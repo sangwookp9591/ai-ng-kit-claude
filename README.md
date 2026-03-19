@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">sw-kit</h1>
-<p align="center"><strong>Harness Engineering Agent</strong> v1.3.2</p>
+<p align="center"><strong>Harness Engineering Agent</strong> v1.4.0</p>
 
 <p align="center">
   <em>For developers, the ultimate assistant.<br>For everyone, the ultimate magician.</em>
@@ -30,7 +30,7 @@ Update: `/plugin update sw-kit`
 
 ---
 
-<h2 id="team">Agent Team</h2>
+<h2 id="team">Agent Team (10 named agents)</h2>
 
 <table>
 <tr>
@@ -42,13 +42,13 @@ Update: `/plugin update sw-kit`
 |:---:|------|------|:-----:|
 | <img src="images/sam.svg" width="18"> | **Sam** | CTO / Lead | `opus` |
 | <img src="images/able.svg" width="18"> | **Able** | PM / Planning | `sonnet` |
-| <img src="images/klay.svg" width="18"> | **Klay** | Architect | `opus` |
+| <img src="images/klay.svg" width="18"> | **Klay** | Architect / Explorer | `opus` |
 
 ### <img src="images/willji.svg" width="16"> Design
 
 | | Name | Role | Model |
 |:---:|------|------|:-----:|
-| <img src="images/willji.svg" width="18"> | **Willji** | UI/UX | `sonnet` |
+| <img src="images/willji.svg" width="18"> | **Willji** | UI/UX Designer | `sonnet` |
 
 </td>
 <td width="50%" valign="top">
@@ -57,37 +57,27 @@ Update: `/plugin update sw-kit`
 
 | | Name | Role | Model |
 |:---:|------|------|:-----:|
-| <img src="images/jay.svg" width="18"> | **Jay** | API | `sonnet` |
-| <img src="images/jerry.svg" width="18"> | **Jerry** | DB / Infra | `sonnet` |
-| <img src="images/milla.svg" width="18"> | **Milla** | Security | `sonnet` |
+| <img src="images/jay.svg" width="18"> | **Jay** | API Development | `sonnet` |
+| <img src="images/jerry.svg" width="18"> | **Jerry** | DB / Infrastructure | `sonnet` |
+| <img src="images/milla.svg" width="18"> | **Milla** | Security / Auth | `sonnet` |
 
 ### <img src="images/derek.svg" width="16"> Frontend
 
 | | Name | Role | Model |
 |:---:|------|------|:-----:|
-| <img src="images/derek.svg" width="18"> | **Derek** | Build | `sonnet` |
-| <img src="images/rowan.svg" width="18"> | **Rowan** | Motion | `sonnet` |
+| <img src="images/derek.svg" width="18"> | **Derek** | Screen Build | `sonnet` |
+| <img src="images/rowan.svg" width="18"> | **Rowan** | Motion / Interaction | `sonnet` |
 
 </td>
 </tr>
 <tr>
-<td width="50%" valign="top">
-
-### <img src="images/scout.svg" width="16"> Ops
-
-| | Name | Role | Model |
-|:---:|------|------|:-----:|
-| <img src="images/scout.svg" width="18"> | **Scout** | Explorer | `haiku` |
-| <img src="images/proof.svg" width="18"> | **Proof** | Verifier | `haiku` |
-
-</td>
-<td width="50%" valign="top">
+<td width="100%" colspan="2" valign="top">
 
 ### <img src="images/iron.svg" width="16"> Magic
 
 | | Name | Role | Model |
 |:---:|------|------|:-----:|
-| <img src="images/iron.svg" width="18"> | **Iron** | Wizard | `sonnet` |
+| <img src="images/iron.svg" width="18"> | **Iron** | Wizard -- guided magic for non-developers | `sonnet` |
 
 </td>
 </tr>
@@ -119,11 +109,11 @@ Teams are **auto-selected** based on task complexity analysis:
 ### Harness 4-Axis Score
 
 ```
-Constrain ████████████████████████████████████████████░░░░ 92
-Inform    ████████████████████████████████████████████░░░░ 90
-Verify    ████████████████████████████████████████████░░░░ 90
-Correct   ████████████████████████████████████████████░░░░ 90
-                                                    avg 90.5
+Constrain  ██████████████████████████████████████████████░░ 92
+Inform     ████████████████████████████████████████████░░░░ 90
+Verify     ████████████████████████████████████████████░░░░ 90
+Correct    ████████████████████████████████████████████░░░░ 90
+                                                     avg 90.5
 ```
 
 | Axis | Modules |
@@ -142,7 +132,7 @@ Correct   ███████████████████████�
 | Command | What it does |
 |---------|-------------|
 | `/swkit start <name>` | Start PDCA cycle (Plan stage) |
-| `/swkit auto <feat> <task>` | Full pipeline: Scout - Archie - Bolt - Shield - Proof |
+| `/swkit auto <feat> <task>` | Full pipeline: Klay - Able - Jay/Derek - Milla - Sam |
 | `/swkit status` | Real-time dashboard (PDCA + TDD + Tasks + Budget) |
 | `/swkit next` | Advance to next PDCA stage |
 | `/swkit wizard` | <img src="images/iron.svg" width="14"> Iron -- guided magic for non-developers |
@@ -168,11 +158,11 @@ Correct   ███████████████████████�
 
 | Command | Agent | Role |
 |---------|-------|------|
-| `/swkit explore <target>` | <img src="images/scout.svg" width="14"> Scout | Codebase scan |
-| `/swkit plan <task>` | <img src="images/able.svg" width="14"> Able + <img src="images/klay.svg" width="14"> Klay | Architecture + planning |
+| `/swkit explore <target>` | <img src="images/klay.svg" width="14"> Klay | Architecture + codebase scan |
+| `/swkit plan <task>` | <img src="images/able.svg" width="14"> Able + <img src="images/klay.svg" width="14"> Klay | Requirements + architecture |
 | `/swkit execute <task>` | <img src="images/jay.svg" width="14"> Jay + <img src="images/derek.svg" width="14"> Derek | Backend + Frontend |
 | `/swkit review` | <img src="images/milla.svg" width="14"> Milla | Security + quality review |
-| `/swkit verify` | <img src="images/proof.svg" width="14"> Proof | Evidence chain verification |
+| `/swkit verify` | <img src="images/sam.svg" width="14"> Sam | Final review + evidence chain |
 
 ### Recovery
 
@@ -202,18 +192,17 @@ Correct   ███████████████████████�
 ```
 /swkit auto user-auth "JWT auth"
 
-  1. Scout    -- scan codebase, extract conventions
-  2. Able     -- write requirements + spec
-     Klay     -- design architecture
+  1. Klay     -- scan codebase, extract conventions, design architecture
+  2. Able     -- write requirements + spec + task checklist
   3. Jay      -- implement API (TDD: RED-GREEN-REFACTOR)
      Jerry    -- database schema + migration
      Milla    -- auth middleware + security
      Willji   -- login UI design
      Derek    -- frontend implementation
-     Rowan    -- form interactions
+     Rowan    -- form interactions + animations
   4. Milla    -- security review (OWASP Top 10)
-     Sam      -- final code review
-  5. Proof    -- evidence chain:
+     Sam      -- final code review + evidence chain
+  5. Sam      -- verdict:
                  [test] PASS (24/24)
                  [build] PASS
                  [lint] PASS (0 errors)
@@ -231,10 +220,10 @@ Korean and English auto-detected:
 
 | Input | Action |
 |-------|--------|
-| "계획 세워줘" / "plan this" | PDCA Plan stage |
-| "검증해줘" / "verify" | PDCA Check stage |
-| "만들어줘" / "build me" | Iron wizard mode |
-| "탐색해줘" / "explore" | Scout codebase scan |
+| "plan" / "plan this" | PDCA Plan stage |
+| "verify" / "verify" | PDCA Check stage |
+| "build me" / "build" | Iron wizard mode |
+| "explore" / "explore" | Klay codebase scan |
 
 ---
 
@@ -246,7 +235,7 @@ sw-kit-claude/
   hooks/hooks.json                   -- 7 hook events
   hooks-handlers/                    -- session-start, user-prompt, pre/post-tool, compact, stop
   scripts/
-    core/         state, config, logger, context-budget, display, dashboard
+    core/         state, config, logger, context-budget, display, dashboard, stdin
     guardrail/    guardrail-engine, safety-invariants, cost-ceiling, dry-run,
                   progress-tracker, convention-extractor
     pdca/         pdca-engine (5-Stage: plan-do-check-act-review)
@@ -260,7 +249,7 @@ sw-kit-claude/
     pipeline/     agent-pipeline, team-orchestrator, auto-runner, rollback, handoff
     task/         task-manager, plan-manager
     i18n/         intent-detector, locale
-  agents/         6 agent definitions (.md)
+  agents/         10 named agents (sam, able, klay, jay, jerry, milla, willji, derek, rowan, iron)
   commands/       swkit.md, help.md
   skills/         11 skill definitions
   templates/      plan, review, completion, adr
@@ -286,7 +275,7 @@ sw-kit-claude/
 
 | Metric | Result |
 |--------|--------|
-| Hook import chain | **5ms** (budget: 5,000ms) |
+| Hook response | **5ms** (budget: 5,000ms) |
 | Config cold start | **36ms** |
 | Test suite | **33/33 ALL GREEN** |
 | External dependencies | **0** |
