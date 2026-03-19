@@ -6,10 +6,17 @@ AI 네이티브 시대의 개발 하네스. 구조화된 워크플로우, 지능
 
 ---
 
-## Install (한 줄)
+## Install
 
+Claude Code 세션에서:
+```
+/plugin marketplace add sangwookp9591/sw-kit-claude
+/plugin install sw-kit
+```
+
+또는 터미널에서:
 ```bash
-claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin install sw-kit@swkit-marketplace
+claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin install sw-kit
 ```
 
 ## Quick Start
