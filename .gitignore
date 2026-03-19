@@ -1,4 +1,5 @@
 node_modules/
+.omc/
 .sw-kit/state/
 .sw-kit/snapshots/
 .sw-kit/logs/
