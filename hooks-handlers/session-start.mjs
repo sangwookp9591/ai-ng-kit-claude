@@ -1,8 +1,7 @@
 /**
- * sw-kit SessionStart Hook Handler
- * Initializes session: loads memory, restores PDCA state, sets context budget.
+ * sw-kit SessionStart Hook v1.7.0
+ * Injects harness rules so sw-kit is ALWAYS active without explicit invocation.
  */
-
 import { readStateOrDefault } from '../scripts/core/state.mjs';
 import { loadConfig } from '../scripts/core/config.mjs';
 import { createLogger } from '../scripts/core/logger.mjs';
@@ -17,90 +16,112 @@ try {
   const projectDir = process.env.PROJECT_DIR || process.cwd();
   const config = loadConfig(projectDir);
 
-  // Reset context budget and safety trackers for new session
   resetBudget();
   resetTrackers(projectDir);
 
-  // Load PDCA state
-  const pdcaState = readStateOrDefault(
-    join(projectDir, '.sw-kit', 'state', 'pdca-status.json'),
-    null
-  );
+  const pdcaState = readStateOrDefault(join(projectDir, '.sw-kit', 'state', 'pdca-status.json'), null);
+  const memory = readStateOrDefault(join(projectDir, '.sw-kit', 'project-memory.json'), null);
 
-  // Load project memory
-  const memory = readStateOrDefault(
-    join(projectDir, '.sw-kit', 'project-memory.json'),
-    null
-  );
+  const ctx = [];
 
-  // Build context injection
-  const contextParts = [];
+  // === Header ===
+  ctx.push(`# sw-kit v1.7.0 Harness Engineering Agent`);
+  ctx.push(`For developers: the ultimate assistant. For everyone: the ultimate magician.`);
+  ctx.push('');
 
-  contextParts.push(`# sw-kit Harness Engineering Agent v1.3.0`);
-  contextParts.push(`개발자에게는 최고의 도우미, 비개발자에게는 최고의 마술사.`);
-  contextParts.push('');
-
-  // PDCA status (if active)
-  if (pdcaState && pdcaState.activeFeature) {
+  // === Active PDCA ===
+  if (pdcaState?.activeFeature) {
     const feat = pdcaState.features?.[pdcaState.activeFeature];
     if (feat) {
-      contextParts.push(`## Active PDCA`);
-      contextParts.push(`- Feature: ${pdcaState.activeFeature}`);
-      contextParts.push(`- Stage: ${feat.currentStage || 'plan'}`);
-      contextParts.push(`- Iteration: ${feat.iteration || 0}/${config.pdca.maxIterations}`);
-      contextParts.push('');
+      ctx.push(`## Active Work`);
+      ctx.push(`Feature: ${pdcaState.activeFeature} | Stage: ${feat.currentStage || 'plan'} | Iteration: ${feat.iteration || 0}/${config.pdca.maxIterations}`);
+      ctx.push('');
     }
   }
 
-  // Project memory summary (if exists)
+  // === Previous session ===
+  const progress = getProgressSummary(projectDir);
+  if (progress) {
+    ctx.push(`## Previous Session`);
+    ctx.push(progress);
+    ctx.push('');
+  }
+
+  // === Project Memory ===
   if (memory) {
     const sections = Object.keys(memory).filter(k => memory[k] && Object.keys(memory[k]).length > 0);
     if (sections.length > 0) {
-      contextParts.push(`## Project Memory`);
-      contextParts.push(`Loaded sections: ${sections.join(', ')}`);
-      contextParts.push('');
+      ctx.push(`## Project Memory: ${sections.join(', ')}`);
+      ctx.push('');
     }
   }
 
-  // Previous session progress
-  const progress = getProgressSummary(projectDir);
-  if (progress) {
-    contextParts.push(`## Previous Session`);
-    contextParts.push(progress);
-    contextParts.push('');
-  }
+  // === Agent Team ===
+  ctx.push(`## sw-kit Agent Team`);
+  ctx.push(`Sam(CTO/opus) Able(PM/sonnet) Klay(Architect/opus) Jay(Backend/sonnet) Jerry(DB/sonnet) Milla(Security/sonnet) Willji(Design/sonnet) Derek(Frontend/sonnet) Rowan(Motion/sonnet) Iron(Wizard/sonnet)`);
+  ctx.push('');
 
-  // Available commands
-  contextParts.push(`## Commands`);
-  contextParts.push(`- /swkit start <name> — PDCA 사이클 시작`);
-  contextParts.push(`- /swkit auto <feature> <task> — 🚀 전체 파이프라인 자동 실행`);
-  contextParts.push(`- /swkit tdd start <feature> <target> — 🔴🟢🔵 TDD 사이클`);
-  contextParts.push(`- /swkit task create <title> — 📋 Task 체크리스트`);
-  contextParts.push(`- /swkit wizard — 🪄 Iron 마술사 모드`);
-  contextParts.push(`- /swkit help — ❓ 도움말`);
-  contextParts.push('');
+  // === MANDATORY RULES (like bkit's Feature Usage Report) ===
+  ctx.push(`## sw-kit Mandatory Rules`);
+  ctx.push('');
+  ctx.push(`### Rule 1: Team Analysis (Required for every task)`);
+  ctx.push(`When the user describes a task, ALWAYS analyze complexity and recommend a team:`);
+  ctx.push(`- Solo(1): bug fix, single file -> Jay alone`);
+  ctx.push(`- Duo(2): mid feature, API -> Jay + Milla`);
+  ctx.push(`- Squad(4): fullstack, multi-domain -> Able + Jay + Derek + Sam`);
+  ctx.push(`- Full(7): architecture, security -> Able + Klay + Jay + Jerry + Milla + Derek + Sam`);
+  ctx.push('');
+  ctx.push(`### Rule 2: Agent Entrance (Required when agent is invoked)`);
+  ctx.push(`When calling a named agent, show their entrance banner:`);
+  ctx.push('```');
+  ctx.push(`Sam: "Sam 출동합니다. 제가 검토하고 판단하겠습니다."`);
+  ctx.push(`Able: "Able 왔습니다! 깔끔하게 계획 짜드릴게요."`);
+  ctx.push(`Klay: "Klay 투입됩니다. 아키텍처 분석 시작합니다..."`);
+  ctx.push(`Jay: "Jay 달려왔습니다! 백엔드, TDD로 갑니다."`);
+  ctx.push(`Jerry: "Jerry 등장합니다. 데이터베이스는 제가 맡겠습니다."`);
+  ctx.push(`Milla: "Milla 체크인합니다. 보안 리뷰 시작합니다."`);
+  ctx.push(`Willji: "Willji 준비됐습니다! 멋지게 디자인 해드릴게요."`);
+  ctx.push(`Derek: "Derek 나갑니다! 프론트엔드 구현 시작합니다."`);
+  ctx.push(`Rowan: "Rowan 등장! 인터랙션 마법을 부려볼게요."`);
+  ctx.push(`Iron: "Iron 가동합니다. 오늘 무엇을 만들어볼까요?"`);
+  ctx.push('```');
+  ctx.push('');
+  ctx.push(`### Rule 3: Completion Report (Required at task end)`);
+  ctx.push(`At the end of every completed task, show this report:`);
+  ctx.push('```');
+  ctx.push(`sw-kit Report`);
+  ctx.push(`---`);
+  ctx.push(`Team: {preset} ({N}명)`);
+  ctx.push(`Agents: {list of agents that worked}`);
+  ctx.push(`{Agent} - {role} - {what they did}`);
+  ctx.push(`Evidence: {test/build/lint results}`);
+  ctx.push(`---`);
+  ctx.push('```');
+  ctx.push('');
+  ctx.push(`### Rule 4: TDD Enforcement`);
+  ctx.push(`All code implementation MUST follow TDD: write test first (RED), implement (GREEN), refactor (REFACTOR).`);
+  ctx.push('');
+  ctx.push(`### Rule 5: Evidence Required`);
+  ctx.push(`Never claim "done" without evidence. Run tests, build, or lint to prove completion.`);
+  ctx.push('');
 
-  // 5 Innovations summary
-  contextParts.push(`## Harness Engine`);
-  contextParts.push(`Context Budget | Evidence Chain | Adaptive Routing | Cross-Session Learning | Self-Healing`);
+  // === Commands ===
+  ctx.push(`## Commands`);
+  ctx.push(`/swkit start|status|next|reset|auto|tdd|task|explore|plan|execute|review|verify|wizard|rollback|learn|help`);
 
-  const context = contextParts.join('\n');
+  const context = ctx.join('\n');
   const maxTokens = config.context.maxSessionStartTokens;
   const trimmed = trimToTokenBudget(context, maxTokens);
 
   trackInjection('session-start', trimmed);
 
-  const response = {
-    hookSpecificOutput: {
-      additionalContext: trimmed
-    }
-  };
+  process.stdout.write(JSON.stringify({
+    hookSpecificOutput: { additionalContext: trimmed }
+  }));
 
-  process.stdout.write(JSON.stringify(response));
   log.info('Session started', { pdcaActive: !!pdcaState?.activeFeature, memoryLoaded: !!memory });
 
 } catch (err) {
   log.error('Session start failed', { error: err.message });
-  // Output empty response on failure — never crash the hook
   process.stdout.write(JSON.stringify({}));
 }
