@@ -1,0 +1,14 @@
+{
+  "name": "sw-kit-claude",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Harness Engineering Agent for Claude Code",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sangwookp9591/sw-kit-claude.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

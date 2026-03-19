@@ -1,0 +1,22 @@
+{
+  "name": "sw-kit",
+  "version": "0.1.0",
+  "description": "Harness Engineering Agent — structured workflows, intelligent context, self-learning agents for AI-native development",
+  "author": {
+    "name": "SW",
+    "url": "https://github.com/sangwookp9591"
+  },
+  "repository": "https://github.com/sangwookp9591/sw-kit-claude",
+  "license": "Apache-2.0",
+  "keywords": [
+    "harness-engineering",
+    "pdca",
+    "context-budget",
+    "self-healing",
+    "evidence-chain",
+    "adaptive-routing",
+    "cross-session-learning",
+    "ai-native",
+    "multilingual"
+  ]
+}

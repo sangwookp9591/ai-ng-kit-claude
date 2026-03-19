@@ -1,0 +1,60 @@
+/**
+ * sw-kit Evidence Collector Lite (Phase 2 — basic interface)
+ * Collects basic evidence from tool outputs.
+ * Full version expands in Phase 4.
+ * @module scripts/evidence/evidence-collector-lite
+ */
+
+/**
+ * Collect basic evidence from a tool execution.
+ * @param {string} toolName - Tool that was executed
+ * @param {string} output - Tool's output text
+ * @returns {{ type: string, timestamp: string, result: string, source: string } | null}
+ */
+export function collectBasicEvidence(toolName, output) {
+  if (!output) return null;
+
+  const lower = output.toLowerCase();
+
+  // Test results
+  if (lower.includes('test') && (lower.includes('pass') || lower.includes('fail'))) {
+    const passed = (lower.match(/(\d+)\s*pass/i) || [])[1];
+    const failed = (lower.match(/(\d+)\s*fail/i) || [])[1];
+    return {
+      type: 'test',
+      timestamp: new Date().toISOString(),
+      result: failed && parseInt(failed) > 0 ? 'fail' : 'pass',
+      source: toolName,
+      details: { passed: passed || '?', failed: failed || '0' }
+    };
+  }
+
+  // Build results
+  if (lower.includes('build') || lower.includes('compile')) {
+    const isSuccess = lower.includes('success') || lower.includes('completed') || lower.includes('built');
+    const isFail = lower.includes('error') || lower.includes('failed');
+    if (isSuccess || isFail) {
+      return {
+        type: 'build',
+        timestamp: new Date().toISOString(),
+        result: isFail ? 'fail' : 'pass',
+        source: toolName
+      };
+    }
+  }
+
+  // Lint results
+  if (lower.includes('lint') || lower.includes('eslint')) {
+    const errors = (lower.match(/(\d+)\s*error/i) || [])[1];
+    const warnings = (lower.match(/(\d+)\s*warning/i) || [])[1];
+    return {
+      type: 'lint',
+      timestamp: new Date().toISOString(),
+      result: errors && parseInt(errors) > 0 ? 'fail' : 'pass',
+      source: toolName,
+      details: { errors: errors || '0', warnings: warnings || '0' }
+    };
+  }
+
+  return null;
+}
