@@ -70,7 +70,7 @@ const INNOVATIONS = [
 export function banner() {
   return `
 ${C.bold}${C.purple}  ┌─────────────────────────────────────────────┐${C.reset}
-${C.bold}${C.purple}  │${C.reset}  ${C.bold}${C.pink}sw-kit${C.reset} ${C.dim}v0.1.0${C.reset}  ${C.italic}Harness Engineering Agent${C.reset}  ${C.bold}${C.purple}│${C.reset}
+${C.bold}${C.purple}  │${C.reset}  ${C.bold}${C.pink}sw-kit${C.reset} ${C.dim}v1.3.0${C.reset}  ${C.italic}Harness Engineering Agent${C.reset}  ${C.bold}${C.purple}│${C.reset}
 ${C.bold}${C.purple}  │${C.reset}                                             ${C.bold}${C.purple}│${C.reset}
 ${C.bold}${C.purple}  │${C.reset}  ${C.dim}개발자에게는 최고의 도우미${C.reset}                ${C.bold}${C.purple}│${C.reset}
 ${C.bold}${C.purple}  │${C.reset}  ${C.dim}비개발자에게는 최고의 마술사${C.reset} ${C.magenta}🪄${C.reset}           ${C.bold}${C.purple}│${C.reset}
@@ -158,15 +158,20 @@ export function pdcaFlow(currentStage) {
 export function commandsHelp() {
   const cmds = [
     { cmd: '/swkit start <name>', desc: 'PDCA 사이클 시작', emoji: '🚀' },
-    { cmd: '/swkit status', desc: '현재 상태 확인', emoji: '📊' },
+    { cmd: '/swkit auto <feat> <task>', desc: '전체 파이프라인 자동 실행', emoji: '🏁' },
+    { cmd: '/swkit status', desc: '현재 상태 대시보드', emoji: '📊' },
     { cmd: '/swkit next', desc: '다음 단계 진행', emoji: '⏭️' },
-    { cmd: '/swkit reset <name>', desc: 'PDCA 초기화', emoji: '🔄' },
+    { cmd: '/swkit tdd start', desc: 'TDD Red→Green→Refactor', emoji: '🔴' },
+    { cmd: '/swkit tdd check <p|f>', desc: 'TDD 결과 기록/전환', emoji: '🟢' },
+    { cmd: '/swkit task create', desc: 'Task 체크리스트 생성', emoji: '📋' },
+    { cmd: '/swkit task check', desc: '서브태스크 완료 체크', emoji: '☑️' },
     { cmd: '/swkit explore <target>', desc: 'Scout로 코드 탐색', emoji: '🔍' },
-    { cmd: '/swkit plan <task>', desc: 'Archie로 계획 수립', emoji: '📋' },
-    { cmd: '/swkit execute <task>', desc: 'Bolt로 코드 구현', emoji: '⚡' },
-    { cmd: '/swkit review', desc: 'Shield로 코드 리뷰', emoji: '🛡️' },
-    { cmd: '/swkit verify', desc: 'Proof로 완료 검증', emoji: '✅' },
+    { cmd: '/swkit plan <task>', desc: 'Able+Klay로 계획 수립', emoji: '📐' },
+    { cmd: '/swkit execute <task>', desc: 'Jay+Derek으로 구현', emoji: '⚡' },
+    { cmd: '/swkit review', desc: 'Milla+Shield로 리뷰', emoji: '🛡️' },
+    { cmd: '/swkit verify', desc: 'Proof로 증거 검증', emoji: '✅' },
     { cmd: '/swkit wizard', desc: 'Iron 마술사 모드', emoji: '🪄' },
+    { cmd: '/swkit rollback', desc: '체크포인트 롤백', emoji: '📌' },
     { cmd: '/swkit learn show', desc: '학습 기록 조회', emoji: '🧠' },
     { cmd: '/swkit help', desc: '이 도움말 표시', emoji: '❓' },
   ];

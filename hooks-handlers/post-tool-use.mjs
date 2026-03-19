@@ -22,7 +22,18 @@ try {
   });
 
   input = chunks.join('');
-  const parsed = input ? JSON.parse(input) : {};
+  if (!input || !input.trim()) {
+    process.stdout.write(JSON.stringify({}));
+    process.exit(0);
+  }
+
+  let parsed;
+  try { parsed = JSON.parse(input); } catch (_) {
+    process.stdout.write(JSON.stringify({}));
+    process.exit(0);
+  }
+
+  const projectDir = process.env.PROJECT_DIR || process.cwd();
   const toolName = parsed.tool_name || '';
   const toolResponse = parsed.tool_response || '';
 

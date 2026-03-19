@@ -36,7 +36,7 @@ try {
   // Build context injection
   const contextParts = [];
 
-  contextParts.push(`# sw-kit Harness Engineering Agent v0.1.0`);
+  contextParts.push(`# sw-kit Harness Engineering Agent v1.3.0`);
   contextParts.push(`개발자에게는 최고의 도우미, 비개발자에게는 최고의 마술사.`);
   contextParts.push('');
 
@@ -72,10 +72,12 @@ try {
 
   // Available commands
   contextParts.push(`## Commands`);
-  contextParts.push(`- /pdca [start|status|next|reset] — PDCA 워크플로우 관리`);
-  contextParts.push(`- /kit [explore|plan|execute|review|verify] — 에이전트 직접 호출`);
-  contextParts.push(`- /learn [show|clear] — 학습 기록 관리`);
-  contextParts.push(`- /wizard — 가이디드 마술사 모드 (비개발자 지원)`);
+  contextParts.push(`- /swkit start <name> — PDCA 사이클 시작`);
+  contextParts.push(`- /swkit auto <feature> <task> — 🚀 전체 파이프라인 자동 실행`);
+  contextParts.push(`- /swkit tdd start <feature> <target> — 🔴🟢🔵 TDD 사이클`);
+  contextParts.push(`- /swkit task create <title> — 📋 Task 체크리스트`);
+  contextParts.push(`- /swkit wizard — 🪄 Iron 마술사 모드`);
+  contextParts.push(`- /swkit help — ❓ 도움말`);
   contextParts.push('');
 
   // 5 Innovations summary
