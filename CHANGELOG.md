@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.3.1] - 2026-03-19
+
+### Fixed
+- **UserPromptSubmit hook error** -- robust JSON parsing, fallback field names (prompt/user_prompt/content)
+- **PostToolUse hook error** -- missing `projectDir` variable declaration
+- **.omc/ removed from repo** -- added to .gitignore
+
+### Changed
+- Version strings updated to v1.3.x across all files (hooks.json, session-start, display, plugin.json, marketplace.json)
+- Session-start command list updated to `/swkit` unified commands (auto, tdd, task, wizard, help)
+- Display command list expanded: auto, tdd, task, rollback, team agents (Able+Klay, Jay+Derek, Milla+Shield)
+
+### Added
+- **12 custom SVG icons** (images/) -- emoji-free agent identity
+  - sam.svg (star), able.svg (crosshair), klay.svg (triangle), jay.svg (sun-gear)
+  - jerry.svg (cylinder-db), milla.svg (lock), willji.svg (pen-nib), derek.svg (monitor)
+  - rowan.svg (bolt), scout.svg (magnifier), proof.svg (check-circle), iron.svg (wand)
+
+### Test
+- 33/33 ALL GREEN
+
 ## [1.3.0] - 2026-03-19
 
 ### Added — Level 5 Harness Engineering (100%)
