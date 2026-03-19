@@ -1,32 +1,30 @@
 /**
- * sw-kit PostToolUse Hook Handler v1.3.1
- * Collects evidence, records trace, resets error counter.
+ * sw-kit PostToolUse Hook v1.3.2
  */
-import { readFileSync } from 'node:fs';
+import { readStdinJSON } from '../scripts/core/stdin.mjs';
 import { collectBasicEvidence } from '../scripts/evidence/evidence-collector-lite.mjs';
 import { recordToolUse } from '../scripts/trace/agent-trace.mjs';
 import { resetErrorCount } from '../scripts/guardrail/safety-invariants.mjs';
 
-let parsed = {};
-try { parsed = JSON.parse(readFileSync(0, 'utf-8')); } catch (_) {}
+const parsed = await readStdinJSON();
+const projectDir = process.env.PROJECT_DIR || process.cwd();
 
 try {
-  const projectDir = process.env.PROJECT_DIR || process.cwd();
   const toolName = parsed.tool_name || '';
   const toolResponse = parsed.tool_response || '';
 
-  recordToolUse(toolName, parsed.tool_input || {}, toolResponse, projectDir);
-  resetErrorCount(projectDir);
-
-  if (toolName === 'Bash' && toolResponse) {
-    const evidence = collectBasicEvidence(toolName, toolResponse);
-    if (evidence) {
-      process.stderr.write(`[sw-kit:evidence] ${evidence.type}: ${evidence.result}\n`);
-    }
+  if (toolName) {
+    recordToolUse(toolName, parsed.tool_input || {}, toolResponse, projectDir);
+    resetErrorCount(projectDir);
   }
 
-  process.stdout.write(JSON.stringify({}));
+  if (toolName === 'Bash' && toolResponse) {
+    const ev = collectBasicEvidence(toolName, toolResponse);
+    if (ev) process.stderr.write(`[sw-kit:evidence] ${ev.type}: ${ev.result}\n`);
+  }
+
+  process.stdout.write('{}');
 } catch (err) {
   process.stderr.write(`[sw-kit:post-tool-use] ${err.message}\n`);
-  process.stdout.write(JSON.stringify({}));
+  process.stdout.write('{}');
 }

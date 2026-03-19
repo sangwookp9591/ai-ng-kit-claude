@@ -1,36 +1,25 @@
 /**
- * sw-kit UserPromptSubmit Hook Handler v1.3.2
- * Uses process.stdin async read (ESM-compatible).
+ * sw-kit UserPromptSubmit Hook v1.3.2
  */
+import { readStdinJSON } from '../scripts/core/stdin.mjs';
 import { detectIntent } from '../scripts/i18n/intent-detector.mjs';
 
-const chunks = [];
-process.stdin.setEncoding('utf-8');
-process.stdin.on('data', c => chunks.push(c));
-process.stdin.on('end', () => {
-  try {
-    const raw = chunks.join('');
-    if (!raw || !raw.trim()) { out({}); return; }
+const parsed = await readStdinJSON();
+const prompt = parsed.prompt || parsed.user_prompt || parsed.content || '';
 
-    const parsed = JSON.parse(raw);
-    const prompt = parsed.prompt || parsed.user_prompt || parsed.content || '';
-    if (!prompt) { out({}); return; }
+if (!prompt) { process.stdout.write('{}'); process.exit(0); }
 
-    const intent = detectIntent(prompt);
-    const parts = [];
-    if (intent.agent) parts.push(`Suggested agent: sw-kit:${intent.agent}`);
-    if (intent.pdcaStage) parts.push(`PDCA stage hint: ${intent.pdcaStage}`);
-    if (intent.isWizardMode) parts.push('Wizard mode detected -- guide the user step by step');
+try {
+  const intent = detectIntent(prompt);
+  const parts = [];
+  if (intent.agent) parts.push(`Suggested agent: sw-kit:${intent.agent}`);
+  if (intent.pdcaStage) parts.push(`PDCA stage hint: ${intent.pdcaStage}`);
+  if (intent.isWizardMode) parts.push('Wizard mode -- guide step by step');
 
-    if (parts.length > 0) {
-      out({ hookSpecificOutput: { additionalContext: parts.join(' | ') } });
-    } else {
-      out({});
-    }
-  } catch (err) {
-    process.stderr.write(`[sw-kit:user-prompt] ${err.message}\n`);
-    out({});
-  }
-});
-
-function out(obj) { process.stdout.write(JSON.stringify(obj)); }
+  process.stdout.write(parts.length > 0
+    ? JSON.stringify({ hookSpecificOutput: { additionalContext: parts.join(' | ') } })
+    : '{}');
+} catch (err) {
+  process.stderr.write(`[sw-kit:user-prompt] ${err.message}\n`);
+  process.stdout.write('{}');
+}
