@@ -1,24 +1,24 @@
 # sw-kit — Harness Engineering Agent
 
-> **개발자에게는 최고의 도우미, 비개발자에게는 최고의 마술사.**
+> **For developers: the ultimate assistant. For everyone: the ultimate magician.**
 
-AI 네이티브 시대의 개발 하네스. 구조화된 워크플로우, 지능형 컨텍스트, 자기 학습 에이전트.
+Structured workflows, intelligent context, self-learning agents for AI-native development.
 
 ```
-40 modules | 148KB | 4,601 LOC | 30/30 tests ✓ | 5ms hook response | 0 dependencies
+44 modules | 160KB | 5,100+ LOC | 33/33 tests | 5ms hook response | 0 dependencies
 ```
 
 ---
 
 ## Install
 
-Claude Code 세션에서:
+Claude Code session:
 ```
 /plugin marketplace add sangwookp9591/sw-kit-claude
 /plugin install sw-kit
 ```
 
-또는 터미널에서:
+Terminal:
 ```bash
 claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin install sw-kit
 ```
@@ -31,46 +31,60 @@ claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin insta
 
 ---
 
-## Agent Team (12명)
+## Agent Team (12)
 
-```
-👑 CTO
-  👑 Sam        총괄 리더              [opus]
+### CTO
+| | Name | Role | Model |
+|---|------|------|-------|
+| <img src="images/sam.svg" width="20"> | **Sam** | CTO / Lead | opus |
 
-🎯 기획
-  🎯 Able       PM / 기획              [sonnet]
-  📐 Klay       Architect / 설계       [opus]
+### Planning
+| | Name | Role | Model |
+|---|------|------|-------|
+| <img src="images/able.svg" width="20"> | **Able** | PM / Planning | sonnet |
+| <img src="images/klay.svg" width="20"> | **Klay** | Architect / Design | opus |
 
-⚙️ Backend
-  ⚙️ Jay        API 개발               [sonnet]
-  🗄️ Jerry      DB / 인프라            [sonnet]
-  🔒 Milla      보안 / 인증            [sonnet]
+### Backend
+| | Name | Role | Model |
+|---|------|------|-------|
+| <img src="images/jay.svg" width="20"> | **Jay** | API Development | sonnet |
+| <img src="images/jerry.svg" width="20"> | **Jerry** | DB / Infrastructure | sonnet |
+| <img src="images/milla.svg" width="20"> | **Milla** | Security / Auth | sonnet |
 
-🎨 Design
-  🎨 Willji     UI·UX 디자인           [sonnet]
+### Design
+| | Name | Role | Model |
+|---|------|------|-------|
+| <img src="images/willji.svg" width="20"> | **Willji** | UI/UX Design | sonnet |
 
-🖥️ Frontend
-  🖥️ Derek      화면 구현              [sonnet]
-  ✨ Rowan      인터랙션 / 애니메이션   [sonnet]
+### Frontend
+| | Name | Role | Model |
+|---|------|------|-------|
+| <img src="images/derek.svg" width="20"> | **Derek** | Screen Implementation | sonnet |
+| <img src="images/rowan.svg" width="20"> | **Rowan** | Interaction / Motion | sonnet |
 
-🔧 Ops
-  🔍 Scout      코드베이스 탐색         [haiku]
-  ✅ Proof      증거 기반 검증          [haiku]
+### Ops
+| | Name | Role | Model |
+|---|------|------|-------|
+| <img src="images/scout.svg" width="20"> | **Scout** | Codebase Explorer | haiku |
+| <img src="images/proof.svg" width="20"> | **Proof** | Evidence Verifier | haiku |
 
-🪄 Magic
-  🪄 Iron       비개발자 마법사         [sonnet]
-```
+### Magic
+| | Name | Role | Model |
+|---|------|------|-------|
+| <img src="images/iron.svg" width="20"> | **Iron** | Wizard for Non-developers | sonnet |
+
+---
 
 ## Cost-Aware Team Presets
 
-작업 복잡도에 따라 최적 팀이 **자동으로** 구성됩니다:
+Auto-selected based on task complexity:
 
-| Preset | 인원 | 비용 | 용도 |
-|--------|:---:|------|------|
-| 🟢 Solo | 1명 | ~15K tokens | 버그 수정, 단일 파일 변경 |
-| 🟡 Duo | 2명 | ~18K tokens | 중간 기능, API 추가 |
-| 🟠 Squad | 4명 | ~48K tokens | 풀스택, 다중 도메인 |
-| 🔴 Full | 7명 | ~123K tokens | 아키텍처 변경, 보안 민감 |
+| Preset | Members | Cost | Use Case |
+|--------|:-------:|------|----------|
+| Solo | 1 | ~15K tokens | Bug fix, single file change |
+| Duo | 2 | ~18K tokens | Mid-size feature, API addition |
+| Squad | 4 | ~48K tokens | Fullstack, multi-domain |
+| Full | 7 | ~123K tokens | Architecture change, security-sensitive |
 
 ---
 
@@ -78,19 +92,19 @@ claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin insta
 
 | # | Innovation | Description |
 |---|-----------|-------------|
-| 1 | **Context Budget** | 토큰 소비를 추적하고 예산 내에서 최적화 (~근사치) |
-| 2 | **Cross-Session Learning** | 성공 패턴을 캡처하여 다음 세션에 자동 적용 |
-| 3 | **Adaptive Routing** | 작업 복잡도에 따라 최적 모델 자동 선택 (haiku/sonnet/opus) |
-| 4 | **Evidence Chain** | 테스트/빌드/린트 결과를 체인으로 연결하여 완료 증명 |
-| 5 | **Self-Healing** | 장애 자동 감지/복구, 서킷 브레이커로 반복 실패 차단 |
+| 1 | **Context Budget** | Token consumption tracking and optimization (~approximation) |
+| 2 | **Cross-Session Learning** | Auto-capture success patterns for next session |
+| 3 | **Adaptive Routing** | Complexity-based optimal model selection (haiku/sonnet/opus) |
+| 4 | **Evidence Chain** | Structured completion proof via test/build/lint chain |
+| 5 | **Self-Healing** | Auto failure detection, circuit breaker, git rollback |
 
 ## Harness Engineering 4-Axis (90.5/100)
 
 | Axis | Score | What it does |
 |------|:-----:|-------------|
-| **Constrain** | 92 | Guardrail 7규칙, Safety Invariants 5종, Cost Ceiling, Dry-Run |
+| **Constrain** | 92 | Guardrail 7 rules, Safety Invariants 5 types, Cost Ceiling, Dry-Run |
 | **Inform** | 90 | Context Budget, Progress Tracker, Convention Extractor, Compaction |
-| **Verify** | 90 | TDD Engine (🔴→🟢→🔵), Evidence Chain, Agent Trace, 30/30 Tests |
+| **Verify** | 90 | TDD Engine (R-G-B), Evidence Chain, Agent Trace, 33/33 Tests |
 | **Correct** | 90 | Self-Healing, Circuit Breaker, Git Rollback, Auto Team Recovery |
 
 ---
@@ -98,13 +112,13 @@ claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin insta
 ## Quick Start
 
 ```bash
-# PDCA 사이클 시작
+# PDCA cycle
 /swkit start my-feature
 
-# 전체 파이프라인 자동 실행
-/swkit auto my-feature "JWT 인증 구현"
+# Full pipeline auto-run
+/swkit auto my-feature "Implement JWT auth"
 
-# 비개발자 마술사 모드
+# Wizard mode (non-developers)
 /swkit wizard
 ```
 
@@ -113,55 +127,57 @@ claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin insta
 ### PDCA
 | Command | Description |
 |---------|-------------|
-| `/swkit start <name>` | PDCA 사이클 시작 |
-| `/swkit status` | 현재 상태 확인 |
-| `/swkit next` | 다음 단계 진행 |
-| `/swkit reset <name>` | 초기화 |
+| `/swkit start <name>` | Start PDCA cycle |
+| `/swkit status` | Dashboard |
+| `/swkit next` | Advance to next stage |
+| `/swkit reset <name>` | Reset cycle |
 
 ### TDD
 | Command | Description |
 |---------|-------------|
-| `/swkit tdd start <feature> <target>` | TDD 사이클 시작 (🔴 RED) |
-| `/swkit tdd check <pass\|fail>` | 테스트 결과 기록, 페이즈 전환 |
-| `/swkit tdd status` | 현재 TDD 페이즈 |
+| `/swkit tdd start <feature> <target>` | Start TDD (RED) |
+| `/swkit tdd check <pass\|fail>` | Record result, phase transition |
+| `/swkit tdd status` | Current TDD phase |
 
 ### Task
 | Command | Description |
 |---------|-------------|
-| `/swkit task create <title>` | Main Task + Sub Tasks 생성 |
-| `/swkit task check <id> <seq>` | 서브태스크 완료 체크 ☐→☑ |
-| `/swkit task list` | 전체 태스크 목록 |
+| `/swkit task create <title>` | Create Main + Sub Tasks |
+| `/swkit task check <id> <seq>` | Check subtask done |
+| `/swkit task list` | List all tasks |
 
 ### Agent
 | Command | Description |
 |---------|-------------|
-| `/swkit explore <target>` | 🔍 Scout — 코드 탐색 |
-| `/swkit plan <task>` | 📋 Archie — 계획 수립 |
-| `/swkit execute <task>` | ⚡ Bolt — 코드 구현 |
-| `/swkit review` | 🛡️ Shield — 코드 리뷰 |
-| `/swkit verify` | ✅ Proof — 증거 검증 |
-| `/swkit wizard` | 🪄 Iron — 마술사 모드 |
+| `/swkit explore <target>` | <img src="images/scout.svg" width="14"> Scout -- codebase scan |
+| `/swkit plan <task>` | <img src="images/able.svg" width="14"> Able + <img src="images/klay.svg" width="14"> Klay -- planning |
+| `/swkit execute <task>` | <img src="images/jay.svg" width="14"> Jay + <img src="images/derek.svg" width="14"> Derek -- implementation |
+| `/swkit review` | <img src="images/milla.svg" width="14"> Milla + <img src="images/proof.svg" width="14"> Proof -- review |
+| `/swkit verify` | <img src="images/proof.svg" width="14"> Proof -- evidence chain |
+| `/swkit wizard` | <img src="images/iron.svg" width="14"> Iron -- magic mode |
 
 ### Pipeline
 | Command | Description |
 |---------|-------------|
-| `/swkit auto <feature> <task>` | 🚀 전체 자동 실행 |
-| `/swkit rollback` | 📌 체크포인트 롤백 |
+| `/swkit auto <feature> <task>` | Full auto-run |
+| `/swkit rollback` | Checkpoint rollback |
 
 ### Utility
 | Command | Description |
 |---------|-------------|
-| `/swkit learn show` | 🧠 학습 기록 조회 |
-| `/swkit help` | ❓ 도움말 |
+| `/swkit learn show` | Learning history |
+| `/swkit help` | Help |
+
+---
 
 ## Multilingual
 
-한국어와 영어를 자동 감지합니다:
+Auto-detects Korean and English:
 
 ```
-"계획 세워줘"  → Plan 단계 트리거
-"검증해줘"    → Check 단계 트리거
-"만들어줘"    → Iron 마술사 모드 활성화
+"plan" / "plan"      -> Plan stage trigger
+"verify" / "verify"  -> Check stage trigger
+"build me" / "build" -> Iron wizard mode
 ```
 
 ---
@@ -169,32 +185,33 @@ claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin insta
 ## Architecture
 
 ```
-.sw-kit/                    ← 런타임 데이터 (gitignore)
-├── state/                  ← PDCA, TDD, invariants, pipeline, circuit-breaker
-├── tasks/                  ← 체크리스트 (main → sub tasks)
-├── plans/                  ← 계획서 문서
-├── snapshots/              ← 컴팩션 스냅샷
-├── reports/                ← 완료 보고서
-├── logs/                   ← 구조화된 로그 (JSONL)
-├── routing-history.json    ← 적응형 라우팅 기록
-└── project-memory.json     ← 교차 세션 학습
+.sw-kit/                    -- runtime data (gitignored)
+  state/                    -- PDCA, TDD, invariants, pipeline, circuit-breaker
+  tasks/                    -- checklist (main -> sub tasks)
+  plans/                    -- plan documents
+  snapshots/                -- compaction snapshots
+  reports/                  -- completion reports
+  logs/                     -- structured logs (JSONL)
+  handoffs/                 -- stage transition handoffs
+  routing-history.json      -- adaptive routing history
+  project-memory.json       -- cross-session learning
 
-hooks-handlers/             ← 7개 훅 핸들러
+hooks-handlers/             -- 7 hook handlers (sync readFileSync pattern)
 scripts/
-├── core/                   ← state, config, logger, context-budget, display
-├── guardrail/              ← guardrail-engine, safety-invariants, cost-ceiling,
-│                              dry-run, progress-tracker, convention-extractor
-├── pdca/                   ← pdca-engine (5-Stage)
-├── routing/                ← complexity-scorer, model-router, routing-history
-├── memory/                 ← project-memory, learning-capture
-├── evidence/               ← evidence-collector, evidence-chain, evidence-report
-├── recovery/               ← health-check, recovery-engine, circuit-breaker
-├── trace/                  ← agent-trace
-├── compaction/             ← context-compaction (priority-based)
-├── pipeline/               ← agent-pipeline, rollback, team-orchestrator
-├── tdd/                    ← tdd-engine (Red→Green→Refactor)
-├── task/                   ← task-manager, plan-manager
-└── i18n/                   ← intent-detector, locale
+  core/                     -- state, config, logger, context-budget, display, dashboard
+  guardrail/                -- guardrail-engine, safety-invariants, cost-ceiling,
+                               dry-run, progress-tracker, convention-extractor
+  pdca/                     -- pdca-engine (5-Stage)
+  routing/                  -- complexity-scorer, model-router, routing-history
+  memory/                   -- project-memory, learning-capture
+  evidence/                 -- evidence-collector, evidence-chain, evidence-report
+  recovery/                 -- health-check, recovery-engine, circuit-breaker, retry-engine
+  trace/                    -- agent-trace
+  compaction/               -- context-compaction (priority-based)
+  pipeline/                 -- agent-pipeline, rollback, team-orchestrator, auto-runner, handoff
+  tdd/                      -- tdd-engine (Red-Green-Refactor)
+  task/                     -- task-manager, plan-manager
+  i18n/                     -- intent-detector, locale
 ```
 
 ## Performance
@@ -203,7 +220,7 @@ scripts/
 |--------|--------|
 | Hook response | **5ms** (budget: 5,000ms) |
 | Config cold start | **36ms** |
-| Test suite | **30/30 ALL GREEN** |
+| Test suite | **33/33 ALL GREEN** |
 | Dependencies | **0** |
 
 ## Requirements
