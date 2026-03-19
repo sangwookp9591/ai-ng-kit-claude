@@ -1,88 +1,64 @@
 ---
 name: swkit
-description: sw-kit 하네스 엔지니어링 워크플로우. PDCA, TDD, Task, Agent, Pipeline 전체 관리.
+description: sw-kit v1.4.0 하네스 엔지니어링 워크플로우. PDCA, TDD, Task, Agent, Pipeline 전체 관리.
 ---
 
-# /swkit — Harness Engineering Workflow
+# /swkit -- Harness Engineering Workflow v1.4.0
 
-## PDCA Actions
+## PDCA
 
-### `/swkit start <feature-name>`
-PDCA 사이클 시작. Plan 생성 + Task 체크리스트 자동 생성.
+| Command | What it does |
+|---------|-------------|
+| `/swkit start <name>` | PDCA 사이클 시작. Plan + Task 체크리스트 자동 생성. |
+| `/swkit status` | 대시보드 (PDCA + TDD + Task + Budget) |
+| `/swkit next` | 다음 PDCA 단계 진행. 증거 수집 후 자동 전환. |
+| `/swkit reset <name>` | PDCA 사이클 초기화. |
 
-### `/swkit status`
-현재 상태: PDCA 단계, TDD 페이즈, Task 진행률, 증거 체인.
+## TDD
 
-### `/swkit next`
-다음 PDCA 단계 진행. 증거 수집 후 자동 전환.
+| Command | What it does |
+|---------|-------------|
+| `/swkit tdd start <feat> <target>` | TDD 사이클 시작 (RED) |
+| `/swkit tdd check <pass\|fail>` | 결과 기록 + 페이즈 전환 (RED-GREEN-REFACTOR) |
+| `/swkit tdd status` | 현재 TDD 페이즈 |
 
-### `/swkit reset <feature-name>`
-PDCA 사이클 초기화.
+## Task
 
-## TDD Actions
+| Command | What it does |
+|---------|-------------|
+| `/swkit task create <title>` | Main Task + Sub Tasks 체크리스트 생성 |
+| `/swkit task check <id> <seq>` | 서브태스크 완료 체크 |
+| `/swkit task list` | 전체 태스크 목록 |
 
-### `/swkit tdd start <feature> <test-target>`
-TDD 사이클 시작. 🔴 RED → 🟢 GREEN → 🔵 REFACTOR.
+## Agent (v1.4.0 Named Team)
 
-### `/swkit tdd check <pass|fail>`
-테스트 결과 기록. TDD 페이즈 자동 전환.
+| Command | Agent | Role |
+|---------|-------|------|
+| `/swkit explore <target>` | Klay | Architect -- 코드베이스 탐색 + 구조 분석 |
+| `/swkit plan <task>` | Able + Klay | PM 기획 + 아키텍처 설계 |
+| `/swkit execute <task>` | Jay + Derek | Backend API + Frontend 구현 (TDD 강제) |
+| `/swkit review` | Milla | 보안 리뷰 + 코드 품질 점검 |
+| `/swkit verify` | Sam | CTO 최종 검증 + 증거 체인 판정 |
+| `/swkit wizard` | Iron | 비개발자 마술사 모드 |
 
-### `/swkit tdd status`
-현재 TDD 페이즈 표시.
+## Pipeline
 
-## Task Actions
-
-### `/swkit task create <title> --subtasks "step1, step2, step3"`
-Main Task + Sub Tasks 생성. 체크리스트로 추적.
-
-### `/swkit task check <task-id> <subtask-seq>`
-서브태스크 완료 체크. ☐ → ☑
-
-### `/swkit task list`
-전체 태스크 목록.
-
-### `/swkit task show <task-id>`
-태스크 상세 체크리스트 표시.
-
-## Agent Actions
-
-### `/swkit explore <target>`
-🔍 Scout — 코드베이스 탐색.
-
-### `/swkit plan <task>`
-📋 Archie — 작업 계획 수립. .sw-kit/plans/ 에 저장.
-
-### `/swkit execute <task>`
-⚡ Bolt — 코드 구현.
-
-### `/swkit review [scope]`
-🛡️ Shield — 코드 리뷰.
-
-### `/swkit verify [feature]`
-✅ Proof — 증거 체인 검증.
-
-### `/swkit wizard`
-🪄 Iron — 비개발자 마술사 모드.
-
-## Pipeline Actions
-
-### `/swkit auto <feature> <task>`
-🚀 전체 파이프라인 자동 실행: Scout→Archie→Bolt→Shield→Proof.
-
-### `/swkit rollback`
-📌 마지막 체크포인트로 롤백.
+| Command | What it does |
+|---------|-------------|
+| `/swkit auto <feat> <task>` | 전체 파이프라인: Klay - Able - Jay/Derek - Milla - Sam |
+| `/swkit rollback` | 마지막 체크포인트로 롤백 |
 
 ## Utility
 
-### `/swkit learn [show|clear]`
-🧠 교차 세션 학습 기록 관리.
-
-### `/swkit help`
-❓ 에이전트 팀, 5대 혁신, 커맨드 목록 표시.
+| Command | What it does |
+|---------|-------------|
+| `/swkit learn show` | 교차 세션 학습 기록 |
+| `/swkit help` | 에이전트 팀 + 커맨드 도움말 |
 
 ## Flow
 ```
-PDCA:  plan → do(TDD) → check → act → review
-TDD:   🔴 RED → 🟢 GREEN → 🔵 REFACTOR (반복)
-Task:  Main Task → [☐ Sub1] [☐ Sub2] [☐ Sub3] → ☑ Complete
+PDCA:     plan -> do(TDD) -> check -> act -> review
+TDD:      RED -> GREEN -> REFACTOR (repeat)
+Pipeline: Klay -> Able -> Jay+Jerry+Milla+Willji+Derek+Rowan -> Milla -> Sam
+Task:     Main Task -> [Sub1] [Sub2] [Sub3] -> Complete
 ```
