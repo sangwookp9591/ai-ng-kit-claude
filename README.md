@@ -6,17 +6,24 @@ AI 네이티브 시대의 개발 하네스. 구조화된 워크플로우, 지능
 
 ---
 
-## Quick Start (5분)
+## Install
 
 ```bash
-# 1. 플러그인 활성화
-claude plugin enable sw-kit-claude
+claude plugin marketplace add sangwookp9591/sw-kit-claude
+claude plugin install sw-kit@swkit-marketplace
+```
 
-# 2. 첫 PDCA 사이클 시작
-/pdca start my-feature
+## Quick Start
 
-# 3. 비개발자라면 마술사 모드
-/wizard
+```bash
+# PDCA 사이클 시작
+/swkit start my-feature
+
+# 코드베이스 탐색
+/swkit explore src/
+
+# 비개발자라면 마술사 모드
+/swkit wizard
 ```
 
 ## 5 Innovations
