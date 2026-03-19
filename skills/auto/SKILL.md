@@ -1,91 +1,140 @@
 ---
 name: auto
-description: "🚀 전체 파이프라인 자동 실행. 12명의 에이전트 팀이 협업."
-triggers: ["auto", "자동", "파이프라인", "pipeline", "자동 실행", "전체 실행"]
+description: "Full pipeline auto-run. Named agents spawn as CC native team with colors."
+triggers: ["auto", "pipeline", "full team"]
 ---
 
-# /swkit auto — Full Pipeline Automation
+# /swkit auto -- Full Pipeline with Native Team Colors
 
-## Team Roster
+When the user runs `/swkit auto <feature> <task>`, execute this EXACT sequence using Claude Code native team tools. Each agent gets a unique color automatically.
 
-```
-┌──────────────────────────────────────────────────────┐
-│  🏠 sw-kit Agent Team (12 members)                  │
-│                                                      │
-│  👑 CTO                                             │
-│    👑 Sam        총괄 리더           [opus]          │
-│                                                      │
-│  🎯 기획                                            │
-│    🎯 Able       PM / 기획           [sonnet]       │
-│    📐 Klay       Architect / 설계    [opus]         │
-│                                                      │
-│  ⚙️ Backend                                         │
-│    ⚙️ Jay        API 개발            [sonnet]       │
-│    🗄️ Jerry      DB / 인프라         [sonnet]       │
-│    🔒 Milla      보안 / 인증         [sonnet]       │
-│                                                      │
-│  🎨 Design                                          │
-│    🎨 Willji     UI·UX 디자인        [sonnet]       │
-│                                                      │
-│  🖥️ Frontend                                        │
-│    🖥️ Derek      화면 구현           [sonnet]       │
-│    ✨ Rowan      인터랙션 / 애니메이션 [sonnet]      │
-│                                                      │
-│  🔧 Ops                                             │
-│    🔍 Klay      코드베이스 탐색      [haiku]        │
-│    ✅ Sam      증거 기반 검증       [haiku]        │
-│                                                      │
-│  🪄 Magic                                           │
-│    🪄 Iron       비개발자 마법사      [sonnet]       │
-└──────────────────────────────────────────────────────┘
-```
+## Step 1: Analyze and Select Team
 
-## Pipeline Flow
+Read the task description and estimate complexity:
+- Count file references, domains (backend/frontend/db/design/security)
+- Select team preset: Solo(1) / Duo(2) / Squad(4) / Full(7)
+
+## Step 2: Create Team
 
 ```
-/swkit auto user-auth "JWT 인증 시스템 구현"
-
-Phase 1: 탐색
-  🔍 Klay → 프로젝트 구조 스캔 + Convention 추출
-
-Phase 2: 기획
-  👑 Sam 총괄 하에:
-  🎯 Able → 요구사항 정리 + 스펙 작성
-  📐 Klay → 아키텍처 설계 + 기술 결정
-  → .sw-kit/plans/ 생성 + Task 체크리스트 자동 생성
-
-Phase 3: 구현 (TDD)
-  ⚙️ Jay → API 엔드포인트 구현 (🔴→🟢→🔵)
-  🗄️ Jerry → DB 스키마 + 마이그레이션
-  🔒 Milla → JWT 인증 미들웨어 + 보안 검증
-  🎨 Willji → 로그인/회원가입 UI 디자인
-  🖥️ Derek → 프론트엔드 화면 구현
-  ✨ Rowan → 폼 인터랙션 + 애니메이션
-  → 각 서브태스크마다 TDD + ☐→☑ 자동 체크
-
-Phase 4: 검증
-  🔒 Milla → 보안 리뷰 (OWASP Top 10)
-  👑 Sam → 전체 코드 리뷰
-  ✅ Sam → Evidence Chain:
-     ├── [test] PASS (24/24)
-     ├── [build] PASS
-     ├── [lint] PASS (0 errors)
-     └── Verdict: PASS ✓
-
-Phase 5: 완료
-  → .sw-kit/reports/ 완료 보고서 생성
-  → Cross-Session Learning 기록
-  → 🎉 Done!
+TeamCreate({
+  team_name: "<feature-slug>",
+  description: "sw-kit auto: <task>"
+})
 ```
 
-## Failure Recovery
+## Step 3: Create Tasks and Assign
 
-- **구현 실패** → TDD GREEN에서 재시도 (최대 3회)
-- **보안 Critical** → 📌 Rollback + 재구현
-- **Sam FAIL** → PDCA Act → 해당 담당자에게 수정 요청
-- **반복 실패** → Circuit Breaker → Sam에게 보고
+For each team member, create a task and pre-assign:
 
-## Wizard Mode (비개발자)
+```
+TaskCreate({ subject: "[Jay] Backend API", description: "<task details>" })
+TaskUpdate({ taskId: "1", owner: "jay" })
+```
 
-`/swkit wizard` 실행 시 🪄 Iron이 위 전체 파이프라인을 자동으로 실행하면서,
-모든 기술 결정을 비개발자 언어로 번역합니다.
+## Step 4: Spawn Workers (PARALLEL)
+
+Spawn ALL workers in parallel using Task with team_name:
+
+```
+Task({
+  subagent_type: "sw-kit:klay",
+  team_name: "<feature-slug>",
+  name: "klay",
+  model: "opus",
+  prompt: "... Klay's entrance + task + TDD rules ..."
+})
+
+Task({
+  subagent_type: "sw-kit:jay",
+  team_name: "<feature-slug>",
+  name: "jay",
+  model: "sonnet",
+  prompt: "... Jay's entrance + task + TDD rules ..."
+})
+```
+
+Each spawned agent MUST include in their prompt:
+1. Their entrance banner (from agents/*.md)
+2. The specific task to complete
+3. TDD enforcement rules
+4. Evidence collection requirement
+5. SendMessage to "team-lead" on completion
+
+## Step 5: Monitor
+
+- Messages from teammates arrive automatically
+- Use TaskList to check progress
+- If a worker fails, reassign or retry
+
+## Step 6: Shutdown
+
+After all tasks complete:
+1. SendMessage shutdown_request to each worker
+2. Wait for shutdown_response
+3. TeamDelete({ team_name: "<feature-slug>" })
+
+## Team Presets
+
+### Solo (complexity <= 2)
+```
+Task(name: "jay", subagent_type: "sw-kit:jay", model: "sonnet")
+```
+
+### Duo (complexity 3-4)
+```
+Task(name: "jay", subagent_type: "sw-kit:jay", model: "sonnet")
+Task(name: "milla", subagent_type: "sw-kit:milla", model: "sonnet")
+```
+
+### Squad (complexity 5-6)
+```
+Task(name: "able", subagent_type: "sw-kit:able", model: "sonnet")
+Task(name: "jay", subagent_type: "sw-kit:jay", model: "sonnet")
+Task(name: "derek", subagent_type: "sw-kit:derek", model: "sonnet")
+Task(name: "sam", subagent_type: "sw-kit:sam", model: "haiku")
+```
+
+### Full (complexity >= 7)
+```
+Task(name: "able", subagent_type: "sw-kit:able", model: "sonnet")
+Task(name: "klay", subagent_type: "sw-kit:klay", model: "opus")
+Task(name: "jay", subagent_type: "sw-kit:jay", model: "sonnet")
+Task(name: "jerry", subagent_type: "sw-kit:jerry", model: "sonnet")
+Task(name: "milla", subagent_type: "sw-kit:milla", model: "sonnet")
+Task(name: "derek", subagent_type: "sw-kit:derek", model: "sonnet")
+Task(name: "sam", subagent_type: "sw-kit:sam", model: "haiku")
+```
+
+## Worker Prompt Template
+
+Each worker gets this prompt structure:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  {Name} {entrance message}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You are {Name} in team "{feature-slug}".
+Role: {role description}
+
+TASK: {specific task description}
+
+PROTOCOL:
+1. TaskList -> find tasks with owner="{name}"
+2. TaskUpdate status="in_progress"
+3. Work with TDD (Red->Green->Refactor)
+4. Collect evidence (test/build results)
+5. TaskUpdate status="completed"
+6. SendMessage to "team-lead": "Completed: {summary}. Evidence: {results}"
+
+RULES:
+- Do NOT spawn sub-agents
+- Do NOT run team commands
+- MUST follow TDD
+- MUST report evidence
+```
+
+## Why Colors Work
+
+Claude Code automatically assigns different colors to each team member when they're spawned via `Task(team_name, name)`. No manual color configuration needed. Each agent appears in terminal with their unique color alongside their name.
