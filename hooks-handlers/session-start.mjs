@@ -7,6 +7,8 @@ import { readStateOrDefault } from '../scripts/core/state.mjs';
 import { loadConfig } from '../scripts/core/config.mjs';
 import { createLogger } from '../scripts/core/logger.mjs';
 import { resetBudget, trackInjection, trimToTokenBudget } from '../scripts/core/context-budget.mjs';
+import { getProgressSummary } from '../scripts/guardrail/progress-tracker.mjs';
+import { resetTrackers } from '../scripts/guardrail/safety-invariants.mjs';
 import { join } from 'node:path';
 
 const log = createLogger('session-start');
@@ -15,8 +17,9 @@ try {
   const projectDir = process.env.PROJECT_DIR || process.cwd();
   const config = loadConfig(projectDir);
 
-  // Reset context budget for new session
+  // Reset context budget and safety trackers for new session
   resetBudget();
+  resetTrackers(projectDir);
 
   // Load PDCA state
   const pdcaState = readStateOrDefault(
@@ -57,6 +60,14 @@ try {
       contextParts.push(`Loaded sections: ${sections.join(', ')}`);
       contextParts.push('');
     }
+  }
+
+  // Previous session progress
+  const progress = getProgressSummary(projectDir);
+  if (progress) {
+    contextParts.push(`## Previous Session`);
+    contextParts.push(progress);
+    contextParts.push('');
   }
 
   // Available commands

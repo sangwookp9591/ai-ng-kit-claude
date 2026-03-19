@@ -5,6 +5,8 @@
 
 import { createLogger } from '../scripts/core/logger.mjs';
 import { collectBasicEvidence } from '../scripts/evidence/evidence-collector-lite.mjs';
+import { recordToolUse } from '../scripts/trace/agent-trace.mjs';
+import { resetErrorCount } from '../scripts/guardrail/safety-invariants.mjs';
 
 const log = createLogger('post-tool-use');
 
@@ -23,6 +25,10 @@ try {
   const parsed = input ? JSON.parse(input) : {};
   const toolName = parsed.tool_name || '';
   const toolResponse = parsed.tool_response || '';
+
+  // Record tool use trace
+  recordToolUse(toolName, parsed.tool_input || {}, toolResponse, projectDir);
+  resetErrorCount(projectDir);
 
   // Collect evidence from Bash outputs (test/build results)
   if (toolName === 'Bash' && toolResponse) {

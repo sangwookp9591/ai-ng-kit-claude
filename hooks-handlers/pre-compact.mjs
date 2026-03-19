@@ -1,10 +1,11 @@
 /**
- * sw-kit PreCompact Hook Handler
- * Saves PDCA state snapshot before context compaction.
+ * sw-kit PreCompact Hook Handler v0.4.0
+ * Intelligent context preservation + PDCA snapshot.
  */
 
 import { readState, writeState } from '../scripts/core/state.mjs';
 import { createLogger } from '../scripts/core/logger.mjs';
+import { generateCompactionInjection } from '../scripts/compaction/context-compaction.mjs';
 import { join } from 'node:path';
 import { readdirSync, unlinkSync } from 'node:fs';
 
@@ -15,9 +16,9 @@ try {
   const stateFile = join(projectDir, '.sw-kit', 'state', 'pdca-status.json');
   const snapshotDir = join(projectDir, '.sw-kit', 'snapshots');
 
+  // Save PDCA snapshot
   const stateResult = readState(stateFile);
   if (stateResult.ok) {
-    // Save snapshot with timestamp
     const ts = new Date().toISOString().replace(/[:.]/g, '-');
     const snapshotFile = join(snapshotDir, `snapshot-${ts}.json`);
     writeState(snapshotFile, {
@@ -30,28 +31,22 @@ try {
       const snapshots = readdirSync(snapshotDir)
         .filter(f => f.startsWith('snapshot-') && f.endsWith('.json'))
         .sort();
-      const maxSnapshots = 10;
-      if (snapshots.length > maxSnapshots) {
-        const toDelete = snapshots.slice(0, snapshots.length - maxSnapshots);
-        for (const file of toDelete) {
+      if (snapshots.length > 10) {
+        for (const file of snapshots.slice(0, snapshots.length - 10)) {
           unlinkSync(join(snapshotDir, file));
         }
       }
-    } catch (_) { /* best effort cleanup */ }
+    } catch (_) { /* best effort */ }
+  }
 
-    // Inject PDCA state summary for post-compaction context
-    const active = stateResult.data.activeFeature;
-    if (active) {
-      const feat = stateResult.data.features?.[active];
-      const context = `[sw-kit] PDCA state preserved. Active: ${active}, Stage: ${feat?.currentStage || 'unknown'}`;
+  // Build intelligent compaction context (priority-based preservation)
+  const injection = generateCompactionInjection(projectDir);
 
-      process.stdout.write(JSON.stringify({
-        hookSpecificOutput: { additionalContext: context }
-      }));
-      log.info('Snapshot saved before compaction', { activeFeature: active });
-    } else {
-      process.stdout.write(JSON.stringify({}));
-    }
+  if (injection) {
+    process.stdout.write(JSON.stringify({
+      hookSpecificOutput: { additionalContext: injection }
+    }));
+    log.info('Compaction context injected');
   } else {
     process.stdout.write(JSON.stringify({}));
   }
