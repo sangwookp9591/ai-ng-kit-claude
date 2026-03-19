@@ -1,8 +1,10 @@
 /**
- * sw-kit UserPromptSubmit Hook v1.5.0
+ * sw-kit UserPromptSubmit Hook v1.5.1
+ * Intent detection + Team size recommendation + Agent guidance.
  */
 import { readStdinJSON } from '../scripts/core/stdin.mjs';
 import { detectIntent } from '../scripts/i18n/intent-detector.mjs';
+import { selectTeam, estimateTeamCost } from '../scripts/pipeline/team-orchestrator.mjs';
 
 try {
   const parsed = await readStdinJSON();
@@ -13,28 +15,45 @@ try {
   const intent = detectIntent(prompt);
   const parts = [];
 
+  // Estimate task complexity from prompt signals
+  const lower = prompt.toLowerCase();
+  const signals = {
+    fileCount: Math.max((prompt.match(/\.(tsx?|jsx?|py|java|go|rs|vue|svelte)/gi) || []).length, 1),
+    domainCount: new Set([
+      /backend|api|server|백엔드|서버|엔드포인트/i.test(prompt) ? 'be' : null,
+      /frontend|ui|page|component|프론트|화면|페이지|컴포넌트|\.tsx|\.jsx/i.test(prompt) ? 'fe' : null,
+      /db|database|schema|migration|데이터베이스|스키마|마이그레이션/i.test(prompt) ? 'db' : null,
+      /design|css|style|디자인|스타일|레이아웃|figma/i.test(prompt) ? 'design' : null,
+      /auth|security|login|인증|보안|로그인|jwt|token/i.test(prompt) ? 'security' : null,
+      /test|tdd|검증|테스트/i.test(prompt) ? 'test' : null,
+    ].filter(Boolean)).size,
+    hasSecurity: /auth|security|login|token|jwt|password|encrypt|인증|보안|로그인/i.test(prompt),
+    hasTests: /test|tdd|spec|jest|vitest|테스트|검증/i.test(prompt),
+    hasArchChange: /architect|refactor|migration|restructure|아키텍처|리팩토링|마이그레이션/i.test(prompt),
+    lineCount: prompt.length > 200 ? 200 : prompt.length > 100 ? 80 : prompt.length > 50 ? 30 : 10,
+  };
+
+  const team = selectTeam(signals);
+  const cost = estimateTeamCost(team.preset);
+
+  // Always show team recommendation
+  parts.push(`[sw-kit Team] ${team.team.name} (${team.team.workers.length}명, ${cost.estimated})`);
+  parts.push(`Members: ${team.team.workers.map(w => w.name).join(', ')}`);
+
+  // Intent-specific guidance
   if (intent.isWizardMode) {
-    parts.push('[sw-kit] Iron wizard mode activated. Guide the non-developer step by step.');
-    parts.push('Use the wizard agent (agents/wizard.md) to run the full pipeline with simple language.');
+    parts.push('Iron wizard mode -- guide step by step.');
   } else if (intent.pdcaStage === 'plan') {
-    parts.push('[sw-kit] Planning detected. Use Able (PM) + Klay (Architect) to create the plan.');
-    parts.push('Steps: 1) Klay scans codebase 2) Able creates plan in .sw-kit/plans/ 3) Task checklist auto-generated');
-    parts.push('After planning: run "/swkit auto <feature> <task>" to execute with the full team.');
+    parts.push('Klay scans -> Able plans -> .sw-kit/plans/ -> "/swkit auto" to execute.');
   } else if (intent.pdcaStage === 'do') {
-    parts.push('[sw-kit] Implementation detected. Use Jay (Backend) + Derek (Frontend) with TDD enforced.');
-    parts.push('Or run "/swkit auto <feature> <task>" for full pipeline: Klay->Able->Jay+Derek->Milla->Sam');
+    parts.push(`Executing with ${team.team.workers.map(w => w.name).join(' + ')}. TDD enforced.`);
   } else if (intent.pdcaStage === 'check') {
-    parts.push('[sw-kit] Verification detected. Use Milla (Security review) + Sam (Evidence chain verification).');
-    parts.push('Evidence required: test results + build status + lint check. No evidence = no "done".');
-  } else if (intent.pdcaStage === 'act') {
-    parts.push('[sw-kit] Improvement detected. Fix issues found in Check stage, then re-verify.');
-  } else if (intent.agent === 'explorer') {
-    parts.push('[sw-kit] Codebase exploration detected. Klay (Architect) will scan and map the structure.');
+    parts.push('Milla security review + Sam evidence chain verification.');
   }
 
-  process.stdout.write(parts.length > 0
-    ? JSON.stringify({ hookSpecificOutput: { additionalContext: parts.join('\n') } })
-    : '{}');
+  process.stdout.write(JSON.stringify({
+    hookSpecificOutput: { additionalContext: parts.join('\n') }
+  }));
 } catch (err) {
   process.stderr.write(`[sw-kit:user-prompt] ${err.message}\n`);
   process.stdout.write('{}');

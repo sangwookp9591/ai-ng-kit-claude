@@ -31,9 +31,9 @@ export function scoreComplexity(signals = {}) {
   score += lineScore;
   breakdown.lines = lineScore;
 
-  // Domain spread (0-2)
+  // Domain spread (0-4)
   const domains = signals.domainCount || 1;
-  const domainScore = domains <= 1 ? 0 : domains <= 3 ? 1 : 2;
+  const domainScore = domains <= 1 ? 0 : domains === 2 ? 2 : domains === 3 ? 3 : 4;
   score += domainScore;
   breakdown.domains = domainScore;
 
