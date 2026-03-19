@@ -1,0 +1,36 @@
+{
+  "id": "task-1773894692975",
+  "title": "[Plan] test-plan",
+  "feature": "test-plan",
+  "description": "Test goal",
+  "status": "in-progress",
+  "createdAt": "2026-03-19T04:31:32.975Z",
+  "updatedAt": "2026-03-19T04:31:32.975Z",
+  "completedAt": null,
+  "subtasks": [
+    {
+      "id": "task-1773894692975-sub-1",
+      "seq": 1,
+      "title": "Do A",
+      "description": "",
+      "status": "pending",
+      "checkedAt": null
+    },
+    {
+      "id": "task-1773894692975-sub-2",
+      "seq": 2,
+      "title": "Do B",
+      "description": "",
+      "status": "pending",
+      "checkedAt": null
+    },
+    {
+      "id": "task-1773894692975-sub-3",
+      "seq": 3,
+      "title": "Do C",
+      "description": "",
+      "status": "pending",
+      "checkedAt": null
+    }
+  ]
+}

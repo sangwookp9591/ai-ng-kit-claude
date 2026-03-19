@@ -1,6 +1,6 @@
 ---
 name: swkit
-description: sw-kit 하네스 엔지니어링 워크플로우. start, status, next, reset, explore, plan, execute, review, verify, wizard 액션을 지원합니다.
+description: sw-kit 하네스 엔지니어링 워크플로우. PDCA, TDD, Task, Agent, Pipeline 전체 관리.
 ---
 
 # /swkit — Harness Engineering Workflow
@@ -8,50 +8,81 @@ description: sw-kit 하네스 엔지니어링 워크플로우. start, status, ne
 ## PDCA Actions
 
 ### `/swkit start <feature-name>`
-새로운 PDCA 사이클을 시작합니다.
-1. Plan 단계로 진입
-2. `templates/plan.md` 기반 계획서 생성
-3. `.sw-kit/state/pdca-status.json`에 상태 저장
+PDCA 사이클 시작. Plan 생성 + Task 체크리스트 자동 생성.
 
 ### `/swkit status`
-현재 PDCA 상태를 표시합니다.
-- Active feature, current stage, iteration count
-- Evidence chain summary
-- Progress indicator
+현재 상태: PDCA 단계, TDD 페이즈, Task 진행률, 증거 체인.
 
 ### `/swkit next`
-다음 PDCA 단계로 진행합니다.
-- 현재 단계의 수락 기준 확인
-- 증거 수집 (test/build/lint 결과)
-- 자동 단계 전환
+다음 PDCA 단계 진행. 증거 수집 후 자동 전환.
 
 ### `/swkit reset <feature-name>`
-PDCA 사이클을 초기화합니다.
+PDCA 사이클 초기화.
+
+## TDD Actions
+
+### `/swkit tdd start <feature> <test-target>`
+TDD 사이클 시작. 🔴 RED → 🟢 GREEN → 🔵 REFACTOR.
+
+### `/swkit tdd check <pass|fail>`
+테스트 결과 기록. TDD 페이즈 자동 전환.
+
+### `/swkit tdd status`
+현재 TDD 페이즈 표시.
+
+## Task Actions
+
+### `/swkit task create <title> --subtasks "step1, step2, step3"`
+Main Task + Sub Tasks 생성. 체크리스트로 추적.
+
+### `/swkit task check <task-id> <subtask-seq>`
+서브태스크 완료 체크. ☐ → ☑
+
+### `/swkit task list`
+전체 태스크 목록.
+
+### `/swkit task show <task-id>`
+태스크 상세 체크리스트 표시.
 
 ## Agent Actions
 
 ### `/swkit explore <target>`
-Explorer 에이전트로 코드베이스를 탐색합니다.
+🔍 Scout — 코드베이스 탐색.
 
 ### `/swkit plan <task>`
-Planner 에이전트로 작업 계획을 수립합니다.
+📋 Archie — 작업 계획 수립. .sw-kit/plans/ 에 저장.
 
 ### `/swkit execute <task>`
-Executor 에이전트로 코드를 구현합니다.
+⚡ Bolt — 코드 구현.
 
 ### `/swkit review [scope]`
-Reviewer 에이전트로 코드를 검토합니다.
+🛡️ Shield — 코드 리뷰.
 
 ### `/swkit verify [feature]`
-Verifier 에이전트로 완료를 증명합니다.
+✅ Proof — 증거 체인 검증.
 
 ### `/swkit wizard`
-비개발자를 위한 마술사 모드를 시작합니다.
+🪄 Merlin — 비개발자 마술사 모드.
+
+## Pipeline Actions
+
+### `/swkit auto <feature> <task>`
+🚀 전체 파이프라인 자동 실행: Scout→Archie→Bolt→Shield→Proof.
+
+### `/swkit rollback`
+📌 마지막 체크포인트로 롤백.
+
+## Utility
 
 ### `/swkit learn [show|clear]`
-교차 세션 학습 기록을 관리합니다.
+🧠 교차 세션 학습 기록 관리.
 
-## Stage Flow
+### `/swkit help`
+❓ 에이전트 팀, 5대 혁신, 커맨드 목록 표시.
+
+## Flow
 ```
-plan → do → check → act (iterate if <90%) → review → completed
+PDCA:  plan → do(TDD) → check → act → review
+TDD:   🔴 RED → 🟢 GREEN → 🔵 REFACTOR (반복)
+Task:  Main Task → [☐ Sub1] [☐ Sub2] [☐ Sub3] → ☑ Complete
 ```
