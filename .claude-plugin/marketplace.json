@@ -1,6 +1,39 @@
 {
-  "name": "sw-kit",
-  "description": "Harness Engineering Agent — structured workflows, intelligent context, self-learning agents",
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "swkit-marketplace",
   "version": "0.1.0",
-  "tags": ["harness-engineering", "pdca", "ai-native", "multilingual"]
+  "description": "sw-kit Harness Engineering Agent marketplace",
+  "owner": {
+    "name": "SW",
+    "email": "sangwookp9591@github.com",
+    "url": "https://github.com/sangwookp9591"
+  },
+  "plugins": [
+    {
+      "name": "sw-kit",
+      "description": "Harness Engineering Agent — structured workflows, intelligent context, self-learning agents for AI-native development. 5 Innovations: Context Budget, Cross-Session Learning, Adaptive Routing, Evidence Chain, Self-Healing Engine.",
+      "version": "0.1.0",
+      "author": {
+        "name": "SW",
+        "email": "sangwookp9591@github.com"
+      },
+      "repository": "https://github.com/sangwookp9591/sw-kit-claude",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/sangwookp9591/sw-kit-claude.git"
+      },
+      "category": "development",
+      "keywords": [
+        "harness-engineering",
+        "pdca",
+        "context-budget",
+        "self-healing",
+        "evidence-chain",
+        "adaptive-routing",
+        "cross-session-learning",
+        "ai-native",
+        "multilingual"
+      ]
+    }
+  ]
 }
