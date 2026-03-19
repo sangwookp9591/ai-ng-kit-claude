@@ -4,7 +4,7 @@
 
 ### Added
 - `/swkit help` — 컬러풀한 에이전트 팀 시각화 with ANSI colors
-- Agent Team cute names: 🔍 Scout, 📋 Archie, ⚡ Bolt, 🛡️ Shield, ✅ Proof, 🪄 Merlin
+- Agent Team cute names: 🔍 Scout, 📋 Archie, ⚡ Bolt, 🛡️ Shield, ✅ Proof, 🪄 Iron
 - `scripts/core/display.mjs` — 재사용 가능한 터미널 UI 모듈
 - `/help` command definition
 - 5 Innovations color-coded display

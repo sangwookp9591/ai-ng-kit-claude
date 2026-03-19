@@ -34,7 +34,7 @@ const AGENTS = {
   executor: { emoji: '⚡', color: C.orange, name: 'Bolt', role: 'Executor', desc: '코드를 구현하고 수정합니다', model: 'sonnet/opus' },
   reviewer: { emoji: '🛡️', color: C.green, name: 'Shield', role: 'Reviewer', desc: '코드 품질과 보안을 점검합니다', model: 'sonnet' },
   verifier: { emoji: '✅', color: C.lime, name: 'Proof', role: 'Verifier', desc: '증거 체인으로 완료를 증명합니다', model: 'haiku' },
-  wizard: { emoji: '🪄', color: C.magenta, name: 'Merlin', role: 'Wizard', desc: '비개발자를 마법처럼 안내합니다', model: 'sonnet' },
+  wizard: { emoji: '🪄', color: C.magenta, name: 'Iron', role: 'Wizard', desc: '비개발자를 마법처럼 안내합니다', model: 'sonnet' },
 };
 
 const INNOVATIONS = [
@@ -133,7 +133,7 @@ export function commandsHelp() {
     { cmd: '/swkit execute <task>', desc: 'Bolt로 코드 구현', emoji: '⚡' },
     { cmd: '/swkit review', desc: 'Shield로 코드 리뷰', emoji: '🛡️' },
     { cmd: '/swkit verify', desc: 'Proof로 완료 검증', emoji: '✅' },
-    { cmd: '/swkit wizard', desc: 'Merlin 마술사 모드', emoji: '🪄' },
+    { cmd: '/swkit wizard', desc: 'Iron 마술사 모드', emoji: '🪄' },
     { cmd: '/swkit learn show', desc: '학습 기록 조회', emoji: '🧠' },
     { cmd: '/swkit help', desc: '이 도움말 표시', emoji: '❓' },
   ];

@@ -62,7 +62,7 @@ Main Task + Sub Tasks 생성. 체크리스트로 추적.
 ✅ Proof — 증거 체인 검증.
 
 ### `/swkit wizard`
-🪄 Merlin — 비개발자 마술사 모드.
+🪄 Iron — 비개발자 마술사 모드.
 
 ## Pipeline Actions
 

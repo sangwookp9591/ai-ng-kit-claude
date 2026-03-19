@@ -1,20 +1,20 @@
 ---
 name: wizard-mode
-description: "🪄 Merlin 마술사 모드. 비개발자도 auto 파이프라인을 자연어로 실행."
+description: "🪄 Iron 마술사 모드. 비개발자도 auto 파이프라인을 자연어로 실행."
 triggers: ["wizard", "마술사", "만들어줘", "도와줘", "guide me", "help me build"]
 ---
 
 # /swkit wizard — Magic Mode for Non-Developers
 
 > 내부적으로 `/swkit auto`와 동일한 파이프라인을 실행합니다.
-> 차이점: Merlin 에이전트가 모든 기술 결정을 비개발자 언어로 번역합니다.
+> 차이점: Iron 에이전트가 모든 기술 결정을 비개발자 언어로 번역합니다.
 
 ## Pipeline (auto와 동일)
 ```
 🔍 Scout (탐색) → 📋 Archie (계획) → ⚡ Bolt (구현+TDD) → 🛡️ Shield (리뷰) → ✅ Proof (검증)
 ```
 
-## Merlin의 역할 — 번역 레이어
+## Iron의 역할 — 번역 레이어
 
 | 개발자가 보는 것 (auto) | 비개발자가 보는 것 (wizard) |
 |---|---|
@@ -26,9 +26,9 @@ triggers: ["wizard", "마술사", "만들어줘", "도와줘", "guide me", "help
 
 ## How it works
 1. 🪄 "어떤 것을 만들고 싶으세요?"
-2. 답변 → Archie가 계획 수립 (Merlin이 쉽게 설명)
+2. 답변 → Archie가 계획 수립 (Iron이 쉽게 설명)
 3. Bolt가 TDD로 구현 (진행률 이모지로 표시)
-4. Shield 리뷰 → Critical 시 Merlin이 "수정이 필요해요" 안내
+4. Shield 리뷰 → Critical 시 Iron이 "수정이 필요해요" 안내
 5. Proof 검증 → "완성! 🎉" + 사용법 안내
 
 ## Communication Rules
