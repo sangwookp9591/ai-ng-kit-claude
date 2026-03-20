@@ -90,7 +90,11 @@ export function trackInjection(source, content) {
  * @returns {{ total: number, injections: Array, warnings: string[] }}
  */
 export function getBudgetStatus() {
-  return { ..._budget };
+  return {
+    total: _budget.total,
+    injections: _budget.injections.map(i => ({ ...i })),
+    warnings: [..._budget.warnings]
+  };
 }
 
 /**

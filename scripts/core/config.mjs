@@ -41,6 +41,7 @@ const DEFAULTS = {
 };
 
 let _configCache = null;
+let _cachedDir = null;
 
 /**
  * Load sw-kit configuration with defaults merge.
@@ -48,16 +49,16 @@ let _configCache = null;
  * @returns {object} Merged configuration
  */
 export function loadConfig(projectDir) {
-  if (_configCache) return _configCache;
+  const dir = projectDir || process.cwd();
+  if (_configCache && _cachedDir === dir) return _configCache;
 
-  const configPath = projectDir
-    ? join(projectDir, 'sw-kit.config.json')
-    : join(process.cwd(), 'sw-kit.config.json');
+  const configPath = join(dir, 'sw-kit.config.json');
 
   const result = readState(configPath);
   const userConfig = result.ok ? result.data : {};
 
-  _configCache = deepMerge(DEFAULTS, userConfig);
+  _cachedDir = dir;
+  _configCache = Object.freeze(deepMerge(DEFAULTS, userConfig));
   return _configCache;
 }
 
@@ -83,6 +84,7 @@ export function getConfig(path, fallback) {
  */
 export function resetConfigCache() {
   _configCache = null;
+  _cachedDir = null;
 }
 
 function deepMerge(target, source) {

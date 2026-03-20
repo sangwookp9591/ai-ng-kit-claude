@@ -34,8 +34,26 @@ Agent({
 Able agent tasks:
 1. Analyze requirements and break down into tasks
 2. Identify which agents are needed (complexity scoring)
-3. Create plan document at `.sw-kit/plans/{date}-{feature}.md`
-4. Auto-generate Task checklist (Main Task → Sub Tasks)
+3. Return the plan as structured output (feature, goal, steps, acceptance criteria, risks)
+
+## Step 1.5: Persist Plan + Tasks (MANDATORY)
+
+After Able returns, **you MUST persist the plan and tasks** by running:
+
+```bash
+node scripts/cli/persist.mjs plan \
+  --feature "{feature}" \
+  --goal "{goal from Able}" \
+  --steps "{step1}|{step2}|{step3}" \
+  --criteria "{criterion1}|{criterion2}" \
+  --risks "{risk1}|{risk2}"
+```
+
+This creates:
+- `.sw-kit/plans/{date}-{feature}.md` — Plan document
+- `.sw-kit/tasks/task-{id}.json` — Task checklist with subtasks
+
+**DO NOT SKIP THIS STEP.** Without it, no plan or task files are recorded.
 
 ## Step 2: Plan Summary Display
 

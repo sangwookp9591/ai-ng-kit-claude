@@ -9,7 +9,7 @@ import { readState } from '../core/state.mjs';
 import { writeState } from '../core/state.mjs';
 import { createLogger } from '../core/logger.mjs';
 import { join } from 'node:path';
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const log = createLogger('evidence-report');
 
@@ -50,18 +50,11 @@ ${(options.lessons || ['No lessons recorded']).map(l => `- ${l}`).join('\n')}
 `;
 
   const reportPath = join(dir, '.sw-kit', 'reports', `${date}-${feature}.md`);
-  const result = writeState(reportPath, report);
 
-  if (result.ok) {
-    log.info(`Report generated: ${reportPath}`);
-    return { ok: true, path: reportPath };
-  }
-
-  // writeState expects JSON — use raw file write for markdown
   try {
-    const { writeFileSync, mkdirSync } = await import('node:fs');
     mkdirSync(join(dir, '.sw-kit', 'reports'), { recursive: true });
     writeFileSync(reportPath, report, 'utf-8');
+    log.info(`Report generated: ${reportPath}`);
     return { ok: true, path: reportPath };
   } catch (err) {
     log.error('Failed to write report', { error: err.message });

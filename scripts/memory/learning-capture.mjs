@@ -4,7 +4,7 @@
  * @module scripts/memory/learning-capture
  */
 
-import { addMemoryEntry, loadMemory } from './project-memory.mjs';
+import { addMemoryEntry, loadMemory, saveMemory } from './project-memory.mjs';
 import { createLogger } from '../core/logger.mjs';
 import { getConfig } from '../core/config.mjs';
 
@@ -54,6 +54,9 @@ export function captureLearning({ feature, evidence, iterations, patterns, mista
   if (updated.pitfalls.length > maxPatterns) {
     updated.pitfalls = updated.pitfalls.slice(-maxPatterns);
   }
+
+  // Save trimmed memory
+  saveMemory(updated, projectDir);
 
   log.info(`Learning captured for ${feature}`, {
     patterns: patterns?.length || 0,

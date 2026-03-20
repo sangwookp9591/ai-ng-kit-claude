@@ -80,17 +80,31 @@ export function advancePdca(featureName, evidence, projectDir) {
   }
 
   // Check-Act iteration logic
-  if (currentStage === 'check' && evidence?.matchRate !== undefined) {
+  if (currentStage === 'check') {
     const threshold = getConfig('pdca.matchRateThreshold', 90);
     const maxIter = getConfig('pdca.maxIterations', 5);
+    const matchRate = evidence?.matchRate;
 
-    if (evidence.matchRate < threshold && feature.iteration < maxIter) {
+    // matchRate missing → treat as pass (proceed to act → review)
+    if (matchRate !== undefined && matchRate < threshold && feature.iteration < maxIter) {
       feature.iteration++;
       feature.currentStage = 'act';
       feature.history.push({
         stage: 'act', action: 'iterate',
-        reason: `matchRate ${evidence.matchRate}% < ${threshold}%`,
+        reason: `matchRate ${matchRate}% < ${threshold}%`,
         iteration: feature.iteration,
+        ts: new Date().toISOString()
+      });
+      return writeState(statePath, state);
+    }
+
+    // matchRate >= threshold or missing or max iterations reached → go to review
+    if (matchRate === undefined || matchRate >= threshold || feature.iteration >= maxIter) {
+      feature.currentStage = 'review';
+      feature.history.push({
+        stage: 'review', action: 'advanced',
+        from: 'check',
+        reason: matchRate === undefined ? 'no matchRate (pass assumed)' : `matchRate ${matchRate}% >= ${threshold}%`,
         ts: new Date().toISOString()
       });
       return writeState(statePath, state);

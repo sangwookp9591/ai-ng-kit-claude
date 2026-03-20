@@ -28,7 +28,13 @@ function getMemoryPath(projectDir) {
  * @returns {object} Memory object with sections
  */
 export function loadMemory(projectDir) {
-  return readStateOrDefault(getMemoryPath(projectDir), { ...EMPTY_MEMORY });
+  return readStateOrDefault(getMemoryPath(projectDir), {
+    techStack: {},
+    conventions: {},
+    patterns: [],
+    pitfalls: [],
+    decisions: []
+  });
 }
 
 /**

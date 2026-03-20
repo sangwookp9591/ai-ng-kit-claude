@@ -5,7 +5,7 @@
  * @module scripts/trace/agent-trace
  */
 
-import { readStateOrDefault, writeState } from '../core/state.mjs';
+import { readStateOrDefault, writeState, updateState } from '../core/state.mjs';
 import { createLogger } from '../core/logger.mjs';
 import { join } from 'node:path';
 
@@ -28,32 +28,33 @@ function getTracePath(projectDir) {
  */
 export function recordTrace(event, projectDir) {
   const tracePath = getTracePath(projectDir);
-  const traces = readStateOrDefault(tracePath, { events: [], summary: {} });
 
-  const entry = {
-    seq: traces.events.length + 1,
-    ts: new Date().toISOString(),
-    ...event
-  };
+  updateState(tracePath, { events: [], summary: {} }, (traces) => {
+    const entry = {
+      seq: traces.events.length + 1,
+      ts: new Date().toISOString(),
+      ...event
+    };
 
-  traces.events.push(entry);
+    traces.events.push(entry);
 
-  // Update summary counts
-  if (!traces.summary[event.agent]) {
-    traces.summary[event.agent] = { actions: 0, reads: 0, writes: 0, errors: 0 };
-  }
-  const agentSummary = traces.summary[event.agent];
-  agentSummary.actions++;
-  if (event.action === 'read') agentSummary.reads++;
-  if (event.action === 'write' || event.action === 'edit') agentSummary.writes++;
-  if (event.result === 'fail') agentSummary.errors++;
+    // Update summary counts
+    if (!traces.summary[event.agent]) {
+      traces.summary[event.agent] = { actions: 0, reads: 0, writes: 0, errors: 0 };
+    }
+    const agentSummary = traces.summary[event.agent];
+    agentSummary.actions++;
+    if (event.action === 'read') agentSummary.reads++;
+    if (event.action === 'write' || event.action === 'edit') agentSummary.writes++;
+    if (event.result === 'fail') agentSummary.errors++;
 
-  // Keep last 200 events
-  if (traces.events.length > 200) {
-    traces.events = traces.events.slice(-200);
-  }
+    // Keep last 200 events
+    if (traces.events.length > 200) {
+      traces.events = traces.events.slice(-200);
+    }
 
-  writeState(tracePath, traces);
+    return traces;
+  });
 }
 
 /**

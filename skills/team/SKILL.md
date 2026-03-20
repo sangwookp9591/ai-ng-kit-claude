@@ -76,12 +76,25 @@ Agent({
 Able 에이전트가 수행:
 1. 요구사항 분석 + 작업 분해
 2. 에이전트별 태스크 할당
-3. `.sw-kit/plans/{date}-{feature}.md` 저장
-4. Task 체크리스트 자동 생성
+3. 구조화된 결과 반환 (feature, goal, steps, criteria, risks)
+
+### Persist Plan + Tasks (MANDATORY)
+
+Able 완료 후 **반드시 실행**:
+
+```bash
+node scripts/cli/persist.mjs plan \
+  --feature "{feature}" \
+  --goal "{goal from Able}" \
+  --steps "{step1}|{step2}|{step3}" \
+  --criteria "{criterion1}|{criterion2}" \
+  --risks "{risk1}|{risk2}"
+```
 
 ### 출력 아티팩트
-- Plan file: `.sw-kit/plans/{date}-{feature}.md`
-- Tasks: TaskCreate로 생성, owner 사전 할당
+- Plan file: `.sw-kit/plans/{date}-{feature}.md` ← persist.mjs가 생성
+- Task file: `.sw-kit/tasks/task-{id}.json` ← persist.mjs가 생성
+- Tasks: TaskCreate로 CC 팀 태스크도 생성, owner 사전 할당
 
 ### 전환 조건 → team-exec
 - Plan 파일 존재
@@ -324,12 +337,15 @@ PROTOCOL:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-### Shutdown
+### Shutdown + Persist (MANDATORY)
 1. SendMessage shutdown_request to each worker
 2. Wait for shutdown_response
 3. TeamDelete({ team_name: "<feature-slug>" })
-4. Save learning to `.sw-kit/project-memory.json`
-5. Generate `.sw-kit/reports/{date}-{feature}.md`
+4. **Persist report + learning**:
+```bash
+node scripts/cli/persist.mjs report --feature "{feature}" --lessons "{lesson1}|{lesson2}"
+```
+5. This generates `.sw-kit/reports/{date}-{feature}.md`
 
 ---
 

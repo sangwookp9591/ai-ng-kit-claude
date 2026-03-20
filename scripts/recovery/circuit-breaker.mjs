@@ -5,7 +5,7 @@
  * @module scripts/recovery/circuit-breaker
  */
 
-import { readStateOrDefault, writeState } from '../core/state.mjs';
+import { readStateOrDefault, writeState, updateState } from '../core/state.mjs';
 import { getConfig } from '../core/config.mjs';
 import { createLogger } from '../core/logger.mjs';
 import { join } from 'node:path';
@@ -25,31 +25,34 @@ function getCircuitPath(projectDir) {
  */
 export function recordFailure(feature, error, projectDir) {
   const circuitPath = getCircuitPath(projectDir);
-  const circuits = readStateOrDefault(circuitPath, {});
   const threshold = getConfig('recovery.circuitBreakerThreshold', 3);
+  let result;
 
-  if (!circuits[feature]) {
-    circuits[feature] = { state: 'closed', failures: 0, lastFailure: null, openedAt: null };
-  }
+  updateState(circuitPath, {}, (circuits) => {
+    if (!circuits[feature]) {
+      circuits[feature] = { state: 'closed', failures: 0, lastFailure: null, openedAt: null };
+    }
 
-  const circuit = circuits[feature];
-  circuit.failures++;
-  circuit.lastFailure = new Date().toISOString();
-  circuit.lastError = error.slice(0, 200);
+    const circuit = circuits[feature];
+    circuit.failures++;
+    circuit.lastFailure = new Date().toISOString();
+    circuit.lastError = error.slice(0, 200);
 
-  if (circuit.failures >= threshold && circuit.state === 'closed') {
-    circuit.state = 'open';
-    circuit.openedAt = new Date().toISOString();
-    log.warn(`Circuit OPENED for ${feature} after ${circuit.failures} failures`);
-  }
+    if (circuit.failures >= threshold && circuit.state === 'closed') {
+      circuit.state = 'open';
+      circuit.openedAt = new Date().toISOString();
+      log.warn(`Circuit OPENED for ${feature} after ${circuit.failures} failures`);
+    }
 
-  writeState(circuitPath, circuits);
+    result = {
+      tripped: circuit.state === 'open',
+      state: circuit.state,
+      failures: circuit.failures
+    };
+    return circuits;
+  });
 
-  return {
-    tripped: circuit.state === 'open',
-    state: circuit.state,
-    failures: circuit.failures
-  };
+  return result;
 }
 
 /**
@@ -86,11 +89,12 @@ export function isCircuitOpen(feature, projectDir) {
  */
 export function recordSuccess(feature, projectDir) {
   const circuitPath = getCircuitPath(projectDir);
-  const circuits = readStateOrDefault(circuitPath, {});
 
-  if (circuits[feature]) {
-    circuits[feature] = { state: 'closed', failures: 0, lastFailure: null, openedAt: null };
-    writeState(circuitPath, circuits);
-    log.info(`Circuit CLOSED for ${feature} (success recorded)`);
-  }
+  updateState(circuitPath, {}, (circuits) => {
+    if (circuits[feature]) {
+      circuits[feature] = { state: 'closed', failures: 0, lastFailure: null, openedAt: null };
+      log.info(`Circuit CLOSED for ${feature} (success recorded)`);
+    }
+    return circuits;
+  });
 }

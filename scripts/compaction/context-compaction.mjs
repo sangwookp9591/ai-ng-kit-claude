@@ -11,6 +11,7 @@ import { createLogger } from '../core/logger.mjs';
 import { estimateTokens, trimToTokenBudget } from '../core/context-budget.mjs';
 import { getProgressSummary } from '../guardrail/progress-tracker.mjs';
 import { join } from 'node:path';
+import { readdirSync } from 'node:fs';
 
 const log = createLogger('compaction');
 
@@ -72,7 +73,6 @@ export function buildCompactionContext(projectDir) {
   // Evidence chain (latest)
   const evidenceFiles = [];
   try {
-    const { readdirSync } = await import('node:fs');
     const stateDir = join(dir, '.sw-kit', 'state');
     const files = readdirSync(stateDir).filter(f => f.startsWith('evidence-'));
     for (const f of files.slice(-2)) {

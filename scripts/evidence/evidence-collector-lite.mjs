@@ -29,15 +29,16 @@ export function collectBasicEvidence(toolName, output) {
     };
   }
 
-  // Build results
+  // Build results (check after test to avoid overlap)
   if (lower.includes('build') || lower.includes('compile')) {
     const isSuccess = lower.includes('success') || lower.includes('completed') || lower.includes('built');
-    const isFail = lower.includes('error') || lower.includes('failed');
-    if (isSuccess || isFail) {
+    const isFail = /\berror[s]?\b/i.test(output) && !/0 error/i.test(output);
+    const hasExplicitFail = lower.includes('build failed') || lower.includes('compilation failed');
+    if (isSuccess || isFail || hasExplicitFail) {
       return {
         type: 'build',
         timestamp: new Date().toISOString(),
-        result: isFail ? 'fail' : 'pass',
+        result: (isFail || hasExplicitFail) ? 'fail' : 'pass',
         source: toolName
       };
     }

@@ -1,5 +1,49 @@
 # Changelog
 
+## [2.0.1] - 2026-03-20
+
+### Fixed — 21 Bug Fixes + Test Infrastructure
+
+#### Critical (4)
+- **`context-budget.mjs`** — `getBudgetStatus()` shallow copy로 내부 상태 오염 → deep copy로 수정
+- **`evidence-report.mjs`** — `await import()` in non-async + `writeState`로 마크다운 저장 → `writeFileSync` 직접 사용
+- **`context-compaction.mjs`** — `await import('node:fs')` in non-async → top-level import로 이동
+- **`circuit-breaker.mjs`** — read-modify-write race condition → `updateState` atomic 업데이트
+
+#### High (7)
+- **`project-memory.mjs`** — `EMPTY_MEMORY` shallow copy로 모듈 전역 오염 → 매번 새 객체 생성
+- **`learning-capture.mjs`** — 트리밍 후 `saveMemory()` 누락으로 100개 초과 패턴 무한 증가 → save 추가
+- **`config.mjs`** — 캐시된 config 외부 수정 가능 → `Object.freeze` + projectDir별 캐시 키
+- **`evidence-chain.mjs`** — `e.result` undefined 시 `.toUpperCase()` 크래시 → fallback 처리
+- **`safety-invariants.mjs`** — read-modify-write race condition → `updateState` atomic 업데이트
+- **`agent-trace.mjs`** — read-modify-write race condition → `updateState` atomic 업데이트
+- **`safety-invariants.mjs`** — HOME 경로 확장 시 `~` 중간 매칭 오류 → `startsWith('~/')` + `os.homedir()` fallback
+
+#### Medium (6)
+- **`config.mjs`** — `_configCache`가 projectDir 무시 → `_cachedDir` 추가, 변경 시 캐시 무효화
+- **`evidence-collector-lite.mjs`** — 빌드 실패 판정 거짓양성 ("Error handling" → fail) → 정규식 `\berror[s]?\b` + `0 error` 제외
+- **`pdca-engine.mjs`** — check에서 matchRate 없이 호출 시 act→do 무한루프 → matchRate 없으면 review로 직행
+- **`pdca-engine.mjs`** — matchRate >= threshold 시 act→do 루프 → review로 직행하도록 수정
+- **`logger.mjs`** — `process.cwd()` 하드코딩 → `SW_KIT_PROJECT_DIR` 환경변수 지원
+- **`cost-ceiling.mjs`** — `loadLimits`가 projectDir을 `getConfig`에 전달 안 함 (문서화)
+
+#### Low (4)
+- 상위 CRITICAL/HIGH 수정에 의해 자동 해결 (L1~L4)
+
+### Added
+- **`scripts/core/state.mjs`** — `updateState()` atomic read-modify-write 헬퍼 (retry-on-conflict 패턴)
+- **`scripts/cli/persist.mjs`** — CLI 엔트리포인트 (plan/task/report 파일 영속화)
+- **`tests/innovations.test.mjs`** — 76개 테스트 (Node.js `node:test` 기반)
+  - Innovation #1~#5, PDCA, Cost Ceiling, State Manager, Regression 검증
+
+### Changed
+- **`skills/plan-task/SKILL.md`** — Step 1.5: `persist.mjs plan` 호출 필수화
+- **`skills/auto/SKILL.md`** — Step 1.5: `persist.mjs plan` + Step 8: `persist.mjs report` 필수화
+- **`skills/team/SKILL.md`** — Stage 1: `persist.mjs plan` + Stage 5: `persist.mjs report` 필수화
+
+### Test
+- **76/76 ALL PASS** (215ms, zero external dependencies)
+
 ## [2.0.0] - 2026-03-20
 
 ### Added

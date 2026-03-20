@@ -75,3 +75,40 @@ export function readStateOrDefault(filePath, defaultValue) {
   const result = readState(filePath);
   return result.ok ? result.data : defaultValue;
 }
+
+/**
+ * Atomic read-modify-write with retry on conflict.
+ * Solves race conditions in multi-agent environments by retrying
+ * when the file changes between read and write.
+ * @param {string} filePath - Absolute path to JSON file
+ * @param {any} defaultValue - Default if file doesn't exist
+ * @param {(data: any) => any} mutator - Function that modifies and returns data
+ * @param {number} [maxRetries=3] - Max retry attempts
+ * @returns {{ ok: true, data: any } | { ok: false, error: string }}
+ */
+export function updateState(filePath, defaultValue, mutator, maxRetries = 3) {
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    const before = readState(filePath);
+    const data = before.ok ? before.data : (typeof defaultValue === 'function' ? defaultValue() : structuredClone(defaultValue));
+
+    const updated = mutator(data);
+
+    // Read again to check for concurrent modification
+    const check = readState(filePath);
+    const beforeJson = before.ok ? JSON.stringify(before.data) : '';
+    const checkJson = check.ok ? JSON.stringify(check.data) : '';
+
+    if (beforeJson !== checkJson && attempt < maxRetries) {
+      // File changed between our read and now — retry with fresh data
+      continue;
+    }
+
+    const result = writeState(filePath, updated);
+    if (result.ok) {
+      return { ok: true, data: updated };
+    }
+    if (attempt < maxRetries) continue;
+    return { ok: false, error: result.error };
+  }
+  return { ok: false, error: `updateState failed after ${maxRetries} retries` };
+}

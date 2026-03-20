@@ -50,7 +50,7 @@ function log(level, module, message, data) {
 
 function persistLog(entry) {
   try {
-    const logDir = join(process.cwd(), '.sw-kit', 'logs');
+    const logDir = join(process.env.SW_KIT_PROJECT_DIR || process.cwd(), '.sw-kit', 'logs');
     if (!existsSync(logDir)) {
       mkdirSync(logDir, { recursive: true });
     }

@@ -16,6 +16,21 @@ Read the task description and estimate complexity:
 - Count file references, domains (backend/frontend/db/design/security)
 - Select team preset: Solo(1) / Duo(2) / Squad(4) / Full(7)
 
+## Step 1.5: Persist Plan + Tasks (MANDATORY)
+
+Before creating the CC team, **persist the plan to disk**:
+
+```bash
+node scripts/cli/persist.mjs plan \
+  --feature "{feature}" \
+  --goal "{task description}" \
+  --steps "{agent1}: {role}|{agent2}: {role}|..."
+```
+
+This creates `.sw-kit/plans/{date}-{feature}.md` and `.sw-kit/tasks/task-{id}.json`.
+
+**DO NOT SKIP.** Without this, no plan/task files are recorded in `.sw-kit/`.
+
 ## Step 2: Create Team
 
 ```
@@ -163,14 +178,17 @@ After all tasks complete, ALWAYS display the team activity report:
 
 This report is MANDATORY. Never skip it. Include every agent that participated.
 
-## Step 8: Shutdown
+## Step 8: Shutdown + Persist (MANDATORY)
 
 After displaying the completion report:
 1. SendMessage shutdown_request to each worker
 2. Wait for shutdown_response
 3. TeamDelete({ team_name: "<feature-slug>" })
-4. Save learning to project-memory
-5. Generate .sw-kit/reports/{date}-{feature}.md
+4. **Persist completion report and learning**:
+```bash
+node scripts/cli/persist.mjs report --feature "{feature}" --lessons "{lesson1}|{lesson2}"
+```
+5. This generates `.sw-kit/reports/{date}-{feature}.md`
 
 ## Team Presets
 

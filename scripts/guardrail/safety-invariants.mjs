@@ -5,7 +5,8 @@
  * @module scripts/guardrail/safety-invariants
  */
 
-import { readStateOrDefault, writeState } from '../core/state.mjs';
+import { readStateOrDefault, writeState, updateState } from '../core/state.mjs';
+import { homedir } from 'node:os';
 import { getConfig } from '../core/config.mjs';
 import { createLogger } from '../core/logger.mjs';
 import { join } from 'node:path';
@@ -72,23 +73,26 @@ export function loadInvariants(projectDir) {
 export function checkStepLimit(projectDir) {
   const invariants = loadInvariants(projectDir);
   const trackerPath = getInvariantsPath(projectDir);
-  const tracker = readStateOrDefault(trackerPath, { steps: 0, fileChanges: 0, errors: 0, startedAt: null });
+  let steps;
 
-  tracker.steps++;
-  if (!tracker.startedAt) tracker.startedAt = new Date().toISOString();
-  writeState(trackerPath, tracker);
+  updateState(trackerPath, { steps: 0, fileChanges: 0, errors: 0, startedAt: null }, (tracker) => {
+    tracker.steps++;
+    if (!tracker.startedAt) tracker.startedAt = new Date().toISOString();
+    steps = tracker.steps;
+    return tracker;
+  });
 
-  if (tracker.steps > invariants.maxSteps) {
-    log.error(`Step limit exceeded: ${tracker.steps}/${invariants.maxSteps}`);
+  if (steps > invariants.maxSteps) {
+    log.error(`Step limit exceeded: ${steps}/${invariants.maxSteps}`);
     return {
       ok: false,
-      current: tracker.steps,
+      current: steps,
       max: invariants.maxSteps,
-      message: `[sw-kit Safety] 실행 단계 한도 초과 (${tracker.steps}/${invariants.maxSteps}). 작업을 분할하거나 설정에서 maxSteps를 조정하세요.`
+      message: `[sw-kit Safety] 실행 단계 한도 초과 (${steps}/${invariants.maxSteps}). 작업을 분할하거나 설정에서 maxSteps를 조정하세요.`
     };
   }
 
-  return { ok: true, current: tracker.steps, max: invariants.maxSteps };
+  return { ok: true, current: steps, max: invariants.maxSteps };
 }
 
 /**
@@ -100,26 +104,29 @@ export function checkStepLimit(projectDir) {
 export function checkFileChangeLimit(filePath, projectDir) {
   const invariants = loadInvariants(projectDir);
   const trackerPath = getInvariantsPath(projectDir);
-  const tracker = readStateOrDefault(trackerPath, { steps: 0, fileChanges: 0, errors: 0, changedFiles: [] });
+  let fileChanges;
 
-  if (!tracker.changedFiles) tracker.changedFiles = [];
-  if (!tracker.changedFiles.includes(filePath)) {
-    tracker.changedFiles.push(filePath);
-    tracker.fileChanges = tracker.changedFiles.length;
-    writeState(trackerPath, tracker);
-  }
+  updateState(trackerPath, { steps: 0, fileChanges: 0, errors: 0, changedFiles: [] }, (tracker) => {
+    if (!tracker.changedFiles) tracker.changedFiles = [];
+    if (!tracker.changedFiles.includes(filePath)) {
+      tracker.changedFiles.push(filePath);
+      tracker.fileChanges = tracker.changedFiles.length;
+    }
+    fileChanges = tracker.fileChanges;
+    return tracker;
+  });
 
-  if (tracker.fileChanges > invariants.maxFileChanges) {
-    log.error(`File change limit exceeded: ${tracker.fileChanges}/${invariants.maxFileChanges}`);
+  if (fileChanges > invariants.maxFileChanges) {
+    log.error(`File change limit exceeded: ${fileChanges}/${invariants.maxFileChanges}`);
     return {
       ok: false,
-      current: tracker.fileChanges,
+      current: fileChanges,
       max: invariants.maxFileChanges,
-      message: `[sw-kit Safety] 파일 변경 한도 초과 (${tracker.fileChanges}/${invariants.maxFileChanges}). 커밋 후 계속하세요.`
+      message: `[sw-kit Safety] 파일 변경 한도 초과 (${fileChanges}/${invariants.maxFileChanges}). 커밋 후 계속하세요.`
     };
   }
 
-  return { ok: true, current: tracker.fileChanges, max: invariants.maxFileChanges };
+  return { ok: true, current: fileChanges, max: invariants.maxFileChanges };
 }
 
 /**
@@ -130,10 +137,11 @@ export function checkFileChangeLimit(filePath, projectDir) {
  */
 export function checkForbiddenPath(filePath, projectDir) {
   const invariants = loadInvariants(projectDir);
-  const expanded = filePath.replace('~', process.env.HOME || '');
+  const home = process.env.HOME || homedir();
+  const expanded = filePath.startsWith('~/') ? home + filePath.slice(1) : filePath;
 
   for (const forbidden of invariants.forbiddenPaths) {
-    const expandedForbidden = forbidden.replace('~', process.env.HOME || '');
+    const expandedForbidden = forbidden.startsWith('~/') ? home + forbidden.slice(1) : forbidden;
     if (expanded.startsWith(expandedForbidden)) {
       log.error(`Forbidden path access: ${filePath}`);
       return {
@@ -154,21 +162,24 @@ export function checkForbiddenPath(filePath, projectDir) {
 export function checkErrorLimit(projectDir) {
   const invariants = loadInvariants(projectDir);
   const trackerPath = getInvariantsPath(projectDir);
-  const tracker = readStateOrDefault(trackerPath, { steps: 0, fileChanges: 0, errors: 0 });
+  let errors;
 
-  tracker.errors++;
-  writeState(trackerPath, tracker);
+  updateState(trackerPath, { steps: 0, fileChanges: 0, errors: 0 }, (tracker) => {
+    tracker.errors++;
+    errors = tracker.errors;
+    return tracker;
+  });
 
-  if (tracker.errors > invariants.maxConsecutiveErrors) {
+  if (errors > invariants.maxConsecutiveErrors) {
     return {
       ok: false,
-      current: tracker.errors,
+      current: errors,
       max: invariants.maxConsecutiveErrors,
-      message: `[sw-kit Safety] 연속 에러 한도 초과 (${tracker.errors}/${invariants.maxConsecutiveErrors}). 접근 방식을 변경하거나 도움을 요청하세요.`
+      message: `[sw-kit Safety] 연속 에러 한도 초과 (${errors}/${invariants.maxConsecutiveErrors}). 접근 방식을 변경하거나 도움을 요청하세요.`
     };
   }
 
-  return { ok: true, current: tracker.errors, max: invariants.maxConsecutiveErrors };
+  return { ok: true, current: errors, max: invariants.maxConsecutiveErrors };
 }
 
 /**
@@ -177,9 +188,10 @@ export function checkErrorLimit(projectDir) {
  */
 export function resetErrorCount(projectDir) {
   const trackerPath = getInvariantsPath(projectDir);
-  const tracker = readStateOrDefault(trackerPath, { steps: 0, fileChanges: 0, errors: 0 });
-  tracker.errors = 0;
-  writeState(trackerPath, tracker);
+  updateState(trackerPath, { steps: 0, fileChanges: 0, errors: 0 }, (tracker) => {
+    tracker.errors = 0;
+    return tracker;
+  });
 }
 
 /**

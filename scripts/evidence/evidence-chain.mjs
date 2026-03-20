@@ -51,7 +51,7 @@ export function evaluateChain(feature, projectDir) {
   const verdict = hasFail ? 'FAIL' : allPass ? 'PASS' : 'INCOMPLETE';
 
   const summary = chain.entries.map(e =>
-    `[${e.type}] ${e.result.toUpperCase()} (${e.source})`
+    `[${e.type}] ${(e.result || 'unknown').toUpperCase()} (${e.source || 'unknown'})`
   ).join('\n');
 
   // Persist verdict

@@ -256,6 +256,7 @@ sw-kit-claude/
     compaction/   context-compaction (priority-based preservation)
     pipeline/     agent-pipeline, team-orchestrator, auto-runner, rollback, handoff
     task/         task-manager, plan-manager
+    cli/          persist (plan/task/report persistence CLI)
     i18n/         intent-detector, locale
   agents/         10 named agents (sam, able, klay, jay, jerry, milla, willji, derek, rowan, iron)
   commands/       swkit.md, help.md
@@ -285,7 +286,7 @@ sw-kit-claude/
 |--------|--------|
 | Hook response | **5ms** (budget: 5,000ms) |
 | Config cold start | **36ms** |
-| Test suite | **33/33 ALL GREEN** |
+| Test suite | **76/76 ALL GREEN** |
 | External dependencies | **0** |
 | Harness maturity | **Level 5 / 5** |
 
