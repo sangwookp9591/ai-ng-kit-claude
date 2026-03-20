@@ -8,6 +8,8 @@ triggers: ["auto", "pipeline", "full team"]
 
 When the user runs `/swkit auto <feature> <task>`, execute this EXACT sequence using Claude Code native team tools. Each agent gets a unique color automatically.
 
+If a plan file path is provided (e.g., from `/swkit plan` → auto transition), read the plan file and skip to Step 2. Use the plan's task decomposition directly for Step 3 instead of re-analyzing.
+
 ## Step 1: Analyze and Select Team
 
 Read the task description and estimate complexity:
@@ -83,10 +85,34 @@ Each spawned agent MUST include in their prompt:
 4. Evidence collection requirement
 5. SendMessage to "team-lead" on completion
 
-## Step 6: Monitor
+## Step 6: Monitor with Live Progress
 
-- Messages from teammates arrive automatically
-- Use TaskList to check progress
+Messages from teammates arrive automatically via SendMessage. The team-lead manages visibility:
+
+**On every worker message:**
+1. If the message lacks `@{Name}❯` prefix, prepend it using the sender's team identity
+2. Forward the message to the user as: `@{Name}❯ {message content}`
+
+**On state transitions** (worker starts task, completes task, fails, or gets blocked):
+Display the progress table showing all workers' current status:
+
+```
+┌──────────┬───────────────────────────┬───────────────────────┐
+│   워커   │          태스크           │         상태          │
+├──────────┼───────────────────────────┼───────────────────────┤
+│ Jay      │ #1 Backend API            │ 🔄 실행 중            │
+├──────────┼───────────────────────────┼───────────────────────┤
+│ Derek    │ #2 Frontend UI            │ ✅ 완료 → 셧다운 요청 │
+├──────────┼───────────────────────────┼───────────────────────┤
+│ Milla    │ #3 Security Review        │ ⏳ 대기 중            │
+└──────────┴───────────────────────────┴───────────────────────┘
+```
+
+Status icons: 🔄 실행 중, ✅ 완료, ❌ 실패, ⏳ 대기 중
+
+**Between state transitions:** Do NOT print the full table. Just forward the `@{Name}❯` message as a single line.
+
+- Use TaskList to check progress periodically
 - If a worker fails, reassign or retry
 
 ## Step 7: Completion Report
@@ -179,19 +205,35 @@ Role: {role description}
 
 TASK: {specific task description}
 
+COMMUNICATION FORMAT:
+ALL SendMessage to "team-lead" MUST start with "@{Name}❯" prefix.
+Examples:
+  "@Jay❯ Task #1 시작: Backend API 엔드포인트 구현"
+  "@Jay❯ TDD RED: 테스트 3개 작성 완료, 구현 시작"
+  "@Jay❯ Task #1 완료: API 3개 구현, TDD 12/12 통과"
+  "@Jay❯ BLOCKED: DB 스키마 변경 필요, Jerry 대기"
+
+Report at these moments:
+  - Task start: "@{Name}❯ Task #{id} 시작: {what}"
+  - Milestone: "@{Name}❯ {progress update}"
+  - Completion: "@{Name}❯ Task #{id} 완료: {summary}. Evidence: {results}"
+  - Blocker: "@{Name}❯ BLOCKED: {reason}"
+
 PROTOCOL:
 1. TaskList -> find tasks with owner="{name}"
 2. TaskUpdate status="in_progress"
-3. Work with TDD (Red->Green->Refactor)
-4. Collect evidence (test/build results)
-5. TaskUpdate status="completed"
-6. SendMessage to "team-lead": "Completed: {summary}. Evidence: {results}"
+3. SendMessage "@{Name}❯ Task #{id} 시작: {task summary}"
+4. Work with TDD (Red->Green->Refactor)
+5. Collect evidence (test/build results)
+6. TaskUpdate status="completed"
+7. SendMessage "@{Name}❯ Task #{id} 완료: {summary}. Evidence: {results}"
 
 RULES:
 - Do NOT spawn sub-agents
 - Do NOT run team commands
 - MUST follow TDD
 - MUST report evidence
+- MUST use "@{Name}❯" prefix on ALL messages
 ```
 
 ## Why Colors Work

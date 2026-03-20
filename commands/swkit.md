@@ -1,9 +1,9 @@
 ---
 name: swkit
-description: sw-kit v1.4.0 하네스 엔지니어링 워크플로우. PDCA, TDD, Task, Agent, Pipeline 전체 관리.
+description: sw-kit v1.9.0 하네스 엔지니어링 워크플로우. PDCA, TDD, Task, Agent, Pipeline 전체 관리.
 ---
 
-# /swkit -- Harness Engineering Workflow v1.4.0
+# /swkit -- Harness Engineering Workflow v1.9.0
 
 ## PDCA
 
@@ -35,7 +35,7 @@ description: sw-kit v1.4.0 하네스 엔지니어링 워크플로우. PDCA, TDD,
 | Command | Agent | Role |
 |---------|-------|------|
 | `/swkit explore <target>` | Klay | Architect -- 코드베이스 탐색 + 구조 분석 |
-| `/swkit plan <task>` | Able + Klay | PM 기획 + 아키텍처 설계 |
+| `/swkit plan <task>` | Able + Klay | PM 기획 + 아키텍처 설계 → 다음 액션 선택 (team/auto/저장) |
 | `/swkit execute <task>` | Jay + Derek | Backend API + Frontend 구현 (TDD 강제) |
 | `/swkit review` | Milla | 보안 리뷰 + 코드 품질 점검 |
 | `/swkit verify` | Sam | CTO 최종 검증 + 증거 체인 판정 |
@@ -45,7 +45,8 @@ description: sw-kit v1.4.0 하네스 엔지니어링 워크플로우. PDCA, TDD,
 
 | Command | What it does |
 |---------|-------------|
-| `/swkit auto <feat> <task>` | 전체 파이프라인: Klay - Able - Jay/Derek - Milla - Sam |
+| `/swkit team [agents] <task>` | staged pipeline: plan→exec→verify→fix 루프 (품질 보장) |
+| `/swkit auto <feat> <task>` | 단발 파이프라인: 자동 프리셋, verify 없이 빠르게 |
 | `/swkit rollback` | 마지막 체크포인트로 롤백 |
 
 ## Utility
@@ -59,6 +60,8 @@ description: sw-kit v1.4.0 하네스 엔지니어링 워크플로우. PDCA, TDD,
 ```
 PDCA:     plan -> do(TDD) -> check -> act -> review
 TDD:      RED -> GREEN -> REFACTOR (repeat)
-Pipeline: Klay -> Able -> Jay+Jerry+Milla+Willji+Derek+Rowan -> Milla -> Sam
+Plan:     Able(계획) -> 다음 액션? -> team(추천) | auto(단발) | 저장
+Team:     team-plan(Able) -> team-exec(@{Name}❯ 병렬) -> team-verify(Milla+Sam) -> team-fix(max 3) -> Complete
+Auto:     TeamCreate -> @{Name}❯ 워커 병렬 스폰 -> 진행 테이블 -> Completion Report
 Task:     Main Task -> [Sub1] [Sub2] [Sub3] -> Complete
 ```
