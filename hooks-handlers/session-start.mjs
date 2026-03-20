@@ -30,7 +30,7 @@ try {
   const ctx = [];
 
   // === Header ===
-  ctx.push(`# sw-kit v1.8.2 Harness Engineering Agent`);
+  ctx.push(`# sw-kit v1.9.0 Harness Engineering Agent`);
   ctx.push(`For developers: the ultimate assistant. For everyone: the ultimate magician.`);
   ctx.push('');
 

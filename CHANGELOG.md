@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.9.0] - 2026-03-20
+
+### Added
+- **`/swkit team [agents] "task"`** — staged pipeline with verify→fix loop
+  - 4-stage PDCA-mapped pipeline: team-plan → team-exec → team-verify → team-fix
+  - User-specified agents (`jay+derek+milla`) or auto-select via complexity scoring
+  - Milla(Security) + Sam(CTO) always auto-included for verification
+  - Fix stage with retry prompt (failure context + max 3 iterations)
+  - Completion report with pipeline/fix-loop data
+
+### Enhanced
+- **`/swkit auto`** — `@{Name}❯` worker visibility
+  - Worker Prompt Template with COMMUNICATION FORMAT section
+  - Progress table on state transitions (not every message)
+  - Team-lead defensive prefix attribution
+  - Plan file handoff support (skip re-analysis)
+- **`/swkit plan`** — next-action flow after planning
+  - Option 1: `/swkit team` (recommended, verify loop)
+  - Option 2: `/swkit auto` (one-shot, fast)
+  - Option 3: save only
+
 ## [1.8.2] - 2026-03-19
 
 ### Added
