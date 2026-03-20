@@ -58,24 +58,37 @@ Never skip this step. The user must see who is doing what before agents start wo
 
 ## Step 5: Spawn Workers (PARALLEL)
 
-Spawn ALL workers in parallel using Task with team_name:
+Spawn ALL workers in parallel using Agent with team_name. **MANDATORY: `description` 파라미터로 에이전트 가시성을 확보합니다.**
+
+`description` 포맷: `"{Name}: {구체적 작업 요약}"` (3-5 단어)
 
 ```
-Task({
+Agent({
   subagent_type: "sw-kit:klay",
+  description: "Klay: 아키텍처 탐색 + 구조 분석",
   team_name: "<feature-slug>",
   name: "klay",
   model: "opus",
   prompt: "... Klay's entrance + task + TDD rules ..."
 })
 
-Task({
+Agent({
   subagent_type: "sw-kit:jay",
+  description: "Jay: Backend API 엔드포인트 구현",
   team_name: "<feature-slug>",
   name: "jay",
   model: "sonnet",
   prompt: "... Jay's entrance + task + TDD rules ..."
 })
+```
+
+이렇게 하면 터미널에 자동으로 표시됩니다:
+```
+⏺ sw-kit:klay(Klay: 아키텍처 탐색 + 구조 분석) Opus
+  ⎿  Done (9 tool uses · 83.6k tokens · 2m 10s)
+
+⏺ sw-kit:jay(Jay: Backend API 엔드포인트 구현) Sonnet
+  ⎿  Done (15 tool uses · 42.1k tokens · 3m 22s)
 ```
 
 Each spawned agent MUST include in their prompt:
@@ -163,32 +176,32 @@ After displaying the completion report:
 
 ### Solo (complexity <= 2)
 ```
-Task(name: "jay", subagent_type: "sw-kit:jay", model: "sonnet")
+Agent(name: "jay", subagent_type: "sw-kit:jay", description: "Jay: {task}", model: "sonnet")
 ```
 
 ### Duo (complexity 3-4)
 ```
-Task(name: "jay", subagent_type: "sw-kit:jay", model: "sonnet")
-Task(name: "milla", subagent_type: "sw-kit:milla", model: "sonnet")
+Agent(name: "jay", subagent_type: "sw-kit:jay", description: "Jay: {task}", model: "sonnet")
+Agent(name: "milla", subagent_type: "sw-kit:milla", description: "Milla: 보안 리뷰", model: "sonnet")
 ```
 
 ### Squad (complexity 5-6)
 ```
-Task(name: "able", subagent_type: "sw-kit:able", model: "sonnet")
-Task(name: "jay", subagent_type: "sw-kit:jay", model: "sonnet")
-Task(name: "derek", subagent_type: "sw-kit:derek", model: "sonnet")
-Task(name: "sam", subagent_type: "sw-kit:sam", model: "haiku")
+Agent(name: "able", subagent_type: "sw-kit:able", description: "Able: 요구사항 + 태스크 분해", model: "sonnet")
+Agent(name: "jay", subagent_type: "sw-kit:jay", description: "Jay: {task}", model: "sonnet")
+Agent(name: "derek", subagent_type: "sw-kit:derek", description: "Derek: {task}", model: "sonnet")
+Agent(name: "sam", subagent_type: "sw-kit:sam", description: "Sam: 증거 수집 + 최종 판정", model: "haiku")
 ```
 
 ### Full (complexity >= 7)
 ```
-Task(name: "able", subagent_type: "sw-kit:able", model: "sonnet")
-Task(name: "klay", subagent_type: "sw-kit:klay", model: "opus")
-Task(name: "jay", subagent_type: "sw-kit:jay", model: "sonnet")
-Task(name: "jerry", subagent_type: "sw-kit:jerry", model: "sonnet")
-Task(name: "milla", subagent_type: "sw-kit:milla", model: "sonnet")
-Task(name: "derek", subagent_type: "sw-kit:derek", model: "sonnet")
-Task(name: "sam", subagent_type: "sw-kit:sam", model: "haiku")
+Agent(name: "able", subagent_type: "sw-kit:able", description: "Able: 요구사항 + 태스크 분해", model: "sonnet")
+Agent(name: "klay", subagent_type: "sw-kit:klay", description: "Klay: 아키텍처 탐색 + 구조 분석", model: "opus")
+Agent(name: "jay", subagent_type: "sw-kit:jay", description: "Jay: {task}", model: "sonnet")
+Agent(name: "jerry", subagent_type: "sw-kit:jerry", description: "Jerry: DB 스키마 + 마이그레이션", model: "sonnet")
+Agent(name: "milla", subagent_type: "sw-kit:milla", description: "Milla: 보안 리뷰 + 코드 품질", model: "sonnet")
+Agent(name: "derek", subagent_type: "sw-kit:derek", description: "Derek: {task}", model: "sonnet")
+Agent(name: "sam", subagent_type: "sw-kit:sam", description: "Sam: 증거 수집 + 최종 판정", model: "haiku")
 ```
 
 ## Worker Prompt Template

@@ -56,11 +56,24 @@ completion  [Review] → 보고서 + 학습 저장
 **Skip 조건**: `--plan <path>` 제공 시 또는 `/swkit plan`에서 전환된 경우 이 단계를 건너뜁니다.
 
 ### 실행
+
+Able 에이전트를 스폰합니다:
+
 ```
-[sw-kit] team-plan: Able(PM/sonnet) 투입 — 작업 계획 수립
+Agent({
+  subagent_type: "sw-kit:able",
+  description: "Able: 작업 계획 수립 — {task}",
+  model: "sonnet",
+  prompt: "..."
+})
 ```
 
-Able 에이전트를 스폰하여:
+터미널 표시:
+```
+⏺ sw-kit:able(Able: 작업 계획 수립 — 사용자 인증 API) Sonnet
+```
+
+Able 에이전트가 수행:
 1. 요구사항 분석 + 작업 분해
 2. 에이전트별 태스크 할당
 3. `.sw-kit/plans/{date}-{feature}.md` 저장
@@ -106,16 +119,27 @@ TeamCreate({
 
 ### Step 2-3: Spawn Exec Workers (PARALLEL)
 
-Worker Prompt Template은 `auto/SKILL.md`의 포맷을 따릅니다:
+Worker Prompt Template은 `auto/SKILL.md`의 포맷을 따릅니다.
+
+**MANDATORY: `description` 파라미터로 에이전트 가시성을 확보합니다.**
+
+`description` 포맷: `"{Name}: {구체적 작업 요약}"` (3-5 단어)
 
 ```
-Task({
+Agent({
   subagent_type: "sw-kit:{name}",
+  description: "{Name}: {구체적 작업 요약}",
   team_name: "<feature-slug>",
   name: "{name}",
   model: "{agent's default model}",
   prompt: "... (auto/SKILL.md Worker Prompt Template 참조) ..."
 })
+```
+
+터미널 표시 예시:
+```
+⏺ sw-kit:jay(Jay: Backend API 엔드포인트 구현) Sonnet
+  ⎿  Done (15 tool uses · 42.1k tokens · 3m 22s)
 ```
 
 각 워커 프롬프트에 반드시 포함:
@@ -153,30 +177,35 @@ Task({
 ## Stage 3: team-verify (= PDCA Check)
 
 ### 실행
-```
-[sw-kit] team-verify: Milla(Security/sonnet) + Sam(CTO/haiku) 투입 — 검증
-```
 
 **IMPORTANT**: Sam은 team-verify에서 `model: "haiku"`로 스폰합니다 (agents/sam.md의 기본 opus를 오버라이드). verify-fix 루프의 비용 효율을 위한 의도적 선택입니다.
 
 Milla와 Sam을 순차 또는 병렬로 스폰:
 
 ```
-Task({
+Agent({
   subagent_type: "sw-kit:milla",
+  description: "Milla: 보안 리뷰 + 코드 품질 점검",
   team_name: "<feature-slug>",
   name: "milla",
   model: "sonnet",
   prompt: "보안 리뷰 + 코드 품질 점검. 모든 변경사항 검토."
 })
 
-Task({
+Agent({
   subagent_type: "sw-kit:sam",
+  description: "Sam: 증거 체인 검증 + 최종 판정",
   team_name: "<feature-slug>",
   name: "sam",
   model: "haiku",    ← opus 오버라이드
   prompt: "증거 체인 검증: test/build/lint 결과 수집 + 판정."
 })
+```
+
+터미널 표시:
+```
+⏺ sw-kit:milla(Milla: 보안 리뷰 + 코드 품질 점검) Sonnet
+⏺ sw-kit:sam(Sam: 증거 체인 검증 + 최종 판정) Haiku
 ```
 
 ### 검증 기준 (evidence-verification/SKILL.md 준수)
@@ -204,8 +233,20 @@ Task({
 
 실패한 태스크의 원래 담당 에이전트를 **새 Task로** 재스폰합니다 (기존 task reset이 아닌 새로 생성):
 
+실패한 에이전트를 재스폰합니다:
+
 ```
-[sw-kit] team-fix (#{attempt}/3): {실패 에이전트} 재투입
+Agent({
+  subagent_type: "sw-kit:{name}",
+  description: "{Name}: Fix #{attempt} — {실패 사유 요약}",
+  model: "{original model}",
+  prompt: "... (아래 Retry Template 참조) ..."
+})
+```
+
+터미널 표시:
+```
+⏺ sw-kit:jay(Jay: Fix #1 — lint 에러 수정) Sonnet
 ```
 
 ### Fix Worker Prompt (Retry Template)

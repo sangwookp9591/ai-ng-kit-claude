@@ -15,10 +15,19 @@ triggers: ["explore", "탐색", "찾아", "구조", "분석"]
 
 ## Agent Deployment
 
-Before spawning the agent, ALWAYS announce:
+Spawn Klay with the `description` parameter for terminal visibility:
 
 ```
-[sw-kit] Klay(Architect/haiku) 투입 — 코드베이스 탐색
+Agent({
+  subagent_type: "sw-kit:klay",
+  description: "Klay: 코드베이스 탐색 — {target}",
+  model: "haiku",
+  prompt: "..."
+})
 ```
 
-🔍 Klay (haiku) 에이전트가 빠르게 코드베이스를 스캔합니다.
+터미널 표시:
+```
+⏺ sw-kit:klay(Klay: 코드베이스 탐색 — src/auth) Haiku
+  ⎿  Done (12 tool uses · 28.3k tokens · 1m 15s)
+```

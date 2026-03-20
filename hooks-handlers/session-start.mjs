@@ -1,5 +1,5 @@
 /**
- * sw-kit SessionStart Hook v1.9.0
+ * sw-kit SessionStart Hook v2.0.0
  * Injects harness rules so sw-kit is ALWAYS active without explicit invocation.
  * Detects first-run and prompts for setup via /swkit start.
  */
@@ -30,7 +30,7 @@ try {
   const ctx = [];
 
   // === Header ===
-  ctx.push(`# sw-kit v1.9.0 Harness Engineering Agent`);
+  ctx.push(`# sw-kit v2.0.0 Harness Engineering Agent`);
   ctx.push(`For developers: the ultimate assistant. For everyone: the ultimate magician.`);
   ctx.push('');
 
@@ -105,20 +105,16 @@ try {
   ctx.push(`- Squad(4): fullstack, multi-domain -> Able + Jay + Derek + Sam`);
   ctx.push(`- Full(7): architecture, security -> Able + Klay + Jay + Jerry + Milla + Derek + Sam`);
   ctx.push('');
-  ctx.push(`### Rule 2: Agent Deployment Announcement (MANDATORY)`);
-  ctx.push(`Before spawning ANY agent, ALWAYS announce who is being deployed:`);
-  ctx.push(`- Single agent: "[sw-kit] {Name}({Role}/{Model}) 투입 — {task summary}"`);
-  ctx.push(`- Multi agent: Show deployment table with Agent/Role/Model/Task columns`);
-  ctx.push(`Example single: "[sw-kit] Klay(Architect/haiku) 투입 — 코드베이스 탐색"`);
-  ctx.push(`Example multi:`);
+  ctx.push(`### Rule 2: Agent Visibility (MANDATORY)`);
+  ctx.push(`When spawning ANY agent, ALWAYS include the \`description\` parameter in Agent() calls.`);
+  ctx.push(`Format: description: "{Name}: {구체적 작업 요약}" (3-5 words)`);
+  ctx.push(`This makes Claude Code automatically display:`);
   ctx.push('```');
-  ctx.push(`[sw-kit] 에이전트 투입`);
-  ctx.push(`  Agent        Role              Model    Task`);
-  ctx.push(`  ─────        ────              ─────    ────`);
-  ctx.push(`  Jay          Backend / API     sonnet   엔드포인트 구현 (TDD)`);
-  ctx.push(`  Milla        Security          sonnet   보안 리뷰 + 코드 품질`);
+  ctx.push(`⏺ sw-kit:klay(Klay: 아키텍처 탐색 + 구조 분석) Opus`);
+  ctx.push(`  ⎿  Done (9 tool uses · 83.6k tokens · 2m 10s)`);
   ctx.push('```');
-  ctx.push(`Never spawn agents silently. The user must ALWAYS see who is doing what.`);
+  ctx.push(`For multi-agent spawns, also show the deployment table before spawning.`);
+  ctx.push(`Never spawn agents without description. The user must ALWAYS see who is doing what.`);
   ctx.push('');
   ctx.push(`### Rule 3: Agent Entrance (Required when agent starts working)`);
   ctx.push(`Each agent shows their entrance banner when they start:`);

@@ -14,13 +14,24 @@ triggers: ["plan", "계획", "기획", "설계"]
 
 ## Step 1: Agent Deployment
 
-Before spawning the agent, ALWAYS announce:
+Spawn Able with the `description` parameter for terminal visibility:
 
 ```
-[sw-kit] Able(PM/sonnet) 투입 — 작업 계획 수립
+Agent({
+  subagent_type: "sw-kit:able",
+  description: "Able: 작업 계획 수립 — {task}",
+  model: "sonnet",
+  prompt: "..."
+})
 ```
 
-Spawn Able agent to:
+터미널 표시:
+```
+⏺ sw-kit:able(Able: 작업 계획 수립 — 사용자 인증 API) Sonnet
+  ⎿  Done (8 tool uses · 35.2k tokens · 2m 05s)
+```
+
+Able agent tasks:
 1. Analyze requirements and break down into tasks
 2. Identify which agents are needed (complexity scoring)
 3. Create plan document at `.sw-kit/plans/{date}-{feature}.md`

@@ -10,12 +10,27 @@
 
 ## Install
 
+**Claude Code 세션에서**
+
 ```
 /plugin marketplace add sangwookp9591/sw-kit-claude
+```
+
+```
 /plugin install sw-kit
 ```
 
-Update: `/plugin update sw-kit`
+**터미널에서 한 줄로**
+
+```
+claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin install sw-kit
+```
+
+**업데이트**
+
+```
+claude plugin update sw-kit@swkit-marketplace
+```
 
 ---
 

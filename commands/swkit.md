@@ -1,9 +1,9 @@
 ---
 name: swkit
-description: sw-kit v1.9.0 하네스 엔지니어링 워크플로우. PDCA, TDD, Task, Agent, Pipeline 전체 관리.
+description: sw-kit v2.0.0 하네스 엔지니어링 워크플로우. PDCA, TDD, Task, Agent, Pipeline 전체 관리.
 ---
 
-# /swkit -- Harness Engineering Workflow v1.9.0
+# /swkit -- Harness Engineering Workflow v2.0.0
 
 ## PDCA
 

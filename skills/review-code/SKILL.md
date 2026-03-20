@@ -14,13 +14,24 @@ triggers: ["review", "리뷰", "검토", "코드리뷰"]
 
 ## Agent Deployment
 
-Before spawning the agent, ALWAYS announce:
+Spawn Milla with the `description` parameter for terminal visibility:
 
 ```
-[sw-kit] Milla(Security/sonnet) 투입 — 코드 리뷰
+Agent({
+  subagent_type: "sw-kit:milla",
+  description: "Milla: 보안 리뷰 + 코드 품질 점검",
+  model: "sonnet",
+  prompt: "..."
+})
 ```
 
-🛡️ Milla (sonnet) 에이전트가 코드를 리뷰합니다.
+터미널 표시:
+```
+⏺ sw-kit:milla(Milla: 보안 리뷰 + 코드 품질 점검) Sonnet
+  ⎿  Done (11 tool uses · 45.7k tokens · 2m 40s)
+```
+
+Milla가 점검하는 항목:
 - 버그, 로직 오류
 - 보안 취약점 (OWASP Top 10)
 - 성능 안티패턴

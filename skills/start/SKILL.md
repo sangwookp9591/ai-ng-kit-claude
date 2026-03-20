@@ -146,7 +146,7 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" clear
 **삽입할 내용:**
 ```markdown
 <!-- SWKIT:START -->
-# sw-kit Harness Engineering Agent v1.9.0
+# sw-kit Harness Engineering Agent v2.0.0
 
 sw-kit이 활성화되어 있습니다. 세션 시작 시 자동으로 harness rules가 주입됩니다.
 
@@ -287,14 +287,14 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" save 3 <CONFIG_TAR
 ### Mark Completion
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" complete "1.9.0" "<CONFIG_TARGET>" "<HUD_ENABLED>" "<DEFAULT_MODE>"
+node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" complete "2.0.0" "<CONFIG_TARGET>" "<HUD_ENABLED>" "<DEFAULT_MODE>"
 ```
 
 ### Show Welcome
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  sw-kit v1.9.0 셋업 완료!
+  sw-kit v2.0.0 셋업 완료!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   스코프:     {local → 이 프로젝트만 | global → 모든 프로젝트}

@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0] - 2026-03-20
+
+### Added
+- **Agent Visibility (omc-style)** — 모든 Agent 스폰 시 `description` 파라미터 필수
+  - 터미널에 `⏺ sw-kit:jay(Jay: Backend API 구현) Sonnet` 자동 표시
+  - 완료 시 `Done (N tool uses · Nk tokens · Nm Ns)` 자동 표시
+  - `Task()` → `Agent()` 호출 패턴으로 통일
+
+### Changed
+- **`skills/auto/SKILL.md`** — 모든 프리셋(Solo/Duo/Squad/Full) Agent 호출에 description 추가
+- **`skills/team/SKILL.md`** — team-plan, team-exec, team-verify, team-fix 전체 description 추가
+- **`skills/explore/SKILL.md`** — Klay Agent 가시성 적용
+- **`skills/plan-task/SKILL.md`** — Able Agent 가시성 적용
+- **`skills/review-code/SKILL.md`** — Milla Agent 가시성 적용
+- **`skills/verify-evidence/SKILL.md`** — Sam Agent 가시성 적용
+- **`hooks-handlers/session-start.mjs`** — Rule 2를 description 기반 가시성으로 업데이트
+
 ## [1.9.0] - 2026-03-20
 
 ### Added
