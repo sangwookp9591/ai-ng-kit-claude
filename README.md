@@ -32,6 +32,8 @@ claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin insta
 claude plugin update sw-kit@swkit-marketplace
 ```
 
+> 버전은 `.claude-plugin/marketplace.json` + `.claude-plugin/plugin.json` + `package.json` 3곳의 매니페스트로 관리됩니다. `claude plugin update`는 이 매니페스트의 version 필드를 기준으로 업데이트를 판단합니다.
+
 ---
 
 <h2 id="team">Agent Team (10 named agents)</h2>
@@ -168,6 +170,17 @@ Correct    ███████████████████████
 | `/swkit review` | <img src="images/milla.svg" width="14"> Milla | Security + quality review |
 | `/swkit verify` | <img src="images/sam.svg" width="14"> Sam | Final review + evidence chain |
 
+### Agent UI (3D Office)
+
+| Command | What it does |
+|---------|-------------|
+| `/swkit agent-ui` | Open 3D office in browser -- visualize current session |
+| `/swkit agent-ui --setup` | Auto-configure Claude Code hooks (one-time) |
+| `/swkit agent-ui --status` | Check current setup status |
+| `/swkit agent-ui --uninstall` | Remove hooks from settings |
+
+> 🏢 [office.sw-world.site](https://office.sw-world.site) — 팀원 초대 코드로 실시간 협업 시각화
+
 ### Recovery
 
 | Command | What it does |
@@ -260,7 +273,7 @@ sw-kit-claude/
     i18n/         intent-detector, locale
   agents/         10 named agents (sam, able, klay, jay, jerry, milla, willji, derek, rowan, iron)
   commands/       swkit.md, help.md
-  skills/         11 skill definitions
+  skills/         12 skill definitions (including agent-ui)
   templates/      plan, review, completion, adr
   images/         12 custom SVG icons
 ```
