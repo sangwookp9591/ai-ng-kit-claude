@@ -26,7 +26,7 @@ Read the task description and estimate complexity:
 Before creating the CC team, **persist the plan to disk**:
 
 ```bash
-node scripts/cli/persist.mjs plan \
+node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" plan \
   --feature "{feature}" \
   --goal "{task description}" \
   --steps "{agent1}: {role}|{agent2}: {role}|..."
@@ -191,7 +191,7 @@ After displaying the completion report:
 3. TeamDelete({ team_name: "<feature-slug>" })
 4. **Persist completion report and learning**:
 ```bash
-node scripts/cli/persist.mjs report --feature "{feature}" --lessons "{lesson1}|{lesson2}"
+node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" report --feature "{feature}" --lessons "{lesson1}|{lesson2}"
 ```
 5. This generates `.sw-kit/reports/{date}-{feature}.md`
 

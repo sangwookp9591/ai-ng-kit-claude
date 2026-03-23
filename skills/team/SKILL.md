@@ -83,7 +83,7 @@ Able 에이전트가 수행:
 Able 완료 후 **반드시 실행**:
 
 ```bash
-node scripts/cli/persist.mjs plan \
+node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" plan \
   --feature "{feature}" \
   --goal "{goal from Able}" \
   --steps "{step1}|{step2}|{step3}" \
@@ -343,7 +343,7 @@ PROTOCOL:
 3. TeamDelete({ team_name: "<feature-slug>" })
 4. **Persist report + learning**:
 ```bash
-node scripts/cli/persist.mjs report --feature "{feature}" --lessons "{lesson1}|{lesson2}"
+node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" report --feature "{feature}" --lessons "{lesson1}|{lesson2}"
 ```
 5. This generates `.sw-kit/reports/{date}-{feature}.md`
 

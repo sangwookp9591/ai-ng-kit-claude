@@ -41,7 +41,7 @@ Able agent tasks:
 After Able returns, **you MUST persist the plan and tasks** by running:
 
 ```bash
-node scripts/cli/persist.mjs plan \
+node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" plan \
   --feature "{feature}" \
   --goal "{goal from Able}" \
   --steps "{step1}|{step2}|{step3}" \
