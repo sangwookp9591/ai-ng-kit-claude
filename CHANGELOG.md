@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.1.2] - 2026-03-23
+
+### Added — Agent UI (3D Office Visualization)
+
+sw-world-agents-view 연동 스킬 추가.
+
+#### New Skill
+- **agent-ui** — 3D 에이전트 오피스 시각화. `/swkit agent-ui`로 현재 세션을 브라우저에서 실시간 확인. `--setup`으로 Claude Code hooks 자동 설정, `--status`로 상태 확인, `--uninstall`로 제거.
+
+#### Integration
+- sw-world-agents-view (https://github.com/sangwookp9591/sw-world-agents-view) 연동
+- SessionStart hook: 세션 시작 시 3D 오피스 자동 등록
+- PreToolUse hook: 도구 사용 시 캐릭터 애니메이션 실시간 반영
+- 초대 코드 시스템: 팀원 온보딩
+- 룸 시스템: 프로젝트별 협업 공간
+- 배포: https://office.sw-world.site
+
 ## [2.1.1] - 2026-03-23
 
 ### Added — Design Pipeline (Stitch Integration)
