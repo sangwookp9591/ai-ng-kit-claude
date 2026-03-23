@@ -1,6 +1,6 @@
 {
   "name": "sw-kit-claude",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "type": "module",
   "description": "Harness Engineering Agent for Claude Code",
   "license": "Apache-2.0",

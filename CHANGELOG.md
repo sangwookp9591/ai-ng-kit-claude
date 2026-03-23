@@ -1,5 +1,38 @@
 # Changelog
 
+## [2.1.1] - 2026-03-23
+
+### Added — Design Pipeline (Stitch Integration)
+
+Google Labs stitch-skills를 sw-kit에 통합. 7개 원본 skill을 5개로 재구성.
+
+#### New Skills (5)
+- **design** — Willji 전용. UI 디자인 생성/편집, 프롬프트 강화, Stitch MCP 연동. Sub-commands: generate, enhance, edit
+- **design-system** — Willji 전용. Stitch 프로젝트 분석 → DESIGN.md 합성, 디자인 토큰 관리
+- **design-loop** — Willji + Derek. 자율 멀티페이지 빌드 루프 (baton system)
+- **design-to-code** — Derek 전용. Stitch HTML → React 컴포넌트 변환, AST 검증, shadcn/ui 통합, TDD 강제
+- **design-video** — Rowan 전용. Remotion 워크스루 영상 생성
+
+#### Agent Enhancements (3)
+- **Willji** — Stitch MCP 디자인 생성/편집, 디자인 시스템 합성, prompt enhancement 역할 추가
+- **Derek** — Stitch → React 변환, shadcn/ui 통합, AST 검증, 디자인 토큰 매핑 역할 추가
+- **Rowan** — Remotion 워크스루 영상 생성 역할 추가
+
+#### Evidence Chain Extensions
+- `design` 타입 — Stitch 디자인 생성/편집 결과
+- `visual-qa` 타입 — 시각 검증 결과 (Chrome DevTools MCP, 선택적)
+- `component-ast` 타입 — AST 기반 코드 검증 결과
+
+#### Auto Pipeline Extensions
+- Design Domain Detection — 디자인 키워드 감지 시 자동 Design Preset 선택
+- Design Solo / Design Duo / Design Squad 팀 프리셋 3종 추가
+
+#### Key Properties
+- Stitch MCP 미설치 시 graceful degradation (에러 없이 fallback 안내)
+- 기존 13개 skill + 10개 agent에 breaking change 없음
+- 디자인 산출물: `.sw-kit/designs/`, 영상 산출물: `.sw-kit/videos/`
+- Origin: google-labs-code/stitch-skills (Apache-2.0)
+
 ## [2.0.1] - 2026-03-20
 
 ### Fixed — 21 Bug Fixes + Test Infrastructure

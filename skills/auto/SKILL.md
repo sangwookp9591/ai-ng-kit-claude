@@ -16,6 +16,11 @@ Read the task description and estimate complexity:
 - Count file references, domains (backend/frontend/db/design/security)
 - Select team preset: Solo(1) / Duo(2) / Squad(4) / Full(7)
 
+**Design Domain Detection**: 태스크에 아래 키워드가 포함되면 Design Preset을 사용:
+- 한국어: "디자인", "UI", "화면", "페이지 디자인", "랜딩", "대시보드 디자인"
+- English: "design", "landing page", "dashboard design", "stitch", "mockup"
+- Design Preset이 선택되면 아래 "Design Presets" 섹션 참조
+
 ## Step 1.5: Persist Plan + Tasks (MANDATORY)
 
 Before creating the CC team, **persist the plan to disk**:
@@ -221,6 +226,36 @@ Agent(name: "milla", subagent_type: "sw-kit:milla", description: "Milla: 보안 
 Agent(name: "derek", subagent_type: "sw-kit:derek", description: "Derek: {task}", model: "sonnet")
 Agent(name: "sam", subagent_type: "sw-kit:sam", description: "Sam: 증거 수집 + 최종 판정", model: "haiku")
 ```
+
+## Design Presets
+
+디자인 도메인이 감지되면 아래 preset을 사용합니다.
+
+### Design Solo (디자인 생성만)
+```
+Agent(name: "willji", subagent_type: "sw-kit:willji", description: "Willji: UI 디자인 생성", model: "sonnet")
+```
+
+### Design Duo (디자인 → 코드)
+```
+Agent(name: "willji", subagent_type: "sw-kit:willji", description: "Willji: UI 디자인 생성", model: "sonnet")
+Agent(name: "derek", subagent_type: "sw-kit:derek", description: "Derek: 디자인 → React 변환", model: "sonnet")
+```
+
+### Design Squad (디자인 → 코드 → 모션 → 검증)
+```
+Agent(name: "willji", subagent_type: "sw-kit:willji", description: "Willji: UI 디자인 생성", model: "sonnet")
+Agent(name: "derek", subagent_type: "sw-kit:derek", description: "Derek: 디자인 → React 변환", model: "sonnet")
+Agent(name: "rowan", subagent_type: "sw-kit:rowan", description: "Rowan: 인터랙션 + 모션", model: "sonnet")
+Agent(name: "sam", subagent_type: "sw-kit:sam", description: "Sam: 증거 수집 + 최종 판정", model: "haiku")
+```
+
+Design Preset 선택 기준:
+| Preset | 조건 |
+|--------|------|
+| Design Solo | 디자인 생성/편집만 요청 |
+| Design Duo | 디자인 + 코드 변환 요청 |
+| Design Squad | 디자인 + 코드 + 모션/영상 또는 복잡한 멀티페이지 |
 
 ## Worker Prompt Template
 
