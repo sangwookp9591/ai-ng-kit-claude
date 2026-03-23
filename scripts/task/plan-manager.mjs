@@ -8,7 +8,7 @@
 import { readState, writeState, readStateOrDefault } from '../core/state.mjs';
 import { createTask } from './task-manager.mjs';
 import { createLogger } from '../core/logger.mjs';
-import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'node:fs';
+import { writeFileSync, readFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const log = createLogger('plan');
@@ -101,7 +101,7 @@ export function getPlan(feature, projectDir) {
   const dir = getPlanDir(projectDir);
 
   try {
-    const files = require('node:fs').readdirSync(dir)
+    const files = readdirSync(dir)
       .filter(f => f.includes(feature) && f.endsWith('.md'))
       .sort()
       .reverse();
@@ -121,7 +121,7 @@ export function getPlan(feature, projectDir) {
 export function listPlans(projectDir) {
   const dir = getPlanDir(projectDir);
   try {
-    return require('node:fs').readdirSync(dir)
+    return readdirSync(dir)
       .filter(f => f.endsWith('.md'))
       .map(f => ({
         file: f,
