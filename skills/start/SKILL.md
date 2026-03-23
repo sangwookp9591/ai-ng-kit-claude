@@ -288,14 +288,14 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" save 3 <CONFIG_TAR
 ### Mark Completion
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" complete "2.1.5" "<CONFIG_TARGET>" "<HUD_ENABLED>" "<DEFAULT_MODE>"
+node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" complete "2.1.6" "<CONFIG_TARGET>" "<HUD_ENABLED>" "<DEFAULT_MODE>"
 ```
 
 ### Show Welcome
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  sw-kit v2.1.5 셋업 완료!
+  sw-kit v2.1.6 셋업 완료!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   스코프:     {local → 이 프로젝트만 | global → 모든 프로젝트}

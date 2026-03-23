@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.1.5] - 2026-03-23
+## [2.1.6] - 2026-03-23
 
 ### Improved — Agent-UI DX 개선 (Ralplan 합의 기반)
 
