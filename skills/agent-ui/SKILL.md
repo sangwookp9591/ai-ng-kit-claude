@@ -12,43 +12,57 @@ triggers: ["agent-ui", "3d office", "오피스", "시각화", "agent view", "에
 
 사용자 인자를 확인합니다:
 
-- 인자 없음 → **기본 모드** (내장 활동 요약)
+- 인자 없음 → **기본 모드** (3D 오피스 브라우저 오픈)
+- `--monitor` → **모니터 모드** (터미널 내 에이전트 활동 요약)
 - `--status` → **Status 모드** (전체 진단)
-- `--3d` → **3D 오피스 모드** (외부 프로젝트 필요)
 - `--setup` → **3D Setup 모드** (3D 오피스 자동 설정)
 
 ---
 
-### 기본 모드 (인자 없음) — 설치 불필요
+### 기본 모드 (인자 없음) — 브라우저에서 3D 오피스 열기
 
 **반드시 아래 Bash 커맨드를 실행하세요. 분석하거나 질문하지 마세요.**
 
 ```bash
+OFFICE_DIR="$HOME/sw-world-agents-view"
+if [ ! -d "$OFFICE_DIR" ]; then
+  OFFICE_DIR="$(find $HOME/Project -maxdepth 2 -name 'sw-world-agents-view' -o -name 'swkit-office' 2>/dev/null | head -1)"
+fi
+
+if [ -n "$OFFICE_DIR" ] && [ -f "$OFFICE_DIR/bin/agent-ui.mjs" ]; then
+  node "$OFFICE_DIR/bin/agent-ui.mjs"
+else
+  echo "로컬 설치 없음 — 클라우드 모드로 접속합니다."
+  open "https://office.sw-world.site"
+fi
+```
+
+---
+
+### 모니터 모드 (`--monitor`) — 터미널 내 에이전트 활동
+
+**반드시 아래 Bash 커맨드를 실행하세요.**
+
+```bash
 node --input-type=module -e "
 import { formatTraceSummary } from '${CLAUDE_PLUGIN_ROOT}/scripts/trace/agent-trace.mjs';
-import { selectTeam, estimateTeamCost } from '${CLAUDE_PLUGIN_ROOT}/scripts/pipeline/team-orchestrator.mjs';
 const projectDir = process.env.PROJECT_DIR || process.cwd();
 
 console.log('━━━ sw-kit Agent Monitor ━━━');
 console.log('');
-
-// Team info
-const team = selectTeam({ fileCount:1, domainCount:1 });
 console.log('Available Agents:');
 console.log('  Sam(CTO) Able(PM) Klay(Architect) Jay(Backend) Jerry(DB) Milla(Security) Willji(Design) Derek(Frontend) Rowan(Motion) Iron(Wizard)');
 console.log('');
-
-// Trace summary
 const trace = formatTraceSummary(projectDir);
 console.log(trace);
 console.log('');
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 console.log('');
 console.log('Commands:');
-console.log('  /swkit agent-ui          이 화면');
-console.log('  /swkit agent-ui --status 전체 진단');
-console.log('  /swkit agent-ui --3d     3D 오피스');
-console.log('  /swkit auto <task>       에이전트 팀 실행');
+console.log('  /swkit agent-ui            브라우저 3D 오피스');
+console.log('  /swkit agent-ui --monitor  이 화면');
+console.log('  /swkit agent-ui --status   전체 진단');
+console.log('  /swkit auto <task>         에이전트 팀 실행');
 "
 ```
 
@@ -90,43 +104,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 
 ---
 
-### 3D 오피스 모드 (`--3d`)
-
-브라우저에서 3D 오피스를 열고 현재 세션을 등록합니다. **sw-world-agents-view 필요.**
-
-```bash
-OFFICE_DIR="$HOME/sw-world-agents-view"
-if [ ! -d "$OFFICE_DIR" ]; then
-  OFFICE_DIR="$(find $HOME/Project -maxdepth 2 -name 'sw-world-agents-view' -o -name 'swkit-office' 2>/dev/null | head -1)"
-fi
-
-if [ -z "$OFFICE_DIR" ] || [ ! -f "$OFFICE_DIR/bin/agent-ui.mjs" ]; then
-  echo "3D 오피스가 설치되지 않았습니다."
-  echo ""
-  echo "  기본 에이전트 모니터 (설치 불필요):"
-  echo "    /swkit agent-ui          — 활동 요약"
-  echo "    /swkit agent-ui --status — 전체 진단"
-  echo ""
-  echo "  3D 오피스 설치:"
-  echo "    git clone https://github.com/sangwookp9591/sw-world-agents-view.git ~/sw-world-agents-view"
-  echo "    cd ~/sw-world-agents-view && npm install"
-  echo "    /swkit agent-ui --setup  — 자동 설정"
-  echo ""
-  echo "  클라우드 모드 (설치 없이 브라우저):"
-  echo "    https://office.sw-world.site"
-  echo ""
-  read -p "클라우드 모드로 접속할까요? (y/N) " yn
-  if [ "$yn" = "y" ] || [ "$yn" = "Y" ]; then
-    open "https://office.sw-world.site"
-  fi
-else
-  node "$OFFICE_DIR/bin/agent-ui.mjs"
-fi
-```
-
----
-
-### 3D Setup 모드 (`--setup`)
+### Setup 모드 (`--setup`)
 
 3D 오피스 환경변수와 hooks를 자동으로 설정합니다.
 
