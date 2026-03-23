@@ -21,33 +21,35 @@ triggers: ["agent-ui", "3d office", "오피스", "시각화", "agent view", "에
 
 ### 기본 모드 (인자 없음) — 설치 불필요
 
-현재 세션의 에이전트 활동 요약을 보여줍니다. 외부 프로젝트 불필요.
-
-**데이터 소스:** `agent-trace.mjs`의 `formatTraceSummary()`
-
-**실행:**
+**반드시 아래 Bash 커맨드를 실행하세요. 분석하거나 질문하지 마세요.**
 
 ```bash
-node -e "
+node --input-type=module -e "
 import { formatTraceSummary } from '${CLAUDE_PLUGIN_ROOT}/scripts/trace/agent-trace.mjs';
+import { selectTeam, estimateTeamCost } from '${CLAUDE_PLUGIN_ROOT}/scripts/pipeline/team-orchestrator.mjs';
 const projectDir = process.env.PROJECT_DIR || process.cwd();
-console.log(formatTraceSummary(projectDir));
+
+console.log('━━━ sw-kit Agent Monitor ━━━');
+console.log('');
+
+// Team info
+const team = selectTeam({ fileCount:1, domainCount:1 });
+console.log('Available Agents:');
+console.log('  Sam(CTO) Able(PM) Klay(Architect) Jay(Backend) Jerry(DB) Milla(Security) Willji(Design) Derek(Frontend) Rowan(Motion) Iron(Wizard)');
+console.log('');
+
+// Trace summary
+const trace = formatTraceSummary(projectDir);
+console.log(trace);
+console.log('');
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+console.log('');
+console.log('Commands:');
+console.log('  /swkit agent-ui          이 화면');
+console.log('  /swkit agent-ui --status 전체 진단');
+console.log('  /swkit agent-ui --3d     3D 오피스');
+console.log('  /swkit auto <task>       에이전트 팀 실행');
 "
-```
-
-출력 예시:
-```
-[sw-kit Trace] 42 events recorded
-
-  klay: 8 actions (6R 2W)
-  jay: 15 actions (5R 10W)
-  milla: 4 actions (4R 0W)
-  session: 15 actions (8R 7W)
-
-  Recent:
-  ✓ 14:32:05 spawn → Klay: 아키텍처 탐색
-  ✓ 14:33:12 write → src/api/auth.ts
-  ✓ 14:34:01 spawn → Milla: 보안 리뷰
 ```
 
 ---

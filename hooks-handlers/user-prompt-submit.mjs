@@ -60,7 +60,7 @@ try {
   // Pipeline summary — one-line routing preview
   const pipeline = team.team.workers.map(w => {
     const name = w.name.charAt(0).toUpperCase() + w.name.slice(1);
-    const shortRole = w.role.replace(/^[^\s]+\s/, '').split(' ')[0];
+    const shortRole = w.role.includes('—') ? w.role.split('—')[1].trim().split(/\s+/)[0] : w.role.split(' ').pop();
     return `${name}(${shortRole})`;
   }).join(' → ');
   parts.push(`  Pipeline: ${pipeline}`);
