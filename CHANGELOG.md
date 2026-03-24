@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.2.1] - 2026-03-24
+
+### Added — GSD 벤치마킹 바이브코딩 진화 (Ralplan 합의)
+
+#### 신규 스킬 4개
+- **`/swkit do`**: 자연어 자동 라우팅 — intent-router.mjs가 입력 분석 → plan/auto/team/wizard 자동 선택
+- **`/swkit debug`**: 과학적 디버깅 — 증상→가설→테스트→결론, `.sw-kit/debug/{slug}.md` 영구 상태
+- **`/swkit init`**: 프로젝트 초기화 — 질문 기반 문맥 수집 → PROJECT.md + REQUIREMENTS.md + TECH-STACK.md
+- **`/swkit cost`**: 비용/토큰 투명성 — 에이전트별 활동 기반 비용 추정 보고
+
+#### 신규 에이전트
+- **Debugger**: 과학적 디버깅 전문가 (가설-테스트-판정 프로토콜)
+
+#### Goal-Backward Verification (목표-역방향 검증)
+- **goal-checker.mjs**: 완료 ≠ 달성 구분 — ACHIEVED / COMPLETED_NOT_ACHIEVED / INCOMPLETE 3단계 판정
+- **Sam 에이전트 강화**: Goal-Backward Verification Protocol 추가
+- **verify-evidence 스킬 강화**: Step 4 Goal-Backward 단계 추가
+
+#### State 위생
+- **state-gc.mjs**: 좀비 feature 가비지 컬렉션 (7일 비활성 + 증거 없음 → 자동 아카이빙)
+- **status-view.mjs**: `.sw-kit/STATUS.md` 자동 생성 (인간 가독성 상태 뷰)
+- **session-start.mjs**: GC + STATUS.md 갱신 자동 실행
+
+#### 템플릿 확장
+- `templates/project.md`, `templates/requirements.md`, `templates/tech-stack.md`, `templates/debug.md`
+
+#### 테스트
+- 129개 신규 테스트 전부 통과 (intent-router 30, state-gc 7, status-view 10, goal-checker 10, init 58, cost-reporter 14)
+
 ## [2.2.0] - 2026-03-24
 
 ### Added — agent-ui 세션 자동 연결

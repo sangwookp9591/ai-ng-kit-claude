@@ -10,9 +10,12 @@ import { resetBudget, trackInjection, trimToTokenBudget } from '../scripts/core/
 import { getProgressSummary } from '../scripts/guardrail/progress-tracker.mjs';
 import { resetTrackers } from '../scripts/guardrail/safety-invariants.mjs';
 import { isSetupComplete } from '../scripts/setup/setup-progress.mjs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { homedir } from 'node:os';
+
+const pluginRoot = dirname(fileURLToPath(import.meta.url)).replace(/[\\/]hooks-handlers$/, '');
 
 const log = createLogger('session-start');
 
@@ -181,6 +184,22 @@ try {
   // === Commands ===
   ctx.push(`## Commands`);
   ctx.push(`/swkit start|status|next|reset|auto|tdd|task|explore|plan|execute|review|verify|wizard|rollback|learn|help`);
+
+  // === State GC (automatic cleanup of zombie features) ===
+  try {
+    const { runGC } = await import(join(pluginRoot, 'scripts/pdca/state-gc.mjs'));
+    const gcResult = runGC(projectDir);
+    if (gcResult.removed > 0) {
+      ctx.push('');
+      ctx.push(`[State GC] ${gcResult.removed}개 좀비 feature 정리됨: ${gcResult.archived.join(', ')}`);
+    }
+  } catch (_e) { /* GC 실패는 세션 시작을 방해하지 않음 */ }
+
+  // === STATUS.md 갱신 ===
+  try {
+    const { generateStatusView } = await import(join(pluginRoot, 'scripts/pdca/status-view.mjs'));
+    generateStatusView(projectDir);
+  } catch (_e) { /* 뷰 생성 실패는 세션 시작을 방해하지 않음 */ }
 
   const context = ctx.join('\n');
   const maxTokens = config.context.maxSessionStartTokens;
