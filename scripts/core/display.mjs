@@ -77,7 +77,7 @@ const INNOVATIONS = [
 export function banner() {
   return `
 ${C.bold}${C.purple}  ┌─────────────────────────────────────────────┐${C.reset}
-${C.bold}${C.purple}  │${C.reset}  ${C.bold}${C.pink}sw-kit${C.reset} ${C.dim}v2.2.1${C.reset}  ${C.italic}Harness Engineering Agent${C.reset}  ${C.bold}${C.purple}│${C.reset}
+${C.bold}${C.purple}  │${C.reset}  ${C.bold}${C.pink}sw-kit${C.reset} ${C.dim}v2.2.3${C.reset}  ${C.italic}Harness Engineering Agent${C.reset}  ${C.bold}${C.purple}│${C.reset}
 ${C.bold}${C.purple}  │${C.reset}                                             ${C.bold}${C.purple}│${C.reset}
 ${C.bold}${C.purple}  │${C.reset}  ${C.dim}개발자에게는 최고의 도우미${C.reset}                ${C.bold}${C.purple}│${C.reset}
 ${C.bold}${C.purple}  │${C.reset}  ${C.dim}비개발자에게는 최고의 마술사${C.reset} ${C.magenta}~*${C.reset}          ${C.bold}${C.purple}│${C.reset}

@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.2.3] - 2026-03-24
+
+### Improved — Help 가이드 + Wizard 강화 + 죽은 코드 정리
+
+#### /swkit help 개선
+- Best Practices 가이드 추가 (6가지 시나리오별 추천 경로)
+- 커맨드를 섹션별 그룹화 (Vibe Coding / Pipeline / Development / Quality / Utility)
+- 신규 커맨드 반영 (do, debug, init, cost, agent-ui)
+
+#### Iron wizard GSD 수준 강화
+- intent-router 기반 자동 라우팅 통합 (인자 있음 → 자동 실행)
+- 대화 모드 (인자 없음 → 질문 기반 문맥 수집 → 자동 실행)
+- 에이전트 작업 중 비기술 번역 레이어
+
+#### Dead Code Cleanup
+- 미사용 스크립트 10개 삭제 (-1,503줄): dashboard, locale, convention-extractor, tdd-engine, agent-pipeline, handoff, auto-runner, rollback, model-router, debugger agent
+- 버전 하드코딩 동기화: display.mjs, hooks.json (v1.3.0 → v2.2.3)
+
 ## [2.2.1] - 2026-03-24
 
 ### Added — GSD 벤치마킹 바이브코딩 진화 (Ralplan 합의)
