@@ -134,7 +134,7 @@ MCP 없이도 동작하는 독립 기능.
 모든 디자인 산출물은 `.sw-kit/designs/`에 저장:
 ```
 .sw-kit/designs/
-├── DESIGN.md          # 디자인 시스템 (design-system skill로 생성)
+├── DESIGN.md          # 디자인 시스템 문서
 ├── metadata.json      # Stitch project/screen IDs
 ├── {page}.html        # 생성된 HTML
 └── {page}.png         # 스크린샷

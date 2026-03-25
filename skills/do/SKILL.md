@@ -93,13 +93,6 @@ Skill("sw-kit:team") 호출
 - preset에 따라 에이전트 자동 선택 (team SKILL.md Agent Selection 참조)
 ```
 
-### route = "wizard"
-
-```
-Skill("sw-kit:wizard-mode") 호출
-- 대화형 설정 모드로 진입
-```
-
 ## 라우팅 규칙 요약
 
 | 시그널 | 라우팅 | 이유 |

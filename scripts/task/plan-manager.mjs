@@ -8,22 +8,11 @@
 import { readState, writeState, readStateOrDefault } from '../core/state.mjs';
 import { createTask } from './task-manager.mjs';
 import { createLogger } from '../core/logger.mjs';
+import { sanitizeFeature } from '../core/path-utils.mjs';
 import { writeFileSync, readFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
-import { join, basename } from 'node:path';
+import { join } from 'node:path';
 
 const log = createLogger('plan');
-
-/**
- * Sanitize a feature name for safe use in file paths.
- * Prevents path traversal (e.g., "../../etc" → "etc").
- * @param {string} feature
- * @returns {string}
- */
-function sanitizeFeature(feature) {
-  const safe = basename(feature).replace(/[^a-zA-Z0-9_\-가-힣]/g, '_');
-  if (!safe) throw new Error(`Invalid feature name: ${feature}`);
-  return safe;
-}
 
 function getPlanDir(projectDir) {
   const dir = join(projectDir || process.cwd(), '.sw-kit', 'plans');

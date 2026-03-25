@@ -6,7 +6,7 @@
 import { readStdinJSON } from '../scripts/core/stdin.mjs';
 import { detectIntent } from '../scripts/i18n/intent-detector.mjs';
 import { selectTeam, estimateTeamCost } from '../scripts/pipeline/team-orchestrator.mjs';
-import { readState } from '../scripts/core/state.mjs';
+import { getActiveSession, sanitizeSessionField } from '../scripts/core/session-reader.mjs';
 import { readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -54,41 +54,11 @@ const EXECUTION_KEYWORDS = [
 function detectKeywordRoutes(promptLower) {
   const matches = [];
   for (const route of KEYWORD_ROUTES) {
-    if (route.keywords.some(kw => promptLower.includes(kw.toLowerCase()))) {
+    if (route.keywords.some(kw => promptLower.includes(kw))) {
       matches.push(route.message);
     }
   }
   return matches;
-}
-
-/**
- * Read active session state.
- * Checks pdca-status.json → returns { active: true, mode, feature, stage } or { active: false }.
- */
-function getActiveSession(projectDir) {
-  // Check team session (auto-run files indicate a queued session)
-  const stateDir = join(projectDir, '.sw-kit', 'state');
-
-  // Pipeline session
-  const pipelineFile = join(stateDir, 'pipeline-state.json');
-  const pipeline = readState(pipelineFile);
-  if (pipeline.ok && pipeline.data.status === 'running') {
-    const stage = pipeline.data.stages?.[pipeline.data.currentStageIndex]?.id || 'unknown';
-    return { active: true, mode: 'pipeline', feature: pipeline.data.feature || pipeline.data.id, currentStage: stage };
-  }
-
-  // PDCA active feature
-  const pdcaFile = join(stateDir, 'pdca-status.json');
-  const pdca = readState(pdcaFile);
-  if (pdca.ok && pdca.data.activeFeature) {
-    const feature = pdca.data.activeFeature;
-    const featureData = pdca.data.features?.[feature];
-    if (featureData) {
-      return { active: true, mode: 'team', feature, currentStage: featureData.currentStage || 'plan' };
-    }
-  }
-
-  return { active: false };
 }
 
 /**
@@ -129,7 +99,7 @@ try {
   // --- Active session injection ---
   const session = getActiveSession(projectDir);
   if (session.active) {
-    parts.push(`[ACTIVE SESSION: ${session.mode} — ${session.feature} at stage ${session.currentStage}]`);
+    parts.push(`[ACTIVE SESSION: ${sanitizeSessionField(session.mode)} — ${sanitizeSessionField(session.feature)} at stage ${sanitizeSessionField(session.currentStage)}]`);
   } else {
     // --- Plan exists but no active session ---
     const wantsExecution = EXECUTION_KEYWORDS.some(kw => lower.includes(kw));

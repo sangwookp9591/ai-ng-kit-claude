@@ -4,24 +4,13 @@
  * @module scripts/pipeline/handoff-manager
  */
 
-import { writeFileSync, readFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
-import { join, basename } from 'node:path';
+import { writeFileSync, readFileSync, mkdirSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import { randomBytes } from 'node:crypto';
 import { createLogger } from '../core/logger.mjs';
+import { sanitizeFeature } from '../core/path-utils.mjs';
 
 const log = createLogger('handoff');
-
-/**
- * Sanitize a feature name for safe use in file paths.
- * Prevents path traversal (e.g., "../../etc" → "etc").
- * @param {string} feature
- * @returns {string}
- */
-function sanitizeFeature(feature) {
-  const safe = basename(feature).replace(/[^a-zA-Z0-9_\-가-힣]/g, '_');
-  if (!safe) throw new Error(`Invalid feature name: ${feature}`);
-  return safe;
-}
 
 /**
  * Get the handoff directory for a feature.
@@ -140,7 +129,7 @@ export function listHandoffs(feature, projectDir) {
     return readdirSync(dir)
       .filter(f => f.endsWith('.md'))
       .map(f => {
-        const match = f.match(/^(.+?)-(\d{4}-\d{2}-\d{2}T.+)\.md$/);
+        const match = f.match(/^(.+)-(\d{4}-\d{2}-\d{2}T.+)\.md$/);
         return {
           stage: match ? match[1] : f.replace('.md', ''),
           file: f,

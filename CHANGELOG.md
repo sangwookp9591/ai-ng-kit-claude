@@ -1,5 +1,35 @@
 # Changelog
 
+## [2.3.1] - 2026-03-25
+
+### Improved — 코드 품질 강화 + 스킬 정리 + Figma/Progress 에이전트 추가
+
+#### 코드 리뷰 이슈 5건 수정
+- **DRY 추출**: `getActiveSession()` → `scripts/core/session-reader.mjs`, `sanitizeFeature()` → `scripts/core/path-utils.mjs` 공통 모듈화
+- **API contract 통합**: `stop.mjs` 자체 `writeHandoff` 제거, `handoff-manager.mjs` import로 통합
+- **Regex bug**: `handoff-manager.mjs` stage 파싱 — `.+?` → `.+` (greedy) 변경으로 `team-plan` 등 `-` 포함 stage명 정상 파싱
+- **Prompt injection 방어**: `sanitizeSessionField()` 추가 (200자 제한 + 제어문자 제거) — LLM 컨텍스트 주입 방어
+- **Hot path 최적화**: `stop.mjs`에서 pdcaState 사전 읽기 전달로 중복 I/O 제거
+
+#### 비활성/중복 스킬 8개 삭제 (-1,094줄)
+- `evidence-verification` (verify-evidence와 중복), `pdca-workflow` (auto/team에 내장)
+- `wizard-mode` (do에 흡수), `cost` (정확도 부족)
+- `design-video`, `design-loop`, `design-system`, `design-to-code` (Stitch MCP 의존)
+
+#### 신규 에이전트 2개
+- **figma-reader** (opus): Figma MCP로 파일 분석 → 기획 문서(figma-spec.md) 자동 생성. get_metadata/get_design_context/get_screenshot 활용, MCP fallback 패턴 포함
+- **progress-checker** (opus): 기획 문서 vs 코드베이스 구현 진행도 비교. 4가지 비교 전략(파일/라우트/컴포넌트/테스트), AskUserQuestion으로 프로젝트 경로 질문
+
+#### 신규 스킬 2개
+- `/swkit figma-read <url>`: Figma → 기획 문서 추출 (5섹션: 화면/플로우/컴포넌트/인터랙션/구현매핑힌트)
+- `/swkit progress-check`: 기획 vs 코드 진행도 비교 (Figma 없이 수동 기획서도 지원)
+
+#### 기타
+- `agents/willji.md`: figma-spec.md 존재 시 우선 참조 조건 추가
+- `skills/do/SKILL.md`: wizard-mode 참조 제거
+- `skills/team/SKILL.md`: evidence-verification → verify-evidence 참조 수정
+- `package.json` keywords: agent-ui/3d-office → multi-agent
+
 ## [2.3.0] - 2026-03-25
 
 ### Major — OMC 패리티 대규모 업그레이드 (10개 영역)

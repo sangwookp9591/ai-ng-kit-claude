@@ -304,7 +304,7 @@ Agent({
 ⏺ sw-kit:sam(Sam: 증거 체인 검증 + 최종 판정) Haiku
 ```
 
-### 검증 기준 (evidence-verification/SKILL.md 준수)
+### 검증 기준 (verify-evidence/SKILL.md 준수)
 - [test] 테스트 통과 여부
 - [build] 빌드 성공 여부
 - [lint] 린트 에러 없음
