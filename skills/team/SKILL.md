@@ -16,6 +16,67 @@ triggers: ["team", "팀", "팀 실행", "team run"]
 /swkit team --plan .sw-kit/plans/xxx.md   ← 기존 plan 파일로 team-plan 스킵
 ```
 
+## Step 0: Resume Detection
+
+Before starting the pipeline, check for an existing active session:
+
+1. Check `.sw-kit/state/team-session.json` for an active session
+2. If found AND matches the requested feature:
+   - Read the session to find `currentStage` and `completedStages`
+   - Read the latest handoff from `.sw-kit/handoffs/{feature}/`
+   - Display resume prompt:
+     ```
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       sw-kit team: Resume Detected
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+       Feature: {feature}
+       Last Stage: {lastStage} ✓
+       Next Stage: {nextStage}
+       Completed: {completedStages.join(' → ')}
+
+       Resume from {nextStage}? (y/n)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     ```
+   - If yes: skip completed stages, start from `nextStage`
+   - If no: start fresh (create new session)
+3. If session file is corrupt (JSON parse error) or unreadable: start fresh (create new session)
+4. If no active session found: proceed normally
+
+## Session Lifecycle
+
+At the START of the pipeline:
+```
+// Create session
+writeSession({
+  feature: "{feature}",
+  mode: "team",
+  currentStage: "team-plan",
+  planPath: "{plan path if exists}",
+  agents: { plan: ["able"], exec: [...], verify: ["milla", "sam"] },
+})
+```
+
+At each STAGE TRANSITION:
+```
+// Complete current stage + write handoff
+completeStage("team", "{stage}", { status: "success", summary: "{what happened}" })
+
+writeHandoff({
+  feature: "{feature}",
+  stage: "{stage}",
+  summary: "{what happened}",
+  decisions: ["{key decisions made}"],
+  artifacts: ["{files created/modified}"],
+  nextStage: "{next stage}",
+})
+```
+
+At PIPELINE END:
+```
+endSession("team", "complete"|"failed"|"cancelled")
+```
+
 ## Agent Selection
 
 ### Explicit Selection
@@ -130,6 +191,28 @@ TeamCreate({
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
+### Stage-Aware Agent Selection
+
+Each stage uses task-appropriate specialists:
+
+| Stage | Default Agents | Specialist Routing |
+|-------|---------------|-------------------|
+| team-plan | Able (plan), Klay (review) | + Milla for high-complexity gap analysis |
+| team-exec | Jay (backend), Derek (frontend) | + Jerry (DB), Willji (design) based on task keywords |
+| team-verify | Milla (security), Sam (CTO) | + Klay (quality) for mid+, + Jay (performance) for high |
+| team-fix | Jay (primary fixer) | + debugger routing if same error 3x |
+
+Keyword-based specialist routing for team-exec:
+- "database", "schema", "migration" → include Jerry
+- "UI", "component", "page", "design" → include Derek + Willji
+- "API", "endpoint", "backend" → include Jay
+- "auth", "security" → include Milla as advisor
+
+team-verify uses the same complexity-based review scaling as `/swkit review`:
+- low: Milla only
+- mid: Milla + Klay
+- high: Milla + Klay + Jay (performance)
+
 ### Step 2-3: Spawn Exec Workers (PARALLEL)
 
 Worker Prompt Template은 `auto/SKILL.md`의 포맷을 따릅니다.
@@ -227,6 +310,14 @@ Agent({
 - [lint] 린트 에러 없음
 - 누락된 증거는 PASS가 아닌 NOT_AVAILABLE
 
+### QA Loop Integration
+
+After team-verify agents complete their review, if implementation tests exist:
+1. Run `/swkit qa` with the project test command
+2. QA results feed into the verification report
+3. If QA fails → trigger team-fix stage
+4. If QA passes → include in verification evidence
+
 ### Verdict
 - **PASS**: 모든 증거 체인 통과 → `completion` 단계로
 - **FAIL**: 실패 항목 + 구체적 사유 → `team-fix` 단계로
@@ -241,6 +332,17 @@ Agent({
 ## Stage 4: team-fix (= PDCA Act)
 
 **Max 3회 반복**. 초과 시 FAIL verdict로 completion 진행.
+
+### Fix with Context
+
+When entering team-fix, read the latest handoff to understand what was tried:
+1. Read `.sw-kit/handoffs/{feature}/team-verify-*.md` for verification findings
+2. Pass findings to fix agents so they don't repeat failed approaches
+3. After fix, write a team-fix handoff documenting what was changed
+
+If fix loop reaches max (3) AND same error persists:
+- Suggest `/swkit debug` for scientific debugging
+- Include error signature in the debug handoff
 
 ### 실행
 

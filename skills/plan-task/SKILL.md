@@ -1,10 +1,10 @@
 ---
 name: plan-task
-description: "📋 Able 에이전트로 작업 계획 수립. .sw-kit/plans/ 저장 + Task 자동 생성 + 다음 액션 선택."
+description: "📋 Able + Klay(+Milla) 다중 관점 계획 수립. 구조화된 출력 + 복잡도 자동 리뷰."
 triggers: ["plan", "계획", "기획", "설계"]
 ---
 
-# /swkit plan — Task Planning with Action Flow
+# /swkit plan — Multi-Perspective Task Planning
 
 ## Usage
 ```
@@ -12,52 +12,221 @@ triggers: ["plan", "계획", "기획", "설계"]
 /swkit plan "사용자 인증 API 구현"
 ```
 
-## Step 1: Agent Deployment
+## Step 1: Able Draft (구조화된 초안)
 
-Spawn Able with the `description` parameter for terminal visibility:
+Spawn Able with structured output requirements:
 
 ```
 Agent({
   subagent_type: "sw-kit:able",
   description: "Able: 작업 계획 수립 — {task}",
   model: "sonnet",
-  prompt: "..."
+  prompt: "다음 작업을 분석하고 PLAN_DRAFT 포맷으로 계획을 수립하세요: {task}
+
+출력 포맷 (PLAN_DRAFT):
+## Meta
+- Feature: {name}
+- Complexity Signals: fileCount={N}, domainCount={N}, hasArchChange={bool}, hasSecurity={bool}
+
+## Goal
+{what to achieve}
+
+## Context
+{codebase facts discovered by reading code}
+
+## Options
+### Option 1: {name}
+- Pros: {list}
+- Cons: {list}
+### Option 2: {name}
+- Pros: {list}
+- Cons: {list}
+
+## Recommended Option
+{name} — {rationale}
+
+## Steps
+1. {step} — files: {paths}, agent: {name}
+2. ...
+
+## Acceptance Criteria
+- [ ] {testable criterion}
+
+## Risks
+- {risk}: {mitigation}
+
+Rules:
+- 최소 2개 이상의 Options를 비교 분석 후 추천안 선택
+- 모든 Step에 파일 경로와 담당 에이전트 명시
+- Acceptance Criteria는 테스트 가능한 것만
+- Meta 섹션의 Complexity Signals를 반드시 포함"
 })
 ```
 
-터미널 표시:
+## Step 1.5: Complexity Scoring
+
+After Able returns, extract complexity signals from the `## Meta` section:
+- Parse `fileCount`, `domainCount`, `hasArchChange`, `hasSecurity` from Able's output
+- Apply scoring thresholds:
+  - **low** (score ≤ 3): fileCount ≤ 2, single domain, no arch/security changes
+  - **mid** (score 4-7): moderate file count, 2 domains, or has tests
+  - **high** (score > 7): many files, 3+ domains, or has arch/security changes
+
+Scoring rules (same as complexity-scorer.mjs):
+- fileCount: ≤2→0, ≤5→1, ≤15→2, >15→3
+- domainCount: 1→0, 2→2, 3→3, >3→4
+- hasArchChange: +2
+- hasSecurity: +2
+
+## Step 2: Klay Architecture Review
+
+Spawn Klay in Plan Review Mode:
+
 ```
-⏺ sw-kit:able(Able: 작업 계획 수립 — 사용자 인증 API) Sonnet
-  ⎿  Done (8 tool uses · 35.2k tokens · 2m 05s)
+Agent({
+  subagent_type: "sw-kit:klay",
+  description: "Klay: 계획 아키텍처 리뷰 — {feature}",
+  model: "sonnet",   // Note: overrides klay.md default (opus) for cost efficiency
+  prompt: "[PLAN REVIEW MODE]
+다음 계획의 아키텍처 리뷰를 수행하세요.
+
+{Able's PLAN_DRAFT output here}
+
+REVIEW_FEEDBACK 포맷으로 출력하세요:
+## Feasibility
+- {step N}: FEASIBLE / CONCERN — {detail}
+
+## Missing Alternatives
+- {alternative not considered}
+
+## Architecture Risks
+- {risk}: severity={HIGH/MED/LOW}, {detail}
+
+## Verdict
+APPROVE / SUGGEST_CHANGES
+
+## Changes Requested
+- {specific change 1}
+- {specific change 2}
+
+Rules:
+- 코드베이스를 직접 탐색하여 기술적 실현 가능성 검증
+- 최소 1개의 누락된 대안 또는 아키텍처 리스크를 제시
+- Rubber stamp 금지 — 실질적 피드백 필수"
+})
 ```
 
-Able agent tasks:
-1. Analyze requirements and break down into tasks
-2. Identify which agents are needed (complexity scoring)
-3. Return the plan as structured output (feature, goal, steps, acceptance criteria, risks)
+## Step 2.5: Milla Gap Analysis (Conditional — high complexity only)
 
-## Step 1.5: Persist Plan + Tasks (MANDATORY)
+**Only execute this step if complexity level = high (score > 7).**
 
-After Able returns, **you MUST persist the plan and tasks** by running:
+Spawn Milla in Plan Critic Mode:
+
+```
+Agent({
+  subagent_type: "sw-kit:milla",
+  description: "Milla: 계획 갭 분석 — {feature}",
+  model: "sonnet",
+  prompt: "[PLAN REVIEW MODE]
+다음 계획과 아키텍처 리뷰를 분석하여 갭을 찾으세요.
+
+=== PLAN_DRAFT ===
+{Able's output}
+
+=== REVIEW_FEEDBACK ===
+{Klay's output}
+
+CRITIC_FEEDBACK 포맷으로 출력하세요:
+## Gap Analysis
+| Severity | Area | Gap | Impact |
+|----------|------|-----|--------|
+| Critical/Major/Minor | {area} | {what's missing} | {consequence} |
+
+## Acceptance Criteria Audit
+- {criterion}: TESTABLE / NOT_TESTABLE — {fix suggestion}
+
+## Dependency/Ordering Issues
+- {issue}
+
+## Verdict
+APPROVE / REQUEST_CHANGES
+
+## Changes Requested
+- {specific change 1}
+- {specific change 2}
+
+Rules:
+- Gap Analysis 테이블에 최소 1개 항목 필수
+- Acceptance Criteria의 테스트 가능성을 각각 검증
+- REQUEST_CHANGES 시 Changes Requested가 비어있으면 안 됨"
+})
+```
+
+**Re-review loop**: If Milla's Verdict is `REQUEST_CHANGES`:
+1. Pass Milla's feedback to Able for integration (Step 3)
+2. After Able integrates, re-submit to Milla for re-review
+3. Maximum 2 total Milla reviews — if still REQUEST_CHANGES after 2nd review, proceed with current version
+
+## Step 3: Feedback Integration
+
+Spawn Able again to integrate all review feedback:
+
+```
+Agent({
+  subagent_type: "sw-kit:able",
+  description: "Able: 피드백 통합 — {feature}",
+  model: "sonnet",
+  prompt: "다음 리뷰 피드백을 계획에 통합하고 FINAL_PLAN JSON을 생성하세요.
+
+=== ORIGINAL PLAN ===
+{Able's PLAN_DRAFT}
+
+=== KLAY REVIEW ===
+{Klay's REVIEW_FEEDBACK}
+
+=== MILLA REVIEW (if present) ===
+{Milla's CRITIC_FEEDBACK or 'N/A'}
+
+리뷰어의 피드백을 반영하여 최종 계획을 수정하세요. 그리고 다음 JSON 포맷으로 출력하세요:
+
+\`\`\`json
+{
+  \"feature\": \"...\",
+  \"goal\": \"...\",
+  \"steps\": [\"...\"],
+  \"acceptanceCriteria\": [\"...\"],
+  \"risks\": [\"...\"],
+  \"options\": [{ \"name\": \"...\", \"pros\": [\"...\"], \"cons\": [\"...\"] }],
+  \"reviewNotes\": [{ \"reviewer\": \"klay\", \"verdict\": \"...\", \"highlights\": [\"...\"] }],
+  \"complexityScore\": N,
+  \"complexityLevel\": \"low|mid|high\"
+}
+\`\`\`
+
+Rules:
+- 리뷰어가 제시한 변경 사항을 모두 반영
+- 최종 JSON은 반드시 유효한 JSON이어야 함
+- reviewNotes에 각 리뷰어(klay, milla)의 verdict와 핵심 피드백 포함"
+})
+```
+
+## Step 4: Persist (JSON stdin)
+
+After Able returns the FINAL_PLAN JSON, persist via JSON stdin:
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" plan \
-  --feature "{feature}" \
-  --goal "{goal from Able}" \
-  --steps "{step1}|{step2}|{step3}" \
-  --criteria "{criterion1}|{criterion2}" \
-  --risks "{risk1}|{risk2}"
+printf '%s' '{FINAL_PLAN_JSON}' | node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" plan --stdin
 ```
 
+Note: Use `printf '%s'` instead of `echo` to avoid shell quote issues when JSON contains single quotes.
+
 This creates:
-- `.sw-kit/plans/{date}-{feature}.md` — Plan document
+- `.sw-kit/plans/{date}-{feature}.md` — Structured plan with Options, Review Notes, Complexity
 - `.sw-kit/tasks/task-{id}.json` — Task checklist with subtasks
 
-**DO NOT SKIP THIS STEP.** Without it, no plan or task files are recorded.
+## Step 5: Plan Summary Display
 
-## Step 2: Plan Summary Display
-
-After Able completes, display the plan summary to the user:
+Display the plan summary to the user:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -67,20 +236,23 @@ After Able completes, display the plan summary to the user:
   Plan: .sw-kit/plans/{date}-{feature}.md
   Tasks: {N}개
   Team: {preset} ({agent names})
-  Complexity: {score}/10
+  Complexity: {level} ({score}/10)
+  Review: Klay ✓ [Milla ✓ if high]
+
+  Options Considered: {N}개
+  Recommended: {option name}
 
   Task Breakdown:
   #1  {task title}          → {agent}
   #2  {task title}          → {agent}
-  #3  {task title}          → {agent}
   ...
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-## Step 3: Next Action Selection
+## Step 6: Next Action Selection
 
-**MANDATORY**: After displaying the plan summary, present next-action choices using AskUserQuestion:
+**MANDATORY**: Present next-action choices using AskUserQuestion:
 
 ```
 📋 계획이 완료되었습니다. 다음 액션을 선택하세요:
@@ -95,23 +267,17 @@ Invoke `/swkit team` with the plan context:
 - Pass the plan file path: `--plan .sw-kit/plans/{date}-{feature}.md`
 - Team will skip team-plan stage and use existing plan directly
 - Staged pipeline: exec → verify → fix 루프 (max 3회)
-- Full team with `@{Name}❯` prefixed worker messages and progress tables
-- Milla + Sam이 자동으로 검증 투입
 
 ### On Option 2: Auto (One-shot)
-Invoke `/swkit auto` with the plan context:
-- Pass the plan file path: `.sw-kit/plans/{date}-{feature}.md`
-- Auto will read the existing plan and skip re-analysis (Step 1)
-- 단발 실행 — verify 루프 없이 빠르게 완료
-- `@{Name}❯` prefixed worker messages and progress tables
+Invoke `/swkit auto` with the plan context
 
 ### On Option 3: Save Only
-- Confirm plan saved at `.sw-kit/plans/{date}-{feature}.md`
-- Remind user: "나중에 `/swkit team {feature}` 또는 `/swkit auto {feature}` 로 실행할 수 있습니다"
-- End the flow
+Confirm save and end flow
 
 ## Error Handling
 
-- If AskUserQuestion times out or user cancels: default to Option 3 (save only)
-- If user types something other than 1/2/3: interpret intent and route accordingly
-- If auto execution fails after Option 1: plan file persists for retry
+- Klay agent fails → skip review, save Able's draft directly (graceful degradation)
+- Milla agent fails → proceed with Klay review only
+- Milla re-review loop exceeds 2 → save current version
+- persist.mjs stdin fails → fall back to CLI arg mode
+- AskUserQuestion timeout → default to Option 3 (save only)

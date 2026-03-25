@@ -1,6 +1,6 @@
 {
   "name": "sw-kit-claude",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "type": "module",
   "description": "Harness Engineering Agent for Claude Code — 10 named agents with PDCA, TDD, team pipeline",
   "license": "Apache-2.0",

@@ -1,10 +1,113 @@
 /**
- * sw-kit UserPromptSubmit Hook v1.5.1
- * Intent detection + Team size recommendation + Agent guidance.
+ * sw-kit UserPromptSubmit Hook v1.6.0
+ * Intent detection + Team size recommendation + Agent guidance
+ * + Keyword routing + Active session injection + Plan existence detection.
  */
 import { readStdinJSON } from '../scripts/core/stdin.mjs';
 import { detectIntent } from '../scripts/i18n/intent-detector.mjs';
 import { selectTeam, estimateTeamCost } from '../scripts/pipeline/team-orchestrator.mjs';
+import { readState } from '../scripts/core/state.mjs';
+import { readdirSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+// ---------------------------------------------------------------------------
+// Keyword → Skill routing table
+// ---------------------------------------------------------------------------
+const KEYWORD_ROUTES = [
+  {
+    keywords: ['debug', '디버그', '버그', 'bug', '에러', 'error', '오류', '안돼', '안됨', 'fix bug'],
+    skill: 'debug',
+    message: '[SKILL SUGGESTION: /swkit debug] — 과학적 디버깅 워크플로우를 사용하세요.',
+  },
+  {
+    keywords: ['qa', 'test loop', '테스트루프', '테스트 반복'],
+    skill: 'qa-loop',
+    message: '[SKILL SUGGESTION: /swkit qa] — QA 사이클(테스트→수정→반복)을 시작합니다.',
+  },
+  {
+    keywords: ['plan', '계획', '기획', '설계'],
+    skill: 'plan-task',
+    message: '[SKILL SUGGESTION: /swkit plan] — Klay(Architect)가 계획을 수립합니다.',
+  },
+  {
+    keywords: ['review', '리뷰', '코드리뷰', 'code review'],
+    skill: 'review-code',
+    message: '[SKILL SUGGESTION: /swkit review] — Milla(Security) + Sam(CTO) 리뷰 투입.',
+  },
+  {
+    keywords: ['rollback', '롤백', 'undo', '되돌리기', 'revert'],
+    skill: 'rollback',
+    message: '[SKILL SUGGESTION: /swkit rollback] — 마지막 체크포인트로 되돌립니다.',
+  },
+];
+
+// Keywords that indicate the user wants to execute / run something
+const EXECUTION_KEYWORDS = [
+  'run', 'execute', 'start', 'begin', 'do', 'implement', 'build',
+  '실행', '시작', '구현', '빌드', '진행',
+];
+
+/**
+ * Match prompt against keyword routes.
+ * Returns all matching route messages (deduped).
+ */
+function detectKeywordRoutes(promptLower) {
+  const matches = [];
+  for (const route of KEYWORD_ROUTES) {
+    if (route.keywords.some(kw => promptLower.includes(kw.toLowerCase()))) {
+      matches.push(route.message);
+    }
+  }
+  return matches;
+}
+
+/**
+ * Read active session state.
+ * Checks pdca-status.json → returns { active: true, mode, feature, stage } or { active: false }.
+ */
+function getActiveSession(projectDir) {
+  // Check team session (auto-run files indicate a queued session)
+  const stateDir = join(projectDir, '.sw-kit', 'state');
+
+  // Pipeline session
+  const pipelineFile = join(stateDir, 'pipeline-state.json');
+  const pipeline = readState(pipelineFile);
+  if (pipeline.ok && pipeline.data.status === 'running') {
+    const stage = pipeline.data.stages?.[pipeline.data.currentStageIndex]?.id || 'unknown';
+    return { active: true, mode: 'pipeline', feature: pipeline.data.feature || pipeline.data.id, currentStage: stage };
+  }
+
+  // PDCA active feature
+  const pdcaFile = join(stateDir, 'pdca-status.json');
+  const pdca = readState(pdcaFile);
+  if (pdca.ok && pdca.data.activeFeature) {
+    const feature = pdca.data.activeFeature;
+    const featureData = pdca.data.features?.[feature];
+    if (featureData) {
+      return { active: true, mode: 'team', feature, currentStage: featureData.currentStage || 'plan' };
+    }
+  }
+
+  return { active: false };
+}
+
+/**
+ * Find the most recent plan file in .sw-kit/plans/.
+ * Returns filename or null.
+ */
+function findLatestPlan(projectDir) {
+  const plansDir = join(projectDir, '.sw-kit', 'plans');
+  if (!existsSync(plansDir)) return null;
+  try {
+    const files = readdirSync(plansDir).filter(f => f.endsWith('.md'));
+    if (files.length === 0) return null;
+    // Sort by name descending (date-prefixed filenames sort correctly)
+    files.sort((a, b) => b.localeCompare(a));
+    return files[0];
+  } catch {
+    return null;
+  }
+}
 
 try {
   const parsed = await readStdinJSON();
@@ -14,9 +117,35 @@ try {
 
   const intent = detectIntent(prompt);
   const parts = [];
+  const projectDir = process.env.PROJECT_DIR || process.cwd();
+  const lower = prompt.toLowerCase();
+
+  // --- Keyword routing suggestions ---
+  const keywordMatches = detectKeywordRoutes(lower);
+  for (const msg of keywordMatches) {
+    parts.push(msg);
+  }
+
+  // --- Active session injection ---
+  const session = getActiveSession(projectDir);
+  if (session.active) {
+    parts.push(`[ACTIVE SESSION: ${session.mode} — ${session.feature} at stage ${session.currentStage}]`);
+  } else {
+    // --- Plan exists but no active session ---
+    const wantsExecution = EXECUTION_KEYWORDS.some(kw => lower.includes(kw));
+    if (wantsExecution) {
+      const planFile = findLatestPlan(projectDir);
+      if (planFile) {
+        parts.push(`[PLAN EXISTS: .sw-kit/plans/${planFile} — 실행하려면 /swkit team 또는 /swkit auto]`);
+      }
+    }
+  }
+
+  if (parts.length > 0) {
+    parts.push(''); // blank separator before team table
+  }
 
   // Estimate task complexity from prompt signals
-  const lower = prompt.toLowerCase();
   const signals = {
     fileCount: Math.max((prompt.match(/\.(tsx?|jsx?|py|java|go|rs|vue|svelte)/gi) || []).length, 1),
     domainCount: new Set([

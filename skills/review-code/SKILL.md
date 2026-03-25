@@ -1,38 +1,137 @@
 ---
 name: review-code
-description: "🛡️ Milla 에이전트로 코드 리뷰. 버그, 보안, 품질 점검."
-triggers: ["review", "리뷰", "검토", "코드리뷰"]
+description: "🛡️ 다중 관점 코드 리뷰. Milla(보안) + 품질/성능 리뷰어 병렬 실행. 복잡도 기반 자동 스케일."
+triggers: ["review", "리뷰", "코드리뷰", "code review"]
 ---
 
-# /swkit review — Code Review
+# /swkit review — Multi-Perspective Code Review
 
 ## Usage
 ```
-/swkit review
-/swkit review src/auth/
+/swkit review [files...]
+/swkit review "src/auth/"
 ```
 
-## Agent Deployment
+## Step 1: Scope Analysis
 
-Spawn Milla with the `description` parameter for terminal visibility:
+Determine review scope and complexity:
+- Identify changed files (git diff or user-specified)
+- Count files, lines changed, domains touched
+- Apply complexity scoring (reuse from complexity-scorer.mjs):
+  - **low** (≤3): Single reviewer (Milla security only)
+  - **mid** (4-7): Dual reviewer (Milla security + Klay quality)
+  - **high** (>7): Triple reviewer (Milla security + Klay quality + Jay performance)
 
+## Step 2: Parallel Review Dispatch
+
+### Always: Milla — Security Review
 ```
 Agent({
   subagent_type: "sw-kit:milla",
-  description: "Milla: 보안 리뷰 + 코드 품질 점검",
+  description: "Milla: 보안 리뷰 — {scope}",
   model: "sonnet",
-  prompt: "..."
+  prompt: "[SECURITY REVIEW]
+다음 파일들의 보안 리뷰를 수행하세요: {files}
+
+Focus:
+- Injection vulnerabilities (SQL, XSS, command)
+- Auth bypass and privilege escalation
+- Data exposure and sensitive info leaks
+- Input validation gaps
+- Dependency vulnerabilities
+
+출력 포맷:
+## Security Review
+| Severity | File:Line | Issue | Fix |
+|----------|-----------|-------|-----|
+
+## Verdict: PASS / FAIL (Critical blocks completion)"
 })
 ```
 
-터미널 표시:
+### Mid+: Klay — Quality Review
 ```
-⏺ sw-kit:milla(Milla: 보안 리뷰 + 코드 품질 점검) Sonnet
-  ⎿  Done (11 tool uses · 45.7k tokens · 2m 40s)
+Agent({
+  subagent_type: "sw-kit:klay",
+  description: "Klay: 품질 리뷰 — {scope}",
+  model: "sonnet",
+  prompt: "[QUALITY REVIEW]
+다음 파일들의 코드 품질 리뷰를 수행하세요: {files}
+
+Focus:
+- Logic errors and edge cases
+- Anti-patterns and code smells
+- Missing error handling
+- API contract violations
+- Naming and convention consistency
+- Dead code and unnecessary complexity
+
+출력 포맷:
+## Quality Review
+| Severity | File:Line | Issue | Fix |
+|----------|-----------|-------|-----|
+
+## Verdict: PASS / NEEDS_WORK"
+})
 ```
 
-Milla가 점검하는 항목:
-- 버그, 로직 오류
-- 보안 취약점 (OWASP Top 10)
-- 성능 안티패턴
-- 컨벤션 위반
+### High only: Jay — Performance Review
+```
+Agent({
+  subagent_type: "sw-kit:jay",
+  description: "Jay: 성능 리뷰 — {scope}",
+  model: "sonnet",
+  prompt: "[PERFORMANCE REVIEW]
+다음 파일들의 성능 리뷰를 수행하세요: {files}
+
+Focus:
+- N+1 queries and unnecessary database calls
+- Memory leaks and large allocations
+- Blocking operations in async paths
+- Missing caching opportunities
+- O(n²) or worse algorithms on large inputs
+- Bundle size impact (if frontend)
+
+출력 포맷:
+## Performance Review
+| Severity | File:Line | Issue | Fix |
+|----------|-----------|-------|-----|
+
+## Verdict: PASS / NEEDS_OPTIMIZATION"
+})
+```
+
+**IMPORTANT**: Mid and High reviewers run IN PARALLEL with Milla (not sequential).
+
+## Step 3: Consolidated Report
+
+Merge all reviewer outputs into a single report:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  sw-kit review: {scope}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Complexity: {level} ({score}/10)
+  Reviewers: {names}
+
+  Security (Milla):  {PASS/FAIL} — {N} findings
+  Quality (Klay):    {PASS/NEEDS_WORK} — {N} findings (if applicable)
+  Performance (Jay): {PASS/NEEDS_OPT} — {N} findings (if applicable)
+
+  Critical: {N}  |  Major: {N}  |  Minor: {N}
+
+  Overall: {PASS / BLOCKED / NEEDS_WORK}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Followed by the combined findings table sorted by severity.
+
+## Verdicts
+- **PASS**: All reviewers pass, no Critical findings
+- **BLOCKED**: Any Critical finding (security blocks completion)
+- **NEEDS_WORK**: Major findings exist but no Critical
+
+## Error Handling
+- Reviewer agent fails → skip that reviewer, note in report
+- No changed files detected → ask user to specify scope

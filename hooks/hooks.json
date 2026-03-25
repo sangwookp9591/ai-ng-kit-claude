@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-hooks.json",
-  "description": "sw-kit Harness Engineering Agent v2.2.3",
+  "description": "sw-kit Harness Engineering Agent v2.3.0",
   "hooks": {
     "SessionStart": [
       {

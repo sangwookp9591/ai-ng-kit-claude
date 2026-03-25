@@ -1,5 +1,43 @@
 # Changelog
 
+## [2.3.0] - 2026-03-25
+
+### Major — OMC 패리티 대규모 업그레이드 (10개 영역)
+
+Ralplan 합의 기획으로 설계, 3-Wave 병렬 실행으로 구현. 45개 테스트 + 엣지케이스 24건 해결.
+
+#### Plan 모드 강화 (Ralplan 수준)
+- Able → Klay(아키텍처 리뷰) → Milla(갭 분석, high 복잡도만) 다중 관점 합의 루프
+- PLAN_DRAFT / REVIEW_FEEDBACK / CRITIC_FEEDBACK / FINAL_PLAN 4개 에이전트 간 통신 포맷 정의
+- `persist.mjs` JSON stdin 모드 (`--stdin`) — pipe delimiter 문제 완전 해소
+- `createPlan()` 확장: options, reviewNotes, complexityScore, complexityLevel 필드
+
+#### 신규 모듈 4개 (테스트 포함)
+- **model-router.mjs**: 복잡도 기반 adaptive model routing + cost mode (quality/balanced/budget) + risk escalation
+- **handoff-manager.mjs**: stage 간 의사결정 보존 + resume context + path traversal 방어
+- **session-state.mjs**: session/stage 수준 상태 관리 + pipeline resume 기능
+- **qa-loop SKILL.md**: test→fix→retest 자동 사이클 (max 5회) + 동일 에러 감지 자동 중단
+
+#### 기존 모듈 업그레이드
+- **review-code**: Milla(보안) + Klay(품질, mid+) + Jay(성능, high) 병렬 리뷰
+- **debug**: 가설→증거→반증 4단계 과학적 디버깅 (Klay 탐색 → Jay 수정 → Milla 검증)
+- **team**: Resume Detection + Session Lifecycle + Stage-Aware Specialist Routing + QA Loop 통합 + Handoff 기반 Fix
+- **auto**: 5단계 파이프라인 (Planning→Execution→QA→Validation→Completion) + context reuse + validationLoopCount 추적
+- **rollback**: Git Checkpoint System + Selective Story Retry + Rollback Safety 가드
+- **hooks**: 키워드→스킬 자동 라우팅 + 활성 세션 컨텍스트 주입 + stop 시 handoff 보존
+
+#### 에이전트 강화
+- **able.md**: PLAN_DRAFT 구조화 출력 + 대안 탐색(2+) + Feedback Integration + Meta complexity signals
+- **klay.md**: Plan Review Mode (REVIEW_FEEDBACK 포맷, 최소 1개 대안/리스크 필수)
+- **milla.md**: Plan Critic Mode (CRITIC_FEEDBACK 포맷, Gap Analysis + Criteria Audit, high only)
+
+#### 보안 수정
+- Path Traversal 방어: `sanitizeFeature()` 적용 (handoff-manager, plan-manager)
+- model-router null 방어: `safeSignals` + `costMode` fallback
+- session-state updateSession 반환값 오류 수정
+- persist.mjs getArg `--` 플래그 값 거부
+- handoff 파일명 collision 방어: `randomBytes(3)` 접미사
+
 ## [2.2.3] - 2026-03-24
 
 ### Improved — Help 가이드 + Wizard 강화 + 죽은 코드 정리

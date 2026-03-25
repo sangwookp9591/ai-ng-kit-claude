@@ -14,13 +14,18 @@
 import { createPlan, getPlan, listPlans } from '../task/plan-manager.mjs';
 import { createTask, listTasks, formatTaskChecklist, formatAllTasks } from '../task/task-manager.mjs';
 import { generateReport } from '../evidence/evidence-report.mjs';
+import { readStdinRaw } from '../core/stdin.mjs';
 
 const args = process.argv.slice(2);
 const command = args[0];
+const useStdin = args.includes('--stdin');
 
 function getArg(name) {
   const idx = args.indexOf(`--${name}`);
-  return idx >= 0 && args[idx + 1] ? args[idx + 1] : null;
+  if (idx < 0 || !args[idx + 1]) return null;
+  // Reject values that look like flags (e.g., --goal when expecting a value)
+  if (args[idx + 1].startsWith('--')) return null;
+  return args[idx + 1];
 }
 
 function splitPipe(str) {
@@ -29,29 +34,62 @@ function splitPipe(str) {
 
 const projectDir = getArg('dir') || process.cwd();
 
+(async () => {
 try {
   let result;
 
   switch (command) {
     case 'plan': {
-      const feature = getArg('feature');
-      const goal = getArg('goal');
-      const steps = splitPipe(getArg('steps'));
-      const criteria = splitPipe(getArg('criteria'));
-      const risks = splitPipe(getArg('risks'));
+      if (useStdin) {
+        let data;
+        try {
+          const raw = await readStdinRaw(5000);
+          data = JSON.parse(raw);
+        } catch (_) {
+          console.log(JSON.stringify({ ok: false, error: 'Invalid JSON on stdin' }));
+          process.exit(1);
+        }
 
-      if (!feature || !goal || steps.length === 0) {
-        console.log(JSON.stringify({ ok: false, error: 'Required: --feature, --goal, --steps "s1|s2|s3"' }));
-        process.exit(1);
+        const feature = data.feature;
+        const goal = data.goal;
+        const steps = Array.isArray(data.steps) ? data.steps : [];
+
+        if (!feature || !goal || steps.length === 0) {
+          console.log(JSON.stringify({ ok: false, error: 'Required: feature, goal, steps (non-empty array)' }));
+          process.exit(1);
+        }
+
+        result = createPlan({
+          feature,
+          goal,
+          steps,
+          acceptanceCriteria: Array.isArray(data.acceptanceCriteria) && data.acceptanceCriteria.length > 0 ? data.acceptanceCriteria : undefined,
+          risks: Array.isArray(data.risks) && data.risks.length > 0 ? data.risks : undefined,
+          options: Array.isArray(data.options) && data.options.length > 0 ? data.options : undefined,
+          reviewNotes: Array.isArray(data.reviewNotes) && data.reviewNotes.length > 0 ? data.reviewNotes : undefined,
+          complexityScore: data.complexityScore,
+          complexityLevel: data.complexityLevel,
+        }, projectDir);
+      } else {
+        const feature = getArg('feature');
+        const goal = getArg('goal');
+        const steps = splitPipe(getArg('steps'));
+        const criteria = splitPipe(getArg('criteria'));
+        const risks = splitPipe(getArg('risks'));
+
+        if (!feature || !goal || steps.length === 0) {
+          console.log(JSON.stringify({ ok: false, error: 'Required: --feature, --goal, --steps "s1|s2|s3"' }));
+          process.exit(1);
+        }
+
+        result = createPlan({
+          feature,
+          goal,
+          steps,
+          acceptanceCriteria: criteria.length > 0 ? criteria : undefined,
+          risks: risks.length > 0 ? risks : undefined
+        }, projectDir);
       }
-
-      result = createPlan({
-        feature,
-        goal,
-        steps,
-        acceptanceCriteria: criteria.length > 0 ? criteria : undefined,
-        risks: risks.length > 0 ? risks : undefined
-      }, projectDir);
       break;
     }
 
@@ -117,3 +155,4 @@ try {
   console.log(JSON.stringify({ ok: false, error: err.message }));
   process.exit(1);
 }
+})();

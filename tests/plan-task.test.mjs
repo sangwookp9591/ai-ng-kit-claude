@@ -7,7 +7,7 @@ import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdirSync, rmSync, existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 
 const TEST_DIR = join(tmpdir(), `sw-kit-test-${Date.now()}`);
@@ -208,5 +208,190 @@ describe('persist.mjs CLI', () => {
     assert.equal(result.ok, true);
     assert.ok(result.plans.length > 0, 'Should list at least 1 plan');
     assert.ok(result.plans.some(p => p.feature === 'cli-test'), 'Should include cli-test plan');
+  });
+});
+
+describe('createPlan extended fields', () => {
+  const EXT_TEST_DIR = join(tmpdir(), `sw-kit-ext-test-${Date.now()}`);
+
+  before(() => {
+    mkdirSync(EXT_TEST_DIR, { recursive: true });
+  });
+
+  after(() => {
+    rmSync(EXT_TEST_DIR, { recursive: true, force: true });
+  });
+
+  it('should include ## Options section when options provided', async () => {
+    const { createPlan } = await import('../scripts/task/plan-manager.mjs');
+
+    const result = createPlan({
+      feature: 'ext-options',
+      goal: 'Pick an architecture',
+      steps: ['Evaluate options', 'Decide'],
+      options: [
+        { name: 'Option A', pros: ['Fast'], cons: ['Expensive'] },
+        { name: 'Option B', pros: ['Cheap'], cons: ['Slow'] },
+      ],
+    }, EXT_TEST_DIR);
+
+    assert.equal(result.ok, true);
+    const content = readFileSync(result.planPath, 'utf-8');
+    assert.ok(content.includes('## Options'), 'Should contain ## Options');
+    assert.ok(content.includes('### Option A'), 'Should contain Option A heading');
+    assert.ok(content.includes('### Option B'), 'Should contain Option B heading');
+    assert.ok(content.includes('- Fast'), 'Should contain pro');
+    assert.ok(content.includes('- Expensive'), 'Should contain con');
+  });
+
+  it('should include ## Review Notes section when reviewNotes provided', async () => {
+    const { createPlan } = await import('../scripts/task/plan-manager.mjs');
+
+    const result = createPlan({
+      feature: 'ext-review',
+      goal: 'Review the plan',
+      steps: ['Review', 'Approve'],
+      reviewNotes: [
+        { reviewer: 'Alice', verdict: 'Approved', highlights: ['Clear steps', 'Good tests'] },
+      ],
+    }, EXT_TEST_DIR);
+
+    assert.equal(result.ok, true);
+    const content = readFileSync(result.planPath, 'utf-8');
+    assert.ok(content.includes('## Review Notes'), 'Should contain ## Review Notes');
+    assert.ok(content.includes('### Alice'), 'Should contain reviewer heading');
+    assert.ok(content.includes('**Verdict**: Approved'), 'Should contain verdict');
+    assert.ok(content.includes('- Clear steps'), 'Should contain highlight');
+  });
+
+  it('should include ## Complexity section and header metadata when complexityScore/Level provided', async () => {
+    const { createPlan } = await import('../scripts/task/plan-manager.mjs');
+
+    const result = createPlan({
+      feature: 'ext-complexity',
+      goal: 'Complex feature',
+      steps: ['Step 1'],
+      complexityScore: 7,
+      complexityLevel: 'mid',
+    }, EXT_TEST_DIR);
+
+    assert.equal(result.ok, true);
+    const content = readFileSync(result.planPath, 'utf-8');
+    assert.ok(content.includes('## Complexity'), 'Should contain ## Complexity');
+    assert.ok(content.includes('**Score**: 7'), 'Should contain score');
+    assert.ok(content.includes('**Level**: mid'), 'Should contain level');
+    assert.ok(content.includes('**Complexity Score**: 7'), 'Should contain score in header');
+    assert.ok(content.includes('**Complexity Level**: mid'), 'Should contain level in header');
+  });
+
+  it('should omit optional sections when fields not provided (backward compat)', async () => {
+    const { createPlan } = await import('../scripts/task/plan-manager.mjs');
+
+    const result = createPlan({
+      feature: 'ext-basic',
+      goal: 'Basic plan',
+      steps: ['Step 1'],
+    }, EXT_TEST_DIR);
+
+    assert.equal(result.ok, true);
+    const content = readFileSync(result.planPath, 'utf-8');
+    assert.ok(!content.includes('## Options'), 'Should NOT contain ## Options');
+    assert.ok(!content.includes('## Review Notes'), 'Should NOT contain ## Review Notes');
+    assert.ok(!content.includes('## Complexity'), 'Should NOT contain ## Complexity');
+  });
+});
+
+describe('persist.mjs --stdin JSON mode', () => {
+  const STDIN_TEST_DIR = join(tmpdir(), `sw-kit-stdin-test-${Date.now()}`);
+  const persistPath = new URL('../scripts/cli/persist.mjs', import.meta.url).pathname;
+
+  before(() => {
+    mkdirSync(STDIN_TEST_DIR, { recursive: true });
+  });
+
+  after(() => {
+    rmSync(STDIN_TEST_DIR, { recursive: true, force: true });
+  });
+
+  it('should create plan from JSON on stdin', () => {
+    const payload = JSON.stringify({
+      feature: 'stdin-feature',
+      goal: 'Build from stdin',
+      steps: ['Read stdin', 'Parse JSON', 'Write plan'],
+      acceptanceCriteria: ['Plan file exists'],
+      risks: ['Encoding issues'],
+    });
+
+    const proc = spawnSync('node', [persistPath, 'plan', '--stdin', '--dir', STDIN_TEST_DIR], {
+      input: payload,
+      encoding: 'utf-8',
+    });
+
+    assert.equal(proc.status, 0, `Process should exit 0. stderr: ${proc.stderr}`);
+    const result = JSON.parse(proc.stdout);
+    assert.equal(result.ok, true, 'Should succeed');
+    assert.ok(result.planPath.includes('stdin-feature'), 'planPath should contain feature name');
+    assert.ok(existsSync(result.planPath), 'Plan file should exist on disk');
+
+    const content = readFileSync(result.planPath, 'utf-8');
+    assert.ok(content.includes('Build from stdin'), 'Should contain goal');
+    assert.ok(content.includes('Read stdin'), 'Should contain first step');
+    assert.ok(content.includes('Plan file exists'), 'Should contain acceptance criterion');
+    assert.ok(content.includes('Encoding issues'), 'Should contain risk');
+  });
+
+  it('should create plan with extended fields from JSON stdin', () => {
+    const payload = JSON.stringify({
+      feature: 'stdin-extended',
+      goal: 'Extended stdin plan',
+      steps: ['Step A'],
+      options: [{ name: 'Opt X', pros: ['Good'], cons: ['Bad'] }],
+      reviewNotes: [{ reviewer: 'Bob', verdict: 'LGTM', highlights: ['Nice'] }],
+      complexityScore: 5,
+      complexityLevel: 'low',
+    });
+
+    const proc = spawnSync('node', [persistPath, 'plan', '--stdin', '--dir', STDIN_TEST_DIR], {
+      input: payload,
+      encoding: 'utf-8',
+    });
+
+    assert.equal(proc.status, 0, `Process should exit 0. stderr: ${proc.stderr}`);
+    const result = JSON.parse(proc.stdout);
+    assert.equal(result.ok, true);
+
+    const content = readFileSync(result.planPath, 'utf-8');
+    assert.ok(content.includes('## Options'), 'Should have Options section');
+    assert.ok(content.includes('### Opt X'), 'Should have option name');
+    assert.ok(content.includes('## Review Notes'), 'Should have Review Notes section');
+    assert.ok(content.includes('### Bob'), 'Should have reviewer');
+    assert.ok(content.includes('## Complexity'), 'Should have Complexity section');
+    assert.ok(content.includes('**Score**: 5'), 'Should have score');
+  });
+
+  it('should return error for invalid JSON on stdin', () => {
+    const proc = spawnSync('node', [persistPath, 'plan', '--stdin', '--dir', STDIN_TEST_DIR], {
+      input: 'not valid json {{{',
+      encoding: 'utf-8',
+    });
+
+    assert.equal(proc.status, 1, 'Process should exit 1');
+    const result = JSON.parse(proc.stdout);
+    assert.equal(result.ok, false);
+    assert.equal(result.error, 'Invalid JSON on stdin');
+  });
+
+  it('should return error when required fields missing in stdin JSON', () => {
+    const payload = JSON.stringify({ feature: 'incomplete' });
+
+    const proc = spawnSync('node', [persistPath, 'plan', '--stdin', '--dir', STDIN_TEST_DIR], {
+      input: payload,
+      encoding: 'utf-8',
+    });
+
+    assert.equal(proc.status, 1, 'Process should exit 1');
+    const result = JSON.parse(proc.stdout);
+    assert.equal(result.ok, false);
+    assert.ok(result.error.includes('Required'), 'Error should mention required fields');
   });
 });

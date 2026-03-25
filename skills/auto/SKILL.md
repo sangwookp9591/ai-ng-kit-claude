@@ -10,6 +10,83 @@ When the user runs `/swkit auto <feature> <task>`, execute this EXACT sequence u
 
 If a plan file path is provided (e.g., from `/swkit plan` → auto transition), read the plan file and skip to Step 2. Use the plan's task decomposition directly for Step 3 instead of re-analyzing.
 
+## Step 0: Context Reuse Detection
+
+Before starting the pipeline, check for existing artifacts:
+
+1. **Existing plan**: Check `.sw-kit/plans/` for a plan matching the feature
+   - If found: skip Phase 1 (Planning), load plan directly
+   - Display: `📋 기존 계획 발견: {plan path} — 계획 단계 생략`
+
+2. **Existing session**: Check `.sw-kit/state/auto-session.json`
+   - If active session found: offer resume (same as team resume)
+   - Display resume prompt with completed phases
+
+3. **No artifacts**: proceed with full 5-phase pipeline
+
+## 5-Phase Pipeline
+
+### Phase 1: Planning (skippable)
+- Spawn Able for structured PLAN_DRAFT
+- Apply complexity scoring
+- If complexity >= mid: spawn Klay for architecture review
+- Output: plan file + task checklist
+- **Skip if**: existing plan found in Step 0
+
+### Phase 2: Execution
+- Create CC team based on complexity preset
+- Spawn workers in parallel with `@{Name}❯` prefix
+- Each worker reads the plan and executes assigned tasks
+- Monitor with progress table
+- Write handoff on completion
+
+### Phase 3: QA Cycling (NEW)
+- Run `/swkit qa` with detected test command
+- If tests pass: proceed to Phase 4
+- If tests fail: Jay auto-fix cycle (max 5 rounds)
+- Same error 3x → skip to Phase 4 with warning
+- Output: QA report with cycle history
+
+### Phase 4: Validation (NEW)
+- Spawn parallel reviewers based on complexity:
+  - **Always**: Milla (security review)
+  - **Mid+**: Klay (quality review)
+  - **High**: Jay (performance review)
+- Each reviewer produces structured findings
+- Critical security finding → BLOCKED (return to Phase 2)
+- No Critical findings → proceed to Phase 5
+
+### Phase 5: Completion
+- Aggregate all phase results
+- Generate completion report
+- Persist learning to `.sw-kit/reports/`
+- End session
+- Display final report
+
+## Phase Transition Rules
+
+| From | To | Condition |
+|------|-----|-----------|
+| Phase 1 | Phase 2 | Plan created (or skipped) |
+| Phase 2 | Phase 3 | All execution tasks done |
+| Phase 3 | Phase 4 | QA passes OR max cycles reached |
+| Phase 4 | Phase 2 | Critical finding → fix and re-execute |
+| Phase 4 | Phase 5 | No Critical findings |
+| Phase 5 | END | Report generated |
+
+Maximum Phase 4 → Phase 2 loops: 2 (prevent infinite validation cycles)
+
+Track via session state:
+```
+// At Phase 4 → Phase 2 transition:
+updateSession("auto", { validationLoopCount: (session.validationLoopCount || 0) + 1 })
+
+// Before Phase 4 → Phase 2:
+if (session.validationLoopCount >= 2) → proceed to Phase 5 with warning
+```
+
+---
+
 ## Step 1: Analyze and Select Team
 
 Read the task description and estimate complexity:
@@ -305,3 +382,21 @@ RULES:
 ## Why Colors Work
 
 Claude Code automatically assigns different colors to each team member when they're spawned via `Task(team_name, name)`. No manual color configuration needed. Each agent appears in terminal with their unique color alongside their name.
+
+## Session State
+
+Auto pipeline uses session-state for resume capability:
+
+```
+// At pipeline start
+writeSession({ feature, mode: "auto", currentStage: "phase-1" })
+
+// At each phase transition
+completeStage("auto", "phase-N", { status, summary })
+writeHandoff({ feature, stage: "auto-phase-N", ... })
+
+// At pipeline end
+endSession("auto", "complete"|"failed")
+```
+
+Resume from any phase if session is interrupted.
