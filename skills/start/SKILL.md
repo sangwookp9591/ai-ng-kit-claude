@@ -323,7 +323,7 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" complete "2.1.7" "
 gh CLI가 인증되어 있으면:
 
 ```bash
-gh api user/starred/sangwookp9591/ai-ng-kit &>/dev/null
+gh api user/starred/sangwookp9591/ai-ng-kit-claude &>/dev/null
 ```
 
 아직 star 안 했으면 AskUserQuestion:
@@ -331,7 +331,7 @@ gh api user/starred/sangwookp9591/ai-ng-kit &>/dev/null
 **Question:** "aing이 마음에 드셨다면 GitHub star로 응원해주시겠습니까?"
 
 **Options:**
-1. **네!** → `gh api -X PUT /user/starred/sangwookp9591/ai-ng-kit`
+1. **네!** → `gh api -X PUT /user/starred/sangwookp9591/ai-ng-kit-claude`
 2. **나중에** → 건너뜀
 
 gh CLI 없으면 조용히 건너뜁니다. star 실패해도 셋업은 완료됩니다.

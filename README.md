@@ -13,7 +13,7 @@
 **Claude Code 세션에서**
 
 ```
-/plugin marketplace add sangwookp9591/ai-ng-kit
+/plugin marketplace add sangwookp9591/ai-ng-kit-claude
 ```
 
 ```
@@ -23,7 +23,7 @@
 **터미널에서 한 줄로**
 
 ```
-claude plugin marketplace add sangwookp9591/ai-ng-kit && claude plugin install aing
+claude plugin marketplace add sangwookp9591/ai-ng-kit-claude && claude plugin install aing
 ```
 
 **업데이트**

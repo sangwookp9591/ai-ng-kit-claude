@@ -260,8 +260,8 @@ export function fullHelp() {
     commandsHelp(),
     '',
     `${C.dim}  ───────────────────────────────────────${C.reset}`,
-    `  ${C.dim}GitHub: ${C.reset}${C.sky}sangwookp9591/ai-ng-kit${C.reset}`,
-    `  ${C.dim}Install: ${C.reset}${C.sky}/plugin marketplace add sangwookp9591/ai-ng-kit${C.reset}`,
+    `  ${C.dim}GitHub: ${C.reset}${C.sky}sangwookp9591/ai-ng-kit-claude${C.reset}`,
+    `  ${C.dim}Install: ${C.reset}${C.sky}/plugin marketplace add sangwookp9591/ai-ng-kit-claude${C.reset}`,
     '',
   ].join('\n');
 }

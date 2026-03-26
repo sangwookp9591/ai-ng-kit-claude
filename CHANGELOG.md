@@ -11,7 +11,7 @@
 - **슬래시 커맨드**: `/swkit` → `/aing`
 - **작업 디렉토리**: `.sw-kit/` → `.aing/`
 - **로깅 prefix**: `[sw-kit:*]` → `[aing:*]`
-- **Git remote**: `sangwookp9591/sw-kit-claude` → `sangwookp9591/ai-ng-kit`
+- **Git remote**: `sangwookp9591/sw-kit-claude` → `sangwookp9591/ai-ng-kit-claude`
 - **커맨드 파일**: `commands/swkit.md` → `commands/aing.md`
 
 #### 테스트 개선

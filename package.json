@@ -6,9 +6,9 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sangwookp9591/ai-ng-kit.git"
+    "url": "https://github.com/sangwookp9591/ai-ng-kit-claude.git"
   },
-  "homepage": "https://github.com/sangwookp9591/ai-ng-kit#readme",
+  "homepage": "https://github.com/sangwookp9591/ai-ng-kit-claude#readme",
   "keywords": [
     "claude-code",
     "ai-agents",
