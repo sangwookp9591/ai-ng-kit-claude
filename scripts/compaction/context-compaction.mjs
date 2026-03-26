@@ -1,5 +1,5 @@
 /**
- * sw-kit Context Compaction Strategy v0.4.0
+ * aing Context Compaction Strategy v0.4.0
  * Intelligent context preservation during compaction.
  * Harness Engineering: Inform axis — survive context window limits.
  * @module scripts/compaction/context-compaction
@@ -40,7 +40,7 @@ export function buildCompactionContext(projectDir) {
   const sections = [];
 
   // Gather all preservable sections with priorities
-  const pdcaState = readStateOrDefault(join(dir, '.sw-kit', 'state', 'pdca-status.json'), null);
+  const pdcaState = readStateOrDefault(join(dir, '.aing', 'state', 'pdca-status.json'), null);
   if (pdcaState && pdcaState.activeFeature) {
     const feat = pdcaState.features?.[pdcaState.activeFeature];
     sections.push({
@@ -61,7 +61,7 @@ export function buildCompactionContext(projectDir) {
   }
 
   // Safety invariant tracker
-  const tracker = readStateOrDefault(join(dir, '.sw-kit', 'state', 'invariants-tracker.json'), null);
+  const tracker = readStateOrDefault(join(dir, '.aing', 'state', 'invariants-tracker.json'), null);
   if (tracker && tracker.steps > 0) {
     sections.push({
       priority: PRIORITY.SAFETY_INVARIANTS,
@@ -73,7 +73,7 @@ export function buildCompactionContext(projectDir) {
   // Evidence chain (latest)
   const evidenceFiles = [];
   try {
-    const stateDir = join(dir, '.sw-kit', 'state');
+    const stateDir = join(dir, '.aing', 'state');
     const files = readdirSync(stateDir).filter(f => f.startsWith('evidence-'));
     for (const f of files.slice(-2)) {
       const data = readStateOrDefault(join(stateDir, f), null);
@@ -88,7 +88,7 @@ export function buildCompactionContext(projectDir) {
   } catch (_) { /* best effort */ }
 
   // Project memory summary
-  const memory = readStateOrDefault(join(dir, '.sw-kit', 'project-memory.json'), null);
+  const memory = readStateOrDefault(join(dir, '.aing', 'project-memory.json'), null);
   if (memory) {
     const parts = [];
     if (memory.patterns?.length) parts.push(`${memory.patterns.length} patterns`);
@@ -140,7 +140,7 @@ export function generateCompactionInjection(projectDir) {
   if (!context) return '';
 
   const lines = [
-    '[sw-kit] Context preserved across compaction:',
+    '[aing] Context preserved across compaction:',
     context,
     '',
     `Preserved: ${preserved.join(', ')}`,

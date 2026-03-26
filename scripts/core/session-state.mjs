@@ -1,7 +1,7 @@
 /**
- * sw-kit Session State Manager
+ * aing Session State Manager
  * Provides session-scoped and stage-scoped state persistence.
- * Survives context compaction by writing to .sw-kit/state/ files.
+ * Survives context compaction by writing to .aing/state/ files.
  * Uses atomic temp+rename writes (same pattern as state.mjs).
  * @module scripts/core/session-state
  */
@@ -24,7 +24,7 @@ const STAGES = ['team-plan', 'team-exec', 'team-verify', 'team-fix'];
  * @returns {string}
  */
 function getStateDir(projectDir) {
-  const dir = join(projectDir || process.cwd(), '.sw-kit', 'state');
+  const dir = join(projectDir || process.cwd(), '.aing', 'state');
   mkdirSync(dir, { recursive: true });
   return dir;
 }

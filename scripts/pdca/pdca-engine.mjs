@@ -1,5 +1,5 @@
 /**
- * sw-kit PDCA-Lite 5-Stage Engine
+ * aing PDCA-Lite 5-Stage Engine
  * Stages: plan → do → check → act → review
  * @module scripts/pdca/pdca-engine
  */
@@ -22,7 +22,7 @@ const STAGE_DESCRIPTIONS = {
 };
 
 function getStatePath(projectDir) {
-  return join(projectDir || process.cwd(), '.sw-kit', 'state', 'pdca-status.json');
+  return join(projectDir || process.cwd(), '.aing', 'state', 'pdca-status.json');
 }
 
 /**

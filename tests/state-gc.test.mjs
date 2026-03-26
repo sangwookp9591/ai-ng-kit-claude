@@ -10,8 +10,8 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { writeState } from '../scripts/core/state.mjs';
 
-const TEST_DIR = join(tmpdir(), `sw-kit-gc-test-${Date.now()}`);
-const STATE_PATH = join(TEST_DIR, '.sw-kit', 'state', 'pdca-status.json');
+const TEST_DIR = join(tmpdir(), `aing-gc-test-${Date.now()}`);
+const STATE_PATH = join(TEST_DIR, '.aing', 'state', 'pdca-status.json');
 
 function makeFeature(overrides = {}) {
   return {
@@ -32,7 +32,7 @@ function oldDate(daysAgo) {
 
 describe('state-gc: runGC', () => {
   before(() => {
-    mkdirSync(join(TEST_DIR, '.sw-kit', 'state'), { recursive: true });
+    mkdirSync(join(TEST_DIR, '.aing', 'state'), { recursive: true });
   });
 
   after(() => {
@@ -89,7 +89,7 @@ describe('state-gc: runGC', () => {
     assert.ok(!result.archived.includes('healthy'));
   });
 
-  it('archives removed features to .sw-kit/archive/gc-{date}.json', async () => {
+  it('archives removed features to .aing/archive/gc-{date}.json', async () => {
     const { runGC } = await import('../scripts/pdca/state-gc.mjs');
     writeState(STATE_PATH, {
       version: 1,
@@ -103,7 +103,7 @@ describe('state-gc: runGC', () => {
     const result = runGC(TEST_DIR);
     assert.ok(result.removed > 0);
 
-    const archiveDir = join(TEST_DIR, '.sw-kit', 'archive');
+    const archiveDir = join(TEST_DIR, '.aing', 'archive');
     assert.ok(existsSync(archiveDir), 'archive dir should exist');
 
     const archiveFiles = [];

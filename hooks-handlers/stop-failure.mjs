@@ -1,5 +1,5 @@
 /**
- * sw-kit StopFailure Hook v1.3.2
+ * aing StopFailure Hook v1.3.2
  */
 import { readStdinJSON } from '../scripts/core/stdin.mjs';
 import { readState, writeState } from '../scripts/core/state.mjs';
@@ -26,25 +26,25 @@ try {
     if (p.test(msg)) { cat = k; rec = r; break; }
   }
 
-  const sf = join(dir, '.sw-kit', 'state', 'pdca-status.json');
+  const sf = join(dir, '.aing', 'state', 'pdca-status.json');
   const sr = readState(sf);
   if (sr.ok) {
-    writeState(join(dir, '.sw-kit', 'state', 'pdca-emergency-backup.json'), {
+    writeState(join(dir, '.aing', 'state', 'pdca-emergency-backup.json'), {
       backupAt: new Date().toISOString(), reason: cat, state: sr.data
     });
   }
 
   try {
-    const ld = join(dir, '.sw-kit', 'logs');
+    const ld = join(dir, '.aing', 'logs');
     mkdirSync(ld, { recursive: true });
     appendFileSync(join(ld, 'errors.jsonl'),
       JSON.stringify({ ts: new Date().toISOString(), category: cat, message: msg.slice(0, 500), recovery: rec }) + '\n');
   } catch (_) {}
 
   process.stdout.write(JSON.stringify({
-    hookSpecificOutput: { additionalContext: `[sw-kit Self-Healing] ${cat} -- ${rec}` }
+    hookSpecificOutput: { additionalContext: `[aing Self-Healing] ${cat} -- ${rec}` }
   }));
 } catch (err) {
-  process.stderr.write(`[sw-kit:stop-failure] ${err.message}\n`);
+  process.stderr.write(`[aing:stop-failure] ${err.message}\n`);
   process.stdout.write('{}');
 }

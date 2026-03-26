@@ -1,5 +1,5 @@
 /**
- * sw-kit UserPromptSubmit Hook v1.6.0
+ * aing UserPromptSubmit Hook v1.6.0
  * Intent detection + Team size recommendation + Agent guidance
  * + Keyword routing + Active session injection + Plan existence detection.
  */
@@ -17,27 +17,27 @@ const KEYWORD_ROUTES = [
   {
     keywords: ['debug', '디버그', '버그', 'bug', '에러', 'error', '오류', '안돼', '안됨', 'fix bug'],
     skill: 'debug',
-    message: '[SKILL SUGGESTION: /swkit debug] — 과학적 디버깅 워크플로우를 사용하세요.',
+    message: '[SKILL SUGGESTION: /aing debug] — 과학적 디버깅 워크플로우를 사용하세요.',
   },
   {
     keywords: ['qa', 'test loop', '테스트루프', '테스트 반복'],
     skill: 'qa-loop',
-    message: '[SKILL SUGGESTION: /swkit qa] — QA 사이클(테스트→수정→반복)을 시작합니다.',
+    message: '[SKILL SUGGESTION: /aing qa] — QA 사이클(테스트→수정→반복)을 시작합니다.',
   },
   {
     keywords: ['plan', '계획', '기획', '설계'],
     skill: 'plan-task',
-    message: '[SKILL SUGGESTION: /swkit plan] — Klay(Architect)가 계획을 수립합니다.',
+    message: '[SKILL SUGGESTION: /aing plan] — Klay(Architect)가 계획을 수립합니다.',
   },
   {
     keywords: ['review', '리뷰', '코드리뷰', 'code review'],
     skill: 'review-code',
-    message: '[SKILL SUGGESTION: /swkit review] — Milla(Security) + Sam(CTO) 리뷰 투입.',
+    message: '[SKILL SUGGESTION: /aing review] — Milla(Security) + Sam(CTO) 리뷰 투입.',
   },
   {
     keywords: ['rollback', '롤백', 'undo', '되돌리기', 'revert'],
     skill: 'rollback',
-    message: '[SKILL SUGGESTION: /swkit rollback] — 마지막 체크포인트로 되돌립니다.',
+    message: '[SKILL SUGGESTION: /aing rollback] — 마지막 체크포인트로 되돌립니다.',
   },
 ];
 
@@ -62,11 +62,11 @@ function detectKeywordRoutes(promptLower) {
 }
 
 /**
- * Find the most recent plan file in .sw-kit/plans/.
+ * Find the most recent plan file in .aing/plans/.
  * Returns filename or null.
  */
 function findLatestPlan(projectDir) {
-  const plansDir = join(projectDir, '.sw-kit', 'plans');
+  const plansDir = join(projectDir, '.aing', 'plans');
   if (!existsSync(plansDir)) return null;
   try {
     const files = readdirSync(plansDir).filter(f => f.endsWith('.md'));
@@ -106,7 +106,7 @@ try {
     if (wantsExecution) {
       const planFile = findLatestPlan(projectDir);
       if (planFile) {
-        parts.push(`[PLAN EXISTS: .sw-kit/plans/${planFile} — 실행하려면 /swkit team 또는 /swkit auto]`);
+        parts.push(`[PLAN EXISTS: .aing/plans/${planFile} — 실행하려면 /aing team 또는 /aing auto]`);
       }
     }
   }
@@ -136,7 +136,7 @@ try {
   const cost = estimateTeamCost(team.preset);
 
   // Always show team recommendation with agent deployment table
-  parts.push(`━━━ sw-kit Team Deployment ━━━`);
+  parts.push(`━━━ aing Team Deployment ━━━`);
   parts.push(`${team.team.name} (${team.team.workers.length}명, ${cost.estimated})`);
   parts.push('');
   parts.push('  Agent        Role                    Model    Task');
@@ -169,7 +169,7 @@ try {
   if (intent.isWizardMode) {
     parts.push('Iron(Wizard) 마법사 모드 — 질문-응답으로 단계별 진행합니다.');
   } else if (intent.pdcaStage === 'plan') {
-    parts.push('Klay(Architect)가 코드 탐색 → Able(PM)이 계획 수립 → .sw-kit/plans/ 저장 → "/swkit auto"로 실행.');
+    parts.push('Klay(Architect)가 코드 탐색 → Able(PM)이 계획 수립 → .aing/plans/ 저장 → "/aing auto"로 실행.');
   } else if (intent.pdcaStage === 'do') {
     parts.push(`${pipeline} 투입하여 TDD 기반 구현 진행.`);
   } else if (intent.pdcaStage === 'check') {
@@ -180,6 +180,6 @@ try {
     hookSpecificOutput: { additionalContext: parts.join('\n') }
   }));
 } catch (err) {
-  process.stderr.write(`[sw-kit:user-prompt] ${err.message}\n`);
+  process.stderr.write(`[aing:user-prompt] ${err.message}\n`);
   process.stdout.write('{}');
 }

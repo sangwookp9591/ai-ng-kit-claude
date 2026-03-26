@@ -1,5 +1,5 @@
 /**
- * sw-kit PreCompact Hook Handler v0.4.0
+ * aing PreCompact Hook Handler v0.4.0
  * Intelligent context preservation + PDCA snapshot.
  */
 
@@ -13,8 +13,8 @@ const log = createLogger('pre-compact');
 
 try {
   const projectDir = process.env.PROJECT_DIR || process.cwd();
-  const stateFile = join(projectDir, '.sw-kit', 'state', 'pdca-status.json');
-  const snapshotDir = join(projectDir, '.sw-kit', 'snapshots');
+  const stateFile = join(projectDir, '.aing', 'state', 'pdca-status.json');
+  const snapshotDir = join(projectDir, '.aing', 'snapshots');
 
   // Save PDCA snapshot
   const stateResult = readState(stateFile);

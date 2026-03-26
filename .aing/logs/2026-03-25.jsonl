@@ -1,0 +1,503 @@
+{"ts":"2026-03-25T06:10:07.145Z","level":"info","module":"state-gc","msg":"GC: no zombies found"}
+{"ts":"2026-03-25T06:10:07.149Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":15,"zombieCount":0,"activeFeature":"z"}}
+{"ts":"2026-03-25T06:10:07.155Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-25T06:10:37.304Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"high","workers":7}}
+{"ts":"2026-03-25T06:11:42.596Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T06:42:51.719Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T06:45:57.171Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T06:48:40.928Z","level":"info","module":"task","msg":"Task created: task-1774421320927","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-25T06:48:40.928Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774421320927"}}
+{"ts":"2026-03-25T06:48:40.929Z","level":"info","module":"task","msg":"Task created: task-1774421320929","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-25T06:48:40.929Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774421320929"}}
+{"ts":"2026-03-25T06:48:40.931Z","level":"info","module":"task","msg":"Task created: task-1774421320931","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-25T06:48:40.932Z","level":"info","module":"task","msg":"Task created: task-1774421320932","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-25T06:48:40.932Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774421320932","allDone":false}}
+{"ts":"2026-03-25T06:48:40.933Z","level":"info","module":"task","msg":"Task created: task-1774421320933","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-25T06:48:40.933Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774421320933","allDone":true}}
+{"ts":"2026-03-25T06:48:40.962Z","level":"info","module":"task","msg":"Task created: task-1774421320961","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-25T06:48:40.962Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774421320961"}}
+{"ts":"2026-03-25T06:49:19.813Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 51/50"}
+{"ts":"2026-03-25T06:49:22.804Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 52/50"}
+{"ts":"2026-03-25T06:49:23.028Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 53/50"}
+{"ts":"2026-03-25T06:49:23.591Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 54/50"}
+{"ts":"2026-03-25T06:49:23.682Z","level":"info","module":"task","msg":"Task created: task-1774421363681","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-25T06:49:23.682Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774421363681"}}
+{"ts":"2026-03-25T06:49:23.684Z","level":"info","module":"task","msg":"Task created: task-1774421363683","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-25T06:49:23.684Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774421363683"}}
+{"ts":"2026-03-25T06:49:23.686Z","level":"info","module":"task","msg":"Task created: task-1774421363685","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-25T06:49:23.687Z","level":"info","module":"task","msg":"Task created: task-1774421363686","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-25T06:49:23.687Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774421363686","allDone":false}}
+{"ts":"2026-03-25T06:49:23.688Z","level":"info","module":"task","msg":"Task created: task-1774421363687","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-25T06:49:23.688Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774421363687","allDone":true}}
+{"ts":"2026-03-25T06:49:23.722Z","level":"info","module":"task","msg":"Task created: task-1774421363721","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-25T06:49:23.722Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774421363721"}}
+{"ts":"2026-03-25T06:49:23.790Z","level":"info","module":"task","msg":"Task created: task-1774421363789","data":{"title":"[Plan] ext-options","subtasks":2}}
+{"ts":"2026-03-25T06:49:23.790Z","level":"info","module":"plan","msg":"Plan created: ext-options","data":{"steps":2,"taskId":"task-1774421363789"}}
+{"ts":"2026-03-25T06:49:23.790Z","level":"info","module":"task","msg":"Task created: task-1774421363790","data":{"title":"[Plan] ext-review","subtasks":2}}
+{"ts":"2026-03-25T06:49:23.790Z","level":"info","module":"plan","msg":"Plan created: ext-review","data":{"steps":2,"taskId":"task-1774421363790"}}
+{"ts":"2026-03-25T06:49:23.791Z","level":"info","module":"task","msg":"Task created: task-1774421363790","data":{"title":"[Plan] ext-complexity","subtasks":1}}
+{"ts":"2026-03-25T06:49:23.791Z","level":"info","module":"plan","msg":"Plan created: ext-complexity","data":{"steps":1,"taskId":"task-1774421363790"}}
+{"ts":"2026-03-25T06:49:23.791Z","level":"info","module":"task","msg":"Task created: task-1774421363791","data":{"title":"[Plan] ext-basic","subtasks":1}}
+{"ts":"2026-03-25T06:49:23.791Z","level":"info","module":"plan","msg":"Plan created: ext-basic","data":{"steps":1,"taskId":"task-1774421363791"}}
+{"ts":"2026-03-25T06:49:23.831Z","level":"info","module":"task","msg":"Task created: task-1774421363830","data":{"title":"[Plan] stdin-feature","subtasks":3}}
+{"ts":"2026-03-25T06:49:23.831Z","level":"info","module":"plan","msg":"Plan created: stdin-feature","data":{"steps":3,"taskId":"task-1774421363830"}}
+{"ts":"2026-03-25T06:49:23.876Z","level":"info","module":"task","msg":"Task created: task-1774421363875","data":{"title":"[Plan] stdin-extended","subtasks":1}}
+{"ts":"2026-03-25T06:49:23.877Z","level":"info","module":"plan","msg":"Plan created: stdin-extended","data":{"steps":1,"taskId":"task-1774421363875"}}
+{"ts":"2026-03-25T06:49:25.097Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 55/50"}
+{"ts":"2026-03-25T06:49:31.399Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 56/50"}
+{"ts":"2026-03-25T06:50:09.313Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 57/50"}
+{"ts":"2026-03-25T06:51:44.399Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 58/50"}
+{"ts":"2026-03-25T06:51:45.551Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 59/50"}
+{"ts":"2026-03-25T06:52:04.122Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 60/50"}
+{"ts":"2026-03-25T06:52:09.106Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 61/50"}
+{"ts":"2026-03-25T06:52:09.702Z","level":"info","module":"task","msg":"Task created: task-1774421529701","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-25T06:52:09.702Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774421529701"}}
+{"ts":"2026-03-25T06:52:09.703Z","level":"info","module":"task","msg":"Task created: task-1774421529702","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-25T06:52:09.703Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774421529702"}}
+{"ts":"2026-03-25T06:52:09.706Z","level":"info","module":"task","msg":"Task created: task-1774421529705","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-25T06:52:09.707Z","level":"info","module":"task","msg":"Task created: task-1774421529707","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-25T06:52:09.708Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774421529707","allDone":false}}
+{"ts":"2026-03-25T06:52:09.708Z","level":"info","module":"task","msg":"Task created: task-1774421529708","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-25T06:52:09.709Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774421529708","allDone":true}}
+{"ts":"2026-03-25T06:52:09.739Z","level":"info","module":"task","msg":"Task created: task-1774421529738","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-25T06:52:09.739Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774421529738"}}
+{"ts":"2026-03-25T06:52:09.804Z","level":"info","module":"task","msg":"Task created: task-1774421529803","data":{"title":"[Plan] ext-options","subtasks":2}}
+{"ts":"2026-03-25T06:52:09.804Z","level":"info","module":"plan","msg":"Plan created: ext-options","data":{"steps":2,"taskId":"task-1774421529803"}}
+{"ts":"2026-03-25T06:52:09.805Z","level":"info","module":"task","msg":"Task created: task-1774421529804","data":{"title":"[Plan] ext-review","subtasks":2}}
+{"ts":"2026-03-25T06:52:09.805Z","level":"info","module":"plan","msg":"Plan created: ext-review","data":{"steps":2,"taskId":"task-1774421529804"}}
+{"ts":"2026-03-25T06:52:09.805Z","level":"info","module":"task","msg":"Task created: task-1774421529805","data":{"title":"[Plan] ext-complexity","subtasks":1}}
+{"ts":"2026-03-25T06:52:09.805Z","level":"info","module":"plan","msg":"Plan created: ext-complexity","data":{"steps":1,"taskId":"task-1774421529805"}}
+{"ts":"2026-03-25T06:52:09.806Z","level":"info","module":"task","msg":"Task created: task-1774421529805","data":{"title":"[Plan] ext-basic","subtasks":1}}
+{"ts":"2026-03-25T06:52:09.806Z","level":"info","module":"plan","msg":"Plan created: ext-basic","data":{"steps":1,"taskId":"task-1774421529805"}}
+{"ts":"2026-03-25T06:52:09.832Z","level":"info","module":"task","msg":"Task created: task-1774421529831","data":{"title":"[Plan] stdin-feature","subtasks":3}}
+{"ts":"2026-03-25T06:52:09.832Z","level":"info","module":"plan","msg":"Plan created: stdin-feature","data":{"steps":3,"taskId":"task-1774421529831"}}
+{"ts":"2026-03-25T06:52:09.859Z","level":"info","module":"task","msg":"Task created: task-1774421529859","data":{"title":"[Plan] stdin-extended","subtasks":1}}
+{"ts":"2026-03-25T06:52:09.859Z","level":"info","module":"plan","msg":"Plan created: stdin-extended","data":{"steps":1,"taskId":"task-1774421529859"}}
+{"ts":"2026-03-25T06:52:29.100Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T07:10:07.040Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T07:10:22.341Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 62/50"}
+{"ts":"2026-03-25T07:10:25.105Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 63/50"}
+{"ts":"2026-03-25T07:10:28.442Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 64/50"}
+{"ts":"2026-03-25T07:10:31.359Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 65/50"}
+{"ts":"2026-03-25T07:10:40.376Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 66/50"}
+{"ts":"2026-03-25T07:10:43.550Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 67/50"}
+{"ts":"2026-03-25T07:10:49.174Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 68/50"}
+{"ts":"2026-03-25T07:10:53.822Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 69/50"}
+{"ts":"2026-03-25T07:10:53.979Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 70/50"}
+{"ts":"2026-03-25T07:10:58.941Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 71/50"}
+{"ts":"2026-03-25T07:11:02.446Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 72/50"}
+{"ts":"2026-03-25T07:11:02.880Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 73/50"}
+{"ts":"2026-03-25T07:11:03.284Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 74/50"}
+{"ts":"2026-03-25T07:11:03.482Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 75/50"}
+{"ts":"2026-03-25T07:11:06.926Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 76/50"}
+{"ts":"2026-03-25T07:11:07.397Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 77/50"}
+{"ts":"2026-03-25T07:11:11.607Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 78/50"}
+{"ts":"2026-03-25T07:11:12.954Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 79/50"}
+{"ts":"2026-03-25T07:11:18.896Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 80/50"}
+{"ts":"2026-03-25T07:11:20.126Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 81/50"}
+{"ts":"2026-03-25T07:11:20.181Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 82/50"}
+{"ts":"2026-03-25T07:11:24.846Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 83/50"}
+{"ts":"2026-03-25T07:11:26.575Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 84/50"}
+{"ts":"2026-03-25T07:12:48.642Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T07:13:12.238Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T07:14:34.910Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 85/50"}
+{"ts":"2026-03-25T07:14:40.763Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 86/50"}
+{"ts":"2026-03-25T07:14:59.262Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 87/50"}
+{"ts":"2026-03-25T07:15:20.156Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 88/50"}
+{"ts":"2026-03-25T07:15:35.650Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 89/50"}
+{"ts":"2026-03-25T07:15:41.519Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 90/50"}
+{"ts":"2026-03-25T07:15:44.108Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 91/50"}
+{"ts":"2026-03-25T07:15:48.907Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 92/50"}
+{"ts":"2026-03-25T07:16:06.688Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 93/50"}
+{"ts":"2026-03-25T07:16:08.262Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 94/50"}
+{"ts":"2026-03-25T07:16:13.596Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 95/50"}
+{"ts":"2026-03-25T07:16:19.066Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 96/50"}
+{"ts":"2026-03-25T07:16:22.891Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 97/50"}
+{"ts":"2026-03-25T07:16:37.480Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 98/50"}
+{"ts":"2026-03-25T07:16:50.681Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 99/50"}
+{"ts":"2026-03-25T07:16:52.937Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 100/50"}
+{"ts":"2026-03-25T07:16:59.774Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 101/50"}
+{"ts":"2026-03-25T07:17:03.183Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 102/50"}
+{"ts":"2026-03-25T07:17:03.362Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 103/50"}
+{"ts":"2026-03-25T07:17:06.573Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 104/50"}
+{"ts":"2026-03-25T07:17:07.145Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-plan-2026-03-25T07-17-07-144Z.md"}}
+{"ts":"2026-03-25T07:17:07.146Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-exec-2026-03-25T07-17-07-146Z.md"}}
+{"ts":"2026-03-25T07:17:07.969Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 105/50"}
+{"ts":"2026-03-25T07:17:21.368Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 106/50"}
+{"ts":"2026-03-25T07:17:24.043Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 107/50"}
+{"ts":"2026-03-25T07:17:25.303Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 108/50"}
+{"ts":"2026-03-25T07:17:25.889Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-plan-2026-03-25T07-17-25-889Z.md"}}
+{"ts":"2026-03-25T07:17:25.890Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-exec-2026-03-25T07-17-25-890Z.md"}}
+{"ts":"2026-03-25T07:17:36.916Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 109/50"}
+{"ts":"2026-03-25T07:17:39.402Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 110/50"}
+{"ts":"2026-03-25T07:17:40.133Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 111/50"}
+{"ts":"2026-03-25T07:17:40.735Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-plan-2026-03-25T07-17-40-734Z.md"}}
+{"ts":"2026-03-25T07:17:40.736Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-exec-2026-03-25T07-17-40-736Z.md"}}
+{"ts":"2026-03-25T07:17:42.936Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 112/50"}
+{"ts":"2026-03-25T07:17:49.166Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 113/50"}
+{"ts":"2026-03-25T07:17:52.230Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 114/50"}
+{"ts":"2026-03-25T07:17:52.810Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-plan-2026-03-25T07-17-52-809Z.md"}}
+{"ts":"2026-03-25T07:17:52.811Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-exec-2026-03-25T07-17-52-811Z.md"}}
+{"ts":"2026-03-25T07:18:08.446Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 115/50"}
+{"ts":"2026-03-25T07:18:14.931Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 116/50"}
+{"ts":"2026-03-25T07:19:16.640Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 117/50"}
+{"ts":"2026-03-25T07:19:21.365Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 118/50"}
+{"ts":"2026-03-25T07:19:26.087Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 119/50"}
+{"ts":"2026-03-25T07:19:46.196Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 120/50"}
+{"ts":"2026-03-25T07:19:49.629Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 121/50"}
+{"ts":"2026-03-25T07:20:15.620Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 122/50"}
+{"ts":"2026-03-25T07:20:20.248Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 123/50"}
+{"ts":"2026-03-25T07:20:24.601Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 124/50"}
+{"ts":"2026-03-25T07:20:36.572Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 125/50"}
+{"ts":"2026-03-25T07:20:39.195Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 126/50"}
+{"ts":"2026-03-25T07:20:41.279Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 127/50"}
+{"ts":"2026-03-25T07:20:42.392Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:20:42.393Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:20:42.394Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-exec"}}
+{"ts":"2026-03-25T07:20:42.396Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":null}}
+{"ts":"2026-03-25T07:20:49.751Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 128/50"}
+{"ts":"2026-03-25T07:20:57.489Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 129/50"}
+{"ts":"2026-03-25T07:21:06.296Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 130/50"}
+{"ts":"2026-03-25T07:21:10.351Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 131/50"}
+{"ts":"2026-03-25T07:21:14.580Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 132/50"}
+{"ts":"2026-03-25T07:21:15.248Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:21:15.248Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:21:15.249Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-exec"}}
+{"ts":"2026-03-25T07:21:15.250Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":null}}
+{"ts":"2026-03-25T07:22:04.885Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 133/50"}
+{"ts":"2026-03-25T07:22:27.230Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 134/50"}
+{"ts":"2026-03-25T07:22:30.458Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 135/50"}
+{"ts":"2026-03-25T07:22:38.388Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 136/50"}
+{"ts":"2026-03-25T07:22:44.667Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 137/50"}
+{"ts":"2026-03-25T07:22:44.928Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 138/50"}
+{"ts":"2026-03-25T07:22:44.930Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 21/20"}
+{"ts":"2026-03-25T07:22:59.051Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 139/50"}
+{"ts":"2026-03-25T07:23:11.257Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 140/50"}
+{"ts":"2026-03-25T07:23:48.840Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 141/50"}
+{"ts":"2026-03-25T07:23:48.844Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 22/20"}
+{"ts":"2026-03-25T07:23:56.632Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 142/50"}
+{"ts":"2026-03-25T07:23:56.634Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 22/20"}
+{"ts":"2026-03-25T07:24:10.754Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 143/50"}
+{"ts":"2026-03-25T07:24:10.756Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 22/20"}
+{"ts":"2026-03-25T07:24:37.677Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 144/50"}
+{"ts":"2026-03-25T07:24:37.680Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:24:43.005Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 145/50"}
+{"ts":"2026-03-25T07:24:44.238Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 146/50"}
+{"ts":"2026-03-25T07:24:51.268Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 147/50"}
+{"ts":"2026-03-25T07:25:27.891Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 148/50"}
+{"ts":"2026-03-25T07:25:28.641Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-plan-2026-03-25T07-25-28-639Z.md"}}
+{"ts":"2026-03-25T07:25:28.642Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-exec-2026-03-25T07-25-28-642Z.md"}}
+{"ts":"2026-03-25T07:25:28.645Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:25:28.647Z","level":"info","module":"task","msg":"Task created: task-1774423528645","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-25T07:25:28.647Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774423528645"}}
+{"ts":"2026-03-25T07:25:28.647Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:25:28.648Z","level":"info","module":"task","msg":"Task created: task-1774423528648","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-25T07:25:28.648Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774423528648"}}
+{"ts":"2026-03-25T07:25:28.649Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-exec"}}
+{"ts":"2026-03-25T07:25:28.650Z","level":"info","module":"task","msg":"Task created: task-1774423528650","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-25T07:25:28.651Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":null}}
+{"ts":"2026-03-25T07:25:28.651Z","level":"info","module":"task","msg":"Task created: task-1774423528650","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-25T07:25:28.651Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774423528650","allDone":false}}
+{"ts":"2026-03-25T07:25:28.652Z","level":"info","module":"task","msg":"Task created: task-1774423528652","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-25T07:25:28.653Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774423528652","allDone":true}}
+{"ts":"2026-03-25T07:25:28.680Z","level":"info","module":"task","msg":"Task created: task-1774423528679","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-25T07:25:28.680Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774423528679"}}
+{"ts":"2026-03-25T07:25:28.744Z","level":"info","module":"task","msg":"Task created: task-1774423528744","data":{"title":"[Plan] ext-options","subtasks":2}}
+{"ts":"2026-03-25T07:25:28.744Z","level":"info","module":"plan","msg":"Plan created: ext-options","data":{"steps":2,"taskId":"task-1774423528744"}}
+{"ts":"2026-03-25T07:25:28.745Z","level":"info","module":"task","msg":"Task created: task-1774423528745","data":{"title":"[Plan] ext-review","subtasks":2}}
+{"ts":"2026-03-25T07:25:28.745Z","level":"info","module":"plan","msg":"Plan created: ext-review","data":{"steps":2,"taskId":"task-1774423528745"}}
+{"ts":"2026-03-25T07:25:28.746Z","level":"info","module":"task","msg":"Task created: task-1774423528745","data":{"title":"[Plan] ext-complexity","subtasks":1}}
+{"ts":"2026-03-25T07:25:28.746Z","level":"info","module":"plan","msg":"Plan created: ext-complexity","data":{"steps":1,"taskId":"task-1774423528745"}}
+{"ts":"2026-03-25T07:25:28.746Z","level":"info","module":"task","msg":"Task created: task-1774423528746","data":{"title":"[Plan] ext-basic","subtasks":1}}
+{"ts":"2026-03-25T07:25:28.746Z","level":"info","module":"plan","msg":"Plan created: ext-basic","data":{"steps":1,"taskId":"task-1774423528746"}}
+{"ts":"2026-03-25T07:25:28.776Z","level":"info","module":"task","msg":"Task created: task-1774423528775","data":{"title":"[Plan] stdin-feature","subtasks":3}}
+{"ts":"2026-03-25T07:25:28.776Z","level":"info","module":"plan","msg":"Plan created: stdin-feature","data":{"steps":3,"taskId":"task-1774423528775"}}
+{"ts":"2026-03-25T07:25:28.809Z","level":"info","module":"task","msg":"Task created: task-1774423528808","data":{"title":"[Plan] stdin-extended","subtasks":1}}
+{"ts":"2026-03-25T07:25:28.809Z","level":"info","module":"plan","msg":"Plan created: stdin-extended","data":{"steps":1,"taskId":"task-1774423528808"}}
+{"ts":"2026-03-25T07:25:51.499Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T07:45:42.416Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T07:46:18.201Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 149/50"}
+{"ts":"2026-03-25T07:48:42.679Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 150/50"}
+{"ts":"2026-03-25T07:48:42.681Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:48:47.234Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 151/50"}
+{"ts":"2026-03-25T07:48:47.235Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:48:49.059Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 152/50"}
+{"ts":"2026-03-25T07:48:49.062Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:48:50.819Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 153/50"}
+{"ts":"2026-03-25T07:48:50.821Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:48:51.944Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 154/50"}
+{"ts":"2026-03-25T07:48:51.946Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:49:08.381Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 155/50"}
+{"ts":"2026-03-25T07:49:08.384Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:49:11.507Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 156/50"}
+{"ts":"2026-03-25T07:49:11.513Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:49:12.948Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 157/50"}
+{"ts":"2026-03-25T07:49:12.950Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:49:19.016Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 158/50"}
+{"ts":"2026-03-25T07:49:19.779Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-plan-2026-03-25T07-49-19-776Z.md"}}
+{"ts":"2026-03-25T07:49:19.781Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-exec-2026-03-25T07-49-19-781Z.md"}}
+{"ts":"2026-03-25T07:49:19.789Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:49:19.790Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:49:19.791Z","level":"info","module":"task","msg":"Task created: task-1774424959790","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-25T07:49:19.791Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774424959790"}}
+{"ts":"2026-03-25T07:49:19.791Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-exec"}}
+{"ts":"2026-03-25T07:49:19.792Z","level":"info","module":"task","msg":"Task created: task-1774424959791","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-25T07:49:19.792Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774424959791"}}
+{"ts":"2026-03-25T07:49:19.793Z","level":"info","module":"task","msg":"Task created: task-1774424959793","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-25T07:49:19.793Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":null}}
+{"ts":"2026-03-25T07:49:19.794Z","level":"info","module":"task","msg":"Task created: task-1774424959794","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-25T07:49:19.794Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774424959794","allDone":false}}
+{"ts":"2026-03-25T07:49:19.795Z","level":"info","module":"task","msg":"Task created: task-1774424959795","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-25T07:49:19.795Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774424959795","allDone":true}}
+{"ts":"2026-03-25T07:49:19.821Z","level":"info","module":"task","msg":"Task created: task-1774424959821","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-25T07:49:19.821Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774424959821"}}
+{"ts":"2026-03-25T07:49:19.877Z","level":"info","module":"task","msg":"Task created: task-1774424959877","data":{"title":"[Plan] ext-options","subtasks":2}}
+{"ts":"2026-03-25T07:49:19.878Z","level":"info","module":"plan","msg":"Plan created: ext-options","data":{"steps":2,"taskId":"task-1774424959877"}}
+{"ts":"2026-03-25T07:49:19.878Z","level":"info","module":"task","msg":"Task created: task-1774424959878","data":{"title":"[Plan] ext-review","subtasks":2}}
+{"ts":"2026-03-25T07:49:19.878Z","level":"info","module":"plan","msg":"Plan created: ext-review","data":{"steps":2,"taskId":"task-1774424959878"}}
+{"ts":"2026-03-25T07:49:19.879Z","level":"info","module":"task","msg":"Task created: task-1774424959878","data":{"title":"[Plan] ext-complexity","subtasks":1}}
+{"ts":"2026-03-25T07:49:19.879Z","level":"info","module":"plan","msg":"Plan created: ext-complexity","data":{"steps":1,"taskId":"task-1774424959878"}}
+{"ts":"2026-03-25T07:49:19.879Z","level":"info","module":"task","msg":"Task created: task-1774424959879","data":{"title":"[Plan] ext-basic","subtasks":1}}
+{"ts":"2026-03-25T07:49:19.879Z","level":"info","module":"plan","msg":"Plan created: ext-basic","data":{"steps":1,"taskId":"task-1774424959879"}}
+{"ts":"2026-03-25T07:49:19.906Z","level":"info","module":"task","msg":"Task created: task-1774424959905","data":{"title":"[Plan] stdin-feature","subtasks":3}}
+{"ts":"2026-03-25T07:49:19.906Z","level":"info","module":"plan","msg":"Plan created: stdin-feature","data":{"steps":3,"taskId":"task-1774424959905"}}
+{"ts":"2026-03-25T07:49:19.933Z","level":"info","module":"task","msg":"Task created: task-1774424959933","data":{"title":"[Plan] stdin-extended","subtasks":1}}
+{"ts":"2026-03-25T07:49:19.934Z","level":"info","module":"plan","msg":"Plan created: stdin-extended","data":{"steps":1,"taskId":"task-1774424959933"}}
+{"ts":"2026-03-25T07:49:39.061Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T07:53:37.172Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T07:54:09.493Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 159/50"}
+{"ts":"2026-03-25T07:54:09.494Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:54:11.561Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 160/50"}
+{"ts":"2026-03-25T07:54:11.562Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:54:13.886Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 161/50"}
+{"ts":"2026-03-25T07:54:13.887Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:54:16.303Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 162/50"}
+{"ts":"2026-03-25T07:54:16.308Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:54:17.486Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 163/50"}
+{"ts":"2026-03-25T07:54:17.487Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:54:18.584Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 164/50"}
+{"ts":"2026-03-25T07:54:18.588Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:54:28.615Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 165/50"}
+{"ts":"2026-03-25T07:54:28.617Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:54:30.490Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 166/50"}
+{"ts":"2026-03-25T07:54:30.491Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:54:31.595Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 167/50"}
+{"ts":"2026-03-25T07:54:31.597Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 23/20"}
+{"ts":"2026-03-25T07:54:43.844Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 168/50"}
+{"ts":"2026-03-25T07:54:44.511Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-plan-2026-03-25T07-54-44-503Z-7e6598.md"}}
+{"ts":"2026-03-25T07:54:44.516Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:54:44.518Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-exec-2026-03-25T07-54-44-518Z-e8b26b.md"}}
+{"ts":"2026-03-25T07:54:44.521Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:54:44.523Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-exec"}}
+{"ts":"2026-03-25T07:54:44.528Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":null}}
+{"ts":"2026-03-25T07:54:44.532Z","level":"info","module":"task","msg":"Task created: task-1774425284530","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-25T07:54:44.533Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774425284530"}}
+{"ts":"2026-03-25T07:54:44.535Z","level":"info","module":"task","msg":"Task created: task-1774425284534","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-25T07:54:44.535Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774425284534"}}
+{"ts":"2026-03-25T07:54:44.539Z","level":"info","module":"task","msg":"Task created: task-1774425284538","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-25T07:54:44.540Z","level":"info","module":"task","msg":"Task created: task-1774425284539","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-25T07:54:44.541Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774425284539","allDone":false}}
+{"ts":"2026-03-25T07:54:44.541Z","level":"info","module":"task","msg":"Task created: task-1774425284541","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-25T07:54:44.542Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774425284541","allDone":true}}
+{"ts":"2026-03-25T07:54:44.571Z","level":"info","module":"task","msg":"Task created: task-1774425284570","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-25T07:54:44.571Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774425284570"}}
+{"ts":"2026-03-25T07:54:44.643Z","level":"info","module":"task","msg":"Task created: task-1774425284642","data":{"title":"[Plan] ext-options","subtasks":2}}
+{"ts":"2026-03-25T07:54:44.643Z","level":"info","module":"plan","msg":"Plan created: ext-options","data":{"steps":2,"taskId":"task-1774425284642"}}
+{"ts":"2026-03-25T07:54:44.644Z","level":"info","module":"task","msg":"Task created: task-1774425284643","data":{"title":"[Plan] ext-review","subtasks":2}}
+{"ts":"2026-03-25T07:54:44.644Z","level":"info","module":"plan","msg":"Plan created: ext-review","data":{"steps":2,"taskId":"task-1774425284643"}}
+{"ts":"2026-03-25T07:54:44.645Z","level":"info","module":"task","msg":"Task created: task-1774425284644","data":{"title":"[Plan] ext-complexity","subtasks":1}}
+{"ts":"2026-03-25T07:54:44.645Z","level":"info","module":"plan","msg":"Plan created: ext-complexity","data":{"steps":1,"taskId":"task-1774425284644"}}
+{"ts":"2026-03-25T07:54:44.646Z","level":"info","module":"task","msg":"Task created: task-1774425284645","data":{"title":"[Plan] ext-basic","subtasks":1}}
+{"ts":"2026-03-25T07:54:44.646Z","level":"info","module":"plan","msg":"Plan created: ext-basic","data":{"steps":1,"taskId":"task-1774425284645"}}
+{"ts":"2026-03-25T07:54:44.679Z","level":"info","module":"task","msg":"Task created: task-1774425284677","data":{"title":"[Plan] stdin-feature","subtasks":3}}
+{"ts":"2026-03-25T07:54:44.679Z","level":"info","module":"plan","msg":"Plan created: stdin-feature","data":{"steps":3,"taskId":"task-1774425284677"}}
+{"ts":"2026-03-25T07:54:44.715Z","level":"info","module":"task","msg":"Task created: task-1774425284714","data":{"title":"[Plan] stdin-extended","subtasks":1}}
+{"ts":"2026-03-25T07:54:44.715Z","level":"info","module":"plan","msg":"Plan created: stdin-extended","data":{"steps":1,"taskId":"task-1774425284714"}}
+{"ts":"2026-03-25T07:54:45.544Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 169/50"}
+{"ts":"2026-03-25T07:55:02.805Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T07:57:43.190Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T07:58:07.619Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 170/50"}
+{"ts":"2026-03-25T07:58:07.621Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 24/20"}
+{"ts":"2026-03-25T07:58:43.501Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 171/50"}
+{"ts":"2026-03-25T07:58:43.503Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 25/20"}
+{"ts":"2026-03-25T07:58:44.217Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 172/50"}
+{"ts":"2026-03-25T07:58:44.219Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 26/20"}
+{"ts":"2026-03-25T07:58:44.911Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 173/50"}
+{"ts":"2026-03-25T07:58:44.913Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 27/20"}
+{"ts":"2026-03-25T07:58:45.626Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 174/50"}
+{"ts":"2026-03-25T07:58:45.627Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 28/20"}
+{"ts":"2026-03-25T07:59:18.284Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 175/50"}
+{"ts":"2026-03-25T07:59:18.287Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 29/20"}
+{"ts":"2026-03-25T07:59:26.033Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 176/50"}
+{"ts":"2026-03-25T07:59:26.815Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-plan-2026-03-25T07-59-26-814Z-4c8bf4.md"}}
+{"ts":"2026-03-25T07:59:26.817Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-exec-2026-03-25T07-59-26-817Z-a6160f.md"}}
+{"ts":"2026-03-25T07:59:26.820Z","level":"info","module":"task","msg":"Task created: task-1774425566819","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-25T07:59:26.820Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774425566819"}}
+{"ts":"2026-03-25T07:59:26.821Z","level":"info","module":"task","msg":"Task created: task-1774425566821","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-25T07:59:26.821Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774425566821"}}
+{"ts":"2026-03-25T07:59:26.822Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:59:26.823Z","level":"info","module":"task","msg":"Task created: task-1774425566822","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-25T07:59:26.823Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T07:59:26.824Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-exec"}}
+{"ts":"2026-03-25T07:59:26.824Z","level":"info","module":"task","msg":"Task created: task-1774425566823","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-25T07:59:26.825Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774425566823","allDone":false}}
+{"ts":"2026-03-25T07:59:26.826Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":null}}
+{"ts":"2026-03-25T07:59:26.826Z","level":"info","module":"task","msg":"Task created: task-1774425566825","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-25T07:59:26.827Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774425566825","allDone":true}}
+{"ts":"2026-03-25T07:59:26.854Z","level":"info","module":"task","msg":"Task created: task-1774425566853","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-25T07:59:26.854Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774425566853"}}
+{"ts":"2026-03-25T07:59:26.909Z","level":"info","module":"task","msg":"Task created: task-1774425566908","data":{"title":"[Plan] ext-options","subtasks":2}}
+{"ts":"2026-03-25T07:59:26.909Z","level":"info","module":"plan","msg":"Plan created: ext-options","data":{"steps":2,"taskId":"task-1774425566908"}}
+{"ts":"2026-03-25T07:59:26.909Z","level":"info","module":"task","msg":"Task created: task-1774425566909","data":{"title":"[Plan] ext-review","subtasks":2}}
+{"ts":"2026-03-25T07:59:26.909Z","level":"info","module":"plan","msg":"Plan created: ext-review","data":{"steps":2,"taskId":"task-1774425566909"}}
+{"ts":"2026-03-25T07:59:26.910Z","level":"info","module":"task","msg":"Task created: task-1774425566909","data":{"title":"[Plan] ext-complexity","subtasks":1}}
+{"ts":"2026-03-25T07:59:26.910Z","level":"info","module":"plan","msg":"Plan created: ext-complexity","data":{"steps":1,"taskId":"task-1774425566909"}}
+{"ts":"2026-03-25T07:59:26.910Z","level":"info","module":"task","msg":"Task created: task-1774425566910","data":{"title":"[Plan] ext-basic","subtasks":1}}
+{"ts":"2026-03-25T07:59:26.910Z","level":"info","module":"plan","msg":"Plan created: ext-basic","data":{"steps":1,"taskId":"task-1774425566910"}}
+{"ts":"2026-03-25T07:59:26.936Z","level":"info","module":"task","msg":"Task created: task-1774425566936","data":{"title":"[Plan] stdin-feature","subtasks":3}}
+{"ts":"2026-03-25T07:59:26.937Z","level":"info","module":"plan","msg":"Plan created: stdin-feature","data":{"steps":3,"taskId":"task-1774425566936"}}
+{"ts":"2026-03-25T07:59:26.966Z","level":"info","module":"task","msg":"Task created: task-1774425566965","data":{"title":"[Plan] stdin-extended","subtasks":1}}
+{"ts":"2026-03-25T07:59:26.966Z","level":"info","module":"plan","msg":"Plan created: stdin-extended","data":{"steps":1,"taskId":"task-1774425566965"}}
+{"ts":"2026-03-25T07:59:33.131Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 177/50"}
+{"ts":"2026-03-25T07:59:33.652Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 178/50"}
+{"ts":"2026-03-25T07:59:51.164Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 179/50"}
+{"ts":"2026-03-25T08:00:03.502Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 180/50"}
+{"ts":"2026-03-25T08:00:16.328Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T08:11:56.139Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T08:12:04.112Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 181/50"}
+{"ts":"2026-03-25T08:12:16.805Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T08:15:16.390Z","level":"info","module":"state-gc","msg":"GC: no zombies found"}
+{"ts":"2026-03-25T08:15:16.398Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":15,"zombieCount":0,"activeFeature":"z"}}
+{"ts":"2026-03-25T08:15:16.403Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-25T10:47:18.157Z","level":"info","module":"state-gc","msg":"GC: no zombies found"}
+{"ts":"2026-03-25T10:47:18.164Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":15,"zombieCount":0,"activeFeature":"z"}}
+{"ts":"2026-03-25T10:47:18.170Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-25T10:47:37.414Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T10:50:43.534Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T10:50:43.535Z","level":"info","module":"stop","msg":"Session handoff written","data":{"path":"/Users/iron/Project/sw-kit-claude/.sw-kit/state/handoff-2026-03-25T10-50-43-535Z.md","feature":"z","stage":"explore"}}
+{"ts":"2026-03-25T10:52:10.468Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T10:53:18.640Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T10:53:18.640Z","level":"info","module":"stop","msg":"Session handoff written","data":{"path":"/Users/iron/Project/sw-kit-claude/.sw-kit/state/handoff-2026-03-25T10-53-18-640Z.md","feature":"z","stage":"explore"}}
+{"ts":"2026-03-25T10:54:56.743Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T10:55:19.188Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /Users/iron/Project/sw-kit-claude/skills/evidence-verification /Users/iron/Project/sw-kit-cla","severity":"critical"}}
+{"ts":"2026-03-25T11:00:01.335Z","level":"info","module":"task","msg":"Task created: task-1774436401334","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-25T11:00:01.335Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774436401334"}}
+{"ts":"2026-03-25T11:00:01.337Z","level":"info","module":"task","msg":"Task created: task-1774436401336","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-25T11:00:01.337Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774436401336"}}
+{"ts":"2026-03-25T11:00:01.340Z","level":"info","module":"task","msg":"Task created: task-1774436401339","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-25T11:00:01.340Z","level":"info","module":"task","msg":"Task created: task-1774436401340","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-25T11:00:01.341Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774436401340","allDone":false}}
+{"ts":"2026-03-25T11:00:01.341Z","level":"info","module":"task","msg":"Task created: task-1774436401341","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-25T11:00:01.342Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774436401341","allDone":true}}
+{"ts":"2026-03-25T11:00:01.380Z","level":"info","module":"task","msg":"Task created: task-1774436401379","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-25T11:00:01.381Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774436401379"}}
+{"ts":"2026-03-25T11:00:01.454Z","level":"info","module":"task","msg":"Task created: task-1774436401453","data":{"title":"[Plan] ext-options","subtasks":2}}
+{"ts":"2026-03-25T11:00:01.454Z","level":"info","module":"plan","msg":"Plan created: ext-options","data":{"steps":2,"taskId":"task-1774436401453"}}
+{"ts":"2026-03-25T11:00:01.455Z","level":"info","module":"task","msg":"Task created: task-1774436401455","data":{"title":"[Plan] ext-review","subtasks":2}}
+{"ts":"2026-03-25T11:00:01.455Z","level":"info","module":"plan","msg":"Plan created: ext-review","data":{"steps":2,"taskId":"task-1774436401455"}}
+{"ts":"2026-03-25T11:00:01.457Z","level":"info","module":"task","msg":"Task created: task-1774436401456","data":{"title":"[Plan] ext-complexity","subtasks":1}}
+{"ts":"2026-03-25T11:00:01.457Z","level":"info","module":"plan","msg":"Plan created: ext-complexity","data":{"steps":1,"taskId":"task-1774436401456"}}
+{"ts":"2026-03-25T11:00:01.458Z","level":"info","module":"task","msg":"Task created: task-1774436401458","data":{"title":"[Plan] ext-basic","subtasks":1}}
+{"ts":"2026-03-25T11:00:01.458Z","level":"info","module":"plan","msg":"Plan created: ext-basic","data":{"steps":1,"taskId":"task-1774436401458"}}
+{"ts":"2026-03-25T11:00:01.510Z","level":"info","module":"task","msg":"Task created: task-1774436401506","data":{"title":"[Plan] stdin-feature","subtasks":3}}
+{"ts":"2026-03-25T11:00:01.510Z","level":"info","module":"plan","msg":"Plan created: stdin-feature","data":{"steps":3,"taskId":"task-1774436401506"}}
+{"ts":"2026-03-25T11:00:01.572Z","level":"info","module":"task","msg":"Task created: task-1774436401571","data":{"title":"[Plan] stdin-extended","subtasks":1}}
+{"ts":"2026-03-25T11:00:01.572Z","level":"info","module":"plan","msg":"Plan created: stdin-extended","data":{"steps":1,"taskId":"task-1774436401571"}}
+{"ts":"2026-03-25T11:00:01.697Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-plan-2026-03-25T11-00-01-696Z-190dad.md"}}
+{"ts":"2026-03-25T11:00:01.697Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-exec-2026-03-25T11-00-01-697Z-bfb322.md"}}
+{"ts":"2026-03-25T11:00:16.713Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T11:00:16.715Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T11:00:16.716Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-exec"}}
+{"ts":"2026-03-25T11:00:16.727Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":null}}
+{"ts":"2026-03-25T11:00:39.104Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T11:00:39.106Z","level":"info","module":"stop","msg":"Session handoff written","data":{"path":"/Users/iron/Project/sw-kit-claude/.sw-kit/state/handoff-2026-03-25T11-00-39-106Z.md","feature":"z","stage":"explore"}}
+{"ts":"2026-03-25T11:01:59.922Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T11:04:06.709Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 51/50"}
+{"ts":"2026-03-25T11:04:07.453Z","level":"info","module":"task","msg":"Task created: task-1774436647451","data":{"title":"[Plan] figma-reader-agent","subtasks":5}}
+{"ts":"2026-03-25T11:04:07.453Z","level":"info","module":"plan","msg":"Plan created: figma-reader-agent","data":{"steps":5,"taskId":"task-1774436647451"}}
+{"ts":"2026-03-25T11:04:23.417Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T11:04:23.418Z","level":"info","module":"stop","msg":"Session handoff written","data":{"path":"/Users/iron/Project/sw-kit-claude/.sw-kit/state/handoff-2026-03-25T11-04-23-418Z.md","feature":"z","stage":"explore"}}
+{"ts":"2026-03-25T11:04:53.730Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T11:05:18.446Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 52/50"}
+{"ts":"2026-03-25T11:07:51.616Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 53/50"}
+{"ts":"2026-03-25T11:07:52.234Z","level":"info","module":"task","msg":"Task created: task-1774436872233","data":{"title":"[Plan] figma-reader-progress-checker","subtasks":8}}
+{"ts":"2026-03-25T11:07:52.234Z","level":"info","module":"plan","msg":"Plan created: figma-reader-progress-checker","data":{"steps":8,"taskId":"task-1774436872233"}}
+{"ts":"2026-03-25T11:08:06.121Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T11:08:06.122Z","level":"info","module":"stop","msg":"Session handoff written","data":{"path":"/Users/iron/Project/sw-kit-claude/.sw-kit/state/handoff-2026-03-25T11-08-06-122Z.md","feature":"z","stage":"explore"}}
+{"ts":"2026-03-25T11:08:27.170Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T11:09:07.058Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 54/50"}
+{"ts":"2026-03-25T11:09:25.188Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 55/50"}
+{"ts":"2026-03-25T11:11:05.097Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 56/50"}
+{"ts":"2026-03-25T11:11:33.728Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 57/50"}
+{"ts":"2026-03-25T11:11:39.690Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 58/50"}
+{"ts":"2026-03-25T11:11:46.067Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 59/50"}
+{"ts":"2026-03-25T11:11:55.540Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 60/50"}
+{"ts":"2026-03-25T11:11:59.862Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 61/50"}
+{"ts":"2026-03-25T11:12:05.003Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 62/50"}
+{"ts":"2026-03-25T11:12:11.904Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 63/50"}
+{"ts":"2026-03-25T11:21:31.326Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T11:22:19.623Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 64/50"}
+{"ts":"2026-03-25T11:22:25.229Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 65/50"}
+{"ts":"2026-03-25T11:22:31.432Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 66/50"}
+{"ts":"2026-03-25T11:22:37.999Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 67/50"}
+{"ts":"2026-03-25T11:22:43.883Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 68/50"}
+{"ts":"2026-03-25T11:22:46.570Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 69/50"}
+{"ts":"2026-03-25T11:22:58.938Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 70/50"}
+{"ts":"2026-03-25T11:23:08.752Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 71/50"}
+{"ts":"2026-03-25T11:23:13.527Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 72/50"}
+{"ts":"2026-03-25T11:23:14.812Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 73/50"}
+{"ts":"2026-03-25T11:23:31.572Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 74/50"}
+{"ts":"2026-03-25T11:23:39.960Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 75/50"}
+{"ts":"2026-03-25T11:23:54.942Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T11:23:54.943Z","level":"info","module":"stop","msg":"Session handoff written","data":{"path":"/Users/iron/Project/sw-kit-claude/.sw-kit/state/handoff-2026-03-25T11-23-54-943Z.md","feature":"z","stage":"explore"}}
+{"ts":"2026-03-25T11:23:55.527Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"high","workers":7}}
+{"ts":"2026-03-25T11:24:05.525Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T11:24:05.525Z","level":"info","module":"stop","msg":"Session handoff written","data":{"path":"/Users/iron/Project/sw-kit-claude/.sw-kit/state/handoff-2026-03-25T11-24-05-525Z.md","feature":"z","stage":"explore"}}
+{"ts":"2026-03-25T11:25:01.249Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-25T11:25:10.735Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 76/50"}
+{"ts":"2026-03-25T11:25:12.708Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 77/50"}
+{"ts":"2026-03-25T11:25:30.897Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 78/50"}
+{"ts":"2026-03-25T11:25:31.981Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 79/50"}
+{"ts":"2026-03-25T11:25:32.851Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 80/50"}
+{"ts":"2026-03-25T11:25:33.707Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 81/50"}
+{"ts":"2026-03-25T11:25:34.506Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 82/50"}
+{"ts":"2026-03-25T11:25:34.510Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 21/20"}
+{"ts":"2026-03-25T11:26:00.941Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 83/50"}
+{"ts":"2026-03-25T11:26:00.943Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 22/20"}
+{"ts":"2026-03-25T11:26:06.928Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 84/50"}
+{"ts":"2026-03-25T11:26:07.663Z","level":"info","module":"task","msg":"Task created: task-1774437967662","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-25T11:26:07.663Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774437967662"}}
+{"ts":"2026-03-25T11:26:07.666Z","level":"info","module":"task","msg":"Task created: task-1774437967665","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-25T11:26:07.666Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774437967665"}}
+{"ts":"2026-03-25T11:26:07.670Z","level":"info","module":"task","msg":"Task created: task-1774437967669","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-25T11:26:07.671Z","level":"info","module":"task","msg":"Task created: task-1774437967670","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-25T11:26:07.672Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774437967670","allDone":false}}
+{"ts":"2026-03-25T11:26:07.674Z","level":"info","module":"task","msg":"Task created: task-1774437967673","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-25T11:26:07.675Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774437967673","allDone":true}}
+{"ts":"2026-03-25T11:26:07.724Z","level":"info","module":"task","msg":"Task created: task-1774437967723","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-25T11:26:07.725Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774437967723"}}
+{"ts":"2026-03-25T11:26:07.843Z","level":"info","module":"task","msg":"Task created: task-1774437967842","data":{"title":"[Plan] ext-options","subtasks":2}}
+{"ts":"2026-03-25T11:26:07.843Z","level":"info","module":"plan","msg":"Plan created: ext-options","data":{"steps":2,"taskId":"task-1774437967842"}}
+{"ts":"2026-03-25T11:26:07.845Z","level":"info","module":"task","msg":"Task created: task-1774437967844","data":{"title":"[Plan] ext-review","subtasks":2}}
+{"ts":"2026-03-25T11:26:07.845Z","level":"info","module":"plan","msg":"Plan created: ext-review","data":{"steps":2,"taskId":"task-1774437967844"}}
+{"ts":"2026-03-25T11:26:07.847Z","level":"info","module":"task","msg":"Task created: task-1774437967846","data":{"title":"[Plan] ext-complexity","subtasks":1}}
+{"ts":"2026-03-25T11:26:07.847Z","level":"info","module":"plan","msg":"Plan created: ext-complexity","data":{"steps":1,"taskId":"task-1774437967846"}}
+{"ts":"2026-03-25T11:26:07.848Z","level":"info","module":"task","msg":"Task created: task-1774437967847","data":{"title":"[Plan] ext-basic","subtasks":1}}
+{"ts":"2026-03-25T11:26:07.848Z","level":"info","module":"plan","msg":"Plan created: ext-basic","data":{"steps":1,"taskId":"task-1774437967847"}}
+{"ts":"2026-03-25T11:26:07.903Z","level":"info","module":"task","msg":"Task created: task-1774437967901","data":{"title":"[Plan] stdin-feature","subtasks":3}}
+{"ts":"2026-03-25T11:26:07.903Z","level":"info","module":"plan","msg":"Plan created: stdin-feature","data":{"steps":3,"taskId":"task-1774437967901"}}
+{"ts":"2026-03-25T11:26:07.962Z","level":"info","module":"task","msg":"Task created: task-1774437967961","data":{"title":"[Plan] stdin-extended","subtasks":1}}
+{"ts":"2026-03-25T11:26:07.963Z","level":"info","module":"plan","msg":"Plan created: stdin-extended","data":{"steps":1,"taskId":"task-1774437967961"}}
+{"ts":"2026-03-25T11:26:08.133Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-plan-2026-03-25T11-26-08-132Z-a7cac6.md"}}
+{"ts":"2026-03-25T11:26:08.135Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.sw-kit/handoffs/auth-upgrade/team-exec-2026-03-25T11-26-08-135Z-7e874d.md"}}
+{"ts":"2026-03-25T11:26:08.282Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T11:26:08.284Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-25T11:26:08.286Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-exec"}}
+{"ts":"2026-03-25T11:26:08.288Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":null}}
+{"ts":"2026-03-25T11:26:15.675Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 85/50"}
+{"ts":"2026-03-25T11:26:21.225Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 86/50"}
+{"ts":"2026-03-25T11:26:25.848Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 87/50"}
+{"ts":"2026-03-25T11:26:40.303Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 88/50"}
+{"ts":"2026-03-25T11:26:45.674Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 89/50"}
+{"ts":"2026-03-25T11:26:53.365Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-25T11:26:53.366Z","level":"info","module":"stop","msg":"Session handoff written","data":{"path":"/Users/iron/Project/sw-kit-claude/.sw-kit/state/handoff-2026-03-25T11-26-53-365Z.md","feature":"z","stage":"explore"}}

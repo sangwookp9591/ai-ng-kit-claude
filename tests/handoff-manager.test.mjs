@@ -21,7 +21,7 @@ describe('Handoff Manager', () => {
       stage: 'team-plan',
       summary: 'Planned OAuth2 migration in 5 steps',
       decisions: ['Use Clerk for auth', 'Keep session tokens in Redis'],
-      artifacts: ['.sw-kit/plans/2026-03-25-auth-upgrade.md'],
+      artifacts: ['.aing/plans/2026-03-25-auth-upgrade.md'],
       nextStage: 'team-exec',
     }, TEST_DIR);
 

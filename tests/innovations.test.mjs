@@ -1,5 +1,5 @@
 /**
- * sw-kit v2.0.0 — 5 Innovations + PDCA 통합 테스트
+ * aing v2.0.0 — 5 Innovations + PDCA 통합 테스트
  *
  * 1. Context Budget
  * 2. Adaptive Routing
@@ -20,8 +20,8 @@ import { randomBytes } from 'node:crypto';
 
 // Isolated temp project dir for each test suite
 function makeTempDir() {
-  const dir = join(tmpdir(), `sw-kit-test-${randomBytes(6).toString('hex')}`);
-  mkdirSync(join(dir, '.sw-kit', 'state'), { recursive: true });
+  const dir = join(tmpdir(), `aing-test-${randomBytes(6).toString('hex')}`);
+  mkdirSync(join(dir, '.aing', 'state'), { recursive: true });
   return dir;
 }
 
@@ -393,7 +393,7 @@ describe('Innovation #4: Self-Healing', async () => {
     it('emergency backup 존재 → 백업에서 복구', () => {
       const backupData = { backupAt: new Date().toISOString(), state: { restored: true, features: {} } };
       writeFileSync(
-        join(tmpDir, '.sw-kit', 'state', 'pdca-status-emergency-backup.json'),
+        join(tmpDir, '.aing', 'state', 'pdca-status-emergency-backup.json'),
         JSON.stringify(backupData)
       );
 
@@ -416,8 +416,8 @@ describe('Innovation #4: Self-Healing', async () => {
     });
 
     it('유효한 JSON 파일 → healthy', () => {
-      writeFileSync(join(tmpDir, '.sw-kit', 'state', 'pdca-status.json'), '{"version":1}');
-      writeFileSync(join(tmpDir, '.sw-kit', 'project-memory.json'), '{"patterns":[]}');
+      writeFileSync(join(tmpDir, '.aing', 'state', 'pdca-status.json'), '{"version":1}');
+      writeFileSync(join(tmpDir, '.aing', 'project-memory.json'), '{"patterns":[]}');
 
       const result = runHealthCheck(tmpDir);
       assert.equal(result.healthy, true);
@@ -426,7 +426,7 @@ describe('Innovation #4: Self-Healing', async () => {
     });
 
     it('깨진 JSON → corrupted → unhealthy', () => {
-      writeFileSync(join(tmpDir, '.sw-kit', 'state', 'pdca-status.json'), '{broken json!!!');
+      writeFileSync(join(tmpDir, '.aing', 'state', 'pdca-status.json'), '{broken json!!!');
 
       const result = runHealthCheck(tmpDir);
       assert.equal(result.healthy, false);
@@ -689,7 +689,7 @@ describe('Cost Ceiling (Budget Guardrail)', async () => {
 
   it('initCostTracker: 초기화', () => {
     initCostTracker(tmpDir);
-    const path = join(tmpDir, '.sw-kit', 'state', 'cost-tracker.json');
+    const path = join(tmpDir, '.aing', 'state', 'cost-tracker.json');
     assert.ok(existsSync(path));
     const data = readJson(path);
     assert.equal(data.tokensUsed, 0);
@@ -724,7 +724,7 @@ describe('Cost Ceiling (Budget Guardrail)', async () => {
     initCostTracker(tmpDir);
     recordUsage(5000, 'test', tmpDir);
     const status = formatCostStatus(tmpDir);
-    assert.ok(status.includes('[sw-kit Cost]'));
+    assert.ok(status.includes('[aing Cost]'));
     assert.ok(status.includes('Tokens'));
     assert.ok(status.includes('API Calls'));
   });
@@ -742,7 +742,7 @@ describe('Core: State Manager', async () => {
   afterEach(() => cleanDir(tmpDir));
 
   it('writeState + readState: 원자적 쓰기/읽기', () => {
-    const path = join(tmpDir, '.sw-kit', 'state', 'test.json');
+    const path = join(tmpDir, '.aing', 'state', 'test.json');
     const result = writeState(path, { hello: 'world' });
     assert.equal(result.ok, true);
 
@@ -762,7 +762,7 @@ describe('Core: State Manager', async () => {
   });
 
   it('deleteState: 파일 삭제', () => {
-    const path = join(tmpDir, '.sw-kit', 'state', 'del.json');
+    const path = join(tmpDir, '.aing', 'state', 'del.json');
     writeState(path, { temp: true });
     assert.ok(existsSync(path));
 

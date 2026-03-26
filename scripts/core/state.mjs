@@ -1,5 +1,5 @@
 /**
- * sw-kit State Manager — Atomic file I/O
+ * aing State Manager — Atomic file I/O
  * All writes use temp+rename pattern to prevent corruption.
  * @module scripts/core/state
  */

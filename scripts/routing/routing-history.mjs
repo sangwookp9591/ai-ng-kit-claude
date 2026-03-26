@@ -1,5 +1,5 @@
 /**
- * sw-kit Routing History (Innovation #3 — Adaptive Routing)
+ * aing Routing History (Innovation #3 — Adaptive Routing)
  * Tracks routing decisions and outcomes for future optimization.
  * @module scripts/routing/routing-history
  */
@@ -9,7 +9,7 @@ import { getConfig } from '../core/config.mjs';
 import { join } from 'node:path';
 
 function getHistoryPath(projectDir) {
-  return join(projectDir || process.cwd(), '.sw-kit', 'routing-history.json');
+  return join(projectDir || process.cwd(), '.aing', 'routing-history.json');
 }
 
 /**

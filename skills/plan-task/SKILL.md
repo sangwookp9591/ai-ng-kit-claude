@@ -4,12 +4,12 @@ description: "📋 Able + Klay(+Milla) 다중 관점 계획 수립. 구조화된
 triggers: ["plan", "계획", "기획", "설계"]
 ---
 
-# /swkit plan — Multi-Perspective Task Planning
+# /aing plan — Multi-Perspective Task Planning
 
 ## Usage
 ```
-/swkit plan <task-description>
-/swkit plan "사용자 인증 API 구현"
+/aing plan <task-description>
+/aing plan "사용자 인증 API 구현"
 ```
 
 ## Step 1: Able Draft (구조화된 초안)
@@ -18,7 +18,7 @@ Spawn Able with structured output requirements:
 
 ```
 Agent({
-  subagent_type: "sw-kit:able",
+  subagent_type: "aing:able",
   description: "Able: 작업 계획 수립 — {task}",
   model: "sonnet",
   prompt: "다음 작업을 분석하고 PLAN_DRAFT 포맷으로 계획을 수립하세요: {task}
@@ -84,7 +84,7 @@ Spawn Klay in Plan Review Mode:
 
 ```
 Agent({
-  subagent_type: "sw-kit:klay",
+  subagent_type: "aing:klay",
   description: "Klay: 계획 아키텍처 리뷰 — {feature}",
   model: "sonnet",   // Note: overrides klay.md default (opus) for cost efficiency
   prompt: "[PLAN REVIEW MODE]
@@ -124,7 +124,7 @@ Spawn Milla in Plan Critic Mode:
 
 ```
 Agent({
-  subagent_type: "sw-kit:milla",
+  subagent_type: "aing:milla",
   description: "Milla: 계획 갭 분석 — {feature}",
   model: "sonnet",
   prompt: "[PLAN REVIEW MODE]
@@ -173,7 +173,7 @@ Spawn Able again to integrate all review feedback:
 
 ```
 Agent({
-  subagent_type: "sw-kit:able",
+  subagent_type: "aing:able",
   description: "Able: 피드백 통합 — {feature}",
   model: "sonnet",
   prompt: "다음 리뷰 피드백을 계획에 통합하고 FINAL_PLAN JSON을 생성하세요.
@@ -221,8 +221,8 @@ printf '%s' '{FINAL_PLAN_JSON}' | node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persis
 Note: Use `printf '%s'` instead of `echo` to avoid shell quote issues when JSON contains single quotes.
 
 This creates:
-- `.sw-kit/plans/{date}-{feature}.md` — Structured plan with Options, Review Notes, Complexity
-- `.sw-kit/tasks/task-{id}.json` — Task checklist with subtasks
+- `.aing/plans/{date}-{feature}.md` — Structured plan with Options, Review Notes, Complexity
+- `.aing/tasks/task-{id}.json` — Task checklist with subtasks
 
 ## Step 5: Plan Summary Display
 
@@ -230,10 +230,10 @@ Display the plan summary to the user:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  sw-kit plan: {feature}
+  aing plan: {feature}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  Plan: .sw-kit/plans/{date}-{feature}.md
+  Plan: .aing/plans/{date}-{feature}.md
   Tasks: {N}개
   Team: {preset} ({agent names})
   Complexity: {level} ({score}/10)
@@ -257,19 +257,19 @@ Display the plan summary to the user:
 ```
 📋 계획이 완료되었습니다. 다음 액션을 선택하세요:
 
-  1. /swkit team — 팀 실행 (추천: verify→fix 루프, 품질 보장)
-  2. /swkit auto — 단발 실행 (빠르게, verify 없이)
+  1. /aing team — 팀 실행 (추천: verify→fix 루프, 품질 보장)
+  2. /aing auto — 단발 실행 (빠르게, verify 없이)
   3. 저장만 — 계획만 저장하고 나중에 실행
 ```
 
 ### On Option 1: Team Pipeline (Recommended)
-Invoke `/swkit team` with the plan context:
-- Pass the plan file path: `--plan .sw-kit/plans/{date}-{feature}.md`
+Invoke `/aing team` with the plan context:
+- Pass the plan file path: `--plan .aing/plans/{date}-{feature}.md`
 - Team will skip team-plan stage and use existing plan directly
 - Staged pipeline: exec → verify → fix 루프 (max 3회)
 
 ### On Option 2: Auto (One-shot)
-Invoke `/swkit auto` with the plan context
+Invoke `/aing auto` with the plan context
 
 ### On Option 3: Save Only
 Confirm save and end flow

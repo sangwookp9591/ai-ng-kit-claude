@@ -1,6 +1,6 @@
 /**
- * sw-kit Status View — Human-Readable PDCA Status Generator
- * Reads pdca-status.json and writes .sw-kit/STATUS.md.
+ * aing Status View — Human-Readable PDCA Status Generator
+ * Reads pdca-status.json and writes .aing/STATUS.md.
  *
  * @module scripts/pdca/status-view
  */
@@ -82,8 +82,8 @@ function statusIcon(feature, zombie) {
  * @returns {{ path: string, featureCount: number, zombieCount: number, activeFeature: string|null }}
  */
 export function generateStatusView(projectDir) {
-  const statePath = join(projectDir, '.sw-kit', 'state', 'pdca-status.json');
-  const outputPath = join(projectDir, '.sw-kit', 'STATUS.md');
+  const statePath = join(projectDir, '.aing', 'state', 'pdca-status.json');
+  const outputPath = join(projectDir, '.aing', 'STATUS.md');
 
   const state = readStateOrDefault(statePath, { version: 1, features: {}, activeFeature: null });
   const features = state.features || {};
@@ -103,7 +103,7 @@ export function generateStatusView(projectDir) {
   const lines = [];
 
   // Header
-  lines.push(`# sw-kit Status`);
+  lines.push(`# aing Status`);
   lines.push(`> Auto-generated at ${now}. Do not edit manually.`);
   lines.push('');
 
@@ -139,7 +139,7 @@ export function generateStatusView(projectDir) {
   // Warnings section
   if (zombieCount > 0) {
     lines.push(`## Warnings`);
-    lines.push(`- ${zombieCount} zombie feature(s) detected (no activity > ${ZOMBIE_AGE_DAYS} days). Run \`/swkit gc\` to clean up.`);
+    lines.push(`- ${zombieCount} zombie feature(s) detected (no activity > ${ZOMBIE_AGE_DAYS} days). Run \`/aing gc\` to clean up.`);
     lines.push('');
   }
 

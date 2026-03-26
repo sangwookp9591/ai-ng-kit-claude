@@ -1,5 +1,5 @@
 /**
- * sw-kit Context Budget System (Innovation #1)
+ * aing Context Budget System (Innovation #1)
  *
  * Tracks approximate token consumption per hook injection.
  * Uses word-based estimation (no external dependencies).

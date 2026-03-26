@@ -4,29 +4,29 @@ description: "Progress Checker로 기획 문서 vs 코드베이스 구현 진행
 triggers: ["progress-check", "진행도", "진행률", "구현 현황", "coverage", "implementation progress"]
 ---
 
-# /swkit progress-check — Implementation Progress Analysis
+# /aing progress-check — Implementation Progress Analysis
 
 기획 문서와 프로젝트 코드베이스를 비교하여 구현 진행도를 산출합니다.
 
 ## Usage
 ```
-/swkit progress-check
-/swkit progress-check --spec .sw-kit/designs/figma-spec.md --project /path/to/project
-/swkit progress-check --spec docs/PRD.md
+/aing progress-check
+/aing progress-check --spec .aing/designs/figma-spec.md --project /path/to/project
+/aing progress-check --spec docs/PRD.md
 ```
 
 ## MANDATORY: 경로 질문
 
 인자가 없으면 반드시 AskUserQuestion으로 질문:
 
-1. `--spec` 미제공 → 기본값 `.sw-kit/designs/figma-spec.md` 사용, 없으면 "기획 문서 경로를 알려주세요"
+1. `--spec` 미제공 → 기본값 `.aing/designs/figma-spec.md` 사용, 없으면 "기획 문서 경로를 알려주세요"
 2. `--project` 미제공 → **"분석할 프로젝트 경로를 알려주세요"** (필수 질문)
 
 ## Agent Deployment
 
 ```
 Agent({
-  subagent_type: "sw-kit:progress-checker",
+  subagent_type: "aing:progress-checker",
   description: "Progress Checker: 구현 진행도 분석",
   model: "opus",
   prompt: "..."
@@ -57,10 +57,10 @@ figma-spec.md (또는 수동 기획서)에서 체크리스트 항목 추출:
 4. **테스트 커버리지**: 관련 테스트 파일 존재 확인
 
 ### Step 4: 진행도 계산 + 리포트 생성
-`.sw-kit/reports/progress-report.md`에 저장.
+`.aing/reports/progress-report.md`에 저장.
 
 ## Output
-- `.sw-kit/reports/progress-report.md` — 진행도 리포트
+- `.aing/reports/progress-report.md` — 진행도 리포트
 - 콘솔에 요약 테이블 출력
 
 ## Figma 없이도 사용 가능

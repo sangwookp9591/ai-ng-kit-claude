@@ -1,5 +1,5 @@
 /**
- * sw-kit Multilingual Intent Detector
+ * aing Multilingual Intent Detector
  * Supports Korean and English intent detection.
  * @module scripts/i18n/intent-detector
  */

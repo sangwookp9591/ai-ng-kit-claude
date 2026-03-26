@@ -1,5 +1,5 @@
 /**
- * sw-kit State GC — Zombie Feature Garbage Collector
+ * aing State GC — Zombie Feature Garbage Collector
  * Identifies and archives stale/zombie PDCA features.
  *
  * Zombie criteria (ALL must be true):
@@ -19,11 +19,11 @@ import { mkdirSync, readdirSync } from 'node:fs';
 const log = createLogger('state-gc');
 
 function getStatePath(projectDir) {
-  return join(projectDir, '.sw-kit', 'state', 'pdca-status.json');
+  return join(projectDir, '.aing', 'state', 'pdca-status.json');
 }
 
 function getArchiveDir(projectDir) {
-  return join(projectDir, '.sw-kit', 'archive');
+  return join(projectDir, '.aing', 'archive');
 }
 
 /**
@@ -86,7 +86,7 @@ export function runGC(projectDir, options = {}) {
     archiveFeatures[name] = features[name];
   }
 
-  // Write archive file: .sw-kit/archive/gc-{date}-{ms}.json
+  // Write archive file: .aing/archive/gc-{date}-{ms}.json
   const archiveDir = getArchiveDir(projectDir);
   mkdirSync(archiveDir, { recursive: true });
 

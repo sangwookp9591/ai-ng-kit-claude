@@ -1,5 +1,5 @@
 /**
- * sw-kit stdin utility — timeout-protected stdin reading.
+ * aing stdin utility — timeout-protected stdin reading.
  * Pattern from OMC (issue #459): prevents indefinite hang on Linux/Windows.
  * @module scripts/core/stdin
  */

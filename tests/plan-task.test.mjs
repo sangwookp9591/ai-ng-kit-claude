@@ -1,6 +1,6 @@
 /**
  * TDD: Plan Manager + Task Manager integration tests
- * Verifies that plans and tasks are correctly persisted to .sw-kit/ directories.
+ * Verifies that plans and tasks are correctly persisted to .aing/ directories.
  */
 
 import { describe, it, before, after } from 'node:test';
@@ -10,7 +10,7 @@ import { join } from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 
-const TEST_DIR = join(tmpdir(), `sw-kit-test-${Date.now()}`);
+const TEST_DIR = join(tmpdir(), `aing-test-${Date.now()}`);
 
 describe('Plan Manager', () => {
   before(() => {
@@ -21,7 +21,7 @@ describe('Plan Manager', () => {
     rmSync(TEST_DIR, { recursive: true, force: true });
   });
 
-  it('createPlan should create .sw-kit/plans/{date}-{feature}.md', async () => {
+  it('createPlan should create .aing/plans/{date}-{feature}.md', async () => {
     const { createPlan } = await import('../scripts/task/plan-manager.mjs');
 
     const result = createPlan({
@@ -36,9 +36,9 @@ describe('Plan Manager', () => {
     assert.ok(result.planPath, 'planPath should be set');
     assert.ok(result.taskId, 'taskId should be set');
 
-    // Verify plan file exists in .sw-kit/plans/
+    // Verify plan file exists in .aing/plans/
     assert.ok(existsSync(result.planPath), `Plan file should exist at ${result.planPath}`);
-    assert.ok(result.planPath.includes('.sw-kit/plans/'), 'Plan path should be under .sw-kit/plans/');
+    assert.ok(result.planPath.includes('.aing/plans/'), 'Plan path should be under .aing/plans/');
     assert.ok(result.planPath.endsWith('-auth-api.md'), 'Plan file should end with feature name');
 
     // Verify plan content
@@ -62,8 +62,8 @@ describe('Plan Manager', () => {
     assert.equal(result.ok, true);
     assert.ok(result.taskId.startsWith('task-'), 'Task ID should start with task-');
 
-    // Verify task file exists in .sw-kit/tasks/
-    const taskPath = join(TEST_DIR, '.sw-kit', 'tasks', `${result.taskId}.json`);
+    // Verify task file exists in .aing/tasks/
+    const taskPath = join(TEST_DIR, '.aing', 'tasks', `${result.taskId}.json`);
     assert.ok(existsSync(taskPath), `Task file should exist at ${taskPath}`);
 
     const task = JSON.parse(readFileSync(taskPath, 'utf-8'));
@@ -96,7 +96,7 @@ describe('Task Manager', () => {
     mkdirSync(TEST_DIR, { recursive: true });
   });
 
-  it('createTask should create .sw-kit/tasks/{id}.json', async () => {
+  it('createTask should create .aing/tasks/{id}.json', async () => {
     const { createTask } = await import('../scripts/task/task-manager.mjs');
 
     const result = createTask({
@@ -116,8 +116,8 @@ describe('Task Manager', () => {
     assert.equal(result.task.status, 'in-progress');
 
     // Verify file location
-    const taskPath = join(TEST_DIR, '.sw-kit', 'tasks', `${result.taskId}.json`);
-    assert.ok(existsSync(taskPath), 'Task file should exist in .sw-kit/tasks/');
+    const taskPath = join(TEST_DIR, '.aing', 'tasks', `${result.taskId}.json`);
+    assert.ok(existsSync(taskPath), 'Task file should exist in .aing/tasks/');
   });
 
   it('checkSubtask should mark subtask as done', async () => {
@@ -160,7 +160,7 @@ describe('Task Manager', () => {
 });
 
 describe('persist.mjs CLI', () => {
-  const CLI_TEST_DIR = join(tmpdir(), `sw-kit-cli-test-${Date.now()}`);
+  const CLI_TEST_DIR = join(tmpdir(), `aing-cli-test-${Date.now()}`);
   const persistPath = new URL('../scripts/cli/persist.mjs', import.meta.url).pathname;
 
   before(() => {
@@ -171,7 +171,7 @@ describe('persist.mjs CLI', () => {
     rmSync(CLI_TEST_DIR, { recursive: true, force: true });
   });
 
-  it('persist.mjs plan should create files in .sw-kit/plans/', () => {
+  it('persist.mjs plan should create files in .aing/plans/', () => {
     const output = execFileSync('node', [
       persistPath, 'plan',
       '--dir', CLI_TEST_DIR,
@@ -182,12 +182,12 @@ describe('persist.mjs CLI', () => {
 
     const result = JSON.parse(output);
     assert.equal(result.ok, true, 'CLI plan should succeed');
-    assert.ok(result.planPath.includes('.sw-kit/plans/'), `Plan should be in .sw-kit/plans/, got: ${result.planPath}`);
+    assert.ok(result.planPath.includes('.aing/plans/'), `Plan should be in .aing/plans/, got: ${result.planPath}`);
     assert.ok(existsSync(result.planPath), 'Plan file should exist on disk');
 
     // Verify task was also created
-    const tasksDir = join(CLI_TEST_DIR, '.sw-kit', 'tasks');
-    assert.ok(existsSync(tasksDir), '.sw-kit/tasks/ directory should exist');
+    const tasksDir = join(CLI_TEST_DIR, '.aing', 'tasks');
+    assert.ok(existsSync(tasksDir), '.aing/tasks/ directory should exist');
     const taskFiles = readdirSync(tasksDir).filter(f => f.startsWith('task-') && f.endsWith('.json'));
     assert.ok(taskFiles.length > 0, 'At least one task file should be created');
   });
@@ -212,7 +212,7 @@ describe('persist.mjs CLI', () => {
 });
 
 describe('createPlan extended fields', () => {
-  const EXT_TEST_DIR = join(tmpdir(), `sw-kit-ext-test-${Date.now()}`);
+  const EXT_TEST_DIR = join(tmpdir(), `aing-ext-test-${Date.now()}`);
 
   before(() => {
     mkdirSync(EXT_TEST_DIR, { recursive: true });
@@ -302,7 +302,7 @@ describe('createPlan extended fields', () => {
 });
 
 describe('persist.mjs --stdin JSON mode', () => {
-  const STDIN_TEST_DIR = join(tmpdir(), `sw-kit-stdin-test-${Date.now()}`);
+  const STDIN_TEST_DIR = join(tmpdir(), `aing-stdin-test-${Date.now()}`);
   const persistPath = new URL('../scripts/cli/persist.mjs', import.meta.url).pathname;
 
   before(() => {

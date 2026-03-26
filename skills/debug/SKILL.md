@@ -4,20 +4,20 @@ description: "과학적 디버깅. 증상→가설→증거→반증→결론. K
 triggers: ["debug", "디버그", "버그", "안돼", "안됨", "에러", "오류", "fix bug"]
 ---
 
-# /swkit debug — Scientific Debugging
+# /aing debug — Scientific Debugging
 
 ## Usage
 ```
-/swkit debug <증상>          — 새 디버그 세션 시작
-/swkit debug                 — 미완료 세션 재개
-/swkit debug --list          — 전체 세션 목록 조회
+/aing debug <증상>          — 새 디버그 세션 시작
+/aing debug                 — 미완료 세션 재개
+/aing debug --list          — 전체 세션 목록 조회
 ```
 
 ## Mode Detection
 
 인자 파싱 순서:
 1. `--list` 플래그 → **목록 모드**
-2. 인자 없음 + `.sw-kit/debug/` 에 OPEN/INVESTIGATING 세션 있음 → **재개 모드**
+2. 인자 없음 + `.aing/debug/` 에 OPEN/INVESTIGATING 세션 있음 → **재개 모드**
 3. 인자 있음 → **새 세션 모드**
 
 ---
@@ -27,7 +27,7 @@ triggers: ["debug", "디버그", "버그", "안돼", "안됨", "에러", "오류
 ### Step 1: 디렉토리 확인 및 slug 생성
 
 ```bash
-mkdir -p .sw-kit/debug
+mkdir -p .aing/debug
 ```
 
 증상 텍스트를 slug으로 변환 규칙:
@@ -46,7 +46,7 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" debug-init \
 ```
 
 파일이 생성되지 않으면 Write 도구로 직접 생성:
-`.sw-kit/debug/{YYYY-MM-DD}-{slug}.md` — 아래 템플릿 사용
+`.aing/debug/{YYYY-MM-DD}-{slug}.md` — 아래 템플릿 사용
 
 ### Step 3: Klay — 증상 수집 (Symptom Collection)
 
@@ -54,7 +54,7 @@ Klay를 스폰하여 코드베이스를 탐색하고 증거를 수집:
 
 ```
 Agent({
-  subagent_type: "sw-kit:klay",
+  subagent_type: "aing:klay",
   description: "Klay: 증상 수집 — {slug}",
   model: "sonnet",
   prompt: "[DEBUG MODE] 다음 증상을 조사하세요: {symptom}
@@ -89,7 +89,7 @@ Klay의 보고서를 바탕으로 경쟁 가설 생성:
 
 ```
 Agent({
-  subagent_type: "sw-kit:klay",
+  subagent_type: "aing:klay",
   description: "Klay: 가설 생성 — {slug}",
   model: "sonnet",
   prompt: "[DEBUG MODE] 다음 증상 보고서를 기반으로 가설을 생성하세요.
@@ -133,7 +133,7 @@ Jay를 스폰하여 상위 가설을 검증하고 수정 코드 작성:
 
 ```
 Agent({
-  subagent_type: "sw-kit:jay",
+  subagent_type: "aing:jay",
   description: "Jay: 가설 검증 — {top hypothesis}",
   model: "sonnet",
   prompt: "[DEBUG MODE] 다음 가설을 검증하세요.
@@ -180,7 +180,7 @@ Agent({
 
 ```
 Agent({
-  subagent_type: "sw-kit:milla",
+  subagent_type: "aing:milla",
   description: "Milla: 수정 검증 — {slug}",
   model: "sonnet",
   prompt: "다음 버그 수정을 검증하세요.
@@ -216,10 +216,10 @@ Verdict: PASS / FAIL — {reason}"
 ### Step 1: 미완료 세션 스캔
 
 ```bash
-grep -rl "Status: OPEN\|Status: INVESTIGATING" .sw-kit/debug/ 2>/dev/null | sort
+grep -rl "Status: OPEN\|Status: INVESTIGATING" .aing/debug/ 2>/dev/null | sort
 ```
 
-결과가 없으면: "활성 디버그 세션이 없습니다. `/swkit debug <증상>` 으로 새 세션을 시작하세요."
+결과가 없으면: "활성 디버그 세션이 없습니다. `/aing debug <증상>` 으로 새 세션을 시작하세요."
 
 ### Step 2: 세션 선택 안내
 
@@ -235,7 +235,7 @@ grep -rl "Status: OPEN\|Status: INVESTIGATING" .sw-kit/debug/ 2>/dev/null | sort
 
 ### Step 3: 마지막 상태에서 재개
 
-선택된 `.sw-kit/debug/{date}-{slug}.md` 를 읽고:
+선택된 `.aing/debug/{date}-{slug}.md` 를 읽고:
 - 마지막 미테스트 가설부터 계속
 - INCONCLUSIVE 가설은 재테스트 고려
 - 새 가설 추가 필요시 H{N+1} 로 추가
@@ -245,14 +245,14 @@ grep -rl "Status: OPEN\|Status: INVESTIGATING" .sw-kit/debug/ 2>/dev/null | sort
 ## Mode C: 목록 조회 (`--list`)
 
 ```bash
-ls .sw-kit/debug/*.md 2>/dev/null
+ls .aing/debug/*.md 2>/dev/null
 ```
 
 각 파일에서 Status, Created, title 추출 후 테이블 출력:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  sw-kit debug sessions
+  aing debug sessions
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   OPEN
@@ -279,7 +279,7 @@ ls .sw-kit/debug/*.md 2>/dev/null
 
 ## State Persistence
 
-디버그 세션은 `.sw-kit/debug/{YYYY-MM-DD}-{symptom-slug}.md` 에 저장:
+디버그 세션은 `.aing/debug/{YYYY-MM-DD}-{symptom-slug}.md` 에 저장:
 - 증상 보고서
 - 테스트된 모든 가설
 - 수집된 증거

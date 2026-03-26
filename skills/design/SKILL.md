@@ -4,14 +4,14 @@ description: "🎨 Willji 에이전트로 UI 디자인 생성/편집. Stitch MCP
 triggers: ["design", "디자인", "stitch", "UI 디자인", "화면 디자인", "screen design"]
 ---
 
-# /swkit design — UI Design Generation & Editing
+# /aing design — UI Design Generation & Editing
 
 ## Usage
 ```
-/swkit design <prompt>
-/swkit design generate "대시보드 랜딩페이지"
-/swkit design enhance "로그인 페이지 만들어줘"
-/swkit design edit "헤더에 검색바 추가"
+/aing design <prompt>
+/aing design generate "대시보드 랜딩페이지"
+/aing design enhance "로그인 페이지 만들어줘"
+/aing design edit "헤더에 검색바 추가"
 ```
 
 ## Sub-commands
@@ -26,7 +26,7 @@ triggers: ["design", "디자인", "stitch", "UI 디자인", "화면 디자인", 
 
 ```
 Agent({
-  subagent_type: "sw-kit:willji",
+  subagent_type: "aing:willji",
   description: "Willji: UI 디자인 생성",
   model: "sonnet",
   prompt: "..."
@@ -60,7 +60,7 @@ Fallback 모드에서는:
 
 ## Workflow 1: Generate (text-to-design)
 
-1. **Context 확인**: `.sw-kit/designs/DESIGN.md` 존재 여부 체크
+1. **Context 확인**: `.aing/designs/DESIGN.md` 존재 여부 체크
 2. **Prompt Enhancement Pipeline**:
    - 사용자 입력에서 누락된 요소 평가 (플랫폼, 페이지 타입, 구조, 스타일, 색상)
    - UI/UX 키워드로 모호한 용어 변환 (참조: `references/design-mappings.md`)
@@ -68,7 +68,7 @@ Fallback 모드에서는:
    - 페이지 구조를 번호 매긴 섹션으로 정리
    - 디자인 시스템 블록 포맷팅
 3. **Stitch 호출**: `[prefix]:generate_screen_from_text` with enhanced prompt
-4. **Asset 저장**: `.sw-kit/designs/{page}.html`, `.sw-kit/designs/{page}.png`
+4. **Asset 저장**: `.aing/designs/{page}.html`, `.aing/designs/{page}.png`
 5. **Evidence 수집**: `{ type: 'design', result: 'pass', source: 'stitch-generate' }`
 
 ### Enhanced Prompt Format
@@ -93,7 +93,7 @@ Fallback 모드에서는:
 MCP 없이도 동작하는 독립 기능.
 
 1. 사용자 입력 평가 (누락 요소 체크)
-2. `.sw-kit/designs/DESIGN.md` 존재 시 디자인 시스템 컨텍스트 주입
+2. `.aing/designs/DESIGN.md` 존재 시 디자인 시스템 컨텍스트 주입
 3. UI/UX 키워드 강화 (참조: `references/prompt-keywords.md`)
 4. 구조화된 프롬프트 출력
 
@@ -112,7 +112,7 @@ MCP 없이도 동작하는 독립 기능.
 
 ## Workflow 3: Edit (screen modification)
 
-1. 기존 화면 ID 확인 (`.sw-kit/designs/metadata.json`)
+1. 기존 화면 ID 확인 (`.aing/designs/metadata.json`)
 2. 변경 사항을 구조화된 편집 프롬프트로 변환
 3. `[prefix]:edit_screens` 호출
 4. 업데이트된 asset 저장
@@ -131,9 +131,9 @@ MCP 없이도 동작하는 독립 기능.
 
 ## Output Directory
 
-모든 디자인 산출물은 `.sw-kit/designs/`에 저장:
+모든 디자인 산출물은 `.aing/designs/`에 저장:
 ```
-.sw-kit/designs/
+.aing/designs/
 ├── DESIGN.md          # 디자인 시스템 문서
 ├── metadata.json      # Stitch project/screen IDs
 ├── {page}.html        # 생성된 HTML

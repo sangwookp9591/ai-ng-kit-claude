@@ -1,5 +1,5 @@
 /**
- * sw-kit Evidence Report Generator
+ * aing Evidence Report Generator
  * Creates completion reports from evidence chains.
  * @module scripts/evidence/evidence-report
  */
@@ -26,7 +26,7 @@ export function generateReport(feature, options = {}, projectDir) {
   const { verdict, summary, entries } = evaluateChain(feature, dir);
 
   // Load PDCA state for iteration count
-  const pdcaState = readState(join(dir, '.sw-kit', 'state', 'pdca-status.json'));
+  const pdcaState = readState(join(dir, '.aing', 'state', 'pdca-status.json'));
   const featureState = pdcaState.ok && pdcaState.data ? pdcaState.data.features?.[feature] : null;
   const iterations = featureState?.iteration || 0;
 
@@ -49,10 +49,10 @@ ${entries.map(e => `- **${e.type}** (${e.source}): ${e.result}${e.details ? ' â€
 ${(options.lessons || ['No lessons recorded']).map(l => `- ${l}`).join('\n')}
 `;
 
-  const reportPath = join(dir, '.sw-kit', 'reports', `${date}-${feature}.md`);
+  const reportPath = join(dir, '.aing', 'reports', `${date}-${feature}.md`);
 
   try {
-    mkdirSync(join(dir, '.sw-kit', 'reports'), { recursive: true });
+    mkdirSync(join(dir, '.aing', 'reports'), { recursive: true });
     writeFileSync(reportPath, report, 'utf-8');
     log.info(`Report generated: ${reportPath}`);
     return { ok: true, path: reportPath };

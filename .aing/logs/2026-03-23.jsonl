@@ -1,0 +1,506 @@
+{"ts":"2026-03-23T00:47:29.891Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 85/50"}
+{"ts":"2026-03-23T00:47:36.630Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 86/50"}
+{"ts":"2026-03-23T00:47:37.205Z","level":"warn","module":"context-budget","msg":"Context budget exceeded: ~5000 / 2000 tokens (source: big-hook)"}
+{"ts":"2026-03-23T00:47:37.217Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-23T00:47:37.217Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-23T00:47:37.217Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-23T00:47:37.217Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-23T00:47:37.218Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-23T00:47:37.218Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-23T00:47:37.218Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-23T00:47:37.219Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-23T00:47:37.220Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-23T00:47:37.220Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-23T00:47:37.220Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-23T00:47:37.220Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-23T00:47:37.221Z","level":"warn","module":"retry","msg":"Retry 1/2 for \"unknown\" in 11ms","data":{"error":"fail"}}
+{"ts":"2026-03-23T00:47:37.232Z","level":"warn","module":"retry","msg":"Retry 2/2 for \"unknown\" in 22ms","data":{"error":"fail"}}
+{"ts":"2026-03-23T00:47:37.256Z","level":"error","module":"retry","msg":"All retries exhausted for \"unknown\"","data":{"attempts":3,"error":"fail"}}
+{"ts":"2026-03-23T00:47:37.257Z","level":"warn","module":"retry","msg":"Retry 1/3 for \"unknown\" in 11ms","data":{"error":"not yet"}}
+{"ts":"2026-03-23T00:47:37.275Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-23T00:47:37.276Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-23T00:47:37.276Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-23T00:47:37.276Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-23T00:47:37.278Z","level":"warn","module":"recovery-engine","msg":"Reset pdca-status.json to fresh state (no backup found)"}
+{"ts":"2026-03-23T00:47:37.278Z","level":"info","module":"recovery-engine","msg":"Recovered pdca-status.json from emergency backup"}
+{"ts":"2026-03-23T00:47:37.280Z","level":"error","module":"health-check","msg":"Health check failed","data":{"corrupted":["pdca-status"]}}
+{"ts":"2026-03-23T00:47:37.285Z","level":"info","module":"learning-capture","msg":"Learning captured for auth","data":{"patterns":1,"mistakes":1,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.286Z","level":"info","module":"learning-capture","msg":"Learning captured for complex-feat","data":{"patterns":0,"mistakes":0,"iterations":4}}
+{"ts":"2026-03-23T00:47:37.287Z","level":"info","module":"learning-capture","msg":"Learning captured for simple","data":{"patterns":0,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.288Z","level":"info","module":"pdca-engine","msg":"PDCA started: feat-1"}
+{"ts":"2026-03-23T00:47:37.289Z","level":"info","module":"pdca-engine","msg":"PDCA started: feat-dup"}
+{"ts":"2026-03-23T00:47:37.289Z","level":"info","module":"pdca-engine","msg":"PDCA started: flow-test"}
+{"ts":"2026-03-23T00:47:37.291Z","level":"info","module":"pdca-engine","msg":"PDCA started: no-rate"}
+{"ts":"2026-03-23T00:47:37.292Z","level":"info","module":"pdca-engine","msg":"PDCA started: iter-test"}
+{"ts":"2026-03-23T00:47:37.293Z","level":"info","module":"pdca-engine","msg":"PDCA started: complete-test"}
+{"ts":"2026-03-23T00:47:37.294Z","level":"info","module":"pdca-engine","msg":"PDCA started: reset-test"}
+{"ts":"2026-03-23T00:47:37.295Z","level":"info","module":"pdca-engine","msg":"PDCA started: review-end"}
+{"ts":"2026-03-23T00:47:37.297Z","level":"info","module":"pdca-engine","msg":"PDCA started: full-flow"}
+{"ts":"2026-03-23T00:47:37.308Z","level":"warn","module":"cost-ceiling","msg":"Cost ceiling warning","data":{"warnings":["🚫 세션 토큰 한도 초과: ~600,000 / 500,000","⚠️ 작업 \"big-task\" 토큰 한도 초과: ~600,000 / 100,000"]}}
+{"ts":"2026-03-23T00:47:37.314Z","level":"info","module":"evidence-report","msg":"Report generated: /var/folders/_p/fy8jj5b95c38w41rttwnnll40000gn/T/sw-kit-test-a518a6df5286/.sw-kit/reports/2026-03-23-rpt-test.md"}
+{"ts":"2026-03-23T00:47:37.315Z","level":"info","module":"learning-capture","msg":"Learning captured for f0","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.316Z","level":"info","module":"learning-capture","msg":"Learning captured for f1","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.316Z","level":"info","module":"learning-capture","msg":"Learning captured for f2","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.316Z","level":"info","module":"learning-capture","msg":"Learning captured for f3","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.317Z","level":"info","module":"learning-capture","msg":"Learning captured for f4","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.317Z","level":"info","module":"learning-capture","msg":"Learning captured for f5","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.318Z","level":"info","module":"learning-capture","msg":"Learning captured for f6","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.318Z","level":"info","module":"learning-capture","msg":"Learning captured for f7","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.319Z","level":"info","module":"learning-capture","msg":"Learning captured for f8","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.319Z","level":"info","module":"learning-capture","msg":"Learning captured for f9","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.319Z","level":"info","module":"learning-capture","msg":"Learning captured for f10","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.320Z","level":"info","module":"learning-capture","msg":"Learning captured for f11","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.320Z","level":"info","module":"learning-capture","msg":"Learning captured for f12","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.320Z","level":"info","module":"learning-capture","msg":"Learning captured for f13","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.321Z","level":"info","module":"learning-capture","msg":"Learning captured for f14","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.322Z","level":"info","module":"learning-capture","msg":"Learning captured for f15","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.322Z","level":"info","module":"learning-capture","msg":"Learning captured for f16","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.322Z","level":"info","module":"learning-capture","msg":"Learning captured for f17","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.323Z","level":"info","module":"learning-capture","msg":"Learning captured for f18","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.323Z","level":"info","module":"learning-capture","msg":"Learning captured for f19","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.323Z","level":"info","module":"learning-capture","msg":"Learning captured for f20","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.324Z","level":"info","module":"learning-capture","msg":"Learning captured for f21","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.324Z","level":"info","module":"learning-capture","msg":"Learning captured for f22","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.324Z","level":"info","module":"learning-capture","msg":"Learning captured for f23","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.325Z","level":"info","module":"learning-capture","msg":"Learning captured for f24","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.325Z","level":"info","module":"learning-capture","msg":"Learning captured for f25","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.326Z","level":"info","module":"learning-capture","msg":"Learning captured for f26","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.326Z","level":"info","module":"learning-capture","msg":"Learning captured for f27","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.327Z","level":"info","module":"learning-capture","msg":"Learning captured for f28","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.327Z","level":"info","module":"learning-capture","msg":"Learning captured for f29","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.327Z","level":"info","module":"learning-capture","msg":"Learning captured for f30","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.328Z","level":"info","module":"learning-capture","msg":"Learning captured for f31","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.328Z","level":"info","module":"learning-capture","msg":"Learning captured for f32","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.329Z","level":"info","module":"learning-capture","msg":"Learning captured for f33","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.329Z","level":"info","module":"learning-capture","msg":"Learning captured for f34","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.330Z","level":"info","module":"learning-capture","msg":"Learning captured for f35","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.330Z","level":"info","module":"learning-capture","msg":"Learning captured for f36","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.330Z","level":"info","module":"learning-capture","msg":"Learning captured for f37","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.331Z","level":"info","module":"learning-capture","msg":"Learning captured for f38","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.331Z","level":"info","module":"learning-capture","msg":"Learning captured for f39","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.332Z","level":"info","module":"learning-capture","msg":"Learning captured for f40","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.332Z","level":"info","module":"learning-capture","msg":"Learning captured for f41","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.332Z","level":"info","module":"learning-capture","msg":"Learning captured for f42","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.333Z","level":"info","module":"learning-capture","msg":"Learning captured for f43","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.333Z","level":"info","module":"learning-capture","msg":"Learning captured for f44","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.334Z","level":"info","module":"learning-capture","msg":"Learning captured for f45","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.334Z","level":"info","module":"learning-capture","msg":"Learning captured for f46","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.334Z","level":"info","module":"learning-capture","msg":"Learning captured for f47","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.335Z","level":"info","module":"learning-capture","msg":"Learning captured for f48","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.335Z","level":"info","module":"learning-capture","msg":"Learning captured for f49","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.336Z","level":"info","module":"learning-capture","msg":"Learning captured for f50","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.336Z","level":"info","module":"learning-capture","msg":"Learning captured for f51","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.337Z","level":"info","module":"learning-capture","msg":"Learning captured for f52","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.338Z","level":"info","module":"learning-capture","msg":"Learning captured for f53","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.338Z","level":"info","module":"learning-capture","msg":"Learning captured for f54","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.339Z","level":"info","module":"learning-capture","msg":"Learning captured for f55","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.340Z","level":"info","module":"learning-capture","msg":"Learning captured for f56","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.341Z","level":"info","module":"learning-capture","msg":"Learning captured for f57","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.341Z","level":"info","module":"learning-capture","msg":"Learning captured for f58","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.342Z","level":"info","module":"learning-capture","msg":"Learning captured for f59","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.342Z","level":"info","module":"learning-capture","msg":"Learning captured for f60","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.343Z","level":"info","module":"learning-capture","msg":"Learning captured for f61","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.344Z","level":"info","module":"learning-capture","msg":"Learning captured for f62","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.344Z","level":"info","module":"learning-capture","msg":"Learning captured for f63","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.344Z","level":"info","module":"learning-capture","msg":"Learning captured for f64","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.345Z","level":"info","module":"learning-capture","msg":"Learning captured for f65","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.346Z","level":"info","module":"learning-capture","msg":"Learning captured for f66","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.346Z","level":"info","module":"learning-capture","msg":"Learning captured for f67","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.347Z","level":"info","module":"learning-capture","msg":"Learning captured for f68","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.348Z","level":"info","module":"learning-capture","msg":"Learning captured for f69","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.348Z","level":"info","module":"learning-capture","msg":"Learning captured for f70","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.348Z","level":"info","module":"learning-capture","msg":"Learning captured for f71","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.349Z","level":"info","module":"learning-capture","msg":"Learning captured for f72","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.349Z","level":"info","module":"learning-capture","msg":"Learning captured for f73","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.350Z","level":"info","module":"learning-capture","msg":"Learning captured for f74","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.351Z","level":"info","module":"learning-capture","msg":"Learning captured for f75","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.351Z","level":"info","module":"learning-capture","msg":"Learning captured for f76","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.352Z","level":"info","module":"learning-capture","msg":"Learning captured for f77","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.352Z","level":"info","module":"learning-capture","msg":"Learning captured for f78","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.353Z","level":"info","module":"learning-capture","msg":"Learning captured for f79","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.353Z","level":"info","module":"learning-capture","msg":"Learning captured for f80","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.353Z","level":"info","module":"learning-capture","msg":"Learning captured for f81","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.354Z","level":"info","module":"learning-capture","msg":"Learning captured for f82","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.354Z","level":"info","module":"learning-capture","msg":"Learning captured for f83","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.355Z","level":"info","module":"learning-capture","msg":"Learning captured for f84","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.355Z","level":"info","module":"learning-capture","msg":"Learning captured for f85","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.356Z","level":"info","module":"learning-capture","msg":"Learning captured for f86","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.357Z","level":"info","module":"learning-capture","msg":"Learning captured for f87","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.357Z","level":"info","module":"learning-capture","msg":"Learning captured for f88","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.358Z","level":"info","module":"learning-capture","msg":"Learning captured for f89","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.358Z","level":"info","module":"learning-capture","msg":"Learning captured for f90","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.359Z","level":"info","module":"learning-capture","msg":"Learning captured for f91","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.360Z","level":"info","module":"learning-capture","msg":"Learning captured for f92","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.360Z","level":"info","module":"learning-capture","msg":"Learning captured for f93","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.360Z","level":"info","module":"learning-capture","msg":"Learning captured for f94","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.361Z","level":"info","module":"learning-capture","msg":"Learning captured for f95","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.361Z","level":"info","module":"learning-capture","msg":"Learning captured for f96","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.362Z","level":"info","module":"learning-capture","msg":"Learning captured for f97","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.362Z","level":"info","module":"learning-capture","msg":"Learning captured for f98","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.362Z","level":"info","module":"learning-capture","msg":"Learning captured for f99","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.363Z","level":"info","module":"learning-capture","msg":"Learning captured for f100","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.363Z","level":"info","module":"learning-capture","msg":"Learning captured for f101","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.364Z","level":"info","module":"learning-capture","msg":"Learning captured for f102","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.364Z","level":"info","module":"learning-capture","msg":"Learning captured for f103","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:37.364Z","level":"info","module":"learning-capture","msg":"Learning captured for f104","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T00:47:49.937Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 87/50"}
+{"ts":"2026-03-23T00:47:59.675Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T00:48:21.229Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T00:48:30.203Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 88/50"}
+{"ts":"2026-03-23T00:48:30.205Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 28/20"}
+{"ts":"2026-03-23T00:48:42.008Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T00:48:42.778Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T00:48:43.512Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T00:48:50.655Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 89/50"}
+{"ts":"2026-03-23T00:48:50.656Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 28/20"}
+{"ts":"2026-03-23T00:48:51.736Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 90/50"}
+{"ts":"2026-03-23T00:48:51.737Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 28/20"}
+{"ts":"2026-03-23T00:48:57.663Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 91/50"}
+{"ts":"2026-03-23T00:48:58.794Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 92/50"}
+{"ts":"2026-03-23T00:48:58.871Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 93/50"}
+{"ts":"2026-03-23T00:49:06.490Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 94/50"}
+{"ts":"2026-03-23T00:49:17.276Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 95/50"}
+{"ts":"2026-03-23T00:49:23.985Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 96/50"}
+{"ts":"2026-03-23T00:49:32.620Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 97/50"}
+{"ts":"2026-03-23T00:49:46.450Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T00:50:24.857Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"duo","complexity":"low","workers":2}}
+{"ts":"2026-03-23T00:50:35.572Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 98/50"}
+{"ts":"2026-03-23T00:50:35.856Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 99/50"}
+{"ts":"2026-03-23T00:50:49.376Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 100/50"}
+{"ts":"2026-03-23T00:50:49.378Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 28/20"}
+{"ts":"2026-03-23T00:50:50.329Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 101/50"}
+{"ts":"2026-03-23T00:50:50.330Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 28/20"}
+{"ts":"2026-03-23T00:50:57.753Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 102/50"}
+{"ts":"2026-03-23T00:50:57.754Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-force-push","data":{"command":"git add .claude-plugin/plugin.json .claude-plugin/marketplace.json && git commit -m \"$(cat <<'EOF'\nc","severity":"critical"}}
+{"ts":"2026-03-23T00:51:09.807Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T04:15:30.986Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T04:59:05.558Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T04:59:19.292Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 103/50"}
+{"ts":"2026-03-23T04:59:26.208Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T05:01:18.267Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T05:01:33.482Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T05:01:47.796Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T05:02:00.904Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T05:02:08.567Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 104/50"}
+{"ts":"2026-03-23T05:02:18.490Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 105/50"}
+{"ts":"2026-03-23T05:02:27.385Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T05:02:27.882Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T05:02:41.926Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 106/50"}
+{"ts":"2026-03-23T05:02:41.928Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 28/20"}
+{"ts":"2026-03-23T05:02:53.790Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 107/50"}
+{"ts":"2026-03-23T05:03:02.683Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T05:03:12.386Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T05:03:22.605Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 108/50"}
+{"ts":"2026-03-23T05:03:29.937Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 109/50"}
+{"ts":"2026-03-23T05:03:36.701Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 110/50"}
+{"ts":"2026-03-23T05:03:50.415Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 111/50"}
+{"ts":"2026-03-23T05:03:57.115Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 112/50"}
+{"ts":"2026-03-23T05:04:25.396Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 113/50"}
+{"ts":"2026-03-23T05:04:25.398Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 28/20"}
+{"ts":"2026-03-23T05:04:35.562Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 114/50"}
+{"ts":"2026-03-23T05:04:35.563Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 28/20"}
+{"ts":"2026-03-23T05:04:41.372Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 115/50"}
+{"ts":"2026-03-23T05:04:41.374Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 28/20"}
+{"ts":"2026-03-23T05:04:52.274Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 116/50"}
+{"ts":"2026-03-23T05:05:02.804Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T05:11:01.035Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T05:11:18.446Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T05:12:59.566Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"mid","workers":4}}
+{"ts":"2026-03-23T05:13:32.731Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 117/50"}
+{"ts":"2026-03-23T05:13:32.734Z","level":"error","module":"safety-invariants","msg":"File change limit exceeded: 29/20"}
+{"ts":"2026-03-23T05:13:39.983Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 118/50"}
+{"ts":"2026-03-23T05:13:49.397Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T05:14:24.045Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T05:14:39.425Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 119/50"}
+{"ts":"2026-03-23T05:14:47.119Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T05:16:05.717Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"duo","complexity":"mid","workers":2}}
+{"ts":"2026-03-23T05:16:20.480Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 120/50"}
+{"ts":"2026-03-23T05:16:28.421Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T06:16:54.140Z","level":"info","module":"task","msg":"Task created: task-1774246614139","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-23T06:16:54.140Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774246614139"}}
+{"ts":"2026-03-23T06:16:54.141Z","level":"info","module":"task","msg":"Task created: task-1774246614141","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-23T06:16:54.141Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774246614141"}}
+{"ts":"2026-03-23T06:16:54.143Z","level":"info","module":"task","msg":"Task created: task-1774246614143","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-23T06:16:54.144Z","level":"info","module":"task","msg":"Task created: task-1774246614144","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-23T06:16:54.144Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774246614144","allDone":false}}
+{"ts":"2026-03-23T06:16:54.145Z","level":"info","module":"task","msg":"Task created: task-1774246614145","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-23T06:16:54.146Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774246614145","allDone":true}}
+{"ts":"2026-03-23T06:16:54.170Z","level":"info","module":"task","msg":"Task created: task-1774246614169","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-23T06:16:54.170Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774246614169"}}
+{"ts":"2026-03-23T06:17:19.515Z","level":"info","module":"task","msg":"Task created: task-1774246639514","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-23T06:17:19.515Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774246639514"}}
+{"ts":"2026-03-23T06:17:19.516Z","level":"info","module":"task","msg":"Task created: task-1774246639515","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-23T06:17:19.516Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774246639515"}}
+{"ts":"2026-03-23T06:17:19.517Z","level":"info","module":"task","msg":"Task created: task-1774246639517","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-23T06:17:19.518Z","level":"info","module":"task","msg":"Task created: task-1774246639518","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-23T06:17:19.518Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774246639518","allDone":false}}
+{"ts":"2026-03-23T06:17:19.519Z","level":"info","module":"task","msg":"Task created: task-1774246639518","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-23T06:17:19.519Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774246639518","allDone":true}}
+{"ts":"2026-03-23T06:17:19.541Z","level":"info","module":"task","msg":"Task created: task-1774246639541","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-23T06:17:19.541Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774246639541"}}
+{"ts":"2026-03-23T06:17:32.244Z","level":"info","module":"task","msg":"Task created: task-1774246652243","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-23T06:17:32.244Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774246652243"}}
+{"ts":"2026-03-23T06:17:32.245Z","level":"info","module":"task","msg":"Task created: task-1774246652244","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-23T06:17:32.245Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774246652244"}}
+{"ts":"2026-03-23T06:17:32.247Z","level":"info","module":"task","msg":"Task created: task-1774246652246","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-23T06:17:32.247Z","level":"info","module":"task","msg":"Task created: task-1774246652247","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-23T06:17:32.248Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774246652247","allDone":false}}
+{"ts":"2026-03-23T06:17:32.248Z","level":"info","module":"task","msg":"Task created: task-1774246652248","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-23T06:17:32.249Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774246652248","allDone":true}}
+{"ts":"2026-03-23T06:17:32.272Z","level":"info","module":"task","msg":"Task created: task-1774246652271","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-23T06:17:32.272Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774246652271"}}
+{"ts":"2026-03-23T06:24:08.596Z","level":"info","module":"task","msg":"Task created: task-1774247048595","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-23T06:24:08.596Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774247048595"}}
+{"ts":"2026-03-23T06:24:08.597Z","level":"info","module":"task","msg":"Task created: task-1774247048597","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-23T06:24:08.597Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774247048597"}}
+{"ts":"2026-03-23T06:24:08.599Z","level":"info","module":"task","msg":"Task created: task-1774247048599","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-23T06:24:08.600Z","level":"info","module":"task","msg":"Task created: task-1774247048599","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-23T06:24:08.601Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774247048599","allDone":false}}
+{"ts":"2026-03-23T06:24:08.602Z","level":"info","module":"task","msg":"Task created: task-1774247048601","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-23T06:24:08.602Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774247048601","allDone":true}}
+{"ts":"2026-03-23T06:24:08.626Z","level":"info","module":"task","msg":"Task created: task-1774247048626","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-23T06:24:08.626Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774247048626"}}
+{"ts":"2026-03-23T06:24:32.496Z","level":"info","module":"task","msg":"Task created: task-1774247072495","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-23T06:24:32.496Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774247072495"}}
+{"ts":"2026-03-23T06:24:32.497Z","level":"info","module":"task","msg":"Task created: task-1774247072497","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-23T06:24:32.497Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774247072497"}}
+{"ts":"2026-03-23T06:24:32.499Z","level":"info","module":"task","msg":"Task created: task-1774247072499","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-23T06:24:32.500Z","level":"info","module":"task","msg":"Task created: task-1774247072500","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-23T06:24:32.500Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774247072500","allDone":false}}
+{"ts":"2026-03-23T06:24:32.501Z","level":"info","module":"task","msg":"Task created: task-1774247072501","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-23T06:24:32.501Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774247072501","allDone":true}}
+{"ts":"2026-03-23T06:24:32.527Z","level":"info","module":"task","msg":"Task created: task-1774247072526","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-23T06:24:32.527Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774247072526"}}
+{"ts":"2026-03-23T06:33:02.362Z","level":"info","module":"task","msg":"Task created: task-1774247582362","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-23T06:33:02.363Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774247582362"}}
+{"ts":"2026-03-23T06:33:02.364Z","level":"info","module":"task","msg":"Task created: task-1774247582363","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-23T06:33:02.364Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774247582363"}}
+{"ts":"2026-03-23T06:33:02.366Z","level":"info","module":"task","msg":"Task created: task-1774247582365","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-23T06:33:02.366Z","level":"info","module":"task","msg":"Task created: task-1774247582366","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-23T06:33:02.367Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774247582366","allDone":false}}
+{"ts":"2026-03-23T06:33:02.367Z","level":"info","module":"task","msg":"Task created: task-1774247582367","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-23T06:33:02.367Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774247582367","allDone":true}}
+{"ts":"2026-03-23T06:33:02.391Z","level":"info","module":"task","msg":"Task created: task-1774247582391","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-23T06:33:02.391Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774247582391"}}
+{"ts":"2026-03-23T06:34:39.757Z","level":"info","module":"task","msg":"Task created: task-1774247679756","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-23T06:34:39.757Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774247679756"}}
+{"ts":"2026-03-23T06:34:39.758Z","level":"info","module":"task","msg":"Task created: task-1774247679758","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-23T06:34:39.758Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774247679758"}}
+{"ts":"2026-03-23T06:34:39.760Z","level":"info","module":"task","msg":"Task created: task-1774247679760","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-23T06:34:39.761Z","level":"info","module":"task","msg":"Task created: task-1774247679760","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-23T06:34:39.761Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774247679760","allDone":false}}
+{"ts":"2026-03-23T06:34:39.762Z","level":"info","module":"task","msg":"Task created: task-1774247679762","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-23T06:34:39.762Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774247679762","allDone":true}}
+{"ts":"2026-03-23T06:34:39.763Z","level":"warn","module":"context-budget","msg":"Context budget exceeded: ~5000 / 2000 tokens (source: big-hook)"}
+{"ts":"2026-03-23T06:34:39.774Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-23T06:34:39.774Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-23T06:34:39.774Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-23T06:34:39.774Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-23T06:34:39.775Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-23T06:34:39.776Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-23T06:34:39.776Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-23T06:34:39.776Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-23T06:34:39.777Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-23T06:34:39.777Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-23T06:34:39.777Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-23T06:34:39.778Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-23T06:34:39.778Z","level":"warn","module":"retry","msg":"Retry 1/2 for \"unknown\" in 11ms","data":{"error":"fail"}}
+{"ts":"2026-03-23T06:34:39.786Z","level":"info","module":"task","msg":"Task created: task-1774247679786","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-23T06:34:39.787Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774247679786"}}
+{"ts":"2026-03-23T06:34:39.790Z","level":"warn","module":"retry","msg":"Retry 2/2 for \"unknown\" in 20ms","data":{"error":"fail"}}
+{"ts":"2026-03-23T06:34:39.810Z","level":"error","module":"retry","msg":"All retries exhausted for \"unknown\"","data":{"attempts":3,"error":"fail"}}
+{"ts":"2026-03-23T06:34:39.810Z","level":"warn","module":"retry","msg":"Retry 1/3 for \"unknown\" in 10ms","data":{"error":"not yet"}}
+{"ts":"2026-03-23T06:34:39.823Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-23T06:34:39.823Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-23T06:34:39.823Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-23T06:34:39.823Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-23T06:34:39.824Z","level":"warn","module":"recovery-engine","msg":"Reset pdca-status.json to fresh state (no backup found)"}
+{"ts":"2026-03-23T06:34:39.825Z","level":"info","module":"recovery-engine","msg":"Recovered pdca-status.json from emergency backup"}
+{"ts":"2026-03-23T06:34:39.827Z","level":"error","module":"health-check","msg":"Health check failed","data":{"corrupted":["pdca-status"]}}
+{"ts":"2026-03-23T06:34:39.831Z","level":"info","module":"learning-capture","msg":"Learning captured for auth","data":{"patterns":1,"mistakes":1,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.832Z","level":"info","module":"learning-capture","msg":"Learning captured for complex-feat","data":{"patterns":0,"mistakes":0,"iterations":4}}
+{"ts":"2026-03-23T06:34:39.832Z","level":"info","module":"learning-capture","msg":"Learning captured for simple","data":{"patterns":0,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.833Z","level":"info","module":"pdca-engine","msg":"PDCA started: feat-1"}
+{"ts":"2026-03-23T06:34:39.834Z","level":"info","module":"pdca-engine","msg":"PDCA started: feat-dup"}
+{"ts":"2026-03-23T06:34:39.835Z","level":"info","module":"pdca-engine","msg":"PDCA started: flow-test"}
+{"ts":"2026-03-23T06:34:39.836Z","level":"info","module":"pdca-engine","msg":"PDCA started: no-rate"}
+{"ts":"2026-03-23T06:34:39.837Z","level":"info","module":"pdca-engine","msg":"PDCA started: iter-test"}
+{"ts":"2026-03-23T06:34:39.839Z","level":"info","module":"pdca-engine","msg":"PDCA started: complete-test"}
+{"ts":"2026-03-23T06:34:39.840Z","level":"info","module":"pdca-engine","msg":"PDCA started: reset-test"}
+{"ts":"2026-03-23T06:34:39.841Z","level":"info","module":"pdca-engine","msg":"PDCA started: review-end"}
+{"ts":"2026-03-23T06:34:39.842Z","level":"info","module":"pdca-engine","msg":"PDCA started: full-flow"}
+{"ts":"2026-03-23T06:34:39.852Z","level":"warn","module":"cost-ceiling","msg":"Cost ceiling warning","data":{"warnings":["🚫 세션 토큰 한도 초과: ~600,000 / 500,000","⚠️ 작업 \"big-task\" 토큰 한도 초과: ~600,000 / 100,000"]}}
+{"ts":"2026-03-23T06:34:39.857Z","level":"info","module":"evidence-report","msg":"Report generated: /var/folders/_p/fy8jj5b95c38w41rttwnnll40000gn/T/sw-kit-test-8213cdf77b91/.sw-kit/reports/2026-03-23-rpt-test.md"}
+{"ts":"2026-03-23T06:34:39.858Z","level":"info","module":"learning-capture","msg":"Learning captured for f0","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.858Z","level":"info","module":"learning-capture","msg":"Learning captured for f1","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.858Z","level":"info","module":"learning-capture","msg":"Learning captured for f2","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.859Z","level":"info","module":"learning-capture","msg":"Learning captured for f3","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.859Z","level":"info","module":"learning-capture","msg":"Learning captured for f4","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.859Z","level":"info","module":"learning-capture","msg":"Learning captured for f5","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.860Z","level":"info","module":"learning-capture","msg":"Learning captured for f6","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.860Z","level":"info","module":"learning-capture","msg":"Learning captured for f7","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.861Z","level":"info","module":"learning-capture","msg":"Learning captured for f8","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.861Z","level":"info","module":"learning-capture","msg":"Learning captured for f9","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.862Z","level":"info","module":"learning-capture","msg":"Learning captured for f10","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.862Z","level":"info","module":"learning-capture","msg":"Learning captured for f11","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.862Z","level":"info","module":"learning-capture","msg":"Learning captured for f12","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.863Z","level":"info","module":"learning-capture","msg":"Learning captured for f13","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.863Z","level":"info","module":"learning-capture","msg":"Learning captured for f14","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.863Z","level":"info","module":"learning-capture","msg":"Learning captured for f15","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.864Z","level":"info","module":"learning-capture","msg":"Learning captured for f16","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.864Z","level":"info","module":"learning-capture","msg":"Learning captured for f17","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.864Z","level":"info","module":"learning-capture","msg":"Learning captured for f18","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.864Z","level":"info","module":"learning-capture","msg":"Learning captured for f19","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.865Z","level":"info","module":"learning-capture","msg":"Learning captured for f20","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.865Z","level":"info","module":"learning-capture","msg":"Learning captured for f21","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.866Z","level":"info","module":"learning-capture","msg":"Learning captured for f22","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.866Z","level":"info","module":"learning-capture","msg":"Learning captured for f23","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.866Z","level":"info","module":"learning-capture","msg":"Learning captured for f24","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.867Z","level":"info","module":"learning-capture","msg":"Learning captured for f25","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.867Z","level":"info","module":"learning-capture","msg":"Learning captured for f26","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.867Z","level":"info","module":"learning-capture","msg":"Learning captured for f27","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.868Z","level":"info","module":"learning-capture","msg":"Learning captured for f28","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.868Z","level":"info","module":"learning-capture","msg":"Learning captured for f29","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.868Z","level":"info","module":"learning-capture","msg":"Learning captured for f30","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.869Z","level":"info","module":"learning-capture","msg":"Learning captured for f31","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.869Z","level":"info","module":"learning-capture","msg":"Learning captured for f32","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.869Z","level":"info","module":"learning-capture","msg":"Learning captured for f33","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.870Z","level":"info","module":"learning-capture","msg":"Learning captured for f34","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.870Z","level":"info","module":"learning-capture","msg":"Learning captured for f35","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.870Z","level":"info","module":"learning-capture","msg":"Learning captured for f36","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.871Z","level":"info","module":"learning-capture","msg":"Learning captured for f37","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.871Z","level":"info","module":"learning-capture","msg":"Learning captured for f38","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.872Z","level":"info","module":"learning-capture","msg":"Learning captured for f39","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.872Z","level":"info","module":"learning-capture","msg":"Learning captured for f40","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.872Z","level":"info","module":"learning-capture","msg":"Learning captured for f41","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.873Z","level":"info","module":"learning-capture","msg":"Learning captured for f42","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.874Z","level":"info","module":"learning-capture","msg":"Learning captured for f43","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.874Z","level":"info","module":"learning-capture","msg":"Learning captured for f44","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.875Z","level":"info","module":"learning-capture","msg":"Learning captured for f45","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.875Z","level":"info","module":"learning-capture","msg":"Learning captured for f46","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.875Z","level":"info","module":"learning-capture","msg":"Learning captured for f47","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.876Z","level":"info","module":"learning-capture","msg":"Learning captured for f48","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.876Z","level":"info","module":"learning-capture","msg":"Learning captured for f49","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.877Z","level":"info","module":"learning-capture","msg":"Learning captured for f50","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.877Z","level":"info","module":"learning-capture","msg":"Learning captured for f51","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.878Z","level":"info","module":"learning-capture","msg":"Learning captured for f52","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.878Z","level":"info","module":"learning-capture","msg":"Learning captured for f53","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.878Z","level":"info","module":"learning-capture","msg":"Learning captured for f54","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.879Z","level":"info","module":"learning-capture","msg":"Learning captured for f55","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.879Z","level":"info","module":"learning-capture","msg":"Learning captured for f56","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.880Z","level":"info","module":"learning-capture","msg":"Learning captured for f57","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.880Z","level":"info","module":"learning-capture","msg":"Learning captured for f58","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.881Z","level":"info","module":"learning-capture","msg":"Learning captured for f59","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.881Z","level":"info","module":"learning-capture","msg":"Learning captured for f60","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.881Z","level":"info","module":"learning-capture","msg":"Learning captured for f61","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.882Z","level":"info","module":"learning-capture","msg":"Learning captured for f62","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.882Z","level":"info","module":"learning-capture","msg":"Learning captured for f63","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.883Z","level":"info","module":"learning-capture","msg":"Learning captured for f64","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.883Z","level":"info","module":"learning-capture","msg":"Learning captured for f65","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.884Z","level":"info","module":"learning-capture","msg":"Learning captured for f66","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.884Z","level":"info","module":"learning-capture","msg":"Learning captured for f67","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.884Z","level":"info","module":"learning-capture","msg":"Learning captured for f68","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.885Z","level":"info","module":"learning-capture","msg":"Learning captured for f69","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.885Z","level":"info","module":"learning-capture","msg":"Learning captured for f70","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.886Z","level":"info","module":"learning-capture","msg":"Learning captured for f71","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.886Z","level":"info","module":"learning-capture","msg":"Learning captured for f72","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.886Z","level":"info","module":"learning-capture","msg":"Learning captured for f73","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.887Z","level":"info","module":"learning-capture","msg":"Learning captured for f74","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.887Z","level":"info","module":"learning-capture","msg":"Learning captured for f75","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.888Z","level":"info","module":"learning-capture","msg":"Learning captured for f76","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.888Z","level":"info","module":"learning-capture","msg":"Learning captured for f77","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.889Z","level":"info","module":"learning-capture","msg":"Learning captured for f78","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.889Z","level":"info","module":"learning-capture","msg":"Learning captured for f79","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.890Z","level":"info","module":"learning-capture","msg":"Learning captured for f80","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.890Z","level":"info","module":"learning-capture","msg":"Learning captured for f81","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.891Z","level":"info","module":"learning-capture","msg":"Learning captured for f82","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.891Z","level":"info","module":"learning-capture","msg":"Learning captured for f83","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.892Z","level":"info","module":"learning-capture","msg":"Learning captured for f84","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.892Z","level":"info","module":"learning-capture","msg":"Learning captured for f85","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.892Z","level":"info","module":"learning-capture","msg":"Learning captured for f86","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.893Z","level":"info","module":"learning-capture","msg":"Learning captured for f87","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.893Z","level":"info","module":"learning-capture","msg":"Learning captured for f88","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.894Z","level":"info","module":"learning-capture","msg":"Learning captured for f89","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.894Z","level":"info","module":"learning-capture","msg":"Learning captured for f90","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.894Z","level":"info","module":"learning-capture","msg":"Learning captured for f91","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.895Z","level":"info","module":"learning-capture","msg":"Learning captured for f92","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.895Z","level":"info","module":"learning-capture","msg":"Learning captured for f93","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.896Z","level":"info","module":"learning-capture","msg":"Learning captured for f94","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.896Z","level":"info","module":"learning-capture","msg":"Learning captured for f95","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.896Z","level":"info","module":"learning-capture","msg":"Learning captured for f96","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.897Z","level":"info","module":"learning-capture","msg":"Learning captured for f97","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.897Z","level":"info","module":"learning-capture","msg":"Learning captured for f98","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.898Z","level":"info","module":"learning-capture","msg":"Learning captured for f99","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.898Z","level":"info","module":"learning-capture","msg":"Learning captured for f100","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.898Z","level":"info","module":"learning-capture","msg":"Learning captured for f101","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.899Z","level":"info","module":"learning-capture","msg":"Learning captured for f102","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.900Z","level":"info","module":"learning-capture","msg":"Learning captured for f103","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T06:34:39.901Z","level":"info","module":"learning-capture","msg":"Learning captured for f104","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-23T09:13:15.003Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-23T09:13:29.709Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-23T09:15:16.095Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"duo","complexity":"mid","workers":2}}
+{"ts":"2026-03-23T09:34:16.821Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T09:36:18.042Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T09:40:44.226Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T09:48:00.424Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T09:50:02.335Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T09:55:57.350Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"duo","complexity":"low","workers":2}}
+{"ts":"2026-03-23T09:56:12.594Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 51/50"}
+{"ts":"2026-03-23T09:56:22.173Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 52/50"}
+{"ts":"2026-03-23T09:56:28.691Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 53/50"}
+{"ts":"2026-03-23T09:56:36.479Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T09:59:03.885Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"duo","complexity":"mid","workers":2}}
+{"ts":"2026-03-23T09:59:33.315Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 54/50"}
+{"ts":"2026-03-23T09:59:33.861Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T10:00:00.974Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 55/50"}
+{"ts":"2026-03-23T10:00:01.576Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T10:00:01.577Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"high","workers":7}}
+{"ts":"2026-03-23T10:00:10.278Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 56/50"}
+{"ts":"2026-03-23T10:00:16.882Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 57/50"}
+{"ts":"2026-03-23T10:00:17.402Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"mid","workers":4}}
+{"ts":"2026-03-23T10:00:48.739Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 58/50"}
+{"ts":"2026-03-23T10:00:49.830Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 59/50"}
+{"ts":"2026-03-23T10:01:24.255Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 60/50"}
+{"ts":"2026-03-23T10:01:32.173Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 61/50"}
+{"ts":"2026-03-23T10:01:41.239Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 62/50"}
+{"ts":"2026-03-23T10:01:51.620Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T10:02:20.040Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T10:02:25.937Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 63/50"}
+{"ts":"2026-03-23T10:02:27.323Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 64/50"}
+{"ts":"2026-03-23T10:02:28.252Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 65/50"}
+{"ts":"2026-03-23T10:02:30.010Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 66/50"}
+{"ts":"2026-03-23T10:02:30.997Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 67/50"}
+{"ts":"2026-03-23T10:02:37.410Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 68/50"}
+{"ts":"2026-03-23T10:02:42.453Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 69/50"}
+{"ts":"2026-03-23T10:02:50.401Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T10:07:46.327Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T10:08:05.912Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 70/50"}
+{"ts":"2026-03-23T10:08:27.109Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 71/50"}
+{"ts":"2026-03-23T10:08:39.335Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 72/50"}
+{"ts":"2026-03-23T10:08:45.627Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 73/50"}
+{"ts":"2026-03-23T10:08:55.103Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T10:09:53.251Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T10:10:45.531Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 74/50"}
+{"ts":"2026-03-23T10:11:03.774Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 75/50"}
+{"ts":"2026-03-23T10:11:12.954Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 76/50"}
+{"ts":"2026-03-23T10:11:19.648Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 77/50"}
+{"ts":"2026-03-23T10:11:34.158Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 78/50"}
+{"ts":"2026-03-23T10:11:43.286Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T10:12:07.482Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T10:12:20.030Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 79/50"}
+{"ts":"2026-03-23T10:12:30.152Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 80/50"}
+{"ts":"2026-03-23T10:12:37.391Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 81/50"}
+{"ts":"2026-03-23T10:12:44.927Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T10:13:09.201Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-23T10:13:17.465Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 82/50"}
+{"ts":"2026-03-23T10:13:38.095Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 83/50"}
+{"ts":"2026-03-23T10:13:44.654Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 84/50"}
+{"ts":"2026-03-23T10:13:45.574Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 85/50"}
+{"ts":"2026-03-23T10:13:46.454Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 86/50"}
+{"ts":"2026-03-23T10:13:47.433Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 87/50"}
+{"ts":"2026-03-23T10:13:48.212Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 88/50"}
+{"ts":"2026-03-23T10:13:49.637Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 89/50"}
+{"ts":"2026-03-23T10:13:56.398Z","level":"error","module":"safety-invariants","msg":"Step limit exceeded: 90/50"}
+{"ts":"2026-03-23T10:14:04.165Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-23T10:15:09.658Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"duo","complexity":"mid","workers":2}}
+{"ts":"2026-03-23T10:15:32.385Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}

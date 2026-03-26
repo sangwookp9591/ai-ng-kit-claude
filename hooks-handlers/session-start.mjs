@@ -1,7 +1,7 @@
 /**
- * sw-kit SessionStart Hook v2.0.0
- * Injects harness rules so sw-kit is ALWAYS active without explicit invocation.
- * Detects first-run and prompts for setup via /swkit start.
+ * aing SessionStart Hook v2.0.0
+ * Injects harness rules so aing is ALWAYS active without explicit invocation.
+ * Detects first-run and prompts for setup via /aing start.
  */
 import { readStateOrDefault } from '../scripts/core/state.mjs';
 import { loadConfig } from '../scripts/core/config.mjs';
@@ -27,28 +27,28 @@ try {
   resetTrackers(projectDir);
 
   const setupStatus = isSetupComplete();
-  const pdcaState = readStateOrDefault(join(projectDir, '.sw-kit', 'state', 'pdca-status.json'), null);
-  const memory = readStateOrDefault(join(projectDir, '.sw-kit', 'project-memory.json'), null);
+  const pdcaState = readStateOrDefault(join(projectDir, '.aing', 'state', 'pdca-status.json'), null);
+  const memory = readStateOrDefault(join(projectDir, '.aing', 'project-memory.json'), null);
 
   const ctx = [];
 
   // === Header ===
-  ctx.push(`# sw-kit v2.1.7 Harness Engineering Agent`);
+  ctx.push(`# aing v2.1.7 Harness Engineering Agent`);
   ctx.push(`For developers: the ultimate assistant. For everyone: the ultimate magician.`);
   ctx.push('');
 
   // === Setup Check: First Run Detection ===
   if (!setupStatus.completed) {
     ctx.push(`## First Run — Setup Required`);
-    ctx.push(`sw-kit이 아직 초기 설정되지 않았습니다.`);
-    ctx.push(`\`/swkit start\`를 실행하여 셋업 위자드를 시작하세요.`);
+    ctx.push(`aing이 아직 초기 설정되지 않았습니다.`);
+    ctx.push(`\`/aing start\`를 실행하여 셋업 위자드를 시작하세요.`);
     ctx.push('');
     ctx.push(`셋업에서 설정하는 것:`);
     ctx.push(`- 스코프 선택 (이 프로젝트만 vs 모든 프로젝트)`);
     ctx.push(`- Status Line HUD (터미널에 활성 에이전트 표시)`);
     ctx.push(`- 기본 실행 모드 (auto / pdca / wizard)`);
     ctx.push('');
-    ctx.push(`셋업 없이도 sw-kit 기능은 사용 가능하지만, 셋업하면 더 나은 경험을 제공합니다.`);
+    ctx.push(`셋업 없이도 aing 기능은 사용 가능하지만, 셋업하면 더 나은 경험을 제공합니다.`);
     ctx.push('');
   } else {
     // Show setup info compactly
@@ -62,8 +62,8 @@ try {
     if (feat) {
       ctx.push(`## Active Work — Resume Available`);
       ctx.push(`Feature: ${pdcaState.activeFeature} | Stage: ${feat.currentStage || 'plan'} | Iteration: ${feat.iteration || 0}/${config.pdca.maxIterations}`);
-      ctx.push(`이전 작업을 이어서 진행하려면 \`/swkit next\`를 실행하세요.`);
-      ctx.push(`새 작업을 시작하려면 \`/swkit auto <feature> <task>\`를 실행하세요.`);
+      ctx.push(`이전 작업을 이어서 진행하려면 \`/aing next\`를 실행하세요.`);
+      ctx.push(`새 작업을 시작하려면 \`/aing auto <feature> <task>\`를 실행하세요.`);
       ctx.push('');
     }
   } else if (!setupStatus.completed && pdcaState?.activeFeature) {
@@ -94,12 +94,12 @@ try {
   }
 
   // === Agent Team ===
-  ctx.push(`## sw-kit Agent Team`);
+  ctx.push(`## aing Agent Team`);
   ctx.push(`Sam(CTO/opus) Able(PM/sonnet) Klay(Architect/opus) Jay(Backend/sonnet) Jerry(DB/sonnet) Milla(Security/sonnet) Willji(Design/sonnet) Derek(Frontend/sonnet) Rowan(Motion/sonnet) Iron(Wizard/sonnet)`);
   ctx.push('');
 
   // === MANDATORY RULES (like bkit's Feature Usage Report) ===
-  ctx.push(`## sw-kit Mandatory Rules`);
+  ctx.push(`## aing Mandatory Rules`);
   ctx.push('');
   ctx.push(`### Rule 1: Team Analysis (Required for every task)`);
   ctx.push(`When the user describes a task, ALWAYS analyze complexity and recommend a team:`);
@@ -113,7 +113,7 @@ try {
   ctx.push(`Format: description: "{Name}: {구체적 작업 요약}" (3-5 words)`);
   ctx.push(`This makes Claude Code automatically display:`);
   ctx.push('```');
-  ctx.push(`⏺ sw-kit:klay(Klay: 아키텍처 탐색 + 구조 분석) Opus`);
+  ctx.push(`⏺ aing:klay(Klay: 아키텍처 탐색 + 구조 분석) Opus`);
   ctx.push(`  ⎿  Done (9 tool uses · 83.6k tokens · 2m 10s)`);
   ctx.push('```');
   ctx.push(`For multi-agent spawns, also show the deployment table before spawning.`);
@@ -137,7 +137,7 @@ try {
   ctx.push(`### Rule 4: Completion Report (Required at task end)`);
   ctx.push(`At the end of every completed task, show this report:`);
   ctx.push('```');
-  ctx.push(`sw-kit Report`);
+  ctx.push(`aing Report`);
   ctx.push(`---`);
   ctx.push(`Team: {preset} ({N}명)`);
   ctx.push(`Agents: {list of agents that worked}`);
@@ -153,26 +153,26 @@ try {
   ctx.push(`Never claim "done" without evidence. Run tests, build, or lint to prove completion.`);
   ctx.push('');
 
-  // === Status Line Setup (now handled by /swkit start wizard) ===
+  // === Status Line Setup (now handled by /aing start wizard) ===
   // Only show inline HUD prompt if setup was NOT completed (legacy fallback).
   // Once setup is done, HUD config is managed by setup-progress.
   if (!setupStatus.completed) {
     const home = homedir();
     const settingsPath = join(home, '.claude', 'settings.json');
-    const hudSetupFlag = join(projectDir, '.sw-kit', 'state', 'hud-setup-done');
+    const hudSetupFlag = join(projectDir, '.aing', 'state', 'hud-setup-done');
 
     if (!existsSync(hudSetupFlag)) {
       try {
         let needsSetup = true;
         if (existsSync(settingsPath)) {
           const settings = JSON.parse(readFileSync(settingsPath, 'utf8'));
-          if (settings?.statusLine?.command?.includes('swkit-hud')) {
+          if (settings?.statusLine?.command?.includes('aing-hud')) {
             needsSetup = false;
           }
         }
-        // Don't show inline HUD prompt — /swkit start handles it
+        // Don't show inline HUD prompt — /aing start handles it
         // Just mark as checked so we don't re-check every session
-        const stateDir = join(projectDir, '.sw-kit', 'state');
+        const stateDir = join(projectDir, '.aing', 'state');
         if (!existsSync(stateDir)) mkdirSync(stateDir, { recursive: true });
         writeFileSync(hudSetupFlag, new Date().toISOString());
       } catch {
@@ -183,7 +183,7 @@ try {
 
   // === Commands ===
   ctx.push(`## Commands`);
-  ctx.push(`/swkit start|status|next|reset|auto|tdd|task|explore|plan|execute|review|verify|wizard|rollback|learn|help`);
+  ctx.push(`/aing start|status|next|reset|auto|tdd|task|explore|plan|execute|review|verify|wizard|rollback|learn|help`);
 
   // === State GC (automatic cleanup of zombie features) ===
   try {

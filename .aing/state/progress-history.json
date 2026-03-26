@@ -1,0 +1,142 @@
+[
+  {
+    "ts": "2026-03-19T04:57:57.325Z",
+    "feature": "v13-test",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Auto pipeline planned: solo (1명)"
+  },
+  {
+    "ts": "2026-03-19T05:00:41.202Z",
+    "feature": "v13f",
+    "stage": "do",
+    "step": "1/3",
+    "action": ""
+  },
+  {
+    "ts": "2026-03-19T05:00:41.206Z",
+    "feature": "v13f",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Pipeline initialized"
+  },
+  {
+    "ts": "2026-03-19T05:00:41.206Z",
+    "feature": "v13f",
+    "stage": "plan",
+    "step": "1/5",
+    "action": "📋 Archie 시작"
+  },
+  {
+    "ts": "2026-03-19T05:00:41.250Z",
+    "feature": "v13f-test",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Auto pipeline planned: solo (1명)"
+  },
+  {
+    "ts": "2026-03-19T05:10:48.580Z",
+    "feature": "final",
+    "stage": "do",
+    "step": "1/3",
+    "action": ""
+  },
+  {
+    "ts": "2026-03-19T05:10:48.583Z",
+    "feature": "final",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Pipeline initialized"
+  },
+  {
+    "ts": "2026-03-19T05:10:48.584Z",
+    "feature": "final",
+    "stage": "plan",
+    "step": "1/5",
+    "action": "📋 Archie 시작"
+  },
+  {
+    "ts": "2026-03-19T05:10:48.628Z",
+    "feature": "ft",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Auto pipeline planned: solo (1명)"
+  },
+  {
+    "ts": "2026-03-19T05:17:04.421Z",
+    "feature": "test",
+    "stage": "do",
+    "step": "1/3",
+    "action": ""
+  },
+  {
+    "ts": "2026-03-19T05:17:04.425Z",
+    "feature": "test",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Pipeline initialized"
+  },
+  {
+    "ts": "2026-03-19T05:17:04.425Z",
+    "feature": "test",
+    "stage": "plan",
+    "step": "1/5",
+    "action": "📋 Archie 시작"
+  },
+  {
+    "ts": "2026-03-19T05:17:04.470Z",
+    "feature": "test",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Auto pipeline planned: solo (1명)"
+  },
+  {
+    "ts": "2026-03-19T05:19:31.814Z",
+    "feature": "fin",
+    "stage": "do",
+    "step": "1/3",
+    "action": ""
+  },
+  {
+    "ts": "2026-03-19T05:19:31.818Z",
+    "feature": "fin",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Pipeline initialized"
+  },
+  {
+    "ts": "2026-03-19T05:19:31.818Z",
+    "feature": "fin",
+    "stage": "plan",
+    "step": "1/5",
+    "action": "📋 Archie 시작"
+  },
+  {
+    "ts": "2026-03-19T05:19:31.863Z",
+    "feature": "fx",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Auto pipeline planned: solo (1명)"
+  },
+  {
+    "ts": "2026-03-19T05:28:16.402Z",
+    "feature": "z",
+    "stage": "do",
+    "step": "1/3",
+    "action": ""
+  },
+  {
+    "ts": "2026-03-19T05:28:16.406Z",
+    "feature": "z",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Pipeline initialized"
+  },
+  {
+    "ts": "2026-03-19T05:28:16.452Z",
+    "feature": "z",
+    "stage": "plan",
+    "step": "0/5",
+    "action": "Auto pipeline planned: solo (1명)"
+  }
+]

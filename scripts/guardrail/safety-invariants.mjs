@@ -1,5 +1,5 @@
 /**
- * sw-kit Safety Invariants v0.3.0
+ * aing Safety Invariants v0.3.0
  * Hard limits that can never be overridden by the agent.
  * Harness Engineering: Constrain axis — absolute boundaries.
  * @module scripts/guardrail/safety-invariants
@@ -32,7 +32,7 @@ const DEFAULT_INVARIANTS = {
 };
 
 function getInvariantsPath(projectDir) {
-  return join(projectDir || process.cwd(), '.sw-kit', 'state', 'invariants-tracker.json');
+  return join(projectDir || process.cwd(), '.aing', 'state', 'invariants-tracker.json');
 }
 
 /**
@@ -88,7 +88,7 @@ export function checkStepLimit(projectDir) {
       ok: false,
       current: steps,
       max: invariants.maxSteps,
-      message: `[sw-kit Safety] 실행 단계 한도 초과 (${steps}/${invariants.maxSteps}). 작업을 분할하거나 설정에서 maxSteps를 조정하세요.`
+      message: `[aing Safety] 실행 단계 한도 초과 (${steps}/${invariants.maxSteps}). 작업을 분할하거나 설정에서 maxSteps를 조정하세요.`
     };
   }
 
@@ -122,7 +122,7 @@ export function checkFileChangeLimit(filePath, projectDir) {
       ok: false,
       current: fileChanges,
       max: invariants.maxFileChanges,
-      message: `[sw-kit Safety] 파일 변경 한도 초과 (${fileChanges}/${invariants.maxFileChanges}). 커밋 후 계속하세요.`
+      message: `[aing Safety] 파일 변경 한도 초과 (${fileChanges}/${invariants.maxFileChanges}). 커밋 후 계속하세요.`
     };
   }
 
@@ -146,7 +146,7 @@ export function checkForbiddenPath(filePath, projectDir) {
       log.error(`Forbidden path access: ${filePath}`);
       return {
         ok: false,
-        message: `[sw-kit Safety] 🚫 접근 금지 경로: ${filePath}`
+        message: `[aing Safety] 🚫 접근 금지 경로: ${filePath}`
       };
     }
   }
@@ -175,7 +175,7 @@ export function checkErrorLimit(projectDir) {
       ok: false,
       current: errors,
       max: invariants.maxConsecutiveErrors,
-      message: `[sw-kit Safety] 연속 에러 한도 초과 (${errors}/${invariants.maxConsecutiveErrors}). 접근 방식을 변경하거나 도움을 요청하세요.`
+      message: `[aing Safety] 연속 에러 한도 초과 (${errors}/${invariants.maxConsecutiveErrors}). 접근 방식을 변경하거나 도움을 요청하세요.`
     };
   }
 

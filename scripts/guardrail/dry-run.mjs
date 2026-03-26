@@ -1,5 +1,5 @@
 /**
- * sw-kit Dry-Run Mode v0.3.0
+ * aing Dry-Run Mode v0.3.0
  * Preview changes before execution.
  * Harness Engineering: Verify axis — human-in-the-loop approval.
  * @module scripts/guardrail/dry-run
@@ -13,7 +13,7 @@ import { join } from 'node:path';
 const log = createLogger('dry-run');
 
 function getDryRunPath(projectDir) {
-  return join(projectDir || process.cwd(), '.sw-kit', 'state', 'dry-run-queue.json');
+  return join(projectDir || process.cwd(), '.aing', 'state', 'dry-run-queue.json');
 }
 
 /**
@@ -69,10 +69,10 @@ export function getPendingChanges(projectDir) {
  */
 export function formatPreview(projectDir) {
   const pending = getPendingChanges(projectDir);
-  if (pending.length === 0) return '[sw-kit Dry-Run] 대기 중인 변경사항이 없습니다.';
+  if (pending.length === 0) return '[aing Dry-Run] 대기 중인 변경사항이 없습니다.';
 
   const lines = [
-    '[sw-kit Dry-Run] 다음 변경사항이 대기 중입니다:',
+    '[aing Dry-Run] 다음 변경사항이 대기 중입니다:',
     ''
   ];
 
@@ -88,7 +88,7 @@ export function formatPreview(projectDir) {
   }
 
   lines.push('');
-  lines.push('진행하려면 "/swkit approve", 취소하려면 "/swkit reject"를 실행하세요.');
+  lines.push('진행하려면 "/aing approve", 취소하려면 "/aing reject"를 실행하세요.');
 
   return lines.join('\n');
 }

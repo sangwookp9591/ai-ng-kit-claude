@@ -4,30 +4,30 @@ description: "사용자 지정 에이전트 팀 + staged pipeline (plan→exec�
 triggers: ["team", "팀", "팀 실행", "team run"]
 ---
 
-# /swkit team — Staged Team Pipeline
+# /aing team — Staged Team Pipeline
 
 사용자가 에이전트를 직접 지정하거나 자동 선택하여, verify→fix 루프가 있는 구조화된 팀 파이프라인을 실행합니다.
 
 ## Usage
 
 ```
-/swkit team jay+derek+milla "사용자 인증 API 구현"
-/swkit team "검색 기능 추가"              ← 에이전트 미지정 시 자동 선택
-/swkit team --plan .sw-kit/plans/xxx.md   ← 기존 plan 파일로 team-plan 스킵
+/aing team jay+derek+milla "사용자 인증 API 구현"
+/aing team "검색 기능 추가"              ← 에이전트 미지정 시 자동 선택
+/aing team --plan .aing/plans/xxx.md   ← 기존 plan 파일로 team-plan 스킵
 ```
 
 ## Step 0: Resume Detection
 
 Before starting the pipeline, check for an existing active session:
 
-1. Check `.sw-kit/state/team-session.json` for an active session
+1. Check `.aing/state/team-session.json` for an active session
 2. If found AND matches the requested feature:
    - Read the session to find `currentStage` and `completedStages`
-   - Read the latest handoff from `.sw-kit/handoffs/{feature}/`
+   - Read the latest handoff from `.aing/handoffs/{feature}/`
    - Display resume prompt:
      ```
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       sw-kit team: Resume Detected
+       aing team: Resume Detected
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
        Feature: {feature}
@@ -83,7 +83,7 @@ endSession("team", "complete"|"failed"|"cancelled")
 `+` 로 에이전트를 지정합니다. verify 에이전트(Milla, Sam)는 항상 자동 포함됩니다.
 
 ```
-/swkit team jay+derek "task"
+/aing team jay+derek "task"
 → Execution: Jay, Derek
 → Verify: Milla(sonnet) + Sam(haiku)  ← 항상 자동 포함
 ```
@@ -114,7 +114,7 @@ completion  [Review] → 보고서 + 학습 저장
 
 ## Stage 1: team-plan (= PDCA Plan)
 
-**Skip 조건**: `--plan <path>` 제공 시 또는 `/swkit plan`에서 전환된 경우 이 단계를 건너뜁니다.
+**Skip 조건**: `--plan <path>` 제공 시 또는 `/aing plan`에서 전환된 경우 이 단계를 건너뜁니다.
 
 ### 실행
 
@@ -122,7 +122,7 @@ Able 에이전트를 스폰합니다:
 
 ```
 Agent({
-  subagent_type: "sw-kit:able",
+  subagent_type: "aing:able",
   description: "Able: 작업 계획 수립 — {task}",
   model: "sonnet",
   prompt: "..."
@@ -131,7 +131,7 @@ Agent({
 
 터미널 표시:
 ```
-⏺ sw-kit:able(Able: 작업 계획 수립 — 사용자 인증 API) Sonnet
+⏺ aing:able(Able: 작업 계획 수립 — 사용자 인증 API) Sonnet
 ```
 
 Able 에이전트가 수행:
@@ -153,8 +153,8 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" plan \
 ```
 
 ### 출력 아티팩트
-- Plan file: `.sw-kit/plans/{date}-{feature}.md` ← persist.mjs가 생성
-- Task file: `.sw-kit/tasks/task-{id}.json` ← persist.mjs가 생성
+- Plan file: `.aing/plans/{date}-{feature}.md` ← persist.mjs가 생성
+- Task file: `.aing/tasks/task-{id}.json` ← persist.mjs가 생성
 - Tasks: TaskCreate로 CC 팀 태스크도 생성, owner 사전 할당
 
 ### 전환 조건 → team-exec
@@ -169,7 +169,7 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" plan \
 ```
 TeamCreate({
   team_name: "<feature-slug>",
-  description: "sw-kit team: <task>"
+  description: "aing team: <task>"
 })
 ```
 
@@ -179,7 +179,7 @@ TeamCreate({
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  sw-kit team: 에이전트 투입
+  aing team: 에이전트 투입
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Agent        Role              Model    Task
@@ -208,7 +208,7 @@ Keyword-based specialist routing for team-exec:
 - "API", "endpoint", "backend" → include Jay
 - "auth", "security" → include Milla as advisor
 
-team-verify uses the same complexity-based review scaling as `/swkit review`:
+team-verify uses the same complexity-based review scaling as `/aing review`:
 - low: Milla only
 - mid: Milla + Klay
 - high: Milla + Klay + Jay (performance)
@@ -223,7 +223,7 @@ Worker Prompt Template은 `auto/SKILL.md`의 포맷을 따릅니다.
 
 ```
 Agent({
-  subagent_type: "sw-kit:{name}",
+  subagent_type: "aing:{name}",
   description: "{Name}: {구체적 작업 요약}",
   team_name: "<feature-slug>",
   name: "{name}",
@@ -234,7 +234,7 @@ Agent({
 
 터미널 표시 예시:
 ```
-⏺ sw-kit:jay(Jay: Backend API 엔드포인트 구현) Sonnet
+⏺ aing:jay(Jay: Backend API 엔드포인트 구현) Sonnet
   ⎿  Done (15 tool uses · 42.1k tokens · 3m 22s)
 ```
 
@@ -280,7 +280,7 @@ Milla와 Sam을 순차 또는 병렬로 스폰:
 
 ```
 Agent({
-  subagent_type: "sw-kit:milla",
+  subagent_type: "aing:milla",
   description: "Milla: 보안 리뷰 + 코드 품질 점검",
   team_name: "<feature-slug>",
   name: "milla",
@@ -289,7 +289,7 @@ Agent({
 })
 
 Agent({
-  subagent_type: "sw-kit:sam",
+  subagent_type: "aing:sam",
   description: "Sam: 증거 체인 검증 + 최종 판정",
   team_name: "<feature-slug>",
   name: "sam",
@@ -300,8 +300,8 @@ Agent({
 
 터미널 표시:
 ```
-⏺ sw-kit:milla(Milla: 보안 리뷰 + 코드 품질 점검) Sonnet
-⏺ sw-kit:sam(Sam: 증거 체인 검증 + 최종 판정) Haiku
+⏺ aing:milla(Milla: 보안 리뷰 + 코드 품질 점검) Sonnet
+⏺ aing:sam(Sam: 증거 체인 검증 + 최종 판정) Haiku
 ```
 
 ### 검증 기준 (verify-evidence/SKILL.md 준수)
@@ -313,7 +313,7 @@ Agent({
 ### QA Loop Integration
 
 After team-verify agents complete their review, if implementation tests exist:
-1. Run `/swkit qa` with the project test command
+1. Run `/aing qa` with the project test command
 2. QA results feed into the verification report
 3. If QA fails → trigger team-fix stage
 4. If QA passes → include in verification evidence
@@ -336,12 +336,12 @@ After team-verify agents complete their review, if implementation tests exist:
 ### Fix with Context
 
 When entering team-fix, read the latest handoff to understand what was tried:
-1. Read `.sw-kit/handoffs/{feature}/team-verify-*.md` for verification findings
+1. Read `.aing/handoffs/{feature}/team-verify-*.md` for verification findings
 2. Pass findings to fix agents so they don't repeat failed approaches
 3. After fix, write a team-fix handoff documenting what was changed
 
 If fix loop reaches max (3) AND same error persists:
-- Suggest `/swkit debug` for scientific debugging
+- Suggest `/aing debug` for scientific debugging
 - Include error signature in the debug handoff
 
 ### 실행
@@ -352,7 +352,7 @@ If fix loop reaches max (3) AND same error persists:
 
 ```
 Agent({
-  subagent_type: "sw-kit:{name}",
+  subagent_type: "aing:{name}",
   description: "{Name}: Fix #{attempt} — {실패 사유 요약}",
   model: "{original model}",
   prompt: "... (아래 Retry Template 참조) ..."
@@ -361,7 +361,7 @@ Agent({
 
 터미널 표시:
 ```
-⏺ sw-kit:jay(Jay: Fix #1 — lint 에러 수정) Sonnet
+⏺ aing:jay(Jay: Fix #1 — lint 에러 수정) Sonnet
 ```
 
 ### Fix Worker Prompt (Retry Template)
@@ -408,7 +408,7 @@ PROTOCOL:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  sw-kit team complete: {feature}
+  aing team complete: {feature}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Team: {agents} ({N}명 exec + 2 verify)
@@ -435,7 +435,7 @@ PROTOCOL:
   Files changed: 12
   Duration: ~12 min
   Fix loops: 1
-  Report: .sw-kit/reports/{date}-{feature}.md
+  Report: .aing/reports/{date}-{feature}.md
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -447,7 +447,7 @@ PROTOCOL:
 ```bash
 node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" report --feature "{feature}" --lessons "{lesson1}|{lesson2}"
 ```
-5. This generates `.sw-kit/reports/{date}-{feature}.md`
+5. This generates `.aing/reports/{date}-{feature}.md`
 
 ---
 
@@ -464,7 +464,7 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" report --feature "{feature}
 
 ---
 
-## vs /swkit auto
+## vs /aing auto
 
 | 항목 | auto | team |
 |------|------|------|

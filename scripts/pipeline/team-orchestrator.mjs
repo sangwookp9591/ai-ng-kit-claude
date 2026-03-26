@@ -1,5 +1,5 @@
 /**
- * sw-kit Team Orchestrator v1.2.0
+ * aing Team Orchestrator v1.2.0
  * Cost-aware team composition using CC native TeamCreate/TaskCreate.
  * Harness Engineering innovation over OMC:
  *   - Auto team sizing (not user-specified N)
@@ -22,7 +22,7 @@ const log = createLogger('team');
 
 /**
  * Team templates — cost-optimized presets.
- * Instead of fixed N workers, sw-kit auto-selects based on task analysis.
+ * Instead of fixed N workers, aing auto-selects based on task analysis.
  */
 const TEAM_PRESETS = {
   // 🟢 Solo — 간단한 작업 (비용: 최소)
@@ -82,7 +82,7 @@ const TEAM_PRESETS = {
 
 /**
  * Auto-select optimal team preset based on task complexity.
- * sw-kit innovation: OMC는 사용자가 N을 지정, sw-kit은 자동 분석.
+ * aing innovation: OMC는 사용자가 N을 지정, aing은 자동 분석.
  * @param {object} signals - Complexity signals
  * @returns {{ preset: string, team: object, reason: string }}
  */
@@ -144,7 +144,7 @@ export function estimateTeamCost(presetName) {
 }
 
 /**
- * Generate worker preamble — sw-kit harness-enhanced version.
+ * Generate worker preamble — aing harness-enhanced version.
  * Lighter than OMC (role-specific minimal context), includes TDD + Evidence rules.
  * @param {object} params
  * @param {string} params.teamName
@@ -191,7 +191,7 @@ export function formatTeamSelection(selection) {
   const cost = estimateTeamCost(selection.preset);
 
   const lines = [
-    `[sw-kit Team] Auto-selected: ${team.name}`,
+    `[aing Team] Auto-selected: ${team.name}`,
     `  ${reason}`,
     '',
     '  ┌──────────────┬─────────────────────────┬─────────┬──────────────────────┐',

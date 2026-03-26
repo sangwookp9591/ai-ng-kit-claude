@@ -1,5 +1,5 @@
 /**
- * sw-kit Health Check (Innovation #5 — Self-Healing Engine)
+ * aing Health Check (Innovation #5 — Self-Healing Engine)
  * Validates integrity of state files and detects corruption.
  * @module scripts/recovery/health-check
  */
@@ -12,7 +12,7 @@ import { existsSync } from 'node:fs';
 const log = createLogger('health-check');
 
 /**
- * Run health check on all sw-kit state files.
+ * Run health check on all aing state files.
  * @param {string} [projectDir]
  * @returns {{ healthy: boolean, checks: Array<{ file: string, status: string, error?: string }> }}
  */
@@ -21,16 +21,16 @@ export function runHealthCheck(projectDir) {
   const checks = [];
 
   // Check PDCA state file
-  checks.push(checkJsonFile(join(dir, '.sw-kit', 'state', 'pdca-status.json'), 'pdca-status'));
+  checks.push(checkJsonFile(join(dir, '.aing', 'state', 'pdca-status.json'), 'pdca-status'));
 
   // Check project memory
-  checks.push(checkJsonFile(join(dir, '.sw-kit', 'project-memory.json'), 'project-memory'));
+  checks.push(checkJsonFile(join(dir, '.aing', 'project-memory.json'), 'project-memory'));
 
   // Check routing history
-  checks.push(checkJsonFile(join(dir, '.sw-kit', 'routing-history.json'), 'routing-history'));
+  checks.push(checkJsonFile(join(dir, '.aing', 'routing-history.json'), 'routing-history'));
 
   // Check circuit breaker state
-  checks.push(checkJsonFile(join(dir, '.sw-kit', 'state', 'circuit-breaker.json'), 'circuit-breaker'));
+  checks.push(checkJsonFile(join(dir, '.aing', 'state', 'circuit-breaker.json'), 'circuit-breaker'));
 
   const healthy = checks.every(c => c.status === 'ok' || c.status === 'not_found');
 

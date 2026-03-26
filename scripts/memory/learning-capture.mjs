@@ -1,5 +1,5 @@
 /**
- * sw-kit Learning Capture (Innovation #2 — Cross-Session Learning)
+ * aing Learning Capture (Innovation #2 — Cross-Session Learning)
  * Automatically captures success patterns from completed PDCA cycles.
  * @module scripts/memory/learning-capture
  */

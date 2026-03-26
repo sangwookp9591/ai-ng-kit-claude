@@ -10,9 +10,9 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { writeState } from '../scripts/core/state.mjs';
 
-const TEST_DIR = join(tmpdir(), `sw-kit-cost-reporter-test-${Date.now()}`);
-const COST_PATH = join(TEST_DIR, '.sw-kit', 'state', 'cost-tracker.json');
-const TRACE_PATH = join(TEST_DIR, '.sw-kit', 'state', 'agent-traces.json');
+const TEST_DIR = join(tmpdir(), `aing-cost-reporter-test-${Date.now()}`);
+const COST_PATH = join(TEST_DIR, '.aing', 'state', 'cost-tracker.json');
+const TRACE_PATH = join(TEST_DIR, '.aing', 'state', 'agent-traces.json');
 
 function makeCostTracker(overrides = {}) {
   return {
@@ -35,7 +35,7 @@ function makeTraceData(overrides = {}) {
 
 describe('cost-reporter: generateCostReport', () => {
   before(() => {
-    mkdirSync(join(TEST_DIR, '.sw-kit', 'state'), { recursive: true });
+    mkdirSync(join(TEST_DIR, '.aing', 'state'), { recursive: true });
   });
 
   after(() => {
@@ -145,7 +145,7 @@ describe('cost-reporter: generateCostReport', () => {
 
   it('works when state files do not exist (graceful fallback)', async () => {
     const { generateCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
-    const emptyDir = join(tmpdir(), `sw-kit-cost-empty-${Date.now()}`);
+    const emptyDir = join(tmpdir(), `aing-cost-empty-${Date.now()}`);
 
     const report = generateCostReport(emptyDir);
 
@@ -168,7 +168,7 @@ describe('cost-reporter: generateCostReport', () => {
 
 describe('cost-reporter: formatCostReport', () => {
   before(() => {
-    mkdirSync(join(TEST_DIR, '.sw-kit', 'state'), { recursive: true });
+    mkdirSync(join(TEST_DIR, '.aing', 'state'), { recursive: true });
   });
 
   it('returns a non-empty string', async () => {
@@ -183,7 +183,7 @@ describe('cost-reporter: formatCostReport', () => {
     assert.ok(formatted.length > 0);
   });
 
-  it('contains sw-kit Cost Report header', async () => {
+  it('contains aing Cost Report header', async () => {
     const { generateCostReport, formatCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData());
@@ -191,7 +191,7 @@ describe('cost-reporter: formatCostReport', () => {
     const report = generateCostReport(TEST_DIR);
     const formatted = formatCostReport(report);
 
-    assert.ok(formatted.includes('sw-kit Cost Report'), 'should contain header');
+    assert.ok(formatted.includes('aing Cost Report'), 'should contain header');
   });
 
   it('shows agent names when agents are present', async () => {

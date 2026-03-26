@@ -1,0 +1,52 @@
+{
+  "id": "task-1774436647451",
+  "title": "[Plan] figma-reader-agent",
+  "feature": "figma-reader-agent",
+  "description": "Figma 파일을 읽어 화면 목록, 사용자 플로우, 컴포넌트 인벤토리, 인터랙션 사양을 포함한 기획 문서로 변환하는 figma-reader 에이전트를 aing에 추가한다. Figma → 기획문서 → Willji 디자인 → Derek 구현의 선형 파이프라인 완성.",
+  "status": "in-progress",
+  "createdAt": "2026-03-25T11:04:07.451Z",
+  "updatedAt": "2026-03-25T11:04:07.451Z",
+  "completedAt": null,
+  "subtasks": [
+    {
+      "id": "task-1774436647451-sub-1",
+      "seq": 1,
+      "title": "Step 1 — Figma MCP tool 탐색: list_tools로 Figma plugin이 노출하는 MCP tool 목록과 파라미터 스펙 확인 (Klay, read-only)",
+      "description": "",
+      "status": "pending",
+      "checkedAt": null
+    },
+    {
+      "id": "task-1774436647451-sub-2",
+      "seq": 2,
+      "title": "Step 2 — agents/figma-reader.md 작성: frontmatter(name/description/model:opus/tools) + 역할/행동/규칙, MCP fallback 패턴 포함",
+      "description": "",
+      "status": "pending",
+      "checkedAt": null
+    },
+    {
+      "id": "task-1774436647451-sub-3",
+      "seq": 3,
+      "title": "Step 3 — skills/figma-read/SKILL.md 작성: /aing figma-read <url> 커맨드, 에이전트 라우팅, 산출물 경로(.aing/designs/figma-spec.md)",
+      "description": "",
+      "status": "pending",
+      "checkedAt": null
+    },
+    {
+      "id": "task-1774436647451-sub-4",
+      "seq": 4,
+      "title": "Step 4 — skills/figma-read/references/output-spec.md 작성: 기획 문서 4섹션(화면 목록/플로우/컴포넌트/인터랙션) 마크다운 템플릿",
+      "description": "",
+      "status": "pending",
+      "checkedAt": null
+    },
+    {
+      "id": "task-1774436647451-sub-5",
+      "seq": 5,
+      "title": "Step 5 — agents/willji.md 수정: Behavior에 figma-spec.md 존재 시 우선 참조 조건 추가",
+      "description": "",
+      "status": "pending",
+      "checkedAt": null
+    }
+  ]
+}

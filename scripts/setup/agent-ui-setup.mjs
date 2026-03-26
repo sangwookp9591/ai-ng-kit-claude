@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * sw-kit agent-ui Auto Setup v1.0.0
+ * aing agent-ui Auto Setup v1.0.0
  *
  * Automatically configures 3D office connection:
  * 1. Auto-detect sw-world-agents-view path
@@ -40,13 +40,13 @@ function findOfficeDir() {
       for (const entry of readdirSync(projectDir)) {
         const candidate = join(projectDir, entry);
         if (statSync(candidate).isDirectory()) {
-          if (entry === 'sw-world-agents-view' || entry === 'swkit-office') {
+          if (entry === 'sw-world-agents-view' || entry === 'aing-office') {
             if (existsSync(join(candidate, 'bin', 'agent-ui.mjs'))) return candidate;
           }
           // One level deeper
           try {
             for (const sub of readdirSync(candidate)) {
-              if (sub === 'sw-world-agents-view' || sub === 'swkit-office') {
+              if (sub === 'sw-world-agents-view' || sub === 'aing-office') {
                 const subPath = join(candidate, sub);
                 if (existsSync(join(subPath, 'bin', 'agent-ui.mjs'))) return subPath;
               }
@@ -76,7 +76,7 @@ function writeSettings(settings) {
 
 // ── Install ──
 function install() {
-  console.log('━━━ sw-kit agent-ui Setup ━━━');
+  console.log('━━━ aing agent-ui Setup ━━━');
   console.log('');
 
   // 1. Find office directory
@@ -167,8 +167,8 @@ function install() {
   console.log('');
   if (officeDir) {
     console.log('  다음 세션부터 3D 오피스에 자동 연결됩니다.');
-    console.log('  /swkit agent-ui          — 브라우저에서 확인');
-    console.log('  /swkit agent-ui --status — 연결 상태 진단');
+    console.log('  /aing agent-ui          — 브라우저에서 확인');
+    console.log('  /aing agent-ui --status — 연결 상태 진단');
   } else {
     console.log('  클라우드 모드로 설정되었습니다.');
     console.log(`  브라우저에서 ${CLOUD_URL} 접속하세요.`);
@@ -178,7 +178,7 @@ function install() {
 
 // ── Uninstall ──
 function uninstall() {
-  console.log('━━━ sw-kit agent-ui Uninstall ━━━');
+  console.log('━━━ aing agent-ui Uninstall ━━━');
   console.log('');
 
   const settings = readSettings();

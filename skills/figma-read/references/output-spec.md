@@ -1,6 +1,6 @@
 # Figma Spec Output Format
 
-figma-reader 에이전트가 생성하는 `.sw-kit/designs/figma-spec.md`의 표준 포맷입니다.
+figma-reader 에이전트가 생성하는 `.aing/designs/figma-spec.md`의 표준 포맷입니다.
 
 ---
 

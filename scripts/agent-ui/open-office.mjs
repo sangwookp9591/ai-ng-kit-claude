@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * sw-kit agent-ui: Open 3D Office with session context
+ * aing agent-ui: Open 3D Office with session context
  *
  * Passes current session info + active agents as URL query params
  * so the office view can connect to this Claude Code session.
@@ -21,7 +21,7 @@ function getSessionId() {
 }
 
 function getActiveAgents(projectDir) {
-  const tracePath = join(projectDir, '.sw-kit', 'state', 'agent-traces.json');
+  const tracePath = join(projectDir, '.aing', 'state', 'agent-traces.json');
   if (!existsSync(tracePath)) return [];
 
   try {
@@ -39,7 +39,7 @@ function getActiveAgents(projectDir) {
 }
 
 function getPipelineState(projectDir) {
-  const statePath = join(projectDir, '.sw-kit', 'state', 'pipeline-state.json');
+  const statePath = join(projectDir, '.aing', 'state', 'pipeline-state.json');
   if (!existsSync(statePath)) return null;
 
   try {
@@ -55,7 +55,7 @@ function getPipelineState(projectDir) {
 }
 
 function getAutoRunState(projectDir) {
-  const stateDir = join(projectDir, '.sw-kit', 'state');
+  const stateDir = join(projectDir, '.aing', 'state');
   if (!existsSync(stateDir)) return null;
 
   try {

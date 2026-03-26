@@ -1,6 +1,6 @@
 /**
- * sw-kit Intent Router
- * 자연어 입력을 분석하여 최적의 sw-kit 파이프라인으로 라우팅합니다.
+ * aing Intent Router
+ * 자연어 입력을 분석하여 최적의 aing 파이프라인으로 라우팅합니다.
  * @module scripts/routing/intent-router
  */
 
@@ -176,7 +176,7 @@ function resolvePreset(route, complexityScore, isDesign) {
 // ─────────────────────────────────────────────
 
 /**
- * 자연어 입력을 분석하여 최적의 sw-kit 파이프라인으로 라우팅합니다.
+ * 자연어 입력을 분석하여 최적의 aing 파이프라인으로 라우팅합니다.
  * @param {string|null} input - 사용자 자연어 입력
  * @returns {{
  *   route: 'auto'|'plan'|'team'|'wizard',

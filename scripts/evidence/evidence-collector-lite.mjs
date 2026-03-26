@@ -1,5 +1,5 @@
 /**
- * sw-kit Evidence Collector Lite (Phase 2 — basic interface)
+ * aing Evidence Collector Lite (Phase 2 — basic interface)
  * Collects basic evidence from tool outputs.
  * Full version expands in Phase 4.
  * @module scripts/evidence/evidence-collector-lite

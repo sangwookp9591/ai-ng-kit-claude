@@ -1,0 +1,224 @@
+{
+  "cycles": {
+    "tdd-test": {
+      "testTarget": "login API",
+      "phase": "refactor",
+      "cycleCount": 0,
+      "startedAt": "2026-03-19T04:31:32.974Z",
+      "history": [
+        {
+          "phase": "red",
+          "testResult": "fail",
+          "evidence": "test failed as expected",
+          "ts": "2026-03-19T04:31:32.974Z"
+        },
+        {
+          "phase": "green",
+          "testResult": "pass",
+          "evidence": "test passed",
+          "ts": "2026-03-19T04:31:32.974Z"
+        }
+      ],
+      "testResults": {
+        "red": "fail",
+        "green": "pass",
+        "refactor": null
+      }
+    },
+    "tdd-a": {
+      "testTarget": "api",
+      "phase": "refactor",
+      "cycleCount": 0,
+      "startedAt": "2026-03-19T04:42:37.377Z",
+      "history": [
+        {
+          "phase": "red",
+          "testResult": "fail",
+          "evidence": "",
+          "ts": "2026-03-19T04:42:37.377Z"
+        },
+        {
+          "phase": "green",
+          "testResult": "pass",
+          "evidence": "",
+          "ts": "2026-03-19T04:42:37.377Z"
+        }
+      ],
+      "testResults": {
+        "red": "fail",
+        "green": "pass",
+        "refactor": null
+      }
+    },
+    "f": {
+      "testTarget": "api",
+      "phase": "refactor",
+      "cycleCount": 0,
+      "startedAt": "2026-03-19T04:52:42.934Z",
+      "history": [
+        {
+          "phase": "red",
+          "testResult": "fail",
+          "evidence": "",
+          "ts": "2026-03-19T04:52:42.934Z"
+        },
+        {
+          "phase": "green",
+          "testResult": "pass",
+          "evidence": "",
+          "ts": "2026-03-19T04:52:42.934Z"
+        }
+      ],
+      "testResults": {
+        "red": "fail",
+        "green": "pass",
+        "refactor": null
+      }
+    },
+    "f13": {
+      "testTarget": "api",
+      "phase": "refactor",
+      "cycleCount": 0,
+      "startedAt": "2026-03-19T04:57:57.304Z",
+      "history": [
+        {
+          "phase": "red",
+          "testResult": "fail",
+          "evidence": "",
+          "ts": "2026-03-19T04:57:57.304Z"
+        },
+        {
+          "phase": "green",
+          "testResult": "pass",
+          "evidence": "",
+          "ts": "2026-03-19T04:57:57.304Z"
+        }
+      ],
+      "testResults": {
+        "red": "fail",
+        "green": "pass",
+        "refactor": null
+      }
+    },
+    "f13f": {
+      "testTarget": "api",
+      "phase": "refactor",
+      "cycleCount": 0,
+      "startedAt": "2026-03-19T05:00:41.228Z",
+      "history": [
+        {
+          "phase": "red",
+          "testResult": "fail",
+          "evidence": "",
+          "ts": "2026-03-19T05:00:41.228Z"
+        },
+        {
+          "phase": "green",
+          "testResult": "pass",
+          "evidence": "",
+          "ts": "2026-03-19T05:00:41.228Z"
+        }
+      ],
+      "testResults": {
+        "red": "fail",
+        "green": "pass",
+        "refactor": null
+      }
+    },
+    "ft": {
+      "testTarget": "api",
+      "phase": "refactor",
+      "cycleCount": 0,
+      "startedAt": "2026-03-19T05:10:48.606Z",
+      "history": [
+        {
+          "phase": "red",
+          "testResult": "fail",
+          "evidence": "",
+          "ts": "2026-03-19T05:10:48.606Z"
+        },
+        {
+          "phase": "green",
+          "testResult": "pass",
+          "evidence": "",
+          "ts": "2026-03-19T05:10:48.606Z"
+        }
+      ],
+      "testResults": {
+        "red": "fail",
+        "green": "pass",
+        "refactor": null
+      }
+    },
+    "t": {
+      "testTarget": "api",
+      "phase": "refactor",
+      "cycleCount": 0,
+      "startedAt": "2026-03-19T05:17:04.447Z",
+      "history": [
+        {
+          "phase": "red",
+          "testResult": "fail",
+          "evidence": "",
+          "ts": "2026-03-19T05:17:04.448Z"
+        },
+        {
+          "phase": "green",
+          "testResult": "pass",
+          "evidence": "",
+          "ts": "2026-03-19T05:17:04.448Z"
+        }
+      ],
+      "testResults": {
+        "red": "fail",
+        "green": "pass",
+        "refactor": null
+      }
+    },
+    "fx": {
+      "testTarget": "api",
+      "phase": "refactor",
+      "cycleCount": 0,
+      "startedAt": "2026-03-19T05:19:31.841Z",
+      "history": [
+        {
+          "phase": "red",
+          "testResult": "fail",
+          "evidence": "",
+          "ts": "2026-03-19T05:19:31.841Z"
+        },
+        {
+          "phase": "green",
+          "testResult": "pass",
+          "evidence": "",
+          "ts": "2026-03-19T05:19:31.842Z"
+        }
+      ],
+      "testResults": {
+        "red": "fail",
+        "green": "pass",
+        "refactor": null
+      }
+    },
+    "z": {
+      "testTarget": "a",
+      "phase": "green",
+      "cycleCount": 0,
+      "startedAt": "2026-03-19T05:28:16.429Z",
+      "history": [
+        {
+          "phase": "red",
+          "testResult": "fail",
+          "evidence": "",
+          "ts": "2026-03-19T05:28:16.429Z"
+        }
+      ],
+      "testResults": {
+        "red": "fail",
+        "green": null,
+        "refactor": null
+      }
+    }
+  },
+  "activeCycle": "z"
+}

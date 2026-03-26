@@ -1,6 +1,6 @@
 /**
- * sw-kit Configuration Loader
- * Single source of truth: sw-kit.config.json
+ * aing Configuration Loader
+ * Single source of truth: aing.config.json
  * @module scripts/core/config
  */
 
@@ -44,7 +44,7 @@ let _configCache = null;
 let _cachedDir = null;
 
 /**
- * Load sw-kit configuration with defaults merge.
+ * Load aing configuration with defaults merge.
  * @param {string} [projectDir] - Project root directory
  * @returns {object} Merged configuration
  */
@@ -52,7 +52,7 @@ export function loadConfig(projectDir) {
   const dir = projectDir || process.cwd();
   if (_configCache && _cachedDir === dir) return _configCache;
 
-  const configPath = join(dir, 'sw-kit.config.json');
+  const configPath = join(dir, 'aing.config.json');
 
   const result = readState(configPath);
   const userConfig = result.ok ? result.data : {};

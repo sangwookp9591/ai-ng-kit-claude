@@ -4,21 +4,21 @@ description: "Full pipeline auto-run. Named agents spawn as CC native team with 
 triggers: ["auto", "pipeline", "full team"]
 ---
 
-# /swkit auto -- Full Pipeline with Native Team Colors
+# /aing auto -- Full Pipeline with Native Team Colors
 
-When the user runs `/swkit auto <feature> <task>`, execute this EXACT sequence using Claude Code native team tools. Each agent gets a unique color automatically.
+When the user runs `/aing auto <feature> <task>`, execute this EXACT sequence using Claude Code native team tools. Each agent gets a unique color automatically.
 
-If a plan file path is provided (e.g., from `/swkit plan` → auto transition), read the plan file and skip to Step 2. Use the plan's task decomposition directly for Step 3 instead of re-analyzing.
+If a plan file path is provided (e.g., from `/aing plan` → auto transition), read the plan file and skip to Step 2. Use the plan's task decomposition directly for Step 3 instead of re-analyzing.
 
 ## Step 0: Context Reuse Detection
 
 Before starting the pipeline, check for existing artifacts:
 
-1. **Existing plan**: Check `.sw-kit/plans/` for a plan matching the feature
+1. **Existing plan**: Check `.aing/plans/` for a plan matching the feature
    - If found: skip Phase 1 (Planning), load plan directly
    - Display: `📋 기존 계획 발견: {plan path} — 계획 단계 생략`
 
-2. **Existing session**: Check `.sw-kit/state/auto-session.json`
+2. **Existing session**: Check `.aing/state/auto-session.json`
    - If active session found: offer resume (same as team resume)
    - Display resume prompt with completed phases
 
@@ -41,7 +41,7 @@ Before starting the pipeline, check for existing artifacts:
 - Write handoff on completion
 
 ### Phase 3: QA Cycling (NEW)
-- Run `/swkit qa` with detected test command
+- Run `/aing qa` with detected test command
 - If tests pass: proceed to Phase 4
 - If tests fail: Jay auto-fix cycle (max 5 rounds)
 - Same error 3x → skip to Phase 4 with warning
@@ -59,7 +59,7 @@ Before starting the pipeline, check for existing artifacts:
 ### Phase 5: Completion
 - Aggregate all phase results
 - Generate completion report
-- Persist learning to `.sw-kit/reports/`
+- Persist learning to `.aing/reports/`
 - End session
 - Display final report
 
@@ -109,16 +109,16 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" plan \
   --steps "{agent1}: {role}|{agent2}: {role}|..."
 ```
 
-This creates `.sw-kit/plans/{date}-{feature}.md` and `.sw-kit/tasks/task-{id}.json`.
+This creates `.aing/plans/{date}-{feature}.md` and `.aing/tasks/task-{id}.json`.
 
-**DO NOT SKIP.** Without this, no plan/task files are recorded in `.sw-kit/`.
+**DO NOT SKIP.** Without this, no plan/task files are recorded in `.aing/`.
 
 ## Step 2: Create Team
 
 ```
 TeamCreate({
   team_name: "<feature-slug>",
-  description: "sw-kit auto: <task>"
+  description: "aing auto: <task>"
 })
 ```
 
@@ -137,7 +137,7 @@ TaskUpdate({ taskId: "1", owner: "jay" })
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  sw-kit: 에이전트 투입
+  aing: 에이전트 투입
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Agent        Role              Model    Task
@@ -161,7 +161,7 @@ Spawn ALL workers in parallel using Agent with team_name. **MANDATORY: `descript
 
 ```
 Agent({
-  subagent_type: "sw-kit:klay",
+  subagent_type: "aing:klay",
   description: "Klay: 아키텍처 탐색 + 구조 분석",
   team_name: "<feature-slug>",
   name: "klay",
@@ -170,7 +170,7 @@ Agent({
 })
 
 Agent({
-  subagent_type: "sw-kit:jay",
+  subagent_type: "aing:jay",
   description: "Jay: Backend API 엔드포인트 구현",
   team_name: "<feature-slug>",
   name: "jay",
@@ -181,10 +181,10 @@ Agent({
 
 이렇게 하면 터미널에 자동으로 표시됩니다:
 ```
-⏺ sw-kit:klay(Klay: 아키텍처 탐색 + 구조 분석) Opus
+⏺ aing:klay(Klay: 아키텍처 탐색 + 구조 분석) Opus
   ⎿  Done (9 tool uses · 83.6k tokens · 2m 10s)
 
-⏺ sw-kit:jay(Jay: Backend API 엔드포인트 구현) Sonnet
+⏺ aing:jay(Jay: Backend API 엔드포인트 구현) Sonnet
   ⎿  Done (15 tool uses · 42.1k tokens · 3m 22s)
 ```
 
@@ -231,7 +231,7 @@ After all tasks complete, ALWAYS display the team activity report:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  sw-kit auto complete: {feature}
+  aing auto complete: {feature}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Team: {preset} ({N}명)
@@ -253,8 +253,8 @@ After all tasks complete, ALWAYS display the team activity report:
 
   Files changed: 12
   Duration: ~8 min
-  Learning: saved to .sw-kit/project-memory.json
-  Report: .sw-kit/reports/{date}-{feature}.md
+  Learning: saved to .aing/project-memory.json
+  Report: .aing/reports/{date}-{feature}.md
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -270,38 +270,38 @@ After displaying the completion report:
 ```bash
 node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" report --feature "{feature}" --lessons "{lesson1}|{lesson2}"
 ```
-5. This generates `.sw-kit/reports/{date}-{feature}.md`
+5. This generates `.aing/reports/{date}-{feature}.md`
 
 ## Team Presets
 
 ### Solo (complexity <= 2)
 ```
-Agent(name: "jay", subagent_type: "sw-kit:jay", description: "Jay: {task}", model: "sonnet")
+Agent(name: "jay", subagent_type: "aing:jay", description: "Jay: {task}", model: "sonnet")
 ```
 
 ### Duo (complexity 3-4)
 ```
-Agent(name: "jay", subagent_type: "sw-kit:jay", description: "Jay: {task}", model: "sonnet")
-Agent(name: "milla", subagent_type: "sw-kit:milla", description: "Milla: 보안 리뷰", model: "sonnet")
+Agent(name: "jay", subagent_type: "aing:jay", description: "Jay: {task}", model: "sonnet")
+Agent(name: "milla", subagent_type: "aing:milla", description: "Milla: 보안 리뷰", model: "sonnet")
 ```
 
 ### Squad (complexity 5-6)
 ```
-Agent(name: "able", subagent_type: "sw-kit:able", description: "Able: 요구사항 + 태스크 분해", model: "sonnet")
-Agent(name: "jay", subagent_type: "sw-kit:jay", description: "Jay: {task}", model: "sonnet")
-Agent(name: "derek", subagent_type: "sw-kit:derek", description: "Derek: {task}", model: "sonnet")
-Agent(name: "sam", subagent_type: "sw-kit:sam", description: "Sam: 증거 수집 + 최종 판정", model: "haiku")
+Agent(name: "able", subagent_type: "aing:able", description: "Able: 요구사항 + 태스크 분해", model: "sonnet")
+Agent(name: "jay", subagent_type: "aing:jay", description: "Jay: {task}", model: "sonnet")
+Agent(name: "derek", subagent_type: "aing:derek", description: "Derek: {task}", model: "sonnet")
+Agent(name: "sam", subagent_type: "aing:sam", description: "Sam: 증거 수집 + 최종 판정", model: "haiku")
 ```
 
 ### Full (complexity >= 7)
 ```
-Agent(name: "able", subagent_type: "sw-kit:able", description: "Able: 요구사항 + 태스크 분해", model: "sonnet")
-Agent(name: "klay", subagent_type: "sw-kit:klay", description: "Klay: 아키텍처 탐색 + 구조 분석", model: "opus")
-Agent(name: "jay", subagent_type: "sw-kit:jay", description: "Jay: {task}", model: "sonnet")
-Agent(name: "jerry", subagent_type: "sw-kit:jerry", description: "Jerry: DB 스키마 + 마이그레이션", model: "sonnet")
-Agent(name: "milla", subagent_type: "sw-kit:milla", description: "Milla: 보안 리뷰 + 코드 품질", model: "sonnet")
-Agent(name: "derek", subagent_type: "sw-kit:derek", description: "Derek: {task}", model: "sonnet")
-Agent(name: "sam", subagent_type: "sw-kit:sam", description: "Sam: 증거 수집 + 최종 판정", model: "haiku")
+Agent(name: "able", subagent_type: "aing:able", description: "Able: 요구사항 + 태스크 분해", model: "sonnet")
+Agent(name: "klay", subagent_type: "aing:klay", description: "Klay: 아키텍처 탐색 + 구조 분석", model: "opus")
+Agent(name: "jay", subagent_type: "aing:jay", description: "Jay: {task}", model: "sonnet")
+Agent(name: "jerry", subagent_type: "aing:jerry", description: "Jerry: DB 스키마 + 마이그레이션", model: "sonnet")
+Agent(name: "milla", subagent_type: "aing:milla", description: "Milla: 보안 리뷰 + 코드 품질", model: "sonnet")
+Agent(name: "derek", subagent_type: "aing:derek", description: "Derek: {task}", model: "sonnet")
+Agent(name: "sam", subagent_type: "aing:sam", description: "Sam: 증거 수집 + 최종 판정", model: "haiku")
 ```
 
 ## Design Presets
@@ -310,21 +310,21 @@ Agent(name: "sam", subagent_type: "sw-kit:sam", description: "Sam: 증거 수집
 
 ### Design Solo (디자인 생성만)
 ```
-Agent(name: "willji", subagent_type: "sw-kit:willji", description: "Willji: UI 디자인 생성", model: "sonnet")
+Agent(name: "willji", subagent_type: "aing:willji", description: "Willji: UI 디자인 생성", model: "sonnet")
 ```
 
 ### Design Duo (디자인 → 코드)
 ```
-Agent(name: "willji", subagent_type: "sw-kit:willji", description: "Willji: UI 디자인 생성", model: "sonnet")
-Agent(name: "derek", subagent_type: "sw-kit:derek", description: "Derek: 디자인 → React 변환", model: "sonnet")
+Agent(name: "willji", subagent_type: "aing:willji", description: "Willji: UI 디자인 생성", model: "sonnet")
+Agent(name: "derek", subagent_type: "aing:derek", description: "Derek: 디자인 → React 변환", model: "sonnet")
 ```
 
 ### Design Squad (디자인 → 코드 → 모션 → 검증)
 ```
-Agent(name: "willji", subagent_type: "sw-kit:willji", description: "Willji: UI 디자인 생성", model: "sonnet")
-Agent(name: "derek", subagent_type: "sw-kit:derek", description: "Derek: 디자인 → React 변환", model: "sonnet")
-Agent(name: "rowan", subagent_type: "sw-kit:rowan", description: "Rowan: 인터랙션 + 모션", model: "sonnet")
-Agent(name: "sam", subagent_type: "sw-kit:sam", description: "Sam: 증거 수집 + 최종 판정", model: "haiku")
+Agent(name: "willji", subagent_type: "aing:willji", description: "Willji: UI 디자인 생성", model: "sonnet")
+Agent(name: "derek", subagent_type: "aing:derek", description: "Derek: 디자인 → React 변환", model: "sonnet")
+Agent(name: "rowan", subagent_type: "aing:rowan", description: "Rowan: 인터랙션 + 모션", model: "sonnet")
+Agent(name: "sam", subagent_type: "aing:sam", description: "Sam: 증거 수집 + 최종 판정", model: "haiku")
 ```
 
 Design Preset 선택 기준:

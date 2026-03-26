@@ -1,5 +1,5 @@
 /**
- * sw-kit PreToolUse Hook v1.3.2
+ * aing PreToolUse Hook v1.3.2
  */
 import { readStdinJSON } from '../scripts/core/stdin.mjs';
 import { checkBashCommand, checkFilePath, formatViolations } from '../scripts/guardrail/guardrail-engine.mjs';
@@ -46,6 +46,6 @@ try {
     ? JSON.stringify({ hookSpecificOutput: { additionalContext: ctx.join('\n\n') } })
     : '{}');
 } catch (err) {
-  process.stderr.write(`[sw-kit:pre-tool-use] ${err.message}\n`);
+  process.stderr.write(`[aing:pre-tool-use] ${err.message}\n`);
   process.stdout.write('{}');
 }

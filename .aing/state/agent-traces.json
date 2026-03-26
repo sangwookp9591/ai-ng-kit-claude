@@ -1,0 +1,20 @@
+{
+  "events": [
+    {
+      "seq": 1,
+      "ts": "2026-03-19T05:28:16.404Z",
+      "agent": "J",
+      "action": "w",
+      "target": "a",
+      "result": "success"
+    }
+  ],
+  "summary": {
+    "J": {
+      "actions": 1,
+      "reads": 0,
+      "writes": 0,
+      "errors": 0
+    }
+  }
+}

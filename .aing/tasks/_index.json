@@ -106,5 +106,17 @@
     "title": "[Plan] test-auth",
     "status": "in-progress",
     "updatedAt": "2026-03-20T06:21:15.161Z"
+  },
+  {
+    "id": "task-1774436647451",
+    "title": "[Plan] figma-reader-agent",
+    "status": "in-progress",
+    "updatedAt": "2026-03-25T11:04:07.452Z"
+  },
+  {
+    "id": "task-1774436872233",
+    "title": "[Plan] figma-reader-progress-checker",
+    "status": "in-progress",
+    "updatedAt": "2026-03-25T11:07:52.233Z"
   }
 ]

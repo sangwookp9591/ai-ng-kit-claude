@@ -4,12 +4,12 @@ description: "🛡️ 다중 관점 코드 리뷰. Milla(보안) + 품질/성능
 triggers: ["review", "리뷰", "코드리뷰", "code review"]
 ---
 
-# /swkit review — Multi-Perspective Code Review
+# /aing review — Multi-Perspective Code Review
 
 ## Usage
 ```
-/swkit review [files...]
-/swkit review "src/auth/"
+/aing review [files...]
+/aing review "src/auth/"
 ```
 
 ## Step 1: Scope Analysis
@@ -27,7 +27,7 @@ Determine review scope and complexity:
 ### Always: Milla — Security Review
 ```
 Agent({
-  subagent_type: "sw-kit:milla",
+  subagent_type: "aing:milla",
   description: "Milla: 보안 리뷰 — {scope}",
   model: "sonnet",
   prompt: "[SECURITY REVIEW]
@@ -52,7 +52,7 @@ Focus:
 ### Mid+: Klay — Quality Review
 ```
 Agent({
-  subagent_type: "sw-kit:klay",
+  subagent_type: "aing:klay",
   description: "Klay: 품질 리뷰 — {scope}",
   model: "sonnet",
   prompt: "[QUALITY REVIEW]
@@ -78,7 +78,7 @@ Focus:
 ### High only: Jay — Performance Review
 ```
 Agent({
-  subagent_type: "sw-kit:jay",
+  subagent_type: "aing:jay",
   description: "Jay: 성능 리뷰 — {scope}",
   model: "sonnet",
   prompt: "[PERFORMANCE REVIEW]
@@ -109,7 +109,7 @@ Merge all reviewer outputs into a single report:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  sw-kit review: {scope}
+  aing review: {scope}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Complexity: {level} ({score}/10)

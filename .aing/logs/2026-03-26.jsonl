@@ -1,0 +1,365 @@
+{"ts":"2026-03-26T00:59:48.967Z","level":"info","module":"state-gc","msg":"GC: no zombies found"}
+{"ts":"2026-03-26T00:59:48.969Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":15,"zombieCount":0,"activeFeature":"z"}}
+{"ts":"2026-03-26T00:59:48.976Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-26T01:00:49.204Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-26T01:01:08.666Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-26T01:01:08.667Z","level":"info","module":"handoff","msg":"Handoff written: session-stop","data":{"feature":"z","path":"/Users/iron/Project/sw-kit-claude/.sw-kit/handoffs/z/session-stop-2026-03-26T01-01-08-667Z-6adb2d.md"}}
+{"ts":"2026-03-26T01:01:08.667Z","level":"info","module":"stop","msg":"Session handoff written","data":{"path":"/Users/iron/Project/sw-kit-claude/.sw-kit/handoffs/z/session-stop-2026-03-26T01-01-08-667Z-6adb2d.md","feature":"z","stage":"explore"}}
+{"ts":"2026-03-26T01:02:01.139Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"high","workers":7}}
+{"ts":"2026-03-26T01:03:59.404Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-26T01:03:59.406Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-26T01:03:59.407Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-exec"}}
+{"ts":"2026-03-26T01:03:59.409Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":null}}
+{"ts":"2026-03-26T01:04:01.994Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:01.995Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/auth.ts 파일에 JWT 검증 추가해줘...\" → auto(duo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:01.997Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:01.997Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"user.service.ts에서 createUser 함수 수정해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:01.998Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:01.998Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"index.js 오류 고쳐줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:01.998Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:01.998Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"main.py에 함수 추가해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:01.999Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:01.999Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"#42 이슈 수정해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:01.999Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:01.999Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"TypeError: Cannot read property 에러 고쳐줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:02.000Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.000Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"```js\nconsole.log(\"hi\")\n``` 이 코드 최적화해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:02.000Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.001Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"getUserById 함수 리팩토링해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:02.001Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.002Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"UserService 클래스에 메서드 추가해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:02.002Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.002Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"로그인 화면 디자인해줘...\" → auto(design), confidence=0.88"}
+{"ts":"2026-03-26T01:04:02.003Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.003Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"대시보드 UI 만들어줘...\" → auto(design), confidence=0.88"}
+{"ts":"2026-03-26T01:04:02.003Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.003Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"메인 화면 수정해줘...\" → auto(design), confidence=0.88"}
+{"ts":"2026-03-26T01:04:02.004Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.004Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"인증 시스템 계획 세워줘...\" → plan(solo), confidence=0.82"}
+{"ts":"2026-03-26T01:04:02.004Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.004Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"현재 아키텍처 분석해줘...\" → plan(solo), confidence=0.82"}
+{"ts":"2026-03-26T01:04:02.004Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.004Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"DB 스키마 설계해줘...\" → plan(solo), confidence=0.82"}
+{"ts":"2026-03-26T01:04:02.004Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.004Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"팀으로 전체 인증 시스템 구현해줘...\" → team(squad), confidence=0.85"}
+{"ts":"2026-03-26T01:04:02.005Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.005Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"대규모 리팩토링 진행해줘...\" → team(squad), confidence=0.85"}
+{"ts":"2026-03-26T01:04:02.005Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.005Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"전체 백엔드 API 구현해줘...\" → team(squad), confidence=0.85"}
+{"ts":"2026-03-26T01:04:02.006Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.006Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"인증 기능 추가해줘...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:02.006Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.006Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/utils.ts에 헬퍼 함수 하나 추가해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:02.006Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=4, domains=1"}
+{"ts":"2026-03-26T01:04:02.006Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/utils.ts, src/helpers.ts, src/format...\" → auto(duo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:02.007Z","level":"info","module":"intent-router","msg":"complexity 추정: score=8, files=1, domains=3"}
+{"ts":"2026-03-26T01:04:02.007Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"사용자 인증 시스템 전체 구현: JWT, OAuth, 소셜 로그인, 세션...\" → team(full), confidence=0.85"}
+{"ts":"2026-03-26T01:04:02.007Z","level":"info","module":"intent-router","msg":"complexity 추정: score=2, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.007Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"테스트 입력...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:02.007Z","level":"info","module":"intent-router","msg":"complexity 추정: score=2, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.007Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"테스트 입력 문자열...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:02.007Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.007Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"어떤 입력이든...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:02.007Z","level":"info","module":"intent-router","msg":"complexity 추정: score=2, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.007Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"테스트...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:02.008Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:02.008Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/app.ts 수정해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.519Z","level":"info","module":"handoff","msg":"Handoff written: team-plan","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.aing/handoffs/auth-upgrade/team-plan-2026-03-26T01-04-28-518Z-fbeb51.md"}}
+{"ts":"2026-03-26T01:04:28.521Z","level":"info","module":"handoff","msg":"Handoff written: team-exec","data":{"feature":"auth-upgrade","path":"/Users/iron/Project/sw-kit-claude/tests/.test-handoff-tmp/.aing/handoffs/auth-upgrade/team-exec-2026-03-26T01-04-28-520Z-e153d6.md"}}
+{"ts":"2026-03-26T01:04:28.654Z","level":"warn","module":"context-budget","msg":"Context budget exceeded: ~5000 / 2000 tokens (source: big-hook)"}
+{"ts":"2026-03-26T01:04:28.674Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-26T01:04:28.674Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-26T01:04:28.674Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-26T01:04:28.674Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-x after 3 failures"}
+{"ts":"2026-03-26T01:04:28.676Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-26T01:04:28.676Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-26T01:04:28.676Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-26T01:04:28.676Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for feat-y after 3 failures"}
+{"ts":"2026-03-26T01:04:28.679Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-26T01:04:28.679Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-26T01:04:28.679Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-26T01:04:28.679Z","level":"info","module":"circuit-breaker","msg":"Circuit CLOSED for feat-z (success recorded)"}
+{"ts":"2026-03-26T01:04:28.680Z","level":"warn","module":"retry","msg":"Retry 1/2 for \"unknown\" in 11ms","data":{"error":"fail"}}
+{"ts":"2026-03-26T01:04:28.692Z","level":"warn","module":"retry","msg":"Retry 2/2 for \"unknown\" in 21ms","data":{"error":"fail"}}
+{"ts":"2026-03-26T01:04:28.715Z","level":"error","module":"retry","msg":"All retries exhausted for \"unknown\"","data":{"attempts":3,"error":"fail"}}
+{"ts":"2026-03-26T01:04:28.715Z","level":"warn","module":"retry","msg":"Retry 1/3 for \"unknown\" in 11ms","data":{"error":"not yet"}}
+{"ts":"2026-03-26T01:04:28.729Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-26T01:04:28.729Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-26T01:04:28.729Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-26T01:04:28.730Z","level":"warn","module":"circuit-breaker","msg":"Circuit OPENED for retry-test after 3 failures"}
+{"ts":"2026-03-26T01:04:28.732Z","level":"warn","module":"recovery-engine","msg":"Reset pdca-status.json to fresh state (no backup found)"}
+{"ts":"2026-03-26T01:04:28.734Z","level":"info","module":"recovery-engine","msg":"Recovered pdca-status.json from emergency backup"}
+{"ts":"2026-03-26T01:04:28.737Z","level":"error","module":"health-check","msg":"Health check failed","data":{"corrupted":["pdca-status"]}}
+{"ts":"2026-03-26T01:04:28.746Z","level":"info","module":"learning-capture","msg":"Learning captured for auth","data":{"patterns":1,"mistakes":1,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.747Z","level":"info","module":"learning-capture","msg":"Learning captured for complex-feat","data":{"patterns":0,"mistakes":0,"iterations":4}}
+{"ts":"2026-03-26T01:04:28.749Z","level":"info","module":"learning-capture","msg":"Learning captured for simple","data":{"patterns":0,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.750Z","level":"info","module":"pdca-engine","msg":"PDCA started: feat-1"}
+{"ts":"2026-03-26T01:04:28.751Z","level":"info","module":"pdca-engine","msg":"PDCA started: feat-dup"}
+{"ts":"2026-03-26T01:04:28.753Z","level":"info","module":"pdca-engine","msg":"PDCA started: flow-test"}
+{"ts":"2026-03-26T01:04:28.755Z","level":"info","module":"pdca-engine","msg":"PDCA started: no-rate"}
+{"ts":"2026-03-26T01:04:28.757Z","level":"info","module":"pdca-engine","msg":"PDCA started: iter-test"}
+{"ts":"2026-03-26T01:04:28.759Z","level":"info","module":"pdca-engine","msg":"PDCA started: complete-test"}
+{"ts":"2026-03-26T01:04:28.760Z","level":"info","module":"pdca-engine","msg":"PDCA started: reset-test"}
+{"ts":"2026-03-26T01:04:28.763Z","level":"info","module":"pdca-engine","msg":"PDCA started: review-end"}
+{"ts":"2026-03-26T01:04:28.765Z","level":"info","module":"pdca-engine","msg":"PDCA started: full-flow"}
+{"ts":"2026-03-26T01:04:28.784Z","level":"warn","module":"cost-ceiling","msg":"Cost ceiling warning","data":{"warnings":["🚫 세션 토큰 한도 초과: ~600,000 / 500,000","⚠️ 작업 \"big-task\" 토큰 한도 초과: ~600,000 / 100,000"]}}
+{"ts":"2026-03-26T01:04:28.793Z","level":"info","module":"evidence-report","msg":"Report generated: /var/folders/_p/fy8jj5b95c38w41rttwnnll40000gn/T/aing-test-3865caba52b4/.aing/reports/2026-03-26-rpt-test.md"}
+{"ts":"2026-03-26T01:04:28.794Z","level":"info","module":"learning-capture","msg":"Learning captured for f0","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.795Z","level":"info","module":"learning-capture","msg":"Learning captured for f1","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.796Z","level":"info","module":"learning-capture","msg":"Learning captured for f2","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.796Z","level":"info","module":"learning-capture","msg":"Learning captured for f3","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.797Z","level":"info","module":"learning-capture","msg":"Learning captured for f4","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.798Z","level":"info","module":"learning-capture","msg":"Learning captured for f5","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.799Z","level":"info","module":"learning-capture","msg":"Learning captured for f6","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.800Z","level":"info","module":"learning-capture","msg":"Learning captured for f7","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.800Z","level":"info","module":"learning-capture","msg":"Learning captured for f8","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.801Z","level":"info","module":"learning-capture","msg":"Learning captured for f9","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.802Z","level":"info","module":"learning-capture","msg":"Learning captured for f10","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.803Z","level":"info","module":"learning-capture","msg":"Learning captured for f11","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.804Z","level":"info","module":"learning-capture","msg":"Learning captured for f12","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.804Z","level":"info","module":"learning-capture","msg":"Learning captured for f13","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.805Z","level":"info","module":"learning-capture","msg":"Learning captured for f14","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.806Z","level":"info","module":"learning-capture","msg":"Learning captured for f15","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.806Z","level":"info","module":"learning-capture","msg":"Learning captured for f16","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.807Z","level":"info","module":"learning-capture","msg":"Learning captured for f17","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.808Z","level":"info","module":"learning-capture","msg":"Learning captured for f18","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.808Z","level":"info","module":"learning-capture","msg":"Learning captured for f19","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.809Z","level":"info","module":"learning-capture","msg":"Learning captured for f20","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.810Z","level":"info","module":"learning-capture","msg":"Learning captured for f21","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.810Z","level":"info","module":"learning-capture","msg":"Learning captured for f22","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.811Z","level":"info","module":"learning-capture","msg":"Learning captured for f23","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.811Z","level":"info","module":"learning-capture","msg":"Learning captured for f24","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.813Z","level":"info","module":"learning-capture","msg":"Learning captured for f25","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.813Z","level":"info","module":"learning-capture","msg":"Learning captured for f26","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.814Z","level":"info","module":"learning-capture","msg":"Learning captured for f27","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.815Z","level":"info","module":"learning-capture","msg":"Learning captured for f28","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.816Z","level":"info","module":"learning-capture","msg":"Learning captured for f29","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.817Z","level":"info","module":"learning-capture","msg":"Learning captured for f30","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.817Z","level":"info","module":"learning-capture","msg":"Learning captured for f31","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.818Z","level":"info","module":"learning-capture","msg":"Learning captured for f32","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.819Z","level":"info","module":"learning-capture","msg":"Learning captured for f33","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.819Z","level":"info","module":"learning-capture","msg":"Learning captured for f34","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.820Z","level":"info","module":"learning-capture","msg":"Learning captured for f35","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.821Z","level":"info","module":"learning-capture","msg":"Learning captured for f36","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.822Z","level":"info","module":"learning-capture","msg":"Learning captured for f37","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.822Z","level":"info","module":"learning-capture","msg":"Learning captured for f38","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.823Z","level":"info","module":"learning-capture","msg":"Learning captured for f39","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.824Z","level":"info","module":"learning-capture","msg":"Learning captured for f40","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.825Z","level":"info","module":"learning-capture","msg":"Learning captured for f41","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.826Z","level":"info","module":"learning-capture","msg":"Learning captured for f42","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.827Z","level":"info","module":"learning-capture","msg":"Learning captured for f43","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.828Z","level":"info","module":"learning-capture","msg":"Learning captured for f44","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.829Z","level":"info","module":"learning-capture","msg":"Learning captured for f45","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.829Z","level":"info","module":"learning-capture","msg":"Learning captured for f46","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.830Z","level":"info","module":"learning-capture","msg":"Learning captured for f47","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.831Z","level":"info","module":"learning-capture","msg":"Learning captured for f48","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.831Z","level":"info","module":"learning-capture","msg":"Learning captured for f49","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.832Z","level":"info","module":"learning-capture","msg":"Learning captured for f50","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.833Z","level":"info","module":"learning-capture","msg":"Learning captured for f51","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.834Z","level":"info","module":"learning-capture","msg":"Learning captured for f52","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.834Z","level":"info","module":"learning-capture","msg":"Learning captured for f53","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.835Z","level":"info","module":"learning-capture","msg":"Learning captured for f54","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.836Z","level":"info","module":"learning-capture","msg":"Learning captured for f55","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.837Z","level":"info","module":"learning-capture","msg":"Learning captured for f56","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.838Z","level":"info","module":"learning-capture","msg":"Learning captured for f57","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.839Z","level":"info","module":"learning-capture","msg":"Learning captured for f58","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.839Z","level":"info","module":"learning-capture","msg":"Learning captured for f59","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.840Z","level":"info","module":"learning-capture","msg":"Learning captured for f60","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.842Z","level":"info","module":"learning-capture","msg":"Learning captured for f61","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.843Z","level":"info","module":"learning-capture","msg":"Learning captured for f62","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.844Z","level":"info","module":"learning-capture","msg":"Learning captured for f63","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.845Z","level":"info","module":"learning-capture","msg":"Learning captured for f64","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.846Z","level":"info","module":"learning-capture","msg":"Learning captured for f65","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.847Z","level":"info","module":"learning-capture","msg":"Learning captured for f66","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.848Z","level":"info","module":"learning-capture","msg":"Learning captured for f67","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.849Z","level":"info","module":"learning-capture","msg":"Learning captured for f68","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.849Z","level":"info","module":"learning-capture","msg":"Learning captured for f69","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.850Z","level":"info","module":"learning-capture","msg":"Learning captured for f70","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.851Z","level":"info","module":"learning-capture","msg":"Learning captured for f71","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.852Z","level":"info","module":"learning-capture","msg":"Learning captured for f72","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.853Z","level":"info","module":"learning-capture","msg":"Learning captured for f73","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.854Z","level":"info","module":"learning-capture","msg":"Learning captured for f74","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.855Z","level":"info","module":"learning-capture","msg":"Learning captured for f75","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.855Z","level":"info","module":"learning-capture","msg":"Learning captured for f76","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.857Z","level":"info","module":"learning-capture","msg":"Learning captured for f77","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.858Z","level":"info","module":"learning-capture","msg":"Learning captured for f78","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.859Z","level":"info","module":"learning-capture","msg":"Learning captured for f79","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.860Z","level":"info","module":"learning-capture","msg":"Learning captured for f80","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.861Z","level":"info","module":"learning-capture","msg":"Learning captured for f81","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.862Z","level":"info","module":"learning-capture","msg":"Learning captured for f82","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.862Z","level":"info","module":"learning-capture","msg":"Learning captured for f83","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.863Z","level":"info","module":"learning-capture","msg":"Learning captured for f84","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.865Z","level":"info","module":"learning-capture","msg":"Learning captured for f85","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.866Z","level":"info","module":"learning-capture","msg":"Learning captured for f86","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.867Z","level":"info","module":"learning-capture","msg":"Learning captured for f87","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.867Z","level":"info","module":"learning-capture","msg":"Learning captured for f88","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.868Z","level":"info","module":"learning-capture","msg":"Learning captured for f89","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.869Z","level":"info","module":"learning-capture","msg":"Learning captured for f90","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.870Z","level":"info","module":"learning-capture","msg":"Learning captured for f91","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.871Z","level":"info","module":"learning-capture","msg":"Learning captured for f92","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.872Z","level":"info","module":"learning-capture","msg":"Learning captured for f93","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.873Z","level":"info","module":"learning-capture","msg":"Learning captured for f94","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.874Z","level":"info","module":"learning-capture","msg":"Learning captured for f95","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.875Z","level":"info","module":"learning-capture","msg":"Learning captured for f96","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.876Z","level":"info","module":"learning-capture","msg":"Learning captured for f97","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.877Z","level":"info","module":"learning-capture","msg":"Learning captured for f98","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.878Z","level":"info","module":"learning-capture","msg":"Learning captured for f99","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.879Z","level":"info","module":"learning-capture","msg":"Learning captured for f100","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.880Z","level":"info","module":"learning-capture","msg":"Learning captured for f101","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.881Z","level":"info","module":"learning-capture","msg":"Learning captured for f102","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.882Z","level":"info","module":"learning-capture","msg":"Learning captured for f103","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.882Z","level":"info","module":"learning-capture","msg":"Learning captured for f104","data":{"patterns":1,"mistakes":0,"iterations":1}}
+{"ts":"2026-03-26T01:04:28.933Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.934Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/auth.ts 파일에 JWT 검증 추가해줘...\" → auto(duo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.935Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.935Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"user.service.ts에서 createUser 함수 수정해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.936Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.936Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"index.js 오류 고쳐줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.936Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.936Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"main.py에 함수 추가해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.936Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.937Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"#42 이슈 수정해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.937Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.937Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"TypeError: Cannot read property 에러 고쳐줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.937Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.937Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"```js\nconsole.log(\"hi\")\n``` 이 코드 최적화해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.937Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.937Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"getUserById 함수 리팩토링해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.938Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.938Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"UserService 클래스에 메서드 추가해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.939Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.939Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"로그인 화면 디자인해줘...\" → auto(design), confidence=0.88"}
+{"ts":"2026-03-26T01:04:28.939Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.939Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"대시보드 UI 만들어줘...\" → auto(design), confidence=0.88"}
+{"ts":"2026-03-26T01:04:28.939Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.939Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"메인 화면 수정해줘...\" → auto(design), confidence=0.88"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"인증 시스템 계획 세워줘...\" → plan(solo), confidence=0.82"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"현재 아키텍처 분석해줘...\" → plan(solo), confidence=0.82"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"DB 스키마 설계해줘...\" → plan(solo), confidence=0.82"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"팀으로 전체 인증 시스템 구현해줘...\" → team(squad), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"대규모 리팩토링 진행해줘...\" → team(squad), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"전체 백엔드 API 구현해줘...\" → team(squad), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.940Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"인증 기능 추가해줘...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/utils.ts에 헬퍼 함수 하나 추가해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=4, domains=1"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/utils.ts, src/helpers.ts, src/format...\" → auto(duo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"complexity 추정: score=8, files=1, domains=3"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"사용자 인증 시스템 전체 구현: JWT, OAuth, 소셜 로그인, 세션...\" → team(full), confidence=0.85"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"complexity 추정: score=2, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"테스트 입력...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"complexity 추정: score=2, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"테스트 입력 문자열...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"어떤 입력이든...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:28.941Z","level":"info","module":"intent-router","msg":"complexity 추정: score=2, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.942Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"테스트...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:28.942Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:28.942Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/app.ts 수정해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:29.089Z","level":"info","module":"task","msg":"Task created: task-1774487069088","data":{"title":"[Plan] auth-api","subtasks":3}}
+{"ts":"2026-03-26T01:04:29.089Z","level":"info","module":"plan","msg":"Plan created: auth-api","data":{"steps":3,"taskId":"task-1774487069088"}}
+{"ts":"2026-03-26T01:04:29.091Z","level":"info","module":"task","msg":"Task created: task-1774487069090","data":{"title":"[Plan] search","subtasks":3}}
+{"ts":"2026-03-26T01:04:29.091Z","level":"info","module":"plan","msg":"Plan created: search","data":{"steps":3,"taskId":"task-1774487069090"}}
+{"ts":"2026-03-26T01:04:29.094Z","level":"info","module":"task","msg":"Task created: task-1774487069093","data":{"title":"Implement Auth","subtasks":3}}
+{"ts":"2026-03-26T01:04:29.095Z","level":"info","module":"task","msg":"Task created: task-1774487069094","data":{"title":"Test Task","subtasks":2}}
+{"ts":"2026-03-26T01:04:29.095Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1774487069094","allDone":false}}
+{"ts":"2026-03-26T01:04:29.096Z","level":"info","module":"task","msg":"Task created: task-1774487069096","data":{"title":"Small Task","subtasks":1}}
+{"ts":"2026-03-26T01:04:29.097Z","level":"info","module":"task","msg":"Subtask checked: Only step","data":{"taskId":"task-1774487069096","allDone":true}}
+{"ts":"2026-03-26T01:04:29.137Z","level":"info","module":"task","msg":"Task created: task-1774487069136","data":{"title":"[Plan] cli-test","subtasks":2}}
+{"ts":"2026-03-26T01:04:29.138Z","level":"info","module":"plan","msg":"Plan created: cli-test","data":{"steps":2,"taskId":"task-1774487069136"}}
+{"ts":"2026-03-26T01:04:29.230Z","level":"info","module":"task","msg":"Task created: task-1774487069229","data":{"title":"[Plan] ext-options","subtasks":2}}
+{"ts":"2026-03-26T01:04:29.230Z","level":"info","module":"plan","msg":"Plan created: ext-options","data":{"steps":2,"taskId":"task-1774487069229"}}
+{"ts":"2026-03-26T01:04:29.231Z","level":"info","module":"task","msg":"Task created: task-1774487069230","data":{"title":"[Plan] ext-review","subtasks":2}}
+{"ts":"2026-03-26T01:04:29.231Z","level":"info","module":"plan","msg":"Plan created: ext-review","data":{"steps":2,"taskId":"task-1774487069230"}}
+{"ts":"2026-03-26T01:04:29.232Z","level":"info","module":"task","msg":"Task created: task-1774487069231","data":{"title":"[Plan] ext-complexity","subtasks":1}}
+{"ts":"2026-03-26T01:04:29.232Z","level":"info","module":"plan","msg":"Plan created: ext-complexity","data":{"steps":1,"taskId":"task-1774487069231"}}
+{"ts":"2026-03-26T01:04:29.233Z","level":"info","module":"task","msg":"Task created: task-1774487069232","data":{"title":"[Plan] ext-basic","subtasks":1}}
+{"ts":"2026-03-26T01:04:29.233Z","level":"info","module":"plan","msg":"Plan created: ext-basic","data":{"steps":1,"taskId":"task-1774487069232"}}
+{"ts":"2026-03-26T01:04:29.277Z","level":"info","module":"task","msg":"Task created: task-1774487069276","data":{"title":"[Plan] stdin-feature","subtasks":3}}
+{"ts":"2026-03-26T01:04:29.278Z","level":"info","module":"plan","msg":"Plan created: stdin-feature","data":{"steps":3,"taskId":"task-1774487069276"}}
+{"ts":"2026-03-26T01:04:29.323Z","level":"info","module":"task","msg":"Task created: task-1774487069322","data":{"title":"[Plan] stdin-extended","subtasks":1}}
+{"ts":"2026-03-26T01:04:29.323Z","level":"info","module":"plan","msg":"Plan created: stdin-extended","data":{"steps":1,"taskId":"task-1774487069322"}}
+{"ts":"2026-03-26T01:04:29.467Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-26T01:04:29.469Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-plan"}}
+{"ts":"2026-03-26T01:04:29.469Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":"team-exec"}}
+{"ts":"2026-03-26T01:04:29.471Z","level":"info","module":"session-state","msg":"Session updated: team","data":{"feature":"auth-upgrade","stage":null}}
+{"ts":"2026-03-26T01:04:29.525Z","level":"info","module":"state-gc","msg":"GC: no zombies found"}
+{"ts":"2026-03-26T01:04:29.528Z","level":"info","module":"state-gc","msg":"GC: no zombies found"}
+{"ts":"2026-03-26T01:04:29.530Z","level":"info","module":"state-gc","msg":"GC: removed 2 zombie(s)","data":{"zombies":["zombie-old","zombie-plan"]}}
+{"ts":"2026-03-26T01:04:29.531Z","level":"info","module":"state-gc","msg":"GC: removed 2 zombie(s)","data":{"zombies":["z1","z2"]}}
+{"ts":"2026-03-26T01:04:29.532Z","level":"info","module":"state-gc","msg":"GC: removed 1 zombie(s)","data":{"zombies":["to-remove"]}}
+{"ts":"2026-03-26T01:04:29.533Z","level":"info","module":"state-gc","msg":"GC dry-run: would remove 1 zombie(s)","data":{"zombies":["dry-zombie"]}}
+{"ts":"2026-03-26T01:04:29.534Z","level":"info","module":"state-gc","msg":"GC: removed 2 zombie(s)","data":{"zombies":["recent","old"]}}
+{"ts":"2026-03-26T01:04:29.590Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":0,"zombieCount":0,"activeFeature":null}}
+{"ts":"2026-03-26T01:04:29.591Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":2,"zombieCount":0,"activeFeature":"feat-b"}}
+{"ts":"2026-03-26T01:04:29.593Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":1,"zombieCount":0,"activeFeature":"my-feature"}}
+{"ts":"2026-03-26T01:04:29.594Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":3,"zombieCount":2,"activeFeature":"healthy"}}
+{"ts":"2026-03-26T01:04:29.594Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":0,"zombieCount":0,"activeFeature":null}}
+{"ts":"2026-03-26T01:04:29.595Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":1,"zombieCount":0,"activeFeature":"active-feat"}}
+{"ts":"2026-03-26T01:04:29.596Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":2,"zombieCount":0,"activeFeature":"feat-y"}}
+{"ts":"2026-03-26T01:04:29.597Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":1,"zombieCount":1,"activeFeature":null}}
+{"ts":"2026-03-26T01:04:29.597Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":1,"zombieCount":0,"activeFeature":"clean"}}
+{"ts":"2026-03-26T01:04:29.598Z","level":"info","module":"status-view","msg":"STATUS.md generated","data":{"featureCount":0,"zombieCount":0,"activeFeature":null}}
+{"ts":"2026-03-26T01:04:51.437Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.438Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/auth.ts 파일에 JWT 검증 추가해줘...\" → auto(duo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.439Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.439Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"user.service.ts에서 createUser 함수 수정해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.439Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.440Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"index.js 오류 고쳐줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.440Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.440Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"main.py에 함수 추가해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.440Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.440Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"#42 이슈 수정해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.440Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.440Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"TypeError: Cannot read property 에러 고쳐줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.441Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.441Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"```js\nconsole.log(\"hi\")\n``` 이 코드 최적화해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.441Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.441Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"getUserById 함수 리팩토링해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.442Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.442Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"UserService 클래스에 메서드 추가해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.443Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.443Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"로그인 화면 디자인해줘...\" → auto(design), confidence=0.88"}
+{"ts":"2026-03-26T01:04:51.443Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.443Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"대시보드 UI 만들어줘...\" → auto(design), confidence=0.88"}
+{"ts":"2026-03-26T01:04:51.443Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.443Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"메인 화면 수정해줘...\" → auto(design), confidence=0.88"}
+{"ts":"2026-03-26T01:04:51.443Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"인증 시스템 계획 세워줘...\" → plan(solo), confidence=0.82"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"현재 아키텍처 분석해줘...\" → plan(solo), confidence=0.82"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"DB 스키마 설계해줘...\" → plan(solo), confidence=0.82"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"팀으로 전체 인증 시스템 구현해줘...\" → team(squad), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"대규모 리팩토링 진행해줘...\" → team(squad), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.444Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"전체 백엔드 API 구현해줘...\" → team(squad), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.445Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.445Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"인증 기능 추가해줘...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:51.445Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.445Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/utils.ts에 헬퍼 함수 하나 추가해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.445Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=4, domains=1"}
+{"ts":"2026-03-26T01:04:51.445Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/utils.ts, src/helpers.ts, src/format...\" → auto(duo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.445Z","level":"info","module":"intent-router","msg":"complexity 추정: score=8, files=1, domains=3"}
+{"ts":"2026-03-26T01:04:51.445Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"사용자 인증 시스템 전체 구현: JWT, OAuth, 소셜 로그인, 세션...\" → team(full), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.446Z","level":"info","module":"intent-router","msg":"complexity 추정: score=2, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.446Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"테스트 입력...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:51.446Z","level":"info","module":"intent-router","msg":"complexity 추정: score=2, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.446Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"테스트 입력 문자열...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:51.446Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.446Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"어떤 입력이든...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:51.446Z","level":"info","module":"intent-router","msg":"complexity 추정: score=2, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.446Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"테스트...\" → plan(solo), confidence=0.72"}
+{"ts":"2026-03-26T01:04:51.446Z","level":"info","module":"intent-router","msg":"complexity 추정: score=1, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.446Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/app.ts 수정해줘...\" → auto(solo), confidence=0.85"}
+{"ts":"2026-03-26T01:04:51.480Z","level":"info","module":"intent-router","msg":"complexity 추정: score=3, files=1, domains=1"}
+{"ts":"2026-03-26T01:04:51.482Z","level":"info","module":"intent-router","msg":"라우팅 결정: \"src/auth.ts에 JWT 추가해줘...\" → auto(duo), confidence=0.85"}

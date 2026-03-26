@@ -1,5 +1,5 @@
 /**
- * sw-kit Guardrail Engine v0.3.0
+ * aing Guardrail Engine v0.3.0
  * Declarative rule engine for constraining agent behavior.
  * Harness Engineering: Constrain axis — define boundaries.
  * @module scripts/guardrail/guardrail-engine
@@ -147,7 +147,7 @@ export function checkFilePath(filePath, projectDir) {
 export function formatViolations(violations) {
   if (violations.length === 0) return '';
 
-  const lines = ['[sw-kit Guardrail]'];
+  const lines = ['[aing Guardrail]'];
   for (const v of violations) {
     const icon = v.rule.action === 'block' ? '🚫' : '⚠️';
     const tag = v.rule.severity.toUpperCase();

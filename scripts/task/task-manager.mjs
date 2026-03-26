@@ -1,7 +1,7 @@
 /**
- * sw-kit Task Manager v1.1.0
+ * aing Task Manager v1.1.0
  * Hierarchical task system: Main Task → Sub Tasks with checklist tracking.
- * Stored in .sw-kit/tasks/ as individual JSON files.
+ * Stored in .aing/tasks/ as individual JSON files.
  * @module scripts/task/task-manager
  */
 
@@ -13,7 +13,7 @@ import { join } from 'node:path';
 const log = createLogger('task');
 
 function getTaskDir(projectDir) {
-  const dir = join(projectDir || process.cwd(), '.sw-kit', 'tasks');
+  const dir = join(projectDir || process.cwd(), '.aing', 'tasks');
   mkdirSync(dir, { recursive: true });
   return dir;
 }
@@ -177,7 +177,7 @@ export function listActiveTasks(projectDir) {
  */
 export function formatTaskChecklist(taskId, projectDir) {
   const task = getTask(taskId, projectDir);
-  if (!task) return `[sw-kit Task] Task "${taskId}" not found`;
+  if (!task) return `[aing Task] Task "${taskId}" not found`;
 
   const done = task.subtasks.filter(s => s.status === 'done').length;
   const total = task.subtasks.length;
@@ -209,9 +209,9 @@ export function formatTaskChecklist(taskId, projectDir) {
  */
 export function formatAllTasks(projectDir) {
   const tasks = listTasks(projectDir);
-  if (tasks.length === 0) return '[sw-kit Tasks] 등록된 태스크 없음';
+  if (tasks.length === 0) return '[aing Tasks] 등록된 태스크 없음';
 
-  const lines = ['[sw-kit Tasks]', ''];
+  const lines = ['[aing Tasks]', ''];
 
   for (const t of tasks.slice(-10)) {
     const icon = t.status === 'completed' ? '✅' : '🔄';

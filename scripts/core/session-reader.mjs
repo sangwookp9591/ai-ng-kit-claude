@@ -35,7 +35,7 @@ export function sanitizeSessionField(value) {
  * @returns {{ active: boolean, mode?: string, feature?: string, currentStage?: string }}
  */
 export function getActiveSession(projectDir, preRead = {}) {
-  const stateDir = join(projectDir, '.sw-kit', 'state');
+  const stateDir = join(projectDir, '.aing', 'state');
 
   // Pipeline session
   const pipeline = preRead.pipelineState ?? (() => {

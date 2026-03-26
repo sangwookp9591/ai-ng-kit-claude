@@ -1,5 +1,5 @@
 /**
- * sw-kit Stop Hook Handler v1.1.0
+ * aing Stop Hook Handler v1.1.0
  * Persists PDCA state and learning records on session end.
  * Writes a handoff document when an active session is in progress.
  */
@@ -27,7 +27,7 @@ try {
   }
 
   // Persist any in-flight PDCA state (read once, reuse for getActiveSession)
-  const stateFile = join(projectDir, '.sw-kit', 'state', 'pdca-status.json');
+  const stateFile = join(projectDir, '.aing', 'state', 'pdca-status.json');
   const stateResult = readState(stateFile);
   if (stateResult.ok && stateResult.data.activeFeature) {
     stateResult.data.lastSessionEnd = new Date().toISOString();
@@ -46,7 +46,7 @@ try {
       feature: safeFeature,
       stage: 'session-stop',
       summary: `Session stopped at stage: ${sanitizeSessionField(session.currentStage)}`,
-      decisions: [`Mode: ${session.mode}`, `Resume with /swkit team or /swkit auto`],
+      decisions: [`Mode: ${session.mode}`, `Resume with /aing team or /aing auto`],
       nextStage: session.currentStage,
     }, projectDir);
     if (result.ok) {

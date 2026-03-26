@@ -1,5 +1,5 @@
 /**
- * sw-kit Setup Progress Manager
+ * aing Setup Progress Manager
  * Tracks setup wizard state: save, resume, clear, complete.
  * Modeled after omc's setup-progress.sh but in ESM.
  * @module scripts/setup/setup-progress
@@ -9,8 +9,8 @@ import { join } from 'node:path';
 import { homedir } from 'node:os';
 import { mkdirSync, existsSync } from 'node:fs';
 
-const STATE_FILE = '.sw-kit/state/setup-state.json';
-const CONFIG_FILE = join(homedir(), '.claude', '.swkit-config.json');
+const STATE_FILE = '.aing/state/setup-state.json';
+const CONFIG_FILE = join(homedir(), '.claude', '.aing-config.json');
 
 /**
  * Resolve state file path relative to project dir.
@@ -72,7 +72,7 @@ export function checkResume(projectDir) {
 /**
  * Mark setup as completed. Clears temp state, writes persistent config.
  * @param {object} opts
- * @param {string} opts.version - sw-kit version
+ * @param {string} opts.version - aing version
  * @param {string} opts.configTarget - 'local' or 'global'
  * @param {boolean} opts.hudEnabled
  * @param {string} opts.defaultMode - 'auto' | 'pdca' | 'wizard'

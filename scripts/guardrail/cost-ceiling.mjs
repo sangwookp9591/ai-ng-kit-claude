@@ -1,5 +1,5 @@
 /**
- * sw-kit Cost Ceiling v0.5.0
+ * aing Cost Ceiling v0.5.0
  * Token usage limits, session time limits, API call limits.
  * Harness Engineering: Constrain axis — budget enforcement.
  * @module scripts/guardrail/cost-ceiling
@@ -14,7 +14,7 @@ import { join } from 'node:path';
 const log = createLogger('cost-ceiling');
 
 function getCostPath(projectDir) {
-  return join(projectDir || process.cwd(), '.sw-kit', 'state', 'cost-tracker.json');
+  return join(projectDir || process.cwd(), '.aing', 'state', 'cost-tracker.json');
 }
 
 /**
@@ -140,7 +140,7 @@ export function formatCostStatus(projectDir) {
   const apiPct = Math.round((tracker.apiCalls / limits.maxApiCallsPerSession) * 100);
 
   return [
-    `[sw-kit Cost]`,
+    `[aing Cost]`,
     `  Tokens: ~${tracker.tokensUsed.toLocaleString()} / ${limits.maxTokensPerSession.toLocaleString()} (${tokenPct}%)`,
     `  API Calls: ${tracker.apiCalls} / ${limits.maxApiCallsPerSession} (${apiPct}%)`,
     `  Session: ${elapsed}min / ${limits.maxSessionMinutes}min`

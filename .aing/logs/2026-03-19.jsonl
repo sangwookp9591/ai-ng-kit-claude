@@ -1,0 +1,402 @@
+{"ts":"2026-03-19T04:08:29.943Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T04:08:29.944Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-force-push","data":{"command":"git push --force origin main","severity":"critical"}}
+{"ts":"2026-03-19T04:08:29.944Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: protect-env","data":{"file":".env.production","severity":"high"}}
+{"ts":"2026-03-19T04:08:30.003Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:09:07.048Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:09:52.527Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:13:50.425Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:13:53.065Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"user-auth","stage":"do","pct":60}}
+{"ts":"2026-03-19T04:13:53.114Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:14:08.129Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:16:45.763Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:17:17.603Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:18:46.865Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T04:18:46.877Z","level":"info","module":"pdca-engine","msg":"PDCA started: test-verify"}
+{"ts":"2026-03-19T04:18:46.878Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"test","stage":"do","pct":33}}
+{"ts":"2026-03-19T04:18:46.915Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:19:00.188Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"test-verify"}}
+{"ts":"2026-03-19T04:20:54.865Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:23:28.089Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T04:23:28.103Z","level":"info","module":"pdca-engine","msg":"PDCA started: v1test"}
+{"ts":"2026-03-19T04:23:28.104Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v1test","stage":"do","pct":40}}
+{"ts":"2026-03-19T04:23:28.108Z","level":"info","module":"pipeline","msg":"Pipeline initialized: v1test","data":{"stages":5,"task":"test task"}}
+{"ts":"2026-03-19T04:23:28.108Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v1test","stage":"plan","pct":0}}
+{"ts":"2026-03-19T04:23:28.108Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v1test","stage":"plan","pct":20}}
+{"ts":"2026-03-19T04:23:28.108Z","level":"info","module":"model-router","msg":"Routed task: complexity=low (score=0) → model=haiku"}
+{"ts":"2026-03-19T04:23:28.133Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/test-1773894208109","data":{"commit":"e2f3348"}}
+{"ts":"2026-03-19T04:23:28.174Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:23:38.153Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:24:02.190Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:24:30.129Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T04:24:30.140Z","level":"info","module":"pdca-engine","msg":"PDCA started: v1final"}
+{"ts":"2026-03-19T04:24:30.140Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v1final","stage":"do","pct":40}}
+{"ts":"2026-03-19T04:24:30.143Z","level":"info","module":"pipeline","msg":"Pipeline initialized: v1final","data":{"stages":5,"task":"test task"}}
+{"ts":"2026-03-19T04:24:30.143Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v1final","stage":"plan","pct":0}}
+{"ts":"2026-03-19T04:24:30.144Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v1final","stage":"plan","pct":20}}
+{"ts":"2026-03-19T04:24:30.144Z","level":"info","module":"model-router","msg":"Routed task: complexity=low (score=0) → model=haiku"}
+{"ts":"2026-03-19T04:24:30.165Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/v1-test-1773894270145","data":{"commit":"e2f3348"}}
+{"ts":"2026-03-19T04:24:30.205Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:24:47.214Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:25:05.886Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"v1final"}}
+{"ts":"2026-03-19T04:25:45.037Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:28:09.137Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"v1final"}}
+{"ts":"2026-03-19T04:28:50.776Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:31:32.934Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T04:31:32.946Z","level":"info","module":"pdca-engine","msg":"PDCA started: v11test"}
+{"ts":"2026-03-19T04:31:32.947Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v11test","stage":"do","pct":40}}
+{"ts":"2026-03-19T04:31:32.950Z","level":"info","module":"pipeline","msg":"Pipeline initialized: v11test","data":{"stages":5,"task":"test"}}
+{"ts":"2026-03-19T04:31:32.950Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v11test","stage":"plan","pct":0}}
+{"ts":"2026-03-19T04:31:32.951Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v11test","stage":"plan","pct":20}}
+{"ts":"2026-03-19T04:31:32.951Z","level":"info","module":"model-router","msg":"Routed task: complexity=low (score=0) → model=haiku"}
+{"ts":"2026-03-19T04:31:32.973Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/v11-test-1773894692952","data":{"commit":"d2cd9c1"}}
+{"ts":"2026-03-19T04:31:32.974Z","level":"info","module":"tdd","msg":"TDD started: tdd-test","data":{"testTarget":"login API"}}
+{"ts":"2026-03-19T04:31:32.975Z","level":"info","module":"task","msg":"Task created: task-1773894692974","data":{"title":"Test Feature","subtasks":3}}
+{"ts":"2026-03-19T04:31:32.975Z","level":"info","module":"task","msg":"Subtask checked: Step 1","data":{"taskId":"task-1773894692974","allDone":false}}
+{"ts":"2026-03-19T04:31:32.976Z","level":"info","module":"task","msg":"Task created: task-1773894692975","data":{"title":"[Plan] test-plan","subtasks":3}}
+{"ts":"2026-03-19T04:31:32.976Z","level":"info","module":"plan","msg":"Plan created: test-plan","data":{"steps":3,"taskId":"task-1773894692975"}}
+{"ts":"2026-03-19T04:31:33.016Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:32:06.583Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:32:24.123Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:33:24.835Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:33:40.388Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:33:53.078Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"v11test"}}
+{"ts":"2026-03-19T04:34:53.514Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:35:47.626Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:35:57.064Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:36:41.400Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:37:06.185Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:37:15.929Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"v11test"}}
+{"ts":"2026-03-19T04:41:11.493Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:41:25.257Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:41:36.351Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"v11test"}}
+{"ts":"2026-03-19T04:42:37.340Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T04:42:37.350Z","level":"info","module":"pdca-engine","msg":"PDCA started: assess"}
+{"ts":"2026-03-19T04:42:37.351Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"assess","stage":"do","pct":33}}
+{"ts":"2026-03-19T04:42:37.353Z","level":"info","module":"pipeline","msg":"Pipeline initialized: assess","data":{"stages":5,"task":"t"}}
+{"ts":"2026-03-19T04:42:37.353Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"assess","stage":"plan","pct":0}}
+{"ts":"2026-03-19T04:42:37.354Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"assess","stage":"plan","pct":20}}
+{"ts":"2026-03-19T04:42:37.354Z","level":"info","module":"model-router","msg":"Routed task: complexity=low (score=0) → model=haiku"}
+{"ts":"2026-03-19T04:42:37.376Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/assess-1773895357354","data":{"commit":"99d81cc"}}
+{"ts":"2026-03-19T04:42:37.377Z","level":"info","module":"tdd","msg":"TDD started: tdd-a","data":{"testTarget":"api"}}
+{"ts":"2026-03-19T04:42:37.378Z","level":"info","module":"task","msg":"Task created: task-1773895357378","data":{"title":"T","subtasks":2}}
+{"ts":"2026-03-19T04:42:37.378Z","level":"info","module":"task","msg":"Subtask checked: S1","data":{"taskId":"task-1773895357378","allDone":false}}
+{"ts":"2026-03-19T04:42:37.379Z","level":"info","module":"task","msg":"Task created: task-1773895357379","data":{"title":"[Plan] a","subtasks":1}}
+{"ts":"2026-03-19T04:42:37.379Z","level":"info","module":"plan","msg":"Plan created: a","data":{"steps":1,"taskId":"task-1773895357379"}}
+{"ts":"2026-03-19T04:42:37.419Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:43:03.385Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"assess"}}
+{"ts":"2026-03-19T04:44:01.267Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"assess"}}
+{"ts":"2026-03-19T04:44:31.615Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"assess"}}
+{"ts":"2026-03-19T04:47:08.713Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:47:13.853Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:47:27.828Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:47:32.873Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:49:33.159Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T04:49:33.159Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T04:49:33.159Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"mid","workers":4}}
+{"ts":"2026-03-19T04:49:33.160Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"high","workers":7}}
+{"ts":"2026-03-19T04:49:33.160Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"duo","complexity":"low","workers":2}}
+{"ts":"2026-03-19T04:49:33.209Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:50:09.797Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:50:24.103Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"assess"}}
+{"ts":"2026-03-19T04:52:42.897Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T04:52:42.898Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-force-push","data":{"command":"git push --force main","severity":"critical"}}
+{"ts":"2026-03-19T04:52:42.898Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: protect-env","data":{"file":".env.production","severity":"high"}}
+{"ts":"2026-03-19T04:52:42.908Z","level":"info","module":"pdca-engine","msg":"PDCA started: final"}
+{"ts":"2026-03-19T04:52:42.909Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"final","stage":"do","pct":33}}
+{"ts":"2026-03-19T04:52:42.911Z","level":"info","module":"pipeline","msg":"Pipeline initialized: final","data":{"stages":5,"task":"t"}}
+{"ts":"2026-03-19T04:52:42.911Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"final","stage":"plan","pct":0}}
+{"ts":"2026-03-19T04:52:42.933Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/final-1773895962912","data":{"commit":"2d04197"}}
+{"ts":"2026-03-19T04:52:42.934Z","level":"info","module":"tdd","msg":"TDD started: f","data":{"testTarget":"api"}}
+{"ts":"2026-03-19T04:52:42.935Z","level":"info","module":"task","msg":"Task created: task-1773895962935","data":{"title":"T","subtasks":1}}
+{"ts":"2026-03-19T04:52:42.936Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T04:52:42.936Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"high","workers":7}}
+{"ts":"2026-03-19T04:52:42.971Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:53:05.878Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"final"}}
+{"ts":"2026-03-19T04:54:57.583Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:55:13.369Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"final"}}
+{"ts":"2026-03-19T04:57:57.268Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T04:57:57.269Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: protect-env","data":{"file":".env.production","severity":"high"}}
+{"ts":"2026-03-19T04:57:57.278Z","level":"info","module":"pdca-engine","msg":"PDCA started: v13"}
+{"ts":"2026-03-19T04:57:57.279Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v13","stage":"do","pct":33}}
+{"ts":"2026-03-19T04:57:57.282Z","level":"info","module":"pipeline","msg":"Pipeline initialized: v13","data":{"stages":5,"task":"t"}}
+{"ts":"2026-03-19T04:57:57.283Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v13","stage":"plan","pct":0}}
+{"ts":"2026-03-19T04:57:57.283Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v13","stage":"plan","pct":20}}
+{"ts":"2026-03-19T04:57:57.283Z","level":"info","module":"model-router","msg":"Routed task: complexity=low (score=0) → model=haiku"}
+{"ts":"2026-03-19T04:57:57.303Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/v13-1773896277284","data":{"commit":"4fbd5e7"}}
+{"ts":"2026-03-19T04:57:57.304Z","level":"info","module":"tdd","msg":"TDD started: f13","data":{"testTarget":"api"}}
+{"ts":"2026-03-19T04:57:57.305Z","level":"info","module":"task","msg":"Task created: task-1773896277305","data":{"title":"T","subtasks":1}}
+{"ts":"2026-03-19T04:57:57.305Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T04:57:57.305Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"mid","workers":4}}
+{"ts":"2026-03-19T04:57:57.306Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T04:57:57.306Z","level":"info","module":"pdca-engine","msg":"PDCA started: v13-test"}
+{"ts":"2026-03-19T04:57:57.307Z","level":"info","module":"task","msg":"Task created: task-1773896277306","data":{"title":"[Plan] v13-test","subtasks":1}}
+{"ts":"2026-03-19T04:57:57.307Z","level":"info","module":"plan","msg":"Plan created: v13-test","data":{"steps":1,"taskId":"task-1773896277306"}}
+{"ts":"2026-03-19T04:57:57.324Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/pre-auto-1773896277307","data":{"commit":"4fbd5e7"}}
+{"ts":"2026-03-19T04:57:57.325Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v13-test","stage":"plan","pct":0}}
+{"ts":"2026-03-19T04:57:57.325Z","level":"info","module":"auto-runner","msg":"Auto run plan generated","data":{"feature":"v13-test","preset":"solo","workers":1}}
+{"ts":"2026-03-19T04:57:57.326Z","level":"info","module":"handoff","msg":"Handoff created: plan-to-do.md"}
+{"ts":"2026-03-19T04:57:57.363Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:58:08.603Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"mid","workers":4}}
+{"ts":"2026-03-19T04:58:08.640Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:58:20.987Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:58:45.720Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"mid","workers":4}}
+{"ts":"2026-03-19T04:58:45.760Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:59:11.366Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T04:59:11.367Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T04:59:11.367Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"duo","complexity":"mid","workers":2}}
+{"ts":"2026-03-19T04:59:11.367Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"mid","workers":7}}
+{"ts":"2026-03-19T04:59:11.405Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:59:25.941Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T04:59:55.942Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T04:59:55.943Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"duo","complexity":"low","workers":2}}
+{"ts":"2026-03-19T04:59:55.943Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"mid","workers":4}}
+{"ts":"2026-03-19T04:59:55.944Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"mid","workers":7}}
+{"ts":"2026-03-19T04:59:55.986Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T05:00:41.191Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T05:00:41.192Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: protect-env","data":{"file":".env.production","severity":"high"}}
+{"ts":"2026-03-19T05:00:41.202Z","level":"info","module":"pdca-engine","msg":"PDCA started: v13f"}
+{"ts":"2026-03-19T05:00:41.203Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v13f","stage":"do","pct":33}}
+{"ts":"2026-03-19T05:00:41.206Z","level":"info","module":"pipeline","msg":"Pipeline initialized: v13f","data":{"stages":5,"task":"t"}}
+{"ts":"2026-03-19T05:00:41.206Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v13f","stage":"plan","pct":0}}
+{"ts":"2026-03-19T05:00:41.206Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v13f","stage":"plan","pct":20}}
+{"ts":"2026-03-19T05:00:41.207Z","level":"info","module":"model-router","msg":"Routed task: complexity=low (score=0) → model=haiku"}
+{"ts":"2026-03-19T05:00:41.227Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/v13f-1773896441207","data":{"commit":"4fbd5e7"}}
+{"ts":"2026-03-19T05:00:41.228Z","level":"info","module":"tdd","msg":"TDD started: f13f","data":{"testTarget":"api"}}
+{"ts":"2026-03-19T05:00:41.229Z","level":"info","module":"task","msg":"Task created: task-1773896441229","data":{"title":"T","subtasks":1}}
+{"ts":"2026-03-19T05:00:41.229Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T05:00:41.230Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"mid","workers":7}}
+{"ts":"2026-03-19T05:00:41.230Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"mid","workers":7}}
+{"ts":"2026-03-19T05:00:41.230Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T05:00:41.231Z","level":"info","module":"pdca-engine","msg":"PDCA started: v13f-test"}
+{"ts":"2026-03-19T05:00:41.231Z","level":"info","module":"task","msg":"Task created: task-1773896441231","data":{"title":"[Plan] v13f-test","subtasks":1}}
+{"ts":"2026-03-19T05:00:41.231Z","level":"info","module":"plan","msg":"Plan created: v13f-test","data":{"steps":1,"taskId":"task-1773896441231"}}
+{"ts":"2026-03-19T05:00:41.249Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/pre-auto-1773896441231","data":{"commit":"4fbd5e7"}}
+{"ts":"2026-03-19T05:00:41.250Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"v13f-test","stage":"plan","pct":0}}
+{"ts":"2026-03-19T05:00:41.250Z","level":"info","module":"auto-runner","msg":"Auto run plan generated","data":{"feature":"v13f-test","preset":"solo","workers":1}}
+{"ts":"2026-03-19T05:00:41.251Z","level":"info","module":"handoff","msg":"Handoff created: plan-to-do.md"}
+{"ts":"2026-03-19T05:00:41.291Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T05:01:47.928Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"output.toLowerCase is not a function"}}
+{"ts":"2026-03-19T05:02:07.484Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"v13f-test"}}
+{"ts":"2026-03-19T05:10:04.113Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:10:10.638Z","level":"info","module":"post-tool-use","msg":"Evidence collected","data":{"type":"test","result":"pass"}}
+{"ts":"2026-03-19T05:10:12.691Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:10:47.994Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"node -e \"\nconst t=[];\nasync function r(){\n  const s=await import('./scripts/core/state.mjs'); t.push","severity":"critical"}}
+{"ts":"2026-03-19T05:10:48.569Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T05:10:48.570Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: protect-env","data":{"file":".env.production","severity":"high"}}
+{"ts":"2026-03-19T05:10:48.579Z","level":"info","module":"pdca-engine","msg":"PDCA started: final"}
+{"ts":"2026-03-19T05:10:48.580Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"final","stage":"do","pct":33}}
+{"ts":"2026-03-19T05:10:48.583Z","level":"info","module":"pipeline","msg":"Pipeline initialized: final","data":{"stages":5,"task":"t"}}
+{"ts":"2026-03-19T05:10:48.583Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"final","stage":"plan","pct":0}}
+{"ts":"2026-03-19T05:10:48.584Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"final","stage":"plan","pct":20}}
+{"ts":"2026-03-19T05:10:48.584Z","level":"info","module":"model-router","msg":"Routed task: complexity=low (score=0) → model=haiku"}
+{"ts":"2026-03-19T05:10:48.605Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/final-1773897048585","data":{"commit":"a21fb9e"}}
+{"ts":"2026-03-19T05:10:48.606Z","level":"info","module":"tdd","msg":"TDD started: ft","data":{"testTarget":"api"}}
+{"ts":"2026-03-19T05:10:48.607Z","level":"info","module":"task","msg":"Task created: task-1773897048607","data":{"title":"T","subtasks":1}}
+{"ts":"2026-03-19T05:10:48.607Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T05:10:48.607Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"mid","workers":7}}
+{"ts":"2026-03-19T05:10:48.608Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T05:10:48.609Z","level":"info","module":"pdca-engine","msg":"PDCA started: ft"}
+{"ts":"2026-03-19T05:10:48.609Z","level":"info","module":"task","msg":"Task created: task-1773897048609","data":{"title":"[Plan] ft","subtasks":1}}
+{"ts":"2026-03-19T05:10:48.609Z","level":"info","module":"plan","msg":"Plan created: ft","data":{"steps":1,"taskId":"task-1773897048609"}}
+{"ts":"2026-03-19T05:10:48.628Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/pre-auto-1773897048609","data":{"commit":"a21fb9e"}}
+{"ts":"2026-03-19T05:10:48.628Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"ft","stage":"plan","pct":0}}
+{"ts":"2026-03-19T05:10:48.628Z","level":"info","module":"auto-runner","msg":"Auto run plan generated","data":{"feature":"ft","preset":"solo","workers":1}}
+{"ts":"2026-03-19T05:10:48.629Z","level":"info","module":"handoff","msg":"Handoff created: plan-to-do.md"}
+{"ts":"2026-03-19T05:10:48.671Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:11:05.156Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:11:30.166Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"ft"}}
+{"ts":"2026-03-19T05:13:20.772Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:13:30.193Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:13:41.870Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:13:53.855Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:14:00.752Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"ft"}}
+{"ts":"2026-03-19T05:14:21.163Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:14:29.328Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:14:39.255Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:14:57.416Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:15:08.232Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:15:17.178Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"ft"}}
+{"ts":"2026-03-19T05:16:41.075Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:16:59.101Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:17:04.410Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T05:17:04.411Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: protect-env","data":{"file":".env.production","severity":"high"}}
+{"ts":"2026-03-19T05:17:04.420Z","level":"info","module":"pdca-engine","msg":"PDCA started: test"}
+{"ts":"2026-03-19T05:17:04.422Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"test","stage":"do","pct":33}}
+{"ts":"2026-03-19T05:17:04.425Z","level":"info","module":"pipeline","msg":"Pipeline initialized: test","data":{"stages":5,"task":"t"}}
+{"ts":"2026-03-19T05:17:04.425Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"test","stage":"plan","pct":0}}
+{"ts":"2026-03-19T05:17:04.425Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"test","stage":"plan","pct":20}}
+{"ts":"2026-03-19T05:17:04.425Z","level":"info","module":"model-router","msg":"Routed task: complexity=low (score=0) → model=haiku"}
+{"ts":"2026-03-19T05:17:04.447Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/test-1773897424426","data":{"commit":"294d9c6"}}
+{"ts":"2026-03-19T05:17:04.447Z","level":"info","module":"tdd","msg":"TDD started: t","data":{"testTarget":"api"}}
+{"ts":"2026-03-19T05:17:04.448Z","level":"info","module":"task","msg":"Task created: task-1773897424448","data":{"title":"T","subtasks":1}}
+{"ts":"2026-03-19T05:17:04.449Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T05:17:04.449Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"mid","workers":7}}
+{"ts":"2026-03-19T05:17:04.450Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T05:17:04.450Z","level":"info","module":"task","msg":"Task created: task-1773897424450","data":{"title":"[Plan] test","subtasks":1}}
+{"ts":"2026-03-19T05:17:04.450Z","level":"info","module":"plan","msg":"Plan created: test","data":{"steps":1,"taskId":"task-1773897424450"}}
+{"ts":"2026-03-19T05:17:04.469Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/pre-auto-1773897424451","data":{"commit":"294d9c6"}}
+{"ts":"2026-03-19T05:17:04.470Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"test","stage":"plan","pct":0}}
+{"ts":"2026-03-19T05:17:04.470Z","level":"info","module":"auto-runner","msg":"Auto run plan generated","data":{"feature":"test","preset":"solo","workers":1}}
+{"ts":"2026-03-19T05:17:04.470Z","level":"info","module":"handoff","msg":"Handoff created: plan-to-do.md"}
+{"ts":"2026-03-19T05:17:11.323Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:17:24.058Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:17:36.042Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:17:47.146Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:18:28.217Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:18:32.517Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:18:45.143Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:18:55.467Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"echo \"=== Hook Tests ===\" && \\\necho '{\"prompt\":\"계획\"}' | node hooks-handlers/user-prompt-submit.mjs 2","severity":"critical"}}
+{"ts":"2026-03-19T05:18:56.087Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T05:18:56.152Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:19:31.220Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"node -e \"\nconst t=[];\nasync function r(){\n  const s=await import('./scripts/core/state.mjs'); t.push","severity":"critical"}}
+{"ts":"2026-03-19T05:19:31.803Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T05:19:31.804Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: protect-env","data":{"file":".env.production","severity":"high"}}
+{"ts":"2026-03-19T05:19:31.813Z","level":"info","module":"pdca-engine","msg":"PDCA started: fin"}
+{"ts":"2026-03-19T05:19:31.814Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"fin","stage":"do","pct":33}}
+{"ts":"2026-03-19T05:19:31.818Z","level":"info","module":"pipeline","msg":"Pipeline initialized: fin","data":{"stages":5,"task":"t"}}
+{"ts":"2026-03-19T05:19:31.818Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"fin","stage":"plan","pct":0}}
+{"ts":"2026-03-19T05:19:31.818Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"fin","stage":"plan","pct":20}}
+{"ts":"2026-03-19T05:19:31.818Z","level":"info","module":"model-router","msg":"Routed task: complexity=low (score=0) → model=haiku"}
+{"ts":"2026-03-19T05:19:31.840Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/fin-1773897571819","data":{"commit":"294d9c6"}}
+{"ts":"2026-03-19T05:19:31.841Z","level":"info","module":"tdd","msg":"TDD started: fx","data":{"testTarget":"api"}}
+{"ts":"2026-03-19T05:19:31.842Z","level":"info","module":"task","msg":"Task created: task-1773897571842","data":{"title":"T","subtasks":1}}
+{"ts":"2026-03-19T05:19:31.843Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T05:19:31.843Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"mid","workers":7}}
+{"ts":"2026-03-19T05:19:31.844Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T05:19:31.844Z","level":"info","module":"pdca-engine","msg":"PDCA started: fx"}
+{"ts":"2026-03-19T05:19:31.844Z","level":"info","module":"task","msg":"Task created: task-1773897571844","data":{"title":"[Plan] fx","subtasks":1}}
+{"ts":"2026-03-19T05:19:31.844Z","level":"info","module":"plan","msg":"Plan created: fx","data":{"steps":1,"taskId":"task-1773897571844"}}
+{"ts":"2026-03-19T05:19:31.862Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/pre-auto-1773897571844","data":{"commit":"294d9c6"}}
+{"ts":"2026-03-19T05:19:31.863Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"fx","stage":"plan","pct":0}}
+{"ts":"2026-03-19T05:19:31.863Z","level":"info","module":"auto-runner","msg":"Auto run plan generated","data":{"feature":"fx","preset":"solo","workers":1}}
+{"ts":"2026-03-19T05:19:31.864Z","level":"info","module":"handoff","msg":"Handoff created: plan-to-do.md"}
+{"ts":"2026-03-19T05:19:31.905Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:19:44.122Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:19:51.191Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"fx"}}
+{"ts":"2026-03-19T05:20:20.747Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:20:28.882Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"fx"}}
+{"ts":"2026-03-19T05:21:22.126Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:21:33.732Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:21:53.329Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:22:04.190Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:22:10.050Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"fx"}}
+{"ts":"2026-03-19T05:24:44.654Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:24:54.291Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:25:04.818Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:25:20.945Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:25:33.554Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:25:51.648Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:26:01.138Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:26:09.878Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:26:18.905Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:26:38.150Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:26:52.550Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:26:58.193Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:27:07.266Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:27:18.171Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:27:53.624Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"echo \"=== Hook Tests ===\" && \\\necho '{\"prompt\":\"계획\"}' | node hooks-handlers/user-prompt-submit.mjs 2","severity":"critical"}}
+{"ts":"2026-03-19T05:28:16.347Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T05:28:16.392Z","level":"warn","module":"guardrail","msg":"Guardrail triggered: block-rm-rf","data":{"command":"rm -rf /","severity":"critical"}}
+{"ts":"2026-03-19T05:28:16.402Z","level":"info","module":"pdca-engine","msg":"PDCA started: z"}
+{"ts":"2026-03-19T05:28:16.403Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"z","stage":"do","pct":33}}
+{"ts":"2026-03-19T05:28:16.406Z","level":"info","module":"pipeline","msg":"Pipeline initialized: z","data":{"stages":5,"task":"t"}}
+{"ts":"2026-03-19T05:28:16.406Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"z","stage":"plan","pct":0}}
+{"ts":"2026-03-19T05:28:16.428Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/z-1773898096407","data":{"commit":"47cfda3"}}
+{"ts":"2026-03-19T05:28:16.429Z","level":"info","module":"tdd","msg":"TDD started: z","data":{"testTarget":"a"}}
+{"ts":"2026-03-19T05:28:16.430Z","level":"info","module":"task","msg":"Task created: task-1773898096430","data":{"title":"T","subtasks":1}}
+{"ts":"2026-03-19T05:28:16.431Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T05:28:16.432Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T05:28:16.432Z","level":"info","module":"task","msg":"Task created: task-1773898096432","data":{"title":"[Plan] z","subtasks":1}}
+{"ts":"2026-03-19T05:28:16.432Z","level":"info","module":"plan","msg":"Plan created: z","data":{"steps":1,"taskId":"task-1773898096432"}}
+{"ts":"2026-03-19T05:28:16.451Z","level":"info","module":"rollback","msg":"Checkpoint created: swkit-checkpoint/pre-auto-1773898096432","data":{"commit":"47cfda3"}}
+{"ts":"2026-03-19T05:28:16.452Z","level":"info","module":"progress","msg":"Progress updated","data":{"feature":"z","stage":"plan","pct":0}}
+{"ts":"2026-03-19T05:28:16.452Z","level":"info","module":"auto-runner","msg":"Auto run plan generated","data":{"feature":"z","preset":"solo","workers":1}}
+{"ts":"2026-03-19T05:28:16.452Z","level":"info","module":"handoff","msg":"Handoff created: a-to-b.md"}
+{"ts":"2026-03-19T05:28:16.510Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:28:31.193Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:28:42.295Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T05:29:04.761Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:29:20.497Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:29:27.210Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:29:33.642Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:29:39.008Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:29:43.144Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:29:49.347Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:29:53.486Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:29:57.618Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:30:01.717Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:30:50.636Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:31:00.767Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T05:31:36.750Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:31:43.730Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T05:35:37.663Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T05:38:20.911Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:38:48.915Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:39:05.202Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:39:13.075Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T05:39:58.260Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:40:06.040Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T05:55:18.516Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:55:45.963Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:56:06.623Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:56:14.788Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T05:57:47.639Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:57:58.697Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T05:58:12.187Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T06:05:40.912Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:05:56.504Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T06:19:09.056Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:19:25.925Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:21:07.681Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:21:25.523Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:21:39.562Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T06:24:28.168Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:25:09.968Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:25:18.380Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T06:40:36.134Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:43:10.945Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T06:43:10.992Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"low","workers":4}}
+{"ts":"2026-03-19T06:43:11.023Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T06:43:11.086Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:43:28.490Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T06:43:28.559Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:43:51.067Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:44:22.896Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T06:44:22.928Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"low","workers":4}}
+{"ts":"2026-03-19T06:44:22.959Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T06:44:22.988Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"mid","workers":7}}
+{"ts":"2026-03-19T06:44:23.049Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:44:38.195Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:44:52.023Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:45:04.223Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"duo","complexity":"low","workers":2}}
+{"ts":"2026-03-19T06:45:04.257Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"mid","workers":4}}
+{"ts":"2026-03-19T06:45:04.287Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T06:45:04.317Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"squad","complexity":"mid","workers":4}}
+{"ts":"2026-03-19T06:45:04.375Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:45:20.887Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:45:32.298Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T06:56:44.237Z","level":"error","module":"post-tool-use","msg":"Post-tool-use failed","data":{"error":"projectDir is not defined"}}
+{"ts":"2026-03-19T06:56:54.011Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T08:58:18.189Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-19T08:59:09.081Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"full","complexity":"high","workers":7}}
+{"ts":"2026-03-19T08:59:57.634Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T09:17:00.596Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T09:23:29.668Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T09:32:17.126Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T09:39:20.619Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T09:45:22.501Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-19T09:45:43.440Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T09:47:38.775Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T09:48:36.293Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T09:51:06.488Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T09:52:37.978Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T09:57:25.774Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-19T09:57:33.031Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-19T09:57:54.515Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T10:01:58.335Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T10:02:31.876Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-19T10:02:39.435Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-19T10:02:45.173Z","level":"info","module":"session-start","msg":"Session started","data":{"pdcaActive":true,"memoryLoaded":false}}
+{"ts":"2026-03-19T10:03:20.159Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}
+{"ts":"2026-03-19T10:03:37.710Z","level":"info","module":"team","msg":"Team selected","data":{"preset":"solo","complexity":"low","workers":1}}
+{"ts":"2026-03-19T10:05:11.696Z","level":"info","module":"stop","msg":"PDCA state persisted on stop","data":{"feature":"z"}}

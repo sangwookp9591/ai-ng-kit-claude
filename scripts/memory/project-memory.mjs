@@ -1,5 +1,5 @@
 /**
- * sw-kit Project Memory (Innovation #2 — Cross-Session Learning)
+ * aing Project Memory (Innovation #2 — Cross-Session Learning)
  * Persistent project knowledge that survives across sessions.
  * @module scripts/memory/project-memory
  */
@@ -19,7 +19,7 @@ const EMPTY_MEMORY = {
 };
 
 function getMemoryPath(projectDir) {
-  return join(projectDir || process.cwd(), '.sw-kit', 'project-memory.json');
+  return join(projectDir || process.cwd(), '.aing', 'project-memory.json');
 }
 
 /**

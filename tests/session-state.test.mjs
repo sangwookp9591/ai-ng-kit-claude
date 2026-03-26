@@ -22,7 +22,7 @@ describe('Session State Manager', () => {
       feature: 'auth-upgrade',
       mode: 'team',
       currentStage: 'team-plan',
-      planPath: '.sw-kit/plans/2026-03-25-auth.md',
+      planPath: '.aing/plans/2026-03-25-auth.md',
     }, TEST_DIR);
     assert.equal(result.ok, true);
   });

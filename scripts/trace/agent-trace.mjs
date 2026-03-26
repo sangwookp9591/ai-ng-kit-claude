@@ -1,5 +1,5 @@
 /**
- * sw-kit Agent Trace Analyzer v0.4.0
+ * aing Agent Trace Analyzer v0.4.0
  * Structured recording of agent decisions and tool usage.
  * Harness Engineering: Verify axis — post-hoc debugging.
  * @module scripts/trace/agent-trace
@@ -12,7 +12,7 @@ import { join } from 'node:path';
 const log = createLogger('trace');
 
 function getTracePath(projectDir) {
-  return join(projectDir || process.cwd(), '.sw-kit', 'state', 'agent-traces.json');
+  return join(projectDir || process.cwd(), '.aing', 'state', 'agent-traces.json');
 }
 
 /**
@@ -107,10 +107,10 @@ export function getTraceSummary(projectDir) {
 export function formatTraceSummary(projectDir) {
   const { totalEvents, agents, lastEvents } = getTraceSummary(projectDir);
 
-  if (totalEvents === 0) return '[sw-kit Trace] 기록된 트레이스가 없습니다.';
+  if (totalEvents === 0) return '[aing Trace] 기록된 트레이스가 없습니다.';
 
   const lines = [
-    `[sw-kit Trace] ${totalEvents} events recorded`,
+    `[aing Trace] ${totalEvents} events recorded`,
     ''
   ];
 

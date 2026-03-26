@@ -1,5 +1,5 @@
 /**
- * sw-kit Goal-Backward Verification
+ * aing Goal-Backward Verification
  *
  * "작업 완료 ≠ 목표 달성"
  * 기존 증거 체인(test/build/lint PASS)이 완료 기준이라면,
@@ -133,7 +133,7 @@ export function deriveAssertions(goalDescription) {
  */
 export function saveGoalResult(feature, result, projectDir) {
   const dir = projectDir || process.cwd();
-  const filePath = join(dir, '.sw-kit', 'state', `goal-${feature}.json`);
+  const filePath = join(dir, '.aing', 'state', `goal-${feature}.json`);
   return writeState(filePath, result);
 }
 
@@ -146,6 +146,6 @@ export function saveGoalResult(feature, result, projectDir) {
  */
 export function loadGoalResult(feature, projectDir) {
   const dir = projectDir || process.cwd();
-  const filePath = join(dir, '.sw-kit', 'state', `goal-${feature}.json`);
+  const filePath = join(dir, '.aing', 'state', `goal-${feature}.json`);
   return readState(filePath);
 }

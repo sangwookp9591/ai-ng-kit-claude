@@ -1,12 +1,12 @@
 {
-  "name": "sw-kit",
-  "version": "2.3.1",
+  "name": "aing",
+  "version": "2.3.2",
   "description": "Harness Engineering Agent — structured workflows, intelligent context, self-learning agents for AI-native development",
   "author": {
     "name": "SW",
     "url": "https://github.com/sangwookp9591"
   },
-  "repository": "https://github.com/sangwookp9591/sw-kit-claude",
+  "repository": "https://github.com/sangwookp9591/ai-ng-kit",
   "license": "Apache-2.0",
   "keywords": [
     "harness-engineering",

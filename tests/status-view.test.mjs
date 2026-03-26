@@ -10,9 +10,9 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { writeState } from '../scripts/core/state.mjs';
 
-const TEST_DIR = join(tmpdir(), `sw-kit-status-view-test-${Date.now()}`);
-const STATE_PATH = join(TEST_DIR, '.sw-kit', 'state', 'pdca-status.json');
-const STATUS_PATH = join(TEST_DIR, '.sw-kit', 'STATUS.md');
+const TEST_DIR = join(tmpdir(), `aing-status-view-test-${Date.now()}`);
+const STATE_PATH = join(TEST_DIR, '.aing', 'state', 'pdca-status.json');
+const STATUS_PATH = join(TEST_DIR, '.aing', 'STATUS.md');
 
 function makeFeature(overrides = {}) {
   return {
@@ -33,14 +33,14 @@ function oldDate(daysAgo) {
 
 describe('status-view: generateStatusView', () => {
   before(() => {
-    mkdirSync(join(TEST_DIR, '.sw-kit', 'state'), { recursive: true });
+    mkdirSync(join(TEST_DIR, '.aing', 'state'), { recursive: true });
   });
 
   after(() => {
     rmSync(TEST_DIR, { recursive: true, force: true });
   });
 
-  it('creates STATUS.md at .sw-kit/STATUS.md', async () => {
+  it('creates STATUS.md at .aing/STATUS.md', async () => {
     const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
     writeState(STATE_PATH, { version: 1, features: {}, activeFeature: null });
 
@@ -105,7 +105,7 @@ describe('status-view: generateStatusView', () => {
 
     generateStatusView(TEST_DIR);
     const content = readFileSync(STATUS_PATH, 'utf-8');
-    assert.ok(content.includes('# sw-kit Status'), 'should have main heading');
+    assert.ok(content.includes('# aing Status'), 'should have main heading');
     assert.ok(content.includes('Auto-generated'), 'should have auto-generated notice');
   });
 

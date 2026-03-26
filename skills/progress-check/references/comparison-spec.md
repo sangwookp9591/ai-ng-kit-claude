@@ -72,7 +72,7 @@ progress-checker 에이전트의 비교 전략 상세 사양입니다.
 
 ## 수동 매핑 오버라이드
 
-프로젝트에 `.sw-kit/mapping.json`이 있으면 자동 매칭보다 우선합니다:
+프로젝트에 `.aing/mapping.json`이 있으면 자동 매칭보다 우선합니다:
 
 ```json
 {

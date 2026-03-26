@@ -1,5 +1,5 @@
 /**
- * TDD: /swkit init 스킬 및 템플릿 시스템 단위 테스트
+ * TDD: /aing init 스킬 및 템플릿 시스템 단위 테스트
  * Run: node --test tests/init-skill.test.mjs
  */
 
@@ -76,12 +76,12 @@ describe('init SKILL.md 구조', () => {
     assert.match(content, /## Phase 4/);
   });
 
-  it('.sw-kit/project/ 저장 경로가 명시되어야 한다', () => {
-    assert.match(content, /\.sw-kit\/project\//);
+  it('.aing/project/ 저장 경로가 명시되어야 한다', () => {
+    assert.match(content, /\.aing\/project\//);
   });
 
   it('Klay 에이전트 호출이 포함되어야 한다', () => {
-    assert.match(content, /sw-kit:klay/);
+    assert.match(content, /aing:klay/);
   });
 
   it('Klay 호출 시 description 파라미터가 있어야 한다', () => {
@@ -99,8 +99,8 @@ describe('init SKILL.md 구조', () => {
   });
 
   it('다음 단계 안내가 있어야 한다', () => {
-    assert.match(content, /\/swkit plan/);
-    assert.match(content, /\/swkit do/);
+    assert.match(content, /\/aing plan/);
+    assert.match(content, /\/aing do/);
   });
 });
 

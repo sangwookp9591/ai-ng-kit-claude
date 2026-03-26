@@ -1,5 +1,5 @@
 /**
- * sw-kit Display — Colorful terminal output with cute team visualization
+ * aing Display — Colorful terminal output with cute team visualization
  * @module scripts/core/display
  */
 
@@ -72,12 +72,12 @@ const INNOVATIONS = [
 ];
 
 /**
- * Generate the sw-kit banner
+ * Generate the aing banner
  */
 export function banner() {
   return `
 ${C.bold}${C.purple}  ┌─────────────────────────────────────────────┐${C.reset}
-${C.bold}${C.purple}  │${C.reset}  ${C.bold}${C.pink}sw-kit${C.reset} ${C.dim}v2.3.1${C.reset}  ${C.italic}Harness Engineering Agent${C.reset}  ${C.bold}${C.purple}│${C.reset}
+${C.bold}${C.purple}  │${C.reset}  ${C.bold}${C.pink}aing${C.reset} ${C.dim}v2.3.1${C.reset}  ${C.italic}Harness Engineering Agent${C.reset}  ${C.bold}${C.purple}│${C.reset}
 ${C.bold}${C.purple}  │${C.reset}                                             ${C.bold}${C.purple}│${C.reset}
 ${C.bold}${C.purple}  │${C.reset}  ${C.dim}개발자에게는 최고의 도우미${C.reset}                ${C.bold}${C.purple}│${C.reset}
 ${C.bold}${C.purple}  │${C.reset}  ${C.dim}비개발자에게는 최고의 마술사${C.reset} ${C.magenta}~*${C.reset}          ${C.bold}${C.purple}│${C.reset}
@@ -99,7 +99,7 @@ export function teamDisplay() {
 
   const lines = [
     '',
-    `${C.bold}  sw-kit Agent Team${C.reset}`,
+    `${C.bold}  aing Agent Team${C.reset}`,
     `${C.dim}  ───────────────────────────────────────${C.reset}`,
   ];
 
@@ -164,28 +164,28 @@ export function pdcaFlow(currentStage) {
 export function commandsHelp() {
   const cmds = [
     // Vibe Coding (바이브코딩 — 자연어로 시작)
-    { cmd: '/swkit do <자연어>', desc: 'Auto-route: 의도 분석 → 최적 파이프라인 자동 선택', icon: icon.route, section: 'Vibe Coding' },
-    { cmd: '/swkit wizard', desc: 'Iron magic: 비개발자도 자연어로 프로젝트 완성', icon: icon.wand },
-    { cmd: '/swkit init <프로젝트>', desc: 'Project init: 질문 기반 문맥 수집 → 프로젝트 문서 생성', icon: `${C.blue}(i)${C.reset}` },
+    { cmd: '/aing do <자연어>', desc: 'Auto-route: 의도 분석 → 최적 파이프라인 자동 선택', icon: icon.route, section: 'Vibe Coding' },
+    { cmd: '/aing wizard', desc: 'Iron magic: 비개발자도 자연어로 프로젝트 완성', icon: icon.wand },
+    { cmd: '/aing init <프로젝트>', desc: 'Project init: 질문 기반 문맥 수집 → 프로젝트 문서 생성', icon: `${C.blue}(i)${C.reset}` },
     // Pipeline (파이프라인)
-    { cmd: '/swkit auto <task>', desc: 'Full pipeline: 자동 팀 구성 + 병렬 실행', icon: `${C.green}|>${C.reset}`, section: 'Pipeline' },
-    { cmd: '/swkit team [agents] <task>', desc: 'Staged: plan→exec→verify→fix 루프 (품질 보장)', icon: `${C.purple}||${C.reset}` },
-    { cmd: '/swkit plan <task>', desc: 'Able+Klay: 요구사항 분석 → 작업 분해', icon: icon.target },
-    { cmd: '/swkit explore <target>', desc: 'Klay: 코드베이스 탐색 + 구조 분석', icon: icon.tri },
+    { cmd: '/aing auto <task>', desc: 'Full pipeline: 자동 팀 구성 + 병렬 실행', icon: `${C.green}|>${C.reset}`, section: 'Pipeline' },
+    { cmd: '/aing team [agents] <task>', desc: 'Staged: plan→exec→verify→fix 루프 (품질 보장)', icon: `${C.purple}||${C.reset}` },
+    { cmd: '/aing plan <task>', desc: 'Able+Klay: 요구사항 분석 → 작업 분해', icon: icon.target },
+    { cmd: '/aing explore <target>', desc: 'Klay: 코드베이스 탐색 + 구조 분석', icon: icon.tri },
     // Development (개발)
-    { cmd: '/swkit start <name>', desc: 'PDCA cycle: Plan→Do→Check→Act→Review', icon: `${C.orange}>>${C.reset}`, section: 'Development' },
-    { cmd: '/swkit tdd start <feat>', desc: 'TDD: 🔴Red→🟢Green→🔵Refactor', icon: `${C.red}(R)${C.reset}` },
-    { cmd: '/swkit execute <task>', desc: 'Jay+Derek: Backend + Frontend 구현', icon: icon.gear },
-    { cmd: '/swkit debug <증상>', desc: 'Scientific debug: 가설→테스트→결론 (영구 상태)', icon: `${C.orange}!${C.reset}` },
+    { cmd: '/aing start <name>', desc: 'PDCA cycle: Plan→Do→Check→Act→Review', icon: `${C.orange}>>${C.reset}`, section: 'Development' },
+    { cmd: '/aing tdd start <feat>', desc: 'TDD: 🔴Red→🟢Green→🔵Refactor', icon: `${C.red}(R)${C.reset}` },
+    { cmd: '/aing execute <task>', desc: 'Jay+Derek: Backend + Frontend 구현', icon: icon.gear },
+    { cmd: '/aing debug <증상>', desc: 'Scientific debug: 가설→테스트→결론 (영구 상태)', icon: `${C.orange}!${C.reset}` },
     // Quality (품질)
-    { cmd: '/swkit review', desc: 'Milla: 보안 + 코드 품질 리뷰', icon: icon.lock, section: 'Quality' },
-    { cmd: '/swkit verify', desc: 'Sam: 증거 체인 + 목표 달성 검증', icon: icon.star },
-    { cmd: '/swkit cost', desc: 'Cost report: 에이전트별 토큰/비용 추정', icon: icon.chart },
+    { cmd: '/aing review', desc: 'Milla: 보안 + 코드 품질 리뷰', icon: icon.lock, section: 'Quality' },
+    { cmd: '/aing verify', desc: 'Sam: 증거 체인 + 목표 달성 검증', icon: icon.star },
+    { cmd: '/aing cost', desc: 'Cost report: 에이전트별 토큰/비용 추정', icon: icon.chart },
     // Utility
-    { cmd: '/swkit rollback', desc: 'Git checkpoint 롤백', icon: `${C.orange}<>>${C.reset}`, section: 'Utility' },
-    { cmd: '/swkit agent-ui', desc: '3D Agent Office 브라우저 오픈', icon: `${C.cyan}{}${C.reset}` },
-    { cmd: '/swkit status', desc: 'Dashboard (PDCA+TDD+Task)', icon: icon.chart },
-    { cmd: '/swkit help', desc: 'This help', icon: `${C.sky}[?]${C.reset}` },
+    { cmd: '/aing rollback', desc: 'Git checkpoint 롤백', icon: `${C.orange}<>>${C.reset}`, section: 'Utility' },
+    { cmd: '/aing agent-ui', desc: '3D Agent Office 브라우저 오픈', icon: `${C.cyan}{}${C.reset}` },
+    { cmd: '/aing status', desc: 'Dashboard (PDCA+TDD+Task)', icon: icon.chart },
+    { cmd: '/aing help', desc: 'This help', icon: `${C.sky}[?]${C.reset}` },
   ];
 
   const lines = [
@@ -218,33 +218,33 @@ export function bestPracticesGuide() {
     `${C.dim}  ───────────────────────────────────────${C.reset}`,
     '',
     `  ${C.bold}${C.green}1. 바이브코딩 (처음이라면)${C.reset}`,
-    `     ${C.cyan}/swkit do "원하는 것을 자연어로"${C.reset}`,
+    `     ${C.cyan}/aing do "원하는 것을 자연어로"${C.reset}`,
     `     ${C.dim}→ 의도 분석 → auto/plan/team 자동 선택${C.reset}`,
-    `     ${C.dim}예: /swkit do "로그인 기능 추가해줘"${C.reset}`,
-    `     ${C.dim}예: /swkit do "src/auth.ts에 JWT 검증 추가"${C.reset}`,
+    `     ${C.dim}예: /aing do "로그인 기능 추가해줘"${C.reset}`,
+    `     ${C.dim}예: /aing do "src/auth.ts에 JWT 검증 추가"${C.reset}`,
     '',
     `  ${C.bold}${C.magenta}2. 비개발자라면${C.reset}`,
-    `     ${C.cyan}/swkit wizard${C.reset}`,
+    `     ${C.cyan}/aing wizard${C.reset}`,
     `     ${C.dim}→ Iron이 질문하면 답만 하면 됩니다${C.reset}`,
     '',
     `  ${C.bold}${C.blue}3. 새 프로젝트 시작${C.reset}`,
-    `     ${C.cyan}/swkit init → /swkit do "첫 기능"${C.reset}`,
+    `     ${C.cyan}/aing init → /aing do "첫 기능"${C.reset}`,
     `     ${C.dim}→ 프로젝트 문맥 수집 후 바로 개발 시작${C.reset}`,
     '',
     `  ${C.bold}${C.orange}4. 빠른 수정${C.reset}`,
-    `     ${C.cyan}/swkit auto "구체적 작업"${C.reset}`,
+    `     ${C.cyan}/aing auto "구체적 작업"${C.reset}`,
     `     ${C.dim}→ 파일/함수명 포함하면 Solo 모드로 즉시 실행${C.reset}`,
     '',
     `  ${C.bold}${C.purple}5. 대규모 기능${C.reset}`,
-    `     ${C.cyan}/swkit team "대규모 작업"${C.reset}`,
+    `     ${C.cyan}/aing team "대규모 작업"${C.reset}`,
     `     ${C.dim}→ plan→exec→verify→fix 품질 루프${C.reset}`,
     '',
     `  ${C.bold}${C.red}6. 버그 잡기${C.reset}`,
-    `     ${C.cyan}/swkit debug "증상 설명"${C.reset}`,
+    `     ${C.cyan}/aing debug "증상 설명"${C.reset}`,
     `     ${C.dim}→ 가설→테스트→결론, 세션 끊겨도 재개 가능${C.reset}`,
     '',
-    `  ${C.dim}  Tip: 모르겠으면 /swkit do 에 아무거나 써보세요.${C.reset}`,
-    `  ${C.dim}  sw-kit이 알아서 최적 경로를 찾아줍니다.${C.reset}`,
+    `  ${C.dim}  Tip: 모르겠으면 /aing do 에 아무거나 써보세요.${C.reset}`,
+    `  ${C.dim}  aing이 알아서 최적 경로를 찾아줍니다.${C.reset}`,
   ];
   return lines.join('\n');
 }
@@ -260,8 +260,8 @@ export function fullHelp() {
     commandsHelp(),
     '',
     `${C.dim}  ───────────────────────────────────────${C.reset}`,
-    `  ${C.dim}GitHub: ${C.reset}${C.sky}sangwookp9591/sw-kit-claude${C.reset}`,
-    `  ${C.dim}Install: ${C.reset}${C.sky}/plugin marketplace add sangwookp9591/sw-kit-claude${C.reset}`,
+    `  ${C.dim}GitHub: ${C.reset}${C.sky}sangwookp9591/ai-ng-kit${C.reset}`,
+    `  ${C.dim}Install: ${C.reset}${C.sky}/plugin marketplace add sangwookp9591/ai-ng-kit${C.reset}`,
     '',
   ].join('\n');
 }

@@ -1,5 +1,5 @@
 /**
- * sw-kit Evidence Chain (Innovation #4)
+ * aing Evidence Chain (Innovation #4)
  * Builds structured proof chains for PDCA completion verification.
  * @module scripts/evidence/evidence-chain
  */
@@ -18,7 +18,7 @@ const log = createLogger('evidence-chain');
  */
 export function addEvidence(feature, evidence, projectDir) {
   const dir = projectDir || process.cwd();
-  const chainPath = join(dir, '.sw-kit', 'state', `evidence-${feature}.json`);
+  const chainPath = join(dir, '.aing', 'state', `evidence-${feature}.json`);
   const chain = readStateOrDefault(chainPath, { feature, entries: [], verdict: null });
 
   chain.entries.push({
@@ -38,7 +38,7 @@ export function addEvidence(feature, evidence, projectDir) {
  */
 export function evaluateChain(feature, projectDir) {
   const dir = projectDir || process.cwd();
-  const chainPath = join(dir, '.sw-kit', 'state', `evidence-${feature}.json`);
+  const chainPath = join(dir, '.aing', 'state', `evidence-${feature}.json`);
   const chain = readStateOrDefault(chainPath, { feature, entries: [] });
 
   if (chain.entries.length === 0) {

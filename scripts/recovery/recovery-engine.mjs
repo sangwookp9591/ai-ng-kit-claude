@@ -1,5 +1,5 @@
 /**
- * sw-kit Recovery Engine (Innovation #5 — Self-Healing Engine)
+ * aing Recovery Engine (Innovation #5 — Self-Healing Engine)
  * Restores corrupted state files from snapshots or backups.
  * @module scripts/recovery/recovery-engine
  */
@@ -22,11 +22,11 @@ export function recoverState(stateFile, projectDir) {
   const dir = projectDir || process.cwd();
 
   // Priority 1: Emergency backup
-  const emergencyPath = join(dir, '.sw-kit', 'state', `${stateFile.replace('.json', '')}-emergency-backup.json`);
+  const emergencyPath = join(dir, '.aing', 'state', `${stateFile.replace('.json', '')}-emergency-backup.json`);
   if (existsSync(emergencyPath)) {
     const result = readState(emergencyPath);
     if (result.ok && result.data.state) {
-      const restored = writeState(join(dir, '.sw-kit', 'state', stateFile), result.data.state);
+      const restored = writeState(join(dir, '.aing', 'state', stateFile), result.data.state);
       if (restored.ok) {
         log.info(`Recovered ${stateFile} from emergency backup`);
         return { recovered: true, source: 'emergency-backup', data: result.data.state };
@@ -35,7 +35,7 @@ export function recoverState(stateFile, projectDir) {
   }
 
   // Priority 2: Latest snapshot
-  const snapshotDir = join(dir, '.sw-kit', 'snapshots');
+  const snapshotDir = join(dir, '.aing', 'snapshots');
   if (existsSync(snapshotDir)) {
     const snapshots = readdirSync(snapshotDir)
       .filter(f => f.startsWith('snapshot-') && f.endsWith('.json'))
@@ -45,7 +45,7 @@ export function recoverState(stateFile, projectDir) {
     for (const snapshot of snapshots) {
       const result = readState(join(snapshotDir, snapshot));
       if (result.ok && result.data.state) {
-        const restored = writeState(join(dir, '.sw-kit', 'state', stateFile), result.data.state);
+        const restored = writeState(join(dir, '.aing', 'state', stateFile), result.data.state);
         if (restored.ok) {
           log.info(`Recovered ${stateFile} from snapshot ${snapshot}`);
           return { recovered: true, source: `snapshot:${snapshot}`, data: result.data.state };
@@ -56,7 +56,7 @@ export function recoverState(stateFile, projectDir) {
 
   // Priority 3: Fresh state
   const freshState = { version: 1, features: {}, createdAt: new Date().toISOString() };
-  const restored = writeState(join(dir, '.sw-kit', 'state', stateFile), freshState);
+  const restored = writeState(join(dir, '.aing', 'state', stateFile), freshState);
   if (restored.ok) {
     log.warn(`Reset ${stateFile} to fresh state (no backup found)`);
     return { recovered: true, source: 'fresh', data: freshState };

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/banner.svg" width="600" alt="sw-kit Harness Engineering Agent">
+  <img src="images/banner.svg" width="600" alt="aing Harness Engineering Agent">
 </p>
 
 <p align="center">
@@ -13,23 +13,23 @@
 **Claude Code 세션에서**
 
 ```
-/plugin marketplace add sangwookp9591/sw-kit-claude
+/plugin marketplace add sangwookp9591/ai-ng-kit
 ```
 
 ```
-/plugin install sw-kit
+/plugin install aing
 ```
 
 **터미널에서 한 줄로**
 
 ```
-claude plugin marketplace add sangwookp9591/sw-kit-claude && claude plugin install sw-kit
+claude plugin marketplace add sangwookp9591/ai-ng-kit && claude plugin install aing
 ```
 
 **업데이트**
 
 ```
-claude plugin update sw-kit@swkit-marketplace
+claude plugin update aing@aing-marketplace
 ```
 
 > 버전은 `.claude-plugin/marketplace.json` + `.claude-plugin/plugin.json` + `package.json` 3곳의 매니페스트로 관리됩니다. `claude plugin update`는 이 매니페스트의 version 필드를 기준으로 업데이트를 판단합니다.
@@ -157,47 +157,47 @@ Correct    ███████████████████████
 
 | Command | What it does |
 |---------|-------------|
-| `/swkit start <name>` | Start PDCA cycle (Plan stage) |
-| `/swkit auto <feat> <task>` | Full pipeline: Klay - Able - Jay/Derek - Milla - Sam |
-| `/swkit status` | Real-time dashboard (PDCA + TDD + Tasks + Budget) |
-| `/swkit next` | Advance to next PDCA stage |
-| `/swkit wizard` | <img src="images/iron.svg" width="14"> Iron -- guided magic for non-developers |
+| `/aing start <name>` | Start PDCA cycle (Plan stage) |
+| `/aing auto <feat> <task>` | Full pipeline: Klay - Able - Jay/Derek - Milla - Sam |
+| `/aing status` | Real-time dashboard (PDCA + TDD + Tasks + Budget) |
+| `/aing next` | Advance to next PDCA stage |
+| `/aing wizard` | <img src="images/iron.svg" width="14"> Iron -- guided magic for non-developers |
 
 ### TDD
 
 | Command | What it does |
 |---------|-------------|
-| `/swkit tdd start <feat> <target>` | Begin RED phase -- write failing test first |
-| `/swkit tdd check pass` | Record pass -- advance phase (RED-GREEN-REFACTOR) |
-| `/swkit tdd check fail` | Record fail -- stay in current phase with guidance |
-| `/swkit tdd status` | Show current TDD phase |
+| `/aing tdd start <feat> <target>` | Begin RED phase -- write failing test first |
+| `/aing tdd check pass` | Record pass -- advance phase (RED-GREEN-REFACTOR) |
+| `/aing tdd check fail` | Record fail -- stay in current phase with guidance |
+| `/aing tdd status` | Show current TDD phase |
 
 ### Task Checklist
 
 | Command | What it does |
 |---------|-------------|
-| `/swkit task create <title>` | Create Main Task with Sub Tasks |
-| `/swkit task check <id> <seq>` | Mark subtask done |
-| `/swkit task list` | List all tasks with progress |
+| `/aing task create <title>` | Create Main Task with Sub Tasks |
+| `/aing task check <id> <seq>` | Mark subtask done |
+| `/aing task list` | List all tasks with progress |
 
 ### Agent Direct
 
 | Command | Agent | Role |
 |---------|-------|------|
-| `/swkit explore <target>` | <img src="images/klay.svg" width="14"> Klay | Architecture + codebase scan |
-| `/swkit plan <task>` | <img src="images/able.svg" width="14"> Able + <img src="images/klay.svg" width="14"> Klay | Requirements + architecture |
-| `/swkit execute <task>` | <img src="images/jay.svg" width="14"> Jay + <img src="images/derek.svg" width="14"> Derek | Backend + Frontend |
-| `/swkit review` | <img src="images/milla.svg" width="14"> Milla | Security + quality review |
-| `/swkit verify` | <img src="images/sam.svg" width="14"> Sam | Final review + evidence chain |
+| `/aing explore <target>` | <img src="images/klay.svg" width="14"> Klay | Architecture + codebase scan |
+| `/aing plan <task>` | <img src="images/able.svg" width="14"> Able + <img src="images/klay.svg" width="14"> Klay | Requirements + architecture |
+| `/aing execute <task>` | <img src="images/jay.svg" width="14"> Jay + <img src="images/derek.svg" width="14"> Derek | Backend + Frontend |
+| `/aing review` | <img src="images/milla.svg" width="14"> Milla | Security + quality review |
+| `/aing verify` | <img src="images/sam.svg" width="14"> Sam | Final review + evidence chain |
 
 ### Agent UI (3D Office)
 
 | Command | What it does |
 |---------|-------------|
-| `/swkit agent-ui` | Open 3D office in browser -- visualize current session |
-| `/swkit agent-ui --setup` | Auto-configure Claude Code hooks (one-time) |
-| `/swkit agent-ui --status` | Check current setup status |
-| `/swkit agent-ui --uninstall` | Remove hooks from settings |
+| `/aing agent-ui` | Open 3D office in browser -- visualize current session |
+| `/aing agent-ui --setup` | Auto-configure Claude Code hooks (one-time) |
+| `/aing agent-ui --status` | Check current setup status |
+| `/aing agent-ui --uninstall` | Remove hooks from settings |
 
 > 🏢 [office.sw-world.site](https://office.sw-world.site) — 팀원 초대 코드로 실시간 협업 시각화
 
@@ -205,9 +205,9 @@ Correct    ███████████████████████
 
 | Command | What it does |
 |---------|-------------|
-| `/swkit rollback` | Revert to last git checkpoint (non-destructive) |
-| `/swkit learn show` | View cross-session learning history |
-| `/swkit help` | Show agent team and full command list |
+| `/aing rollback` | Revert to last git checkpoint (non-destructive) |
+| `/aing learn show` | View cross-session learning history |
+| `/aing help` | Show agent team and full command list |
 
 ---
 
@@ -215,23 +215,23 @@ Correct    ███████████████████████
 
 ```
 -- Start a PDCA cycle
-/swkit start user-auth
+/aing start user-auth
 
 -- Or run the full pipeline automatically
-/swkit auto user-auth "JWT authentication with refresh tokens"
+/aing auto user-auth "JWT authentication with refresh tokens"
 
 -- Non-developer? Just say what you want
-/swkit wizard
+/aing wizard
 ```
 
 ### Pipeline Flow
 
 <p align="center">
-  <img src="images/pipeline-flow.svg" width="600" alt="sw-kit pipeline flow">
+  <img src="images/pipeline-flow.svg" width="600" alt="aing pipeline flow">
 </p>
 
 ```
-/swkit auto user-auth "JWT auth"
+/aing auto user-auth "JWT auth"
 
   1. Klay     -- scan codebase, extract conventions, design architecture
   2. Able     -- write requirements + spec + task checklist
@@ -249,7 +249,7 @@ Correct    ███████████████████████
                  [lint] PASS (0 errors)
                  Verdict: PASS
 
-  -> .sw-kit/reports/ completion report
+  -> .aing/reports/ completion report
   -> Cross-Session Learning captured
 ```
 
@@ -271,7 +271,7 @@ Korean and English auto-detected:
 <h2 id="architecture">Architecture</h2>
 
 ```
-sw-kit-claude/
+ai-ng-kit/
   .claude-plugin/plugin.json         -- plugin manifest
   hooks/hooks.json                   -- 7 hook events
   hooks-handlers/                    -- session-start, user-prompt, pre/post-tool, compact, stop
@@ -292,16 +292,16 @@ sw-kit-claude/
     cli/          persist (plan/task/report persistence CLI)
     i18n/         intent-detector, locale
   agents/         10 named agents (sam, able, klay, jay, jerry, milla, willji, derek, rowan, iron)
-  commands/       swkit.md, help.md
+  commands/       aing.md, help.md
   skills/         12 skill definitions (including agent-ui)
   templates/      plan, review, completion, adr
   images/         12 custom SVG icons
 ```
 
-### Runtime Data (`.sw-kit/`, gitignored)
+### Runtime Data (`.aing/`, gitignored)
 
 ```
-.sw-kit/
+.aing/
   state/          PDCA status, TDD phase, invariants, pipeline, circuit-breaker
   tasks/          Main Task -> Sub Task checklists
   plans/          Plan documents

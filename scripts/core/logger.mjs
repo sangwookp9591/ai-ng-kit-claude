@@ -1,7 +1,7 @@
 /**
- * sw-kit Structured Logger
+ * aing Structured Logger
  * All output goes to stderr (never stdout — stdout is reserved for hook responses).
- * Logs also persist to .sw-kit/logs/ for debugging.
+ * Logs also persist to .aing/logs/ for debugging.
  * @module scripts/core/logger
  */
 
@@ -37,7 +37,7 @@ function log(level, module, message, data) {
   };
 
   // stderr for immediate visibility
-  const line = `[sw-kit:${module}] ${level.toUpperCase()}: ${message}`;
+  const line = `[aing:${module}] ${level.toUpperCase()}: ${message}`;
   if (level === 'error') {
     process.stderr.write(line + '\n');
   } else if (level === 'warn') {
@@ -50,7 +50,7 @@ function log(level, module, message, data) {
 
 function persistLog(entry) {
   try {
-    const logDir = join(process.env.SW_KIT_PROJECT_DIR || process.cwd(), '.sw-kit', 'logs');
+    const logDir = join(process.env.SW_KIT_PROJECT_DIR || process.cwd(), '.aing', 'logs');
     if (!existsSync(logDir)) {
       mkdirSync(logDir, { recursive: true });
     }

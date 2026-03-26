@@ -1,5 +1,5 @@
 /**
- * sw-kit Complexity Scorer (Innovation #3 — Adaptive Routing)
+ * aing Complexity Scorer (Innovation #3 — Adaptive Routing)
  * Estimates task complexity to route to optimal model tier.
  * @module scripts/routing/complexity-scorer
  */

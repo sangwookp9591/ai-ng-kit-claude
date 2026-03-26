@@ -1,5 +1,5 @@
 /**
- * sw-kit Cost Reporter
+ * aing Cost Reporter
  * 비용/토큰 사용량을 인간 친화적으로 보고합니다.
  * @module scripts/evidence/cost-reporter
  */
@@ -24,8 +24,8 @@ const TOKENS_PER_ACTION = 2000;
  */
 export function generateCostReport(projectDir) {
   const dir = projectDir || process.cwd();
-  const costPath  = join(dir, '.sw-kit', 'state', 'cost-tracker.json');
-  const tracePath = join(dir, '.sw-kit', 'state', 'agent-traces.json');
+  const costPath  = join(dir, '.aing', 'state', 'cost-tracker.json');
+  const tracePath = join(dir, '.aing', 'state', 'agent-traces.json');
 
   const costData  = readStateOrDefault(costPath,  { sessions: [], total: {}, tokensUsed: 0, apiCalls: 0 });
   const traceData = readStateOrDefault(tracePath, { events: [], summary: {} });
@@ -67,7 +67,7 @@ export function generateCostReport(projectDir) {
  */
 export function formatCostReport(report) {
   const lines = [
-    '━━━ sw-kit Cost Report (Est.) ━━━',
+    '━━━ aing Cost Report (Est.) ━━━',
     '',
     `Generated: ${new Date(report.timestamp).toLocaleString()}`
   ];

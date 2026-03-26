@@ -1,0 +1,62 @@
+[
+  {
+    "tag": "aing-checkpoint/v13f-1773896441207",
+    "label": "v13f",
+    "commit": "4fbd5e7ed3867d3cb5201dbf89e0037bfea3fddd",
+    "createdAt": "2026-03-19T05:00:41.227Z"
+  },
+  {
+    "tag": "aing-checkpoint/pre-auto-1773896441231",
+    "label": "pre-auto",
+    "commit": "4fbd5e7ed3867d3cb5201dbf89e0037bfea3fddd",
+    "createdAt": "2026-03-19T05:00:41.249Z"
+  },
+  {
+    "tag": "aing-checkpoint/final-1773897048585",
+    "label": "final",
+    "commit": "a21fb9eb5ea9d19860a2679cf20e4969d8e49294",
+    "createdAt": "2026-03-19T05:10:48.605Z"
+  },
+  {
+    "tag": "aing-checkpoint/pre-auto-1773897048609",
+    "label": "pre-auto",
+    "commit": "a21fb9eb5ea9d19860a2679cf20e4969d8e49294",
+    "createdAt": "2026-03-19T05:10:48.627Z"
+  },
+  {
+    "tag": "aing-checkpoint/test-1773897424426",
+    "label": "test",
+    "commit": "294d9c61e56a4ccc8a2750f84e4d3c4a7fef5360",
+    "createdAt": "2026-03-19T05:17:04.446Z"
+  },
+  {
+    "tag": "aing-checkpoint/pre-auto-1773897424451",
+    "label": "pre-auto",
+    "commit": "294d9c61e56a4ccc8a2750f84e4d3c4a7fef5360",
+    "createdAt": "2026-03-19T05:17:04.469Z"
+  },
+  {
+    "tag": "aing-checkpoint/fin-1773897571819",
+    "label": "fin",
+    "commit": "294d9c61e56a4ccc8a2750f84e4d3c4a7fef5360",
+    "createdAt": "2026-03-19T05:19:31.840Z"
+  },
+  {
+    "tag": "aing-checkpoint/pre-auto-1773897571844",
+    "label": "pre-auto",
+    "commit": "294d9c61e56a4ccc8a2750f84e4d3c4a7fef5360",
+    "createdAt": "2026-03-19T05:19:31.862Z"
+  },
+  {
+    "tag": "aing-checkpoint/z-1773898096407",
+    "label": "z",
+    "commit": "47cfda35ab1cd732dd62b5c17fb1cc29076ea519",
+    "createdAt": "2026-03-19T05:28:16.428Z"
+  },
+  {
+    "tag": "aing-checkpoint/pre-auto-1773898096432",
+    "label": "pre-auto",
+    "commit": "47cfda35ab1cd732dd62b5c17fb1cc29076ea519",
+    "createdAt": "2026-03-19T05:28:16.451Z"
+  }
+]

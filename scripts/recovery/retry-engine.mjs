@@ -1,5 +1,5 @@
 /**
- * sw-kit Retry Engine v1.3.0
+ * aing Retry Engine v1.3.0
  * Exponential backoff with jitter for automatic retries.
  * @module scripts/recovery/retry-engine
  */

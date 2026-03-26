@@ -12,9 +12,9 @@ import { tmpdir } from 'node:os';
 import { randomBytes } from 'node:crypto';
 
 function makeTempDir() {
-  const dir = join(tmpdir(), `sw-kit-goal-test-${randomBytes(6).toString('hex')}`);
-  mkdirSync(join(dir, '.sw-kit', 'plans'), { recursive: true });
-  mkdirSync(join(dir, '.sw-kit', 'state'), { recursive: true });
+  const dir = join(tmpdir(), `aing-goal-test-${randomBytes(6).toString('hex')}`);
+  mkdirSync(join(dir, '.aing', 'plans'), { recursive: true });
+  mkdirSync(join(dir, '.aing', 'state'), { recursive: true });
   return dir;
 }
 

@@ -1,5 +1,5 @@
 /**
- * sw-kit Circuit Breaker (Innovation #5 — Self-Healing Engine)
+ * aing Circuit Breaker (Innovation #5 — Self-Healing Engine)
  * Detects repeated failures and auto-disables problematic features.
  * Pattern: CLOSED → OPEN (after N failures) → HALF-OPEN (after timeout) → CLOSED
  * @module scripts/recovery/circuit-breaker
@@ -13,7 +13,7 @@ import { join } from 'node:path';
 const log = createLogger('circuit-breaker');
 
 function getCircuitPath(projectDir) {
-  return join(projectDir || process.cwd(), '.sw-kit', 'state', 'circuit-breaker.json');
+  return join(projectDir || process.cwd(), '.aing', 'state', 'circuit-breaker.json');
 }
 
 /**

@@ -1,5 +1,5 @@
 /**
- * sw-kit Model Router — Adaptive model selection based on task complexity and risk.
+ * aing Model Router — Adaptive model selection based on task complexity and risk.
  * Routes agents to optimal model tier (haiku/sonnet/opus) based on signals.
  * @module scripts/routing/model-router
  */

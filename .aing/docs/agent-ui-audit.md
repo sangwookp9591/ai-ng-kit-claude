@@ -29,7 +29,7 @@
 
 - transcript tail 256KB 파싱 (`parseActiveAgents`)
 - `tool_use` / `tool_result` 쌍으로 활성 에이전트 감지
-- `subagent_type.startsWith('sw-kit:')` 필터
+- `subagent_type.startsWith('aing:')` 필터
 - 블링킹 컬러 도트로 HUD 표시
 
 **판정:** 현행 유지. Resilient read-only 방식.
@@ -42,7 +42,7 @@
 **결과:** 소프트 강제 (프롬프트 지시)
 
 - Rule 2: `description` 파라미터 필수 명시
-- Claude Code 네이티브 표시: `⏺ sw-kit:klay(Klay: 아키텍처 탐색) Opus`
+- Claude Code 네이티브 표시: `⏺ aing:klay(Klay: 아키텍처 탐색) Opus`
 - Hook-level 검증 없음 (LLM 준수에 의존)
 
 **판정:** 현재로 충분. 빈번한 누락 발견 시 pre-tool-use 경고 추가 가능.

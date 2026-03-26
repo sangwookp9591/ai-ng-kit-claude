@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * sw-kit Status Line v1.0.0
+ * aing Status Line v1.0.0
  *
  * Minimal HUD for Claude Code status line.
  * Shows blinking colored dots for active agents + context %.
@@ -80,7 +80,7 @@ function readStdin() {
   }
 }
 
-// ── Parse transcript tail for active sw-kit agents ──
+// ── Parse transcript tail for active aing agents ──
 function parseActiveAgents(transcriptPath) {
   if (!transcriptPath || !existsSync(transcriptPath)) return [];
 
@@ -105,7 +105,7 @@ function parseActiveAgents(transcriptPath) {
       try {
         const entry = JSON.parse(line);
 
-        // Detect sw-kit agent spawn
+        // Detect aing agent spawn
         if (entry.type === 'tool_use') {
           const input = entry.content?.input || entry.tool_input || {};
           const toolName = entry.content?.name || entry.tool_name || '';
@@ -113,8 +113,8 @@ function parseActiveAgents(transcriptPath) {
 
           if ((toolName === 'Agent' || toolName === 'Task') &&
               typeof input.subagent_type === 'string' &&
-              input.subagent_type.startsWith('sw-kit:')) {
-            const agentKey = input.subagent_type.replace('sw-kit:', '');
+              input.subagent_type.startsWith('aing:')) {
+            const agentKey = input.subagent_type.replace('aing:', '');
             const name = input.name || agentKey;
             const info = AGENTS[agentKey] || AGENTS[name] || { label: name, role: agentKey, color: CYAN };
 
@@ -173,7 +173,7 @@ function contextIndicator(pct) {
 // ── PDCA stage ──
 function getPdcaStage(cwd) {
   try {
-    const statePath = join(cwd, '.sw-kit', 'state', 'pdca-status.json');
+    const statePath = join(cwd, '.aing', 'state', 'pdca-status.json');
     if (!existsSync(statePath)) return null;
     const state = JSON.parse(readFileSync(statePath, 'utf8'));
     if (!state?.activeFeature) return null;
@@ -188,15 +188,15 @@ function getPdcaStage(cwd) {
 function main() {
   const stdin = readStdin();
   if (!stdin) {
-    console.log(`${BOLD}sw-kit${RESET}`);
+    console.log(`${BOLD}aing${RESET}`);
     return;
   }
 
   const cwd = stdin.cwd || process.cwd();
   const parts = [];
 
-  // sw-kit brand
-  parts.push(`${BOLD}sw-kit${RESET}`);
+  // aing brand
+  parts.push(`${BOLD}aing${RESET}`);
 
   // Active agents with blinking dots
   const agents = parseActiveAgents(stdin.transcript_path);
