@@ -6,6 +6,7 @@
 
 import { readState, writeState } from '../scripts/core/state.mjs';
 import { createLogger } from '../scripts/core/logger.mjs';
+import { norchSessionEnd } from '../scripts/core/norch-bridge.mjs';
 import { getBudgetStatus } from '../scripts/core/context-budget.mjs';
 import { getActiveSession, sanitizeSessionField } from '../scripts/core/session-reader.mjs';
 import { writeHandoff as writeStageHandoff } from '../scripts/pipeline/handoff-manager.mjs';
@@ -15,6 +16,7 @@ const log = createLogger('stop');
 
 try {
   const projectDir = process.env.PROJECT_DIR || process.cwd();
+  norchSessionEnd(process.env.SESSION_ID || 'default');
 
   // Log context budget usage for this session
   const budget = getBudgetStatus();

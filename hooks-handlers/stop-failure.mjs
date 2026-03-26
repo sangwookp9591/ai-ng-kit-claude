@@ -2,6 +2,7 @@
  * aing StopFailure Hook v1.3.2
  */
 import { readStdinJSON } from '../scripts/core/stdin.mjs';
+import { norchError } from '../scripts/core/norch-bridge.mjs';
 import { readState, writeState } from '../scripts/core/state.mjs';
 import { appendFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -25,6 +26,7 @@ try {
   for (const [k, { p, r }] of Object.entries(CATS)) {
     if (p.test(msg)) { cat = k; rec = r; break; }
   }
+  norchError('session', null, `${cat}: ${msg.slice(0, 100)}`);
 
   const sf = join(dir, '.aing', 'state', 'pdca-status.json');
   const sr = readState(sf);

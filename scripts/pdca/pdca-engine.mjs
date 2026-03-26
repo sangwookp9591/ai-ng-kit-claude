@@ -7,6 +7,7 @@
 import { readState, writeState, readStateOrDefault } from '../core/state.mjs';
 import { getConfig } from '../core/config.mjs';
 import { createLogger } from '../core/logger.mjs';
+import { norchPdcaChange } from '../core/norch-bridge.mjs';
 import { join } from 'node:path';
 
 const log = createLogger('pdca-engine');
@@ -47,6 +48,7 @@ export function startPdca(featureName, projectDir) {
 
   const result = writeState(statePath, state);
   if (result.ok) {
+    norchPdcaChange('session', 'plan', featureName);
     log.info(`PDCA started: ${featureName}`);
   }
   return result;
@@ -89,6 +91,7 @@ export function advancePdca(featureName, evidence, projectDir) {
     if (matchRate !== undefined && matchRate < threshold && feature.iteration < maxIter) {
       feature.iteration++;
       feature.currentStage = 'act';
+      norchPdcaChange('session', 'act', `iterate #${feature.iteration}`);
       feature.history.push({
         stage: 'act', action: 'iterate',
         reason: `matchRate ${matchRate}% < ${threshold}%`,
@@ -101,6 +104,7 @@ export function advancePdca(featureName, evidence, projectDir) {
     // matchRate >= threshold or missing or max iterations reached → go to review
     if (matchRate === undefined || matchRate >= threshold || feature.iteration >= maxIter) {
       feature.currentStage = 'review';
+      norchPdcaChange('session', 'review', 'from check');
       feature.history.push({
         stage: 'review', action: 'advanced',
         from: 'check',
@@ -114,6 +118,7 @@ export function advancePdca(featureName, evidence, projectDir) {
   // Act loops back to do (for iteration)
   const nextStage = currentStage === 'act' ? 'do' : stageInfo.next;
   feature.currentStage = nextStage;
+  norchPdcaChange('session', nextStage, `from ${currentStage}`);
   feature.history.push({
     stage: nextStage, action: 'advanced',
     from: currentStage,

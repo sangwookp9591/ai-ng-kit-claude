@@ -10,6 +10,7 @@ import { resetBudget, trackInjection, trimToTokenBudget } from '../scripts/core/
 import { getProgressSummary } from '../scripts/guardrail/progress-tracker.mjs';
 import { resetTrackers } from '../scripts/guardrail/safety-invariants.mjs';
 import { isSetupComplete } from '../scripts/setup/setup-progress.mjs';
+import { norchSessionStart } from '../scripts/core/norch-bridge.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'node:fs';
@@ -21,6 +22,7 @@ const log = createLogger('session-start');
 
 try {
   const projectDir = process.env.PROJECT_DIR || process.cwd();
+  norchSessionStart(process.env.SESSION_ID || 'default');
   const config = loadConfig(projectDir);
 
   resetBudget();

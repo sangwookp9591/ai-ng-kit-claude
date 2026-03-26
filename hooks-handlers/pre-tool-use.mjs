@@ -2,6 +2,7 @@
  * aing PreToolUse Hook v1.3.2
  */
 import { readStdinJSON } from '../scripts/core/stdin.mjs';
+import { norchToolUse } from '../scripts/core/norch-bridge.mjs';
 import { checkBashCommand, checkFilePath, formatViolations } from '../scripts/guardrail/guardrail-engine.mjs';
 import { checkStepLimit, checkFileChangeLimit, checkForbiddenPath } from '../scripts/guardrail/safety-invariants.mjs';
 import { isDryRunActive, queueChange, formatPreview } from '../scripts/guardrail/dry-run.mjs';
@@ -14,6 +15,7 @@ try {
   const projectDir = process.env.PROJECT_DIR || process.cwd();
   const ctx = [];
 
+  norchToolUse('session', toolName, toolInput.file_path || toolInput.command?.slice(0, 50), null);
   const step = checkStepLimit(projectDir);
   if (!step.ok) ctx.push(step.message);
 

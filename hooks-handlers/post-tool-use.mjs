@@ -5,6 +5,7 @@ import { readStdinJSON } from '../scripts/core/stdin.mjs';
 import { collectBasicEvidence } from '../scripts/evidence/evidence-collector-lite.mjs';
 import { recordToolUse } from '../scripts/trace/agent-trace.mjs';
 import { resetErrorCount } from '../scripts/guardrail/safety-invariants.mjs';
+import { norchToolUse, norchAgentSpawn } from '../scripts/core/norch-bridge.mjs';
 
 const parsed = await readStdinJSON();
 const projectDir = process.env.PROJECT_DIR || process.cwd();
@@ -20,8 +21,10 @@ try {
       const agentKey = toolInput.subagent_type.replace('aing:', '');
       const agentName = toolInput.name || agentKey;
       recordToolUse(toolName, { ...toolInput, _agentName: agentName }, toolResponse, projectDir);
+      norchAgentSpawn('session', agentKey, toolInput.description);
     } else {
       recordToolUse(toolName, toolInput, toolResponse, projectDir);
+      norchToolUse('session', toolName, toolInput.file_path || toolInput.command?.slice(0, 60), null);
     }
     resetErrorCount(projectDir);
   }
