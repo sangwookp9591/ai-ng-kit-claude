@@ -58,9 +58,9 @@ const AGENTS = {
   jerry:   { icon: icon.db,     color: C.yellow, name: 'Jerry', role: 'Backend / DB', desc: 'Database and infrastructure', model: 'sonnet' },
   milla:   { icon: icon.lock,   color: C.green, name: 'Milla', role: 'Security / Review', desc: 'Security audit and code review', model: 'sonnet' },
   willji:  { icon: icon.pen,    color: C.pink, name: 'Willji', role: 'Designer / UI-UX', desc: 'Component design, layout, design tokens', model: 'sonnet' },
-  derek:   { icon: icon.screen, color: C.cyan, name: 'Derek', role: 'Frontend / Build', desc: 'Screen implementation, state management', model: 'sonnet' },
+  derek:   { icon: icon.screen, color: C.cyan, name: 'Derek', role: 'Mobile / Flutter', desc: 'Flutter, iOS, AOS senior engineer', model: 'sonnet' },
   rowan:   { icon: icon.spark,  color: C.lime, name: 'Rowan', role: 'Frontend / Motion', desc: 'Animations, micro-interactions, UX polish', model: 'sonnet' },
-  iron:    { icon: icon.wand,   color: C.magenta, name: 'Iron', role: 'Wizard', desc: 'Guided magic for non-developers', model: 'sonnet' },
+  iron:    { icon: icon.wand,   color: C.magenta, name: 'Iron', role: 'Frontend / Build', desc: 'Screen implementation, state management', model: 'sonnet' },
 };
 
 const INNOVATIONS = [
@@ -93,8 +93,8 @@ export function teamDisplay() {
     { label: `${C.blue}Planning${C.reset}`, members: ['able', 'klay'] },
     { label: `${C.orange}Backend${C.reset}`, members: ['jay', 'jerry', 'milla'] },
     { label: `${C.pink}Design${C.reset}`, members: ['willji'] },
-    { label: `${C.cyan}Frontend${C.reset}`, members: ['derek', 'rowan'] },
-    { label: `${C.magenta}Magic${C.reset}`, members: ['iron'] },
+    { label: `${C.cyan}Frontend${C.reset}`, members: ['iron', 'rowan'] },
+    { label: `${C.magenta}Mobile${C.reset}`, members: ['derek'] },
   ];
 
   const lines = [
@@ -165,7 +165,7 @@ export function commandsHelp() {
   const cmds = [
     // Vibe Coding (바이브코딩 — 자연어로 시작)
     { cmd: '/aing do <자연어>', desc: 'Auto-route: 의도 분석 → 최적 파이프라인 자동 선택', icon: icon.route, section: 'Vibe Coding' },
-    { cmd: '/aing wizard', desc: 'Iron magic: 비개발자도 자연어로 프로젝트 완성', icon: icon.wand },
+    { cmd: '/aing wizard', desc: 'Iron: 비개발자도 자연어로 프로젝트 완성', icon: icon.wand },
     { cmd: '/aing init <프로젝트>', desc: 'Project init: 질문 기반 문맥 수집 → 프로젝트 문서 생성', icon: `${C.blue}(i)${C.reset}` },
     // Pipeline (파이프라인)
     { cmd: '/aing auto <task>', desc: 'Full pipeline: 자동 팀 구성 + 병렬 실행', icon: `${C.green}|>${C.reset}`, section: 'Pipeline' },

@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.4.1] - 2026-03-26
+
+### Changed — 에이전트 역할 재편 + Flutter 스킬 + 리브랜딩 잔여 정리
+
+#### 에이전트 역할 스왑: Derek ↔ Iron
+- **Derek**: Frontend / Build → **Mobile / Flutter** 시니어로 역할 전환
+  - Flutter/iOS/AOS 크로스플랫폼 앱 설계 및 구현 전담
+  - 레이어드 아키텍처 (UI → Logic → Data) 원칙 적용
+  - Animation Strategy 섹션 추가 (Implicit/Explicit/Hero/Physics-Based)
+- **Iron (구 Wizard)**: Wizard → **Frontend / Build**로 역할 전환
+  - 기존 Derek의 프론트엔드 역할 승계 (React, shadcn/ui, 컴포넌트 구현)
+  - 비개발자 마술사 컨셉 → 실전 프론트엔드 엔지니어로 전환
+
+#### 신규 스킬 2개
+- `/aing flutter-animation`: Flutter 애니메이션 구현 가이드 (Implicit/Explicit/Hero/Physics-Based)
+- `/aing flutter-architecture`: Flutter 앱 아키텍처 설계 (레이어드 구조, 상태 관리, 프로젝트 구조화)
+
+#### Display / HUD / Pipeline 반영
+- `display.mjs`: Derek role `Frontend` → `Mobile/Flutter`, Iron role `Wizard` → `Frontend/Build`
+- `display.mjs`: 팀 그룹 — Frontend팀 `[iron, rowan]`, Mobile팀 `[derek]`
+- `statusline.mjs`: Derek `Frontend` → `Mobile`, Wizard `Wizard` → `Frontend`
+- `team-orchestrator.mjs`: mid/high 프리셋 Frontend 실행자 `derek` → `iron`
+
+#### 리브랜딩 잔여 정리
+- `.gitignore`: `.sw-kit/` 경로 → `.aing/`으로 통일
+- `banner.svg`: `sw` → `ai`, `sw-kit` → `aing`, `HARNESS ENGINEERING AGENT` → `AI-NG ENGINEERING AGENT`
+
 ## [2.4.0] - 2026-03-26
 
 ### Added — 신규 에이전트 2개 + 스킬 4개 + Team Gate Review

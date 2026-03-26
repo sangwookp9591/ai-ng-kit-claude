@@ -1,10 +1,10 @@
 node_modules/
 .omc/
-.sw-kit/state/
-.sw-kit/snapshots/
-.sw-kit/logs/
-.sw-kit/reports/
-.sw-kit/routing-history.json
-.sw-kit/project-memory.json
+.aing/state/
+.aing/snapshots/
+.aing/logs/
+.aing/reports/
+.aing/routing-history.json
+.aing/project-memory.json
 *.log
 .DS_Store

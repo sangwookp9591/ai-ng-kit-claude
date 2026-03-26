@@ -37,12 +37,12 @@
     <rect width="48" height="48" rx="10" fill="none" stroke="url(#accent)" stroke-width="2">
       <animate attributeName="stroke-opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
     </rect>
-    <text x="24" y="34" text-anchor="middle" fill="#a78bfa" font-family="monospace" font-size="22" font-weight="bold">sw</text>
+    <text x="24" y="34" text-anchor="middle" fill="#a78bfa" font-family="monospace" font-size="22" font-weight="bold">ai</text>
   </g>
 
   <!-- Title -->
-  <text x="110" y="68" fill="#e2e8f0" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" letter-spacing="-0.5">sw-kit</text>
-  <text x="110" y="92" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="14" letter-spacing="2">HARNESS ENGINEERING AGENT</text>
+  <text x="110" y="68" fill="#e2e8f0" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" letter-spacing="-0.5">aing</text>
+  <text x="110" y="92" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="14" letter-spacing="2">AI-NG ENGINEERING AGENT</text>
 
   <!-- Version badge -->
   <rect x="110" y="102" width="52" height="20" rx="4" fill="#6366f1" opacity="0.2"/>

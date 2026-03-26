@@ -55,7 +55,7 @@ const TEAM_PRESETS = {
     workers: [
       { name: 'able', agent: 'planner', model: 'sonnet', role: '📋 Able — 작업 분해' },
       { name: 'jay', agent: 'executor', model: 'sonnet', role: '⚙️ Jay — Backend 구현' },
-      { name: 'derek', agent: 'executor', model: 'sonnet', role: '🖥️ Derek — Frontend 구현' },
+      { name: 'iron', agent: 'executor', model: 'sonnet', role: '🖥️ Iron — Frontend 구현' },
       { name: 'sam', agent: 'sam', model: 'haiku', role: '✅ Sam — 증거 수집' }
     ],
     when: 'fileCount <= 15 && complexity.level === "mid"',
@@ -72,7 +72,7 @@ const TEAM_PRESETS = {
       { name: 'jay', agent: 'executor', model: 'sonnet', role: '⚙️ Jay — Backend API' },
       { name: 'jerry', agent: 'executor', model: 'sonnet', role: '🗄️ Jerry — DB+인프라' },
       { name: 'milla', agent: 'reviewer', model: 'sonnet', role: '🔒 Milla — 보안 검증' },
-      { name: 'derek', agent: 'executor', model: 'sonnet', role: '🖥️ Derek — Frontend' },
+      { name: 'iron', agent: 'executor', model: 'sonnet', role: '🖥️ Iron — Frontend' },
       { name: 'sam', agent: 'sam', model: 'haiku', role: '✅ Sam — 최종 검증' }
     ],
     when: 'complexity.level === "high"',

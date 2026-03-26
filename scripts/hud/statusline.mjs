@@ -40,9 +40,9 @@ const AGENTS = {
   jerry:  { label: 'Jerry',  role: 'DB',        color: CYAN },
   milla:  { label: 'Milla',  role: 'Security',  color: BRIGHT_RED },
   willji: { label: 'Willji', role: 'Design',    color: MAGENTA },
-  derek:  { label: 'Derek',  role: 'Frontend',  color: BRIGHT_YELLOW },
+  derek:  { label: 'Derek',  role: 'Mobile',    color: BRIGHT_YELLOW },
   rowan:  { label: 'Rowan',  role: 'Motion',    color: WHITE },
-  wizard: { label: 'Iron',   role: 'Wizard',    color: BLUE },
+  wizard: { label: 'Iron',   role: 'Frontend',  color: BLUE },
   // Also match by agent type (executor, planner, reviewer, etc.)
   executor: { label: 'Exec', role: 'Impl',    color: GREEN },
   planner:  { label: 'Plan', role: 'Plan',    color: BLUE },
