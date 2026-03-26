@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.3.3] - 2026-03-26
+
+### Added — Statusline 업데이트 알림 + 랜딩 페이지 최신화
+
+#### Statusline 업데이트 알림
+- GitHub에서 최신 버전을 확인하여 statusline에 `⬆ vX.Y.Z` 표시
+- 1시간 간격 캐시 + non-blocking 백그라운드 체크 (성능 영향 없음)
+- `.aing/state/version-check.json`에 캐시 저장
+
+#### 랜딩 페이지 최신화
+- 버전 2.2.3 → 2.3.3, GitHub URL `ai-ng-kit-claude`로 수정
+- 삭제된 `/aing cost` 커맨드 제거
+- 신규 스킬 반영: `figma-read`, `progress-check`, `design`, `qa-loop`, `plan-task`, `review-code`
+- Modes에 `figma→code`, `qa-loop` 추가
+
 ## [2.3.2] - 2026-03-26
 
 ### Changed — 프로젝트 리브랜딩: sw-kit → aing (ai-ng-kit)

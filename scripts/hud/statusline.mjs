@@ -9,8 +9,10 @@
  *   { transcript_path, cwd, model, context_window, workspace }
  */
 
-import { readFileSync, existsSync, statSync, openSync, readSync, closeSync } from 'node:fs';
-import { join } from 'node:path';
+import { readFileSync, writeFileSync, existsSync, statSync, openSync, readSync, closeSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { execFile } from 'node:child_process';
 
 // ── ANSI Colors ──
 const RESET = '\x1b[0m';
@@ -148,6 +150,75 @@ function parseActiveAgents(transcriptPath) {
   }
 }
 
+// ── Version check (cached, non-blocking) ──
+const CURRENT_VERSION = (() => {
+  try {
+    const pkgPath = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'package.json');
+    return JSON.parse(readFileSync(pkgPath, 'utf8')).version;
+  } catch { return null; }
+})();
+
+function getUpdateInfo(cwd) {
+  const cacheDir = join(cwd, '.aing', 'state');
+  const cachePath = join(cacheDir, 'version-check.json');
+  const CHECK_INTERVAL = 3600_000; // 1 hour
+
+  try {
+    // Read cache
+    if (existsSync(cachePath)) {
+      const cache = JSON.parse(readFileSync(cachePath, 'utf8'));
+      const age = Date.now() - (cache.checkedAt || 0);
+
+      // If cache is fresh, return cached result
+      if (age < CHECK_INTERVAL) {
+        if (cache.latest && cache.latest !== CURRENT_VERSION && isNewer(cache.latest, CURRENT_VERSION)) {
+          return cache.latest;
+        }
+        return null;
+      }
+    }
+
+    // Cache is stale or missing — trigger background check (non-blocking)
+    execFile('node', ['-e', `
+      const https = require('https');
+      const fs = require('fs');
+      const url = 'https://raw.githubusercontent.com/sangwookp9591/ai-ng-kit-claude/main/package.json';
+      https.get(url, { timeout: 5000 }, (res) => {
+        let data = '';
+        res.on('data', c => data += c);
+        res.on('end', () => {
+          try {
+            const v = JSON.parse(data).version;
+            const out = JSON.stringify({ latest: v, checkedAt: Date.now() });
+            fs.mkdirSync('${cacheDir.replace(/'/g, "\\'")}', { recursive: true });
+            fs.writeFileSync('${cachePath.replace(/'/g, "\\'")}', out);
+          } catch {}
+        });
+      }).on('error', () => {});
+    `], { stdio: 'ignore', detached: true }).unref();
+
+    // Return cached value if exists (stale but better than nothing)
+    if (existsSync(cachePath)) {
+      const cache = JSON.parse(readFileSync(cachePath, 'utf8'));
+      if (cache.latest && cache.latest !== CURRENT_VERSION && isNewer(cache.latest, CURRENT_VERSION)) {
+        return cache.latest;
+      }
+    }
+  } catch {}
+  return null;
+}
+
+function isNewer(latest, current) {
+  if (!latest || !current) return false;
+  const l = latest.split('.').map(Number);
+  const c = current.split('.').map(Number);
+  for (let i = 0; i < 3; i++) {
+    if ((l[i] || 0) > (c[i] || 0)) return true;
+    if ((l[i] || 0) < (c[i] || 0)) return false;
+  }
+  return false;
+}
+
 // ── Context percentage ──
 function getContextPercent(stdin) {
   const pct = stdin?.context_window?.used_percentage;
@@ -214,6 +285,12 @@ function main() {
     const icons = { plan: '📋', do: '⚡', check: '✅', act: '🔄' };
     const icon = icons[pdca.stage] || '📌';
     parts.push(`${icon}${DIM}${pdca.stage}${RESET}`);
+  }
+
+  // Update notification
+  const latestVersion = getUpdateInfo(cwd);
+  if (latestVersion) {
+    parts.push(`${BRIGHT_YELLOW}⬆ v${latestVersion}${RESET}`);
   }
 
   // Context %

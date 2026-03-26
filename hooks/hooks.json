@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-hooks.json",
-  "description": "aing Harness Engineering Agent v2.3.2",
+  "description": "aing Harness Engineering Agent v2.3.3",
   "hooks": {
     "SessionStart": [
       {
