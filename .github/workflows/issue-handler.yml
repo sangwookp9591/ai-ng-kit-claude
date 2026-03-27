@@ -11,108 +11,27 @@ permissions:
 
 jobs:
   handle-issue:
-    # 'aing-auto' 라벨이 있는 이슈만 처리
     if: contains(github.event.issue.labels.*.name, 'aing-auto')
     runs-on: ubuntu-latest
     timeout-minutes: 30
-
-    env:
-      ISSUE_NUMBER: ${{ github.event.issue.number }}
-      ISSUE_TITLE: ${{ github.event.issue.title }}
-      ISSUE_BODY: ${{ github.event.issue.body }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-
-      - name: Install Claude Code
-        run: npm install -g @anthropic-ai/claude-code
-
-      - name: Build prompt file
-        run: |
-          cat > /tmp/issue-prompt.txt <<'PROMPT_END'
-          GitHub Issue를 처리하세요.
-          이슈 정보는 환경변수 ISSUE_NUMBER, ISSUE_TITLE, ISSUE_BODY에 있습니다.
-
-          수행할 작업:
-          1. 환경변수에서 이슈 내용을 읽고 분석하세요.
-          2. 필요한 코드 변경을 수행하세요.
-          3. 변경 후 테스트가 있으면 실행하세요.
-          4. 변경 사항을 간결하게 요약하세요.
-
-          규칙:
-          - 이 프로젝트는 aing Claude Code 플러그인입니다.
-          - 에이전트 정의는 agents/*.md에 있습니다.
-          - hook handler는 hooks-handlers/*.mjs에 있습니다.
-          - 스킬 정의는 skills/*/SKILL.md에 있습니다.
-          - 외부 의존성 추가 금지 (Node.js 빌트인만 사용).
-          - 변경이 완료되면 git add + git commit 하세요.
-          PROMPT_END
-
-      - name: Create branch
-        run: |
-          git checkout -b "fix/issue-${ISSUE_NUMBER}"
-
       - name: Process Issue with Claude Code
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          claude --print --dangerously-skip-permissions "$(cat /tmp/issue-prompt.txt)"
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          direct_prompt: |
+            이 GitHub Issue를 분석하고 수정하세요.
 
-      - name: Check for changes
-        id: changes
-        run: |
-          if git diff --quiet HEAD origin/main; then
-            echo "has_changes=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "has_changes=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Push branch
-        if: steps.changes.outputs.has_changes == 'true'
-        run: |
-          git push origin "fix/issue-${ISSUE_NUMBER}"
-
-      - name: Create PR
-        if: steps.changes.outputs.has_changes == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          COMMITS=$(git log --oneline origin/main..HEAD)
-          gh pr create \
-            --title "fix: Issue #${ISSUE_NUMBER}" \
-            --body "Automated fix for #${ISSUE_NUMBER}
-
-          ## Changes
-          ${COMMITS}
-
-          ## Review Checklist
-          - [ ] 코드 변경 확인
-          - [ ] 테스트 통과 확인
-          - [ ] 사이드 이펙트 없음 확인
-
-          Closes #${ISSUE_NUMBER}" \
-            --base main \
-            --head "fix/issue-${ISSUE_NUMBER}"
-
-      - name: Comment PR link on Issue
-        if: steps.changes.outputs.has_changes == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          PR_URL=$(gh pr list --head "fix/issue-${ISSUE_NUMBER}" --json url -q '.[0].url')
-          gh issue comment "${ISSUE_NUMBER}" \
-            --body "aing이 이 이슈를 자동 처리했습니다. PR: ${PR_URL}"
-
-      - name: Comment no changes
-        if: steps.changes.outputs.has_changes == 'false'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh issue comment "${ISSUE_NUMBER}" \
-            --body "aing이 이슈를 분석했지만 자동 처리할 수 없는 이슈입니다. 수동 확인이 필요합니다."
+            규칙:
+            - 이 프로젝트는 aing Claude Code 플러그인입니다.
+            - 에이전트 정의는 agents/*.md에 있습니다.
+            - hook handler는 hooks-handlers/*.mjs에 있습니다.
+            - 스킬 정의는 skills/*/SKILL.md에 있습니다.
+            - 외부 의존성 추가 금지 (Node.js 빌트인만 사용).
+            - 수정이 필요하면 코드를 변경하고 PR을 생성하세요.
+            - 자동 처리가 불가능하면 분석 결과를 코멘트로 남기세요.
+          allowed_tools: "Bash,Read,Write,Edit,Glob,Grep"
