@@ -1,5 +1,38 @@
 # Changelog
 
+## [2.4.7] - 2026-03-27
+
+### Added — norch SendMessage 연동 + 배포 품질 개선
+
+- hooks matcher에 `SendMessage` 추가 — 팀 내 `@agent` 통신이 norch에 활동으로 표시
+- pre-tool-use / post-tool-use에 SendMessage 이벤트 처리 로직 추가
+
+### Changed
+
+- `agents/wizard.md` → `agents/iron.md`로 리네임 (name 필드와 파일명 일치)
+- `.gitignore` 정리 — `.aing/` 전체를 blanket ignore (런타임 파일 69개 git 트래킹 제거)
+- `session-start.mjs` 내부 버전 문자열 `v2.1.7` → `v2.4.7`
+
+## [2.4.6] - 2026-03-26
+
+### Changed — 매니페스트 버전 범프
+
+- 3곳 매니페스트 버전 2.4.6 통일
+
+## [2.4.5] - 2026-03-26
+
+### Fixed — norch-bridge 에이전트 라이프사이클 이벤트 수정
+
+- agent-spawn / agent-done 이벤트가 norch에 정상 전달되도록 수정
+
+## [2.4.4] - 2026-03-26
+
+### Added — norch-bridge 내장
+
+- 에이전트 활동 시각화를 위한 norch-bridge 자동 연동
+- Unix socket `/tmp/norch.sock`으로 fire-and-forget 이벤트 전송
+- norch 미설치 시 zero overhead
+
 ## [2.4.3] - 2026-03-26
 
 ### Changed — 매니페스트 description 업데이트

@@ -1,10 +1,5 @@
 node_modules/
 .omc/
-.aing/state/
-.aing/snapshots/
-.aing/logs/
-.aing/reports/
-.aing/routing-history.json
-.aing/project-memory.json
+.aing/
 *.log
 .DS_Store

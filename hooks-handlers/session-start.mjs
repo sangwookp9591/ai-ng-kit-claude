@@ -35,7 +35,7 @@ try {
   const ctx = [];
 
   // === Header ===
-  ctx.push(`# aing v2.1.7 Harness Engineering Agent`);
+  ctx.push(`# aing v2.4.7 Harness Engineering Agent`);
   ctx.push(`For developers: the ultimate assistant. For everyone: the ultimate magician.`);
   ctx.push('');
 
