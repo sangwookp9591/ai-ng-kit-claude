@@ -1,5 +1,5 @@
 ---
-name: wizard
+name: iron
 description: Frontend / Build. Screen implementation, component coding, state management.
 model: sonnet
 tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep"]

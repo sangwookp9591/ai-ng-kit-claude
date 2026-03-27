@@ -22,6 +22,10 @@ try {
       const agentName = toolInput.name || toolInput.subagent_type.replace('aing:', '');
       recordToolUse(toolName, { ...toolInput, _agentName: agentName }, toolResponse, projectDir);
       norchAgentDone('session', agentKey, toolInput.description);
+    } else if (toolName === 'SendMessage' && toolInput.to) {
+      const agentKey = toolInput.to.replace('aing:', '');
+      recordToolUse(toolName, { ...toolInput, _agentName: agentKey }, toolResponse, projectDir);
+      norchToolUse('session', 'SendMessage', toolInput.to, agentKey);
     } else {
       recordToolUse(toolName, toolInput, toolResponse, projectDir);
       norchToolUse('session', toolName, toolInput.file_path || toolInput.command?.slice(0, 60), null);

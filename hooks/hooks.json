@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-hooks.json",
-  "description": "aing Harness Engineering Agent v2.4.4",
+  "description": "aing Harness Engineering Agent v2.4.7",
   "hooks": {
     "SessionStart": [
       {
@@ -27,7 +27,7 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Write|Edit|Bash|Agent|Task",
+        "matcher": "Write|Edit|Bash|Agent|Task|SendMessage",
         "hooks": [
           {
             "type": "command",
@@ -39,7 +39,7 @@
     ],
     "PostToolUse": [
       {
-        "matcher": "Write|Edit|Bash|Agent|Task",
+        "matcher": "Write|Edit|Bash|Agent|Task|SendMessage",
         "hooks": [
           {
             "type": "command",

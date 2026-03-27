@@ -15,10 +15,14 @@ try {
   const projectDir = process.env.PROJECT_DIR || process.cwd();
   const ctx = [];
 
-  // Agent/Task spawn → norch에 agent-spawn 이벤트 (실행 시작 전)
+  // Agent/Task spawn → norch에 agent-spawn 이벤트
   if ((toolName === 'Agent' || toolName === 'Task') && toolInput.subagent_type) {
     const agentKey = toolInput.name || toolInput.subagent_type.replace('aing:', '');
     norchAgentSpawn('session', agentKey, toolInput.description);
+  } else if (toolName === 'SendMessage' && toolInput.to) {
+    // SendMessage → norch에 agent-working 이벤트 (팀 내 통신)
+    const agentKey = toolInput.to.replace('aing:', '');
+    norchToolUse('session', 'SendMessage', toolInput.to, agentKey);
   } else {
     norchToolUse('session', toolName, toolInput.file_path || toolInput.command?.slice(0, 50), null);
   }
