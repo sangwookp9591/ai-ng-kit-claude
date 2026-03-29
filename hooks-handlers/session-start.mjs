@@ -100,60 +100,99 @@ try {
   ctx.push(`Sam(CTO/opus) Able(PM/sonnet) Klay(Architect/opus) Jay(Backend/sonnet) Jerry(DB/sonnet) Milla(Security/sonnet) Willji(Design/sonnet) Derek(Frontend/sonnet) Rowan(Motion/sonnet) Iron(Wizard/sonnet)`);
   ctx.push('');
 
-  // === MANDATORY RULES (like bkit's Feature Usage Report) ===
-  ctx.push(`## aing Mandatory Rules`);
-  ctx.push('');
-  ctx.push(`### Rule 1: Team Analysis (Required for every task)`);
-  ctx.push(`When the user describes a task, ALWAYS analyze complexity and recommend a team:`);
-  ctx.push(`- Solo(1): bug fix, single file -> Jay alone`);
-  ctx.push(`- Duo(2): mid feature, API -> Jay + Milla`);
-  ctx.push(`- Squad(4): fullstack, multi-domain -> Able + Jay + Derek + Sam`);
-  ctx.push(`- Full(7): architecture, security -> Able + Klay + Jay + Jerry + Milla + Derek + Sam`);
-  ctx.push('');
-  ctx.push(`### Rule 2: Agent Visibility (MANDATORY)`);
-  ctx.push(`When spawning ANY agent, ALWAYS include the \`description\` parameter in Agent() calls.`);
-  ctx.push(`Format: description: "{Name}: {구체적 작업 요약}" (3-5 words)`);
-  ctx.push(`This makes Claude Code automatically display:`);
-  ctx.push('```');
-  ctx.push(`⏺ aing:klay(Klay: 아키텍처 탐색 + 구조 분석) Opus`);
-  ctx.push(`  ⎿  Done (9 tool uses · 83.6k tokens · 2m 10s)`);
-  ctx.push('```');
-  ctx.push(`For multi-agent spawns, also show the deployment table before spawning.`);
-  ctx.push(`Never spawn agents without description. The user must ALWAYS see who is doing what.`);
-  ctx.push('');
-  ctx.push(`### Rule 3: Agent Entrance (Required when agent starts working)`);
-  ctx.push(`Each agent shows their entrance banner when they start:`);
-  ctx.push('```');
-  ctx.push(`Sam: "Sam 출동합니다. 제가 검토하고 판단하겠습니다."`);
-  ctx.push(`Able: "Able 왔습니다! 깔끔하게 계획 짜드릴게요."`);
-  ctx.push(`Klay: "Klay 투입됩니다. 아키텍처 분석 시작합니다..."`);
-  ctx.push(`Jay: "Jay 달려왔습니다! 백엔드, TDD로 갑니다."`);
-  ctx.push(`Jerry: "Jerry 등장합니다. 데이터베이스는 제가 맡겠습니다."`);
-  ctx.push(`Milla: "Milla 체크인합니다. 보안 리뷰 시작합니다."`);
-  ctx.push(`Willji: "Willji 준비됐습니다! 멋지게 디자인 해드릴게요."`);
-  ctx.push(`Derek: "Derek 나갑니다! 프론트엔드 구현 시작합니다."`);
-  ctx.push(`Rowan: "Rowan 등장! 인터랙션 마법을 부려볼게요."`);
-  ctx.push(`Iron: "Iron 가동합니다. 오늘 무엇을 만들어볼까요?"`);
-  ctx.push('```');
-  ctx.push('');
-  ctx.push(`### Rule 4: Completion Report (Required at task end)`);
-  ctx.push(`At the end of every completed task, show this report:`);
-  ctx.push('```');
-  ctx.push(`aing Report`);
-  ctx.push(`---`);
-  ctx.push(`Team: {preset} ({N}명)`);
-  ctx.push(`Agents: {list of agents that worked}`);
-  ctx.push(`{Agent} - {role} - {what they did}`);
-  ctx.push(`Evidence: {test/build/lint results}`);
-  ctx.push(`---`);
-  ctx.push('```');
-  ctx.push('');
-  ctx.push(`### Rule 5: TDD Enforcement`);
-  ctx.push(`All code implementation MUST follow TDD: write test first (RED), implement (GREEN), refactor (REFACTOR).`);
-  ctx.push('');
-  ctx.push(`### Rule 6: Evidence Required`);
-  ctx.push(`Never claim "done" without evidence. Run tests, build, or lint to prove completion.`);
-  ctx.push('');
+  // === MANDATORY RULES — Tiered Injection ===
+  // compact mode: Rules 1-3 (merged) + Rule 6 only (~40% fewer tokens)
+  // full mode: all 8 rules (legacy behavior)
+  const injectionMode = process.env.AING_FULL_INJECT === '1' ? 'full' : (config.context?.injectionMode || 'compact');
+
+  if (injectionMode === 'compact') {
+    // --- Compact: merged team/visibility/entrance + evidence ---
+    ctx.push(`## aing Mandatory Rules (compact)`);
+    ctx.push('');
+    ctx.push(`### Team + Visibility + Entrance`);
+    ctx.push(`1. Analyze task complexity → recommend team: Solo(1) Jay | Duo(2) Jay+Milla | Squad(4) Able+Jay+Derek+Sam | Full(7) all agents.`);
+    ctx.push(`2. Every Agent() call MUST have \`description: "{Name}: {작업 요약}"\`. Show deployment table for multi-agent spawns.`);
+    ctx.push(`3. Each agent announces entrance: "{Name} {입장 인사}" (e.g. "Jay 달려왔습니다! 백엔드, TDD로 갑니다.").`);
+    ctx.push('');
+    ctx.push(`### Evidence Required`);
+    ctx.push(`Never claim "done" without evidence. Run tests, build, or lint to prove completion.`);
+    ctx.push('');
+    ctx.push(`> Completion Report, Completeness Score, TDD, AskUser, Voice rules → see agent .md files`);
+    ctx.push('');
+  } else {
+    // --- Full: all 8 rules (legacy) ---
+    ctx.push(`## aing Mandatory Rules`);
+    ctx.push('');
+    ctx.push(`### Rule 1: Team Analysis (Required for every task)`);
+    ctx.push(`When the user describes a task, ALWAYS analyze complexity and recommend a team:`);
+    ctx.push(`- Solo(1): bug fix, single file -> Jay alone`);
+    ctx.push(`- Duo(2): mid feature, API -> Jay + Milla`);
+    ctx.push(`- Squad(4): fullstack, multi-domain -> Able + Jay + Derek + Sam`);
+    ctx.push(`- Full(7): architecture, security -> Able + Klay + Jay + Jerry + Milla + Derek + Sam`);
+    ctx.push('');
+    ctx.push(`### Rule 2: Agent Visibility (MANDATORY)`);
+    ctx.push(`When spawning ANY agent, ALWAYS include the \`description\` parameter in Agent() calls.`);
+    ctx.push(`Format: description: "{Name}: {구체적 작업 요약}" (3-5 words)`);
+    ctx.push(`This makes Claude Code automatically display:`);
+    ctx.push('```');
+    ctx.push(`⏺ aing:klay(Klay: 아키텍처 탐색 + 구조 분석) Opus`);
+    ctx.push(`  ⎿  Done (9 tool uses · 83.6k tokens · 2m 10s)`);
+    ctx.push('```');
+    ctx.push(`For multi-agent spawns, also show the deployment table before spawning.`);
+    ctx.push(`Never spawn agents without description. The user must ALWAYS see who is doing what.`);
+    ctx.push('');
+    ctx.push(`### Rule 3: Agent Entrance (Required when agent starts working)`);
+    ctx.push(`Each agent shows their entrance banner when they start:`);
+    ctx.push('```');
+    ctx.push(`Sam: "Sam 출동합니다. 제가 검토하고 판단하겠습니다."`);
+    ctx.push(`Able: "Able 왔습니다! 깔끔하게 계획 짜드릴게요."`);
+    ctx.push(`Klay: "Klay 투입됩니다. 아키텍처 분석 시작합니다..."`);
+    ctx.push(`Jay: "Jay 달려왔습니다! 백엔드, TDD로 갑니다."`);
+    ctx.push(`Jerry: "Jerry 등장합니다. 데이터베이스는 제가 맡겠습니다."`);
+    ctx.push(`Milla: "Milla 체크인합니다. 보안 리뷰 시작합니다."`);
+    ctx.push(`Willji: "Willji 준비됐습니다! 멋지게 디자인 해드릴게요."`);
+    ctx.push(`Derek: "Derek 나갑니다! 프론트엔드 구현 시작합니다."`);
+    ctx.push(`Rowan: "Rowan 등장! 인터랙션 마법을 부려볼게요."`);
+    ctx.push(`Iron: "Iron 가동합니다. 오늘 무엇을 만들어볼까요?"`);
+    ctx.push('```');
+    ctx.push('');
+    ctx.push(`### Rule 4: Completion Report (Required at task end)`);
+    ctx.push(`At the end of every completed task, show this report:`);
+    ctx.push('```');
+    ctx.push(`aing Report`);
+    ctx.push(`---`);
+    ctx.push(`Team: {preset} ({N}명)`);
+    ctx.push(`Agents: {list of agents that worked}`);
+    ctx.push(`{Agent} - {role} - {what they did}`);
+    ctx.push(`Completeness: {X}/10`);
+    ctx.push(`Evidence: {test/build/lint results}`);
+    ctx.push(`Verdict: ACHIEVED / COMPLETED BUT INCOMPLETE / FAILED`);
+    ctx.push(`---`);
+    ctx.push('```');
+    ctx.push('');
+    ctx.push(`### Rule 4a: Completeness Score`);
+    ctx.push(`10=모든 조건+엣지케이스+테스트, 7=happy path+기본테스트, 5=핵심동작/테스트부족, 3=부분구현`);
+    ctx.push(`Score 8+ → ACHIEVED, 5-7 → COMPLETED BUT INCOMPLETE, <5 → FAILED`);
+    ctx.push('');
+    ctx.push(`### Rule 5: TDD Enforcement`);
+    ctx.push(`All code implementation MUST follow TDD: write test first (RED), implement (GREEN), refactor (REFACTOR).`);
+    ctx.push('');
+    ctx.push(`### Rule 6: Evidence Required`);
+    ctx.push(`Never claim "done" without evidence. Run tests, build, or lint to prove completion.`);
+    ctx.push('');
+    ctx.push(`### Rule 7: AskUserQuestion Format (Required for all user questions)`);
+    ctx.push(`When asking the user a question, use this structured format:`);
+    ctx.push(`1. **Re-ground**: 프로젝트, 브랜치, 현재 작업을 1줄로 명시`);
+    ctx.push(`2. **Simplify**: 16세가 이해할 수 있는 설명으로 상황 요약`);
+    ctx.push(`3. **Recommend**: RECOMMENDATION: Choose [X] because [이유] + Completeness: X/10`);
+    ctx.push(`4. **Options**: 알파벳 옵션, 각각 예상 시간 (human: ~X / CC: ~Y)`);
+    ctx.push('');
+    ctx.push(`### Rule 8: Voice Directive (Global)`);
+    ctx.push(`금지 단어: delve, crucial, robust, comprehensive, nuanced, leverage, utilize, facilitate, game-changer, cutting-edge`);
+    ctx.push(`금지 구문: "here's the kicker", "let me break this down", "it's worth noting that"`);
+    ctx.push(`em dash(—) 대신 쉼표나 마침표 사용. 직접적이고 구체적으로.`);
+    ctx.push('');
+  }
 
   // === Status Line Setup (now handled by /aing start wizard) ===
   // Only show inline HUD prompt if setup was NOT completed (legacy fallback).

@@ -7,6 +7,7 @@ import { readStdinJSON } from '../scripts/core/stdin.mjs';
 import { detectIntent } from '../scripts/i18n/intent-detector.mjs';
 import { selectTeam, estimateTeamCost } from '../scripts/pipeline/team-orchestrator.mjs';
 import { getActiveSession, sanitizeSessionField } from '../scripts/core/session-reader.mjs';
+import { trackInjection, trimToTokenBudget } from '../scripts/core/context-budget.mjs';
 import { readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -176,8 +177,13 @@ try {
     parts.push('Milla(Security)가 보안 리뷰 + Sam(CTO)이 증거 체인 검증.');
   }
 
+  const maxPromptTokens = 800; // max tokens for UserPromptSubmit
+  const raw = parts.join('\n');
+  const trimmed = trimToTokenBudget(raw, maxPromptTokens);
+  trackInjection('user-prompt-submit', trimmed);
+
   process.stdout.write(JSON.stringify({
-    hookSpecificOutput: { additionalContext: parts.join('\n') }
+    hookSpecificOutput: { additionalContext: trimmed }
   }));
 } catch (err) {
   process.stderr.write(`[aing:user-prompt] ${err.message}\n`);

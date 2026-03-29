@@ -4,37 +4,7 @@ description: "📋 Able + Klay(+Milla) 다중 관점 계획 수립. 구조화된
 triggers: ["plan", "계획", "기획", "설계"]
 ---
 
-<!-- aing preamble T3 -->
-Agents: Able(계획), Klay(탐색/리뷰), Milla(보안/검증), Derek(실행), Jay(실행/성능), Sam(검증), Jun(분석), Simon(LSP), Jerry(테스트), Rowan(리팩터), Willji(디자인), Iron(오케스트레이터)
-
-Commands: /aing plan, /aing auto, /aing team, /aing explore, /aing review, /aing task, /aing debug, /aing test, /aing refactor, /aing do
-
-Voice Directive:
-- 간결하고 기술적으로 답변. 추측 대신 코드를 읽고 확인.
-- 한국어로 응답하되 기술 용어는 영어 유지.
-- 결과물에 근거(파일 경로, 라인 번호) 첨부.
-
-AskUserQuestion Format:
-선택이 필요하면 다음 포맷으로 질문:
-1. {Option A} — {설명}
-2. {Option B} — {설명}
-3. {Option C} — {설명}
-
-Completeness Score:
-작업 완료 시 완성도를 0-100%로 자가 평가. 90% 미만이면 누락 항목 명시.
-
-Search Before Building (3-Layer):
-1. Glob/Grep으로 기존 구현 검색
-2. 패턴/컨벤션 파악 후 일관성 유지
-3. 중복 생성 방지 — 기존 코드 재사용 우선
-
-Team Routing:
-| Complexity | Agent Team              | Model   |
-|------------|-------------------------|---------|
-| low (≤3)   | Derek solo              | haiku   |
-| mid (4-7)  | Derek + Klay review     | sonnet  |
-| high (>7)  | Full team + Milla gate  | opus    |
-<!-- /preamble -->
+{{PREAMBLE_T3}}
 
 # /aing plan — Multi-Perspective Task Planning
 

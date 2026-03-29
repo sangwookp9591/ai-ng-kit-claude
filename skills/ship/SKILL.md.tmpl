@@ -1,0 +1,97 @@
+# /aing ship — Automated Ship Workflow
+
+> gstack 흡수: 7단계 자동화 ship 파이프라인
+> PDCA review 단계와 통합 (aing 시너지)
+
+## 사용법
+
+```
+/aing ship                    # 전체 7단계 실행
+/aing ship --dry-run          # 시뮬레이션 (실제 push/PR 없음)
+/aing ship --skip-tests       # 테스트 스킵 (주의)
+```
+
+## Prerequisites
+- Review Readiness Dashboard: CLEARED (Eng Review 필수)
+- Evidence chain: PASS (test + build)
+- PDCA stage: review (완료 단계)
+- base branch와 다른 feature branch에 있어야 함
+
+## 7-Step Pipeline
+
+### Step 1: Pre-flight Check
+```
+✓ 브랜치 확인 (base branch 아닌지)
+✓ Review Dashboard: CLEARED
+✓ Evidence Chain: PASS
+✓ Uncommitted changes 없음
+```
+
+### Step 2: Base Branch Merge
+```
+git fetch origin {baseBranch}
+git merge origin/{baseBranch}
+```
+Conflict 발생 시 → 사용자에게 알림, 자동 중단.
+
+### Step 3: Test Execution
+```
+테스트 스위트 병렬 실행
+실패 시 triage:
+  - 기존 실패 (base branch에서도 실패): SKIP
+  - 새로운 실패 (이 브랜치에서만 실패): BLOCK
+```
+
+### Step 4: Pre-landing Review
+Milla(Security)가 diff 기반 리뷰:
+- SQL injection 패턴
+- LLM trust boundary 위반
+- Scope drift 감지
+
+### Step 5: Version Bump
+```
+diff 분석 → bump 타입 자동 결정:
+  hasBreaking → major (1.0.0 → 2.0.0)
+  hasNewFeature → minor (1.0.0 → 1.1.0)
+  hasBugFix → patch (1.0.0 → 1.0.1)
+```
+
+### Step 6: CHANGELOG Generation
+```
+git log → conventional commit 파싱 → 카테고리별 그룹핑
+  feat: → Features
+  fix: → Bug Fixes
+  refactor: → Refactoring
+  ...
+CHANGELOG.md 상단에 추가
+```
+
+### Step 7: Push + PR
+```
+git push origin {branch}
+gh pr create --title "feat: {feature} (v{version})" --body "..."
+```
+PR body에 자동 포함:
+- Changelog 섹션
+- Review Dashboard 상태
+- Evidence Chain 요약
+
+## PDCA Integration
+- PDCA review 단계 완료 + Evidence PASS → ship 자동 가능
+- Sam verdict ACHIEVED → ship 허용
+- COMPLETED_BUT_INCOMPLETE → 경고 후 사용자 확인
+- FAILED → ship 차단
+
+## Progress Display
+```
+Ship: user-auth (feature/auth → main)
+Status: IN_PROGRESS
+
+  ✓ 1. preflight — pass
+  ✓ 2. merge-base — pass
+  ▶ 3. run-tests
+  ○ 4. pre-landing-review
+  ○ 5. version-bump
+  ○ 6. changelog
+  ○ 7. push-and-pr
+```

@@ -20,6 +20,10 @@
     "multi-agent"
   ],
   "author": "sangwookp9591",
+  "scripts": {
+    "build:skills": "node scripts/build/gen-skill-docs.mjs",
+    "check:skills": "node scripts/build/check-freshness.mjs"
+  },
   "engines": {
     "node": ">=18.0.0"
   },
