@@ -22,6 +22,9 @@
   "author": "sangwookp9591",
   "scripts": {
     "build:skills": "node scripts/build/gen-skill-docs.mjs",
+    "build:all": "node scripts/build/generate-all.mjs",
+    "build:check": "node scripts/build/generate-all.mjs --check",
+    "build:force": "node scripts/build/generate-all.mjs --force",
     "check:skills": "node scripts/build/check-freshness.mjs"
   },
   "engines": {

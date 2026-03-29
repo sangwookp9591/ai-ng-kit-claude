@@ -18,6 +18,9 @@ import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 
 import { join, dirname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getPreamble, getAgentTeam } from './preamble-tiers.mjs';
+import { resolveReviewTiers, resolveReviewDashboard, resolveScopeDriftCheck } from './resolvers/review-resolver.mjs';
+import { resolveShipSteps, resolveShipPrerequisites } from './resolvers/ship-resolver.mjs';
+import { resolveEvidenceTypes, resolveJudgeCriteria } from './resolvers/evidence-resolver.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -53,6 +56,13 @@ function buildPlaceholders() {
     '{{AGENT_TEAM}}': getAgentTeam(),
     '{{COMMANDS}}': commands,
     '{{VERSION}}': version,
+    '{{REVIEW_TIERS}}': resolveReviewTiers(),
+    '{{REVIEW_DASHBOARD}}': resolveReviewDashboard(),
+    '{{SCOPE_DRIFT_CHECK}}': resolveScopeDriftCheck(),
+    '{{SHIP_STEPS}}': resolveShipSteps(),
+    '{{SHIP_PREREQUISITES}}': resolveShipPrerequisites(),
+    '{{EVIDENCE_TYPES}}': resolveEvidenceTypes(),
+    '{{JUDGE_CRITERIA}}': resolveJudgeCriteria(),
   };
 }
 
