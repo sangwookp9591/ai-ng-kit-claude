@@ -21,6 +21,7 @@ import { getPreamble, getAgentTeam } from './preamble-tiers.mjs';
 import { resolveReviewTiers, resolveReviewDashboard, resolveScopeDriftCheck } from './resolvers/review-resolver.mjs';
 import { resolveShipSteps, resolveShipPrerequisites } from './resolvers/ship-resolver.mjs';
 import { resolveEvidenceTypes, resolveJudgeCriteria } from './resolvers/evidence-resolver.mjs';
+import { resolveHealthCategories, resolveBenchmarkThresholds } from './resolvers/qa-resolver.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -63,6 +64,8 @@ function buildPlaceholders() {
     '{{SHIP_PREREQUISITES}}': resolveShipPrerequisites(),
     '{{EVIDENCE_TYPES}}': resolveEvidenceTypes(),
     '{{JUDGE_CRITERIA}}': resolveJudgeCriteria(),
+    '{{HEALTH_CATEGORIES}}': resolveHealthCategories(),
+    '{{BENCHMARK_THRESHOLDS}}': resolveBenchmarkThresholds(),
   };
 }
 

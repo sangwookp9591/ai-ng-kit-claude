@@ -1,0 +1,112 @@
+/**
+ * aing Freeze Engine — Directory-Scoped Edit Restriction
+ * Absorbed from gstack's /freeze + /unfreeze skills.
+ *
+ * Restricts Edit/Write tools to a specific directory.
+ * Uses trailing slash semantics: /src/ won't match /src-old/
+ *
+ * @module scripts/guardrail/freeze-engine
+ */
+import { readFileSync, writeFileSync, existsSync, unlinkSync, mkdirSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { createLogger } from '../core/logger.mjs';
+
+const log = createLogger('freeze');
+
+const STATE_FILE = 'freeze-dir.txt';
+
+/**
+ * Set freeze boundary.
+ * @param {string} directory - Directory to restrict edits to
+ * @param {string} [projectDir]
+ * @returns {{ ok: boolean, freezeDir: string }}
+ */
+export function setFreeze(directory, projectDir) {
+  const dir = projectDir || process.cwd();
+  const stateDir = join(dir, '.aing', 'state');
+  mkdirSync(stateDir, { recursive: true });
+
+  // Resolve to absolute path with trailing slash
+  let freezeDir = resolve(directory);
+  if (!freezeDir.endsWith('/')) freezeDir += '/';
+
+  writeFileSync(join(stateDir, STATE_FILE), freezeDir);
+  log.info(`Freeze set: ${freezeDir}`);
+
+  return { ok: true, freezeDir };
+}
+
+/**
+ * Clear freeze boundary.
+ * @param {string} [projectDir]
+ * @returns {{ ok: boolean }}
+ */
+export function clearFreeze(projectDir) {
+  const dir = projectDir || process.cwd();
+  const statePath = join(dir, '.aing', 'state', STATE_FILE);
+
+  if (existsSync(statePath)) {
+    unlinkSync(statePath);
+    log.info('Freeze cleared');
+  }
+
+  return { ok: true };
+}
+
+/**
+ * Get current freeze directory.
+ * @param {string} [projectDir]
+ * @returns {string|null}
+ */
+export function getFreezeDir(projectDir) {
+  const dir = projectDir || process.cwd();
+  const statePath = join(dir, '.aing', 'state', STATE_FILE);
+
+  if (!existsSync(statePath)) return null;
+
+  try {
+    return readFileSync(statePath, 'utf-8').trim();
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Check if a file path is allowed under current freeze.
+ * @param {string} filePath - Absolute file path to check
+ * @param {string} [projectDir]
+ * @returns {{ allowed: boolean, reason?: string }}
+ */
+export function checkFreeze(filePath, projectDir) {
+  const freezeDir = getFreezeDir(projectDir);
+
+  // No freeze active = everything allowed
+  if (!freezeDir) return { allowed: true };
+
+  const absolutePath = resolve(filePath);
+
+  // Trailing slash prevents /src matching /src-old
+  if (absolutePath.startsWith(freezeDir) || absolutePath + '/' === freezeDir) {
+    return { allowed: true };
+  }
+
+  return {
+    allowed: false,
+    reason: `File ${absolutePath} is outside freeze boundary ${freezeDir}. Run /aing unfreeze to remove restriction.`,
+  };
+}
+
+/**
+ * Format freeze status for display.
+ * @param {string} [projectDir]
+ * @returns {string}
+ */
+export function formatFreezeStatus(projectDir) {
+  const freezeDir = getFreezeDir(projectDir);
+
+  if (!freezeDir) {
+    return 'Freeze: OFF (all directories writable)';
+  }
+
+  return `Freeze: ON — edits restricted to ${freezeDir}\n  Edit/Write outside this directory will be blocked.\n  Run /aing unfreeze to remove.`;
+}
