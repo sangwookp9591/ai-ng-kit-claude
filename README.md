@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="#install">Install</a> · <a href="#team">Team</a> · <a href="#innovations">Innovations</a> · <a href="#commands">Commands</a> · <a href="#architecture">Architecture</a>
+  <a href="#install">Install</a> · <a href="#team">Team</a> · <a href="#innovations">Innovations</a> · <a href="#commands">Commands</a> · <a href="#review-pipeline">Review</a> · <a href="#ship">Ship</a> · <a href="#architecture">Architecture</a>
 </p>
 
 ---
@@ -133,6 +133,11 @@ Teams are **auto-selected** based on task complexity analysis:
 | 3 | **Adaptive Routing** | Scores task complexity, routes to haiku / sonnet / opus dynamically |
 | 4 | **Evidence Chain** | Collects test/build/lint proof -- no evidence, no "done" |
 | 5 | **Self-Healing** | Health check + recovery engine + circuit breaker + git rollback |
+| 6 | **4-Tier Review Pipeline** | CEO / Eng / Design / Outside Voice with readiness dashboard |
+| 7 | **Ship Workflow** | 7-step automated pipeline: merge - test - review - version - changelog - PR |
+| 8 | **CSO Security Audit** | 14-phase OWASP + STRIDE + secrets + supply chain |
+| 9 | **AI Slop Detection** | 10 anti-patterns + 7 litmus checks + design scoring |
+| 10 | **Autoplan Engine** | 6-principle auto-decision (mechanical / taste / user-challenge) |
 
 ### Harness 4-Axis Score
 
@@ -146,10 +151,10 @@ Correct    ███████████████████████
 
 | Axis | Modules |
 |------|---------|
-| **Constrain** | Guardrail Engine (7 rules), Safety Invariants (5 limits), Cost Ceiling, Dry-Run |
-| **Inform** | Context Budget, Progress Tracker, Convention Extractor, Context Compaction |
-| **Verify** | TDD Engine (RED-GREEN-REFACTOR), Evidence Chain, Agent Trace |
-| **Correct** | Health Check, Recovery Engine, Circuit Breaker, Retry (exp. backoff), Rollback |
+| **Constrain** | Guardrail Engine (7 rules), Safety Invariants (5 limits), Cost Ceiling, Freeze/Unfreeze, Dry-Run |
+| **Inform** | Context Budget, Progress Tracker, Convention Extractor, Context Compaction, Telemetry 3-Tier |
+| **Verify** | TDD Engine, Evidence Chain, LLM Judge (7 criteria), Review Pipeline (4-tier), QA Health Score |
+| **Correct** | Health Check, Recovery Engine, Circuit Breaker, Retry (exp. backoff), Rollback, Pending Marker |
 
 ---
 
@@ -203,11 +208,51 @@ Correct    ███████████████████████
 
 > 🏢 [office.sw-world.site](https://office.sw-world.site) — 팀원 초대 코드로 실시간 협업 시각화
 
+<h3 id="review-pipeline">Review Pipeline</h3>
+
+| Command | What it does |
+|---------|-------------|
+| `/aing review-pipeline` | Auto-select review depth by complexity |
+| `/aing review-pipeline eng` | Eng Review: Klay + Jay + Milla (architecture, tests, security) |
+| `/aing review-pipeline ceo` | CEO Review: Able + Sam (scope, strategy, product-fit) |
+| `/aing review-pipeline design` | Design Review: Willji + Iron (UI/UX, AI slop, a11y) |
+| `/aing review-pipeline full` | All 4 tiers + outside voice |
+
+**Complexity-based auto-selection:**
+
+| Complexity | Tiers |
+|:----------:|-------|
+| low (0-3) | Eng only (Milla) |
+| mid (4-7) | Eng + Design |
+| high (8+) | CEO + Eng + Design + Outside Voice |
+
+<h3 id="ship">Ship Workflow</h3>
+
+| Step | Action |
+|:----:|--------|
+| 1 | Pre-flight: review dashboard CLEARED + evidence PASS |
+| 2 | Base branch merge (auto conflict detection) |
+| 3 | Test execution + failure triage (pre-existing vs branch-new) |
+| 4 | Pre-landing review (Milla: SQL injection, LLM boundary, scope drift) |
+| 5 | Version bump (auto major/minor/patch) |
+| 6 | CHANGELOG generation (conventional commits) |
+| 7 | Push + PR creation (auto-generated body) |
+
+### Security (CSO)
+
+| Command | What it does |
+|---------|-------------|
+| `/aing review cso` | 14-phase security audit (OWASP + STRIDE + secrets + supply chain) |
+| `/aing review cso --owasp` | OWASP Top 10 only |
+
 ### Recovery
 
 | Command | What it does |
 |---------|-------------|
 | `/aing rollback` | Revert to last git checkpoint (non-destructive) |
+| `/aing freeze <dir>` | Restrict edits to directory (trailing slash boundary) |
+| `/aing unfreeze` | Clear freeze restriction |
+| `/aing retro [7d\|14d\|30d]` | Engineering retrospective (sessions, hotspots, focus score) |
 | `/aing learn show` | View cross-session learning history |
 | `/aing help` | Show agent team and full command list |
 
@@ -280,22 +325,37 @@ ai-ng-kit/
   scripts/
     core/         state, config, logger, context-budget, display, dashboard, stdin
     guardrail/    guardrail-engine, safety-invariants, cost-ceiling, dry-run,
-                  progress-tracker, convention-extractor
+                  progress-tracker, convention-extractor, freeze-engine
     pdca/         pdca-engine (5-Stage: plan-do-check-act-review)
     tdd/          tdd-engine (RED-GREEN-REFACTOR)
     routing/      complexity-scorer, model-router, routing-history
     memory/       project-memory, learning-capture
-    evidence/     evidence-collector, evidence-chain, evidence-report
+    evidence/     evidence-collector, evidence-chain, evidence-report,
+                  completeness-scorer, llm-judge, cost-reporter, goal-checker
     recovery/     health-check, recovery-engine, circuit-breaker, retry-engine
     trace/        agent-trace
     compaction/   context-compaction (priority-based preservation)
-    pipeline/     agent-pipeline, team-orchestrator, auto-runner, rollback, handoff
+    pipeline/     agent-pipeline, team-orchestrator, auto-runner, rollback, handoff,
+                  autoplan-engine (6-principle auto-decision)
+    review/       review-engine (4-tier), review-log, review-dashboard,
+                  scope-drift (3-way), outside-voice, browser-evidence,
+                  aria-refs, pdca-integration, cso-audit (14-phase),
+                  qa-health-score (8-category), design-scoring (AI slop 10),
+                  retro-engine, benchmark-engine
+    ship/         ship-engine (7-step), version-bump, changelog-gen,
+                  pr-creator, deploy-detect, doc-release
+    telemetry/    telemetry-engine (3-tier + pending marker)
+    build/        gen-skill-docs, preamble-tiers, smart-rebuild,
+                  check-freshness, touchfiles, generate-all,
+                  resolvers/ (review, ship, evidence, qa)
     task/         task-manager, plan-manager
+    learning/     eureka-logger
     cli/          persist (plan/task/report persistence CLI)
     i18n/         intent-detector, locale
-  agents/         10 named agents (sam, able, klay, jay, jerry, milla, willji, derek, rowan, iron)
+  agents/         14 named agents (sam, able, klay, jay, jerry, milla, jun,
+                  willji, derek, rowan, iron, simon, progress-checker, figma-reader)
   commands/       aing.md, help.md
-  skills/         12 skill definitions (including agent-ui)
+  skills/         review-pipeline, ship + 12 original skill definitions
   templates/      plan, review, completion, adr
   images/         12 custom SVG icons
 ```
@@ -304,13 +364,18 @@ ai-ng-kit/
 
 ```
 .aing/
-  state/          PDCA status, TDD phase, invariants, pipeline, circuit-breaker
+  state/          PDCA status, TDD phase, invariants, pipeline, circuit-breaker, freeze
   tasks/          Main Task -> Sub Task checklists
   plans/          Plan documents
   snapshots/      Compaction snapshots (max 10)
   reports/        Completion reports
+  reviews/        Review log (JSONL) + readiness dashboard state
+  benchmarks/     Performance baselines
   handoffs/       Stage transition context
   logs/           Structured JSONL logs
+  learning/       Eureka discoveries + project memory
+  telemetry/      Skill usage + session analytics
+  retros/         Retrospective snapshots (trend tracking)
 ```
 
 ---
@@ -323,6 +388,8 @@ ai-ng-kit/
 | Config cold start | **36ms** |
 | Test suite | **76/76 ALL GREEN** |
 | External dependencies | **0** |
+| Script modules | **38 modules** (11,545 LOC) |
+| Placeholder resolvers | **20** |
 | Harness maturity | **Level 5 / 5** |
 
 ## Requirements
