@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "aing-marketplace",
-  "version": "2.4.8",
+  "version": "2.5.0",
   "description": "aing Harness Engineering Agent marketplace",
   "owner": {
     "name": "SW",
@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "aing",
-      "description": "Harness Engineering Agent — structured workflows, intelligent context, self-learning agents for AI-native development. 5 Innovations: Context Budget, Cross-Session Learning, Adaptive Routing, Evidence Chain, Self-Healing Engine.",
-      "version": "2.4.8",
+      "description": "Harness Engineering Agent — 14 named agents, 4-tier review pipeline, 7-step ship workflow, CSO 14-phase security audit, AI slop detection, autoplan engine, LLM judge, benchmark, telemetry. 10 Innovations.",
+      "version": "2.5.0",
       "author": {
         "name": "SW",
         "email": "sangwookp9591@github.com"
@@ -31,6 +31,12 @@
         "evidence-chain",
         "adaptive-routing",
         "cross-session-learning",
+        "review-pipeline",
+        "ship-workflow",
+        "cso-security",
+        "ai-slop-detection",
+        "autoplan",
+        "llm-judge",
         "ai-native",
         "multilingual"
       ]

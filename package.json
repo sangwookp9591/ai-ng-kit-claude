@@ -1,8 +1,8 @@
 {
   "name": "ai-ng-kit-claude",
-  "version": "2.4.8",
+  "version": "2.5.0",
   "type": "module",
-  "description": "Harness Engineering Agent for Claude Code — 14 named agents with PDCA, TDD, team pipeline, gate review",
+  "description": "Harness Engineering Agent for Claude Code — 14 named agents, 4-tier review pipeline, 7-step ship workflow, CSO security audit, AI slop detection, autoplan engine",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",

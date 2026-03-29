@@ -1,7 +1,7 @@
 {
   "name": "aing",
-  "version": "2.4.8",
-  "description": "Harness Engineering Agent — structured workflows, intelligent context, self-learning agents for AI-native development",
+  "version": "2.5.0",
+  "description": "Harness Engineering Agent — 14 named agents, 4-tier review pipeline, 7-step ship workflow, CSO security audit, AI slop detection, autoplan engine, LLM judge, benchmark, telemetry",
   "author": {
     "name": "SW",
     "url": "https://github.com/sangwookp9591"
@@ -16,6 +16,12 @@
     "evidence-chain",
     "adaptive-routing",
     "cross-session-learning",
+    "review-pipeline",
+    "ship-workflow",
+    "cso-security",
+    "ai-slop-detection",
+    "autoplan",
+    "llm-judge",
     "ai-native",
     "multilingual"
   ]
