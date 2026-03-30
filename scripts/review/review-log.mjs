@@ -3,9 +3,10 @@
  * Absorbed from gstack's review-log pattern.
  * @module scripts/review/review-log
  */
-import { appendFileSync, readFileSync, existsSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, renameSync, existsSync, mkdirSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
+import { randomBytes } from 'node:crypto';
 import { createLogger } from '../core/logger.mjs';
 
 const log = createLogger('review-log');
@@ -28,7 +29,11 @@ export function appendReviewLog(entry, projectDir) {
   });
 
   try {
-    appendFileSync(logPath, line + '\n');
+    // Atomic append: read existing + append + write via temp+rename
+    const existing = existsSync(logPath) ? readFileSync(logPath, 'utf-8') : '';
+    const tmpPath = `${logPath}.${randomBytes(6).toString('hex')}.tmp`;
+    writeFileSync(tmpPath, existing + line + '\n');
+    renameSync(tmpPath, logPath);
     log.info(`Review logged: ${entry.skill} → ${entry.status}`);
   } catch (err) {
     log.error(`Failed to write review log: ${err.message}`);

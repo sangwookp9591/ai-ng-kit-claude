@@ -189,8 +189,9 @@ export function formatThreeWay(result) {
 }
 
 function matchGlob(str, pattern) {
-  const regex = new RegExp(
-    '^' + pattern.replace(/\*/g, '.*').replace(/\?/g, '.') + '$'
-  );
-  return regex.test(str);
+  const escaped = pattern
+    .replace(/[.+^${}()|[\]\\]/g, '\\$&')  // Escape regex special chars first
+    .replace(/\*/g, '.*')                    // Then handle wildcards
+    .replace(/\?/g, '.');
+  return new RegExp(`^${escaped}$`).test(str);
 }

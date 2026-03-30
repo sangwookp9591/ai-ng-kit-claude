@@ -7,7 +7,7 @@
  *
  * @module scripts/ship/deploy-detect
  */
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
 import { createLogger } from '../core/logger.mjs';
@@ -77,7 +77,6 @@ export const PLATFORMS = [
     getConfig: (dir) => {
       let workflows = [];
       try {
-        const { readdirSync } = require('node:fs');
         workflows = readdirSync(join(dir, '.github', 'workflows'))
           .filter(f => f.endsWith('.yml') || f.endsWith('.yaml'));
       } catch {}

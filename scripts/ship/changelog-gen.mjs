@@ -56,9 +56,14 @@ export function getCommitsSince(since, projectDir) {
     if (!raw) return [];
 
     return raw.split('\n').map(line => {
-      const [hash, message, author, date] = line.split('|');
-      return { hash: hash?.slice(0, 7), message, author, date };
-    });
+      const parts = line.split('|');
+      if (parts.length < 4) return null;
+      const hash = parts[0]?.slice(0, 7);
+      const date = parts[parts.length - 1];
+      const author = parts[parts.length - 2];
+      const message = parts.slice(1, -2).join('|');  // Rejoin if pipe in message
+      return { hash, message, author, date };
+    }).filter(Boolean);
   } catch (err) {
     log.warn(`Failed to get commits: ${err.message}`);
     return [];
