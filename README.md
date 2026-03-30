@@ -66,7 +66,7 @@ git push && git push origin vNEW
 
 | | Name | Role | Model |
 |:---:|------|------|:-----:|
-| | **Simon** | CEO / Product Strategy | `opus` |
+| <img src="images/simon.svg" width="18"> | **Simon** | CEO / Product Strategy | `opus` |
 | <img src="images/sam.svg" width="18"> | **Sam** | CTO / Lead | `opus` |
 | <img src="images/able.svg" width="18"> | **Able** | PM / Planning | `sonnet` |
 | <img src="images/klay.svg" width="18"> | **Klay** | Architect / Explorer | `opus` |
@@ -88,7 +88,7 @@ git push && git push origin vNEW
 | <img src="images/jerry.svg" width="18"> | **Jerry** | DB / Infrastructure | `sonnet` |
 | <img src="images/milla.svg" width="18"> | **Milla** | Security / Auth | `sonnet` |
 | | **Jun** | Performance / Optimization | `sonnet` |
-| | **Kain** | Code Intelligence / Static Analysis | `sonnet` |
+| <img src="images/kain.svg" width="18"> | **Kain** | Code Intelligence / Static Analysis | `sonnet` |
 
 ### Frontend
 
