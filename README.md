@@ -139,6 +139,10 @@ Teams are **auto-selected** based on task complexity analysis:
 | 8 | **CSO Security Audit** | 14-phase OWASP + STRIDE + secrets + supply chain |
 | 9 | **AI Slop Detection** | 10 anti-patterns + 7 litmus checks + design scoring |
 | 10 | **Autoplan Engine** | 6-principle auto-decision (mechanical / taste / user-challenge) |
+| 11 | **Multi-AI Consensus** | 3-voice voting (Claude + Codex + Gemini) with User Sovereignty |
+| 12 | **PDCA Auto-Scaling** | Complexity(0-15) → iteration limits + review tier auto-selection |
+| 13 | **Confidence Decay** | Observed learnings decay over 30 days, user-stated never decay |
+| 14 | **Prompt Injection Guard** | 7 regex patterns + XML trust boundary wrapping |
 
 ### Harness 4-Axis Score
 
@@ -637,11 +641,13 @@ ai-ng-kit/
                   progress-tracker, convention-extractor, freeze-engine
     pdca/         pdca-engine (5-Stage: plan-do-check-act-review)
     tdd/          tdd-engine (RED-GREEN-REFACTOR)
-    routing/      complexity-scorer, model-router, routing-history
-    memory/       project-memory, learning-capture
+    routing/      complexity-scorer, model-router, intent-router, routing-history
+    memory/       project-memory (confidence decay), learning-capture
     evidence/     evidence-collector, evidence-chain, evidence-report,
-                  completeness-scorer, llm-judge, cost-reporter, goal-checker
+                  completeness-scorer, llm-judge, cost-reporter (+ compact dashboard), goal-checker
     recovery/     health-check, recovery-engine, circuit-breaker, retry-engine
+    multi-ai/     cli-bridge (factory), consensus-engine (3-voice voting)
+    security/     prompt-injection-guard (7 patterns + XML trust boundary)
     trace/        agent-trace
     compaction/   context-compaction (priority-based preservation)
     pipeline/     agent-pipeline, team-orchestrator, auto-runner, rollback, handoff,
@@ -659,12 +665,13 @@ ai-ng-kit/
                   resolvers/ (review, ship, evidence, qa)
     task/         task-manager, plan-manager
     learning/     eureka-logger
-    cli/          persist (plan/task/report persistence CLI)
+    cli/          persist, aing-config, aing-doctor, aing-analytics,
+                  aing-diff-scope, aing-learn, aing-bench
     i18n/         intent-detector, locale
-  agents/         14 named agents (sam, able, klay, jay, jerry, milla, jun,
+  agents/         15 named agents (sam, able, klay, jay, jerry, milla, jun, kain,
                   willji, derek, rowan, iron, simon, progress-checker, figma-reader)
   commands/       aing.md, help.md
-  skills/         review-pipeline, ship + 12 original skill definitions
+  skills/         review-pipeline, ship, browse + 24 skill definitions
   templates/      plan, review, completion, adr
   images/         12 custom SVG icons
 ```
@@ -695,13 +702,15 @@ ai-ng-kit/
 |--------|--------|
 | Hook response | **5ms** (budget: 5,000ms) |
 | Config cold start | **36ms** |
-| Test suite | **123/123 ALL PASS** |
-| External dependencies | **0** |
-| Script modules | **95+ modules** (~19K LOC) |
+| Test suite | **494 tests, 493 pass** (125 suites) |
+| External dependencies | **0** (zero runtime) |
+| Script modules | **105 modules** (~14K LOC) |
 | Placeholder resolvers | **20** |
 | Review categories | **18** (6 CRITICAL + 12 INFORMATIONAL) |
 | Ship steps | **7** (실제 git 실행) |
 | Agents | **15** named |
+| Multi-AI voices | **3** (Claude + Codex + Gemini) |
+| CLI tools | **8** (config, doctor, analytics, diff-scope, persist, browse, learn, bench) |
 | Harness maturity | **Level 5 / 5** |
 
 ## Requirements
