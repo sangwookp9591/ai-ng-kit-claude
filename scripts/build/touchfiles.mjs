@@ -20,7 +20,7 @@ export const SKILL_TOUCHFILES = {
   'explore': ['skills/explore/', 'agents/klay.md'],
   'tdd': ['skills/tdd/', 'agents/jay.md'],
   'design': ['skills/design/', 'agents/willji.md', 'agents/derek.md'],
-  'qa-loop': ['skills/qa-loop/', 'scripts/guardrail/'],
+  'qa-loop': ['skills/qa-loop/', 'scripts/review/qa-health-score.mjs', 'scripts/review/browser-evidence.mjs', 'scripts/review/aria-refs.mjs', 'scripts/guardrail/'],
   'rollback': ['skills/rollback/', 'scripts/recovery/'],
   'task': ['skills/task/', 'scripts/task/'],
   'verify-evidence': ['skills/verify-evidence/', 'agents/sam.md', 'scripts/evidence/'],

@@ -59,6 +59,18 @@ export function validateSkill(skillPath) {
     }
   }
 
+  // Check for MCP tool references (browser tools)
+  const mcpRefs = content.match(/mcp__playwright__\w+/g) || [];
+  if (mcpRefs.length > 0) {
+    // Verify browser-evidence module exists
+    if (!existsSync(join(process.cwd(), 'scripts/review/browser-evidence.mjs'))) {
+      warnings.push('References MCP Playwright tools but browser-evidence.mjs not found');
+    }
+    if (!existsSync(join(process.cwd(), 'scripts/review/aria-refs.mjs'))) {
+      warnings.push('References MCP Playwright tools but aria-refs.mjs not found');
+    }
+  }
+
   return {
     valid: errors.length === 0,
     errors,
