@@ -29,7 +29,13 @@ function getStatePath(projectDir) {
 /**
  * Start a new PDCA cycle for a feature.
  */
-export function startPdca(featureName, projectDir) {
+export function startPdca(featureName, complexityScore, projectDir) {
+  // Backward compat: if complexityScore is string, it's actually projectDir
+  if (typeof complexityScore === 'string') {
+    projectDir = complexityScore;
+    complexityScore = undefined;
+  }
+
   const statePath = getStatePath(projectDir);
   const state = readStateOrDefault(statePath, { version: 1, features: {} });
 
@@ -44,6 +50,13 @@ export function startPdca(featureName, projectDir) {
     history: [{ stage: 'plan', action: 'started', ts: new Date().toISOString() }],
     evidence: []
   };
+
+  if (typeof complexityScore === 'number') {
+    const profile = getScalingProfile(complexityScore);
+    state.features[featureName].scalingProfile = profile;
+    state.features[featureName].maxIterations = profile.maxIterations;
+  }
+
   state.activeFeature = featureName;
 
   const result = writeState(statePath, state);
@@ -84,7 +97,7 @@ export function advancePdca(featureName, evidence, projectDir) {
   // Check-Act iteration logic
   if (currentStage === 'check') {
     const threshold = getConfig('pdca.matchRateThreshold', 90);
-    const maxIter = getConfig('pdca.maxIterations', 5);
+    const maxIter = feature.maxIterations || getConfig('pdca.maxIterations', 5);
     const matchRate = evidence?.matchRate;
 
     // matchRate missing → treat as pass (proceed to act → review)
@@ -176,6 +189,40 @@ export function resetPdca(featureName, projectDir) {
   if (state.activeFeature === featureName) state.activeFeature = null;
 
   return writeState(statePath, state);
+}
+
+/**
+ * Scaling profiles based on complexity score.
+ * @param {number} complexityScore - 0-15 from complexity-scorer
+ * @returns {{ level: string, maxIterations: number, reviewTier: string, reviewers: string[], evidenceRequired: string[] }}
+ */
+export function getScalingProfile(complexityScore) {
+  if (complexityScore <= 3) {
+    return {
+      level: 'low',
+      maxIterations: 1,
+      reviewTier: 'milla-only',
+      reviewers: ['milla'],
+      evidenceRequired: ['test'],
+    };
+  }
+  if (complexityScore <= 7) {
+    return {
+      level: 'mid',
+      maxIterations: 2,
+      reviewTier: 'eng-design',
+      reviewers: ['milla', 'willji'],
+      evidenceRequired: ['test', 'build'],
+    };
+  }
+  // high: 8+
+  return {
+    level: 'high',
+    maxIterations: 3,
+    reviewTier: 'full-pipeline',
+    reviewers: ['simon', 'milla', 'willji', 'klay'],
+    evidenceRequired: ['test', 'build', 'lint', 'security'],
+  };
 }
 
 export { STAGES, STAGE_DESCRIPTIONS };

@@ -284,72 +284,25 @@ export function routeIntent(input) {
   let confidence;
   let reason;
 
-  // ── 직접 라우팅 (특정 스킬로 바로 연결) ──
-
-  // 우선순위 0: 버그/에러 → debug
-  if (isDebug) {
-    route = 'debug';
-    confidence = 0.90;
-    reason = `버그/에러 키워드 감지 → 체계적 디버깅`;
-  }
-  // 우선순위 0: 보안 감사 → review-cso (리뷰보다 먼저 체크)
-  else if (isSecurity) {
-    route = 'review-cso';
-    confidence = 0.90;
-    reason = `보안 키워드 감지 → CSO 14-phase 감사`;
-  }
-  // 우선순위 0: 리뷰 요청 → review-pipeline
-  else if (isReview) {
-    route = 'review-pipeline';
-    confidence = 0.90;
-    reason = `리뷰 키워드 감지 → 4-tier 리뷰 파이프라인`;
-  }
-  // 우선순위 0: 코드 이해 → explore
-  else if (isExplore) {
-    route = 'explore';
-    confidence = 0.88;
-    reason = `탐색/이해 키워드 감지 → 코드베이스 스캔`;
-  }
-  // 우선순위 0: 성능 → perf
-  else if (isPerf) {
-    route = 'perf';
-    confidence = 0.88;
-    reason = `성능 키워드 감지 → 성능 프로파일링`;
-  }
-  // 우선순위 0: 리팩토링 → refactor
-  else if (isRefactor) {
-    route = 'refactor';
-    confidence = 0.85;
-    reason = `리팩토링 키워드 감지 → 구조적 리팩토링`;
-  }
-  // 우선순위 0: 테스트 → tdd
-  else if (isTest) {
-    route = 'tdd';
-    confidence = 0.85;
-    reason = `테스트 키워드 감지 → TDD 사이클`;
-  }
-
-  // ── 일반 라우팅 ──
-
-  // 우선순위 1: 팀 키워드 → team
-  else if (isTeamIntent) {
+  // ── 우선순위 1: 팀 키워드 → team ──
+  if (isTeamIntent) {
     route = 'team';
     confidence = 0.85;
     reason = `팀 키워드 감지 + complexity ${complexityScore}`;
   }
-  // 우선순위 2: 디자인 키워드 → auto(design)
+  // ── 우선순위 2: 디자인 키워드 → auto(design) ──
   else if (isDesign) {
     route = 'auto';
     confidence = 0.88;
     reason = `디자인 도메인 감지`;
   }
-  // 우선순위 3: 계획/분석 키워드 → plan
+  // ── 우선순위 3: 계획/분석 키워드 → plan ──
   else if (isPlanIntent) {
     route = 'plan';
     confidence = 0.82;
     reason = `계획/분석 키워드 감지`;
   }
-  // 우선순위 4: 앵커 있음 → 즉시 실행 (auto)
+  // ── 우선순위 4: 앵커 있음 → auto (또는 complexity ≥ 5 이면 team) ──
   else if (anchorInfo.hasAnchor) {
     if (complexityScore >= 5) {
       route = 'team';
@@ -361,31 +314,19 @@ export function routeIntent(input) {
       reason = `앵커(${anchorInfo.anchorTypes.join(', ')}) + complexity ${complexityScore}`;
     }
   }
-  // 우선순위 5: complexity 기반
+  // ── 우선순위 5: complexity 기반 ──
   else if (complexityScore >= 5) {
     route = 'team';
     confidence = 0.75;
     reason = `complexity ${complexityScore} ≥ 5 — 팀 필요`;
   }
-  // 우선순위 6: 짧고 구체적 (앵커 없지만 ≤15단어) → auto(solo)
-  else if (wordCount <= 15 && wordCount > 3) {
-    route = 'auto';
-    confidence = 0.75;
-    reason = `짧은 구체적 요청 (${wordCount}단어) → 빠른 실행`;
-  }
-  // 우선순위 7: 만들기/추가 등 action verb → auto
-  else if (/추가|만들어|구현|생성|넣어|해줘|add|create|implement|build/i.test(safeInput)) {
-    route = 'auto';
-    confidence = 0.80;
-    reason = `행동 키워드 감지 (${wordCount}단어) → 자동 실행`;
-  }
-  // 우선순위 8: 아주 짧거나 모호 → plan
-  else if (wordCount <= 3) {
+  // ── 우선순위 6: 짧고 단순한 입력 (≤15단어, 앵커 없음) → plan ──
+  else if (wordCount <= 15) {
     route = 'plan';
-    confidence = 0.6;
-    reason = `너무 짧은 입력 (${wordCount}단어) — 스코핑 필요`;
+    confidence = 0.70;
+    reason = `짧은 입력 (${wordCount}단어, 앵커 없음) — 계획 수립 필요`;
   }
-  // 기본: auto
+  // ── 기본: auto ──
   else {
     route = 'auto';
     confidence = 0.65;

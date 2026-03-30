@@ -106,6 +106,21 @@ export function formatCostReport(report) {
   return lines.join('\n');
 }
 
+/**
+ * Generate a compact cost summary for stop hook display (3 lines max).
+ * @param {string} [projectDir]
+ * @returns {string}
+ */
+export function formatCompactSummary(projectDir) {
+  const report = generateCostReport(projectDir);
+  const t = report.totals;
+  if (t.actions === 0) return 'Cost: no agent activity recorded';
+  const tokens = (t.estimatedTokens / 1000).toFixed(1);
+  const cost = t.estimatedCostUSD.toFixed(4);
+  const agentCount = Object.keys(report.agents).length;
+  return `Cost: ${agentCount} agents, ${t.actions} actions, ~${tokens}k tokens (~$${cost})`;
+}
+
 // CLI entry point
 if (import.meta.url === `file://${process.argv[1]}`) {
   const projectDir = process.env.PROJECT_DIR || process.cwd();

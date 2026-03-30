@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.0.0] - 2026-03-30 — gstack Differentiation
+
+### Added
+- Multi-AI Consensus Engine: 3-voice voting (Claude + Codex + Gemini) with cli-bridge factory
+- PDCA Auto-Scaling: complexity score (0-15) → automatic iteration limits and review tiers
+- Confidence Decay Learning: entries decay over 30 days, user-stated entries never decay
+- Agent Cost Dashboard: automatic cost summary in session-end hook
+- MCP Browse QA Orchestrator: browser testing via Playwright MCP + evidence chain integration
+- Prompt Injection Guard: 7 regex patterns + XML trust boundary wrapping
+- CLI tools: aing-learn (JSONL learning management), aing-bench (benchmark runner)
+- Test infrastructure: LLM judge (7 criteria), touchfiles (diff-based selection), eval store
+
+### Changed
+- Intent router: 13 failures fixed, simplified to 4 routes (auto/plan/team/wizard)
+- outside-voice.mjs: now integrates with multi-AI consensus engine
+- project-memory.mjs: schema extended with confidence/source/lastDecayed fields
+- pdca-engine.mjs: startPdca accepts complexityScore for auto-scaling
+
+### Performance
+- 446+ tests (from 380), 118 suites
+- Zero new runtime dependencies (MCP Playwright is built into Claude Code)
+
 ## [2.7.0] - 2026-03-30
 
 ### Added — gstack 200% 흡수 + v3.0 로드맵 전체 완료

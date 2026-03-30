@@ -52,3 +52,26 @@ export function recordOutsideVoice(result, projectDir) {
 
   log.info(`Outside voice recorded: ${result.source} → ${result.findings?.length || 0} findings`);
 }
+
+// ── Multi-AI integration ───────────────────────────────────────────────
+
+import { codex, gemini, getAvailableBridges } from '../multi-ai/cli-bridge.mjs';
+
+/**
+ * Build a review plan that includes all available AI voters.
+ * Claude is always included; Codex and Gemini are added when their CLIs are on $PATH.
+ *
+ * @param {object} context - Same context object accepted by buildAdversarialPrompt
+ * @returns {{ available: string[], voterCount: number, prompt: string }}
+ */
+export function buildMultiAIReviewPlan(context) {
+  const available = ['claude'];
+  if (codex.isAvailable()) available.push('codex');
+  if (gemini.isAvailable()) available.push('gemini');
+
+  return {
+    available,
+    voterCount: available.length,
+    prompt: buildAdversarialPrompt(context),
+  };
+}

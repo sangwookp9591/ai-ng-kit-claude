@@ -5,6 +5,7 @@
  */
 
 import { readState, writeState } from '../scripts/core/state.mjs';
+import { formatCompactSummary } from '../scripts/evidence/cost-reporter.mjs';
 import { createLogger } from '../scripts/core/logger.mjs';
 import { norchSessionEnd } from '../scripts/core/norch-bridge.mjs';
 import { getBudgetStatus } from '../scripts/core/context-budget.mjs';
@@ -65,7 +66,12 @@ try {
     }
   }
 
-  process.stdout.write(JSON.stringify({}));
+  // Append compact cost summary
+  const ctx = [];
+  const costLine = formatCompactSummary(projectDir);
+  if (costLine) ctx.push(costLine);
+
+  process.stdout.write(JSON.stringify(ctx.length > 0 ? { context: ctx.join('\n') } : {}));
 
 } catch (err) {
   log.error('Stop handler failed', { error: err.message });

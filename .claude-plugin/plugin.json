@@ -1,7 +1,7 @@
 {
   "name": "aing",
-  "version": "2.7.0",
-  "description": "Harness Engineering Agent — 14 named agents, 4-tier review pipeline, 7-step ship workflow, CSO security audit, AI slop detection, autoplan engine, LLM judge, benchmark, telemetry",
+  "version": "3.0.0",
+  "description": "Harness Engineering Agent — 15 named agents, Multi-AI Consensus, 4-tier review pipeline, 7-step ship workflow, CSO security audit, AI slop detection, autoplan engine, LLM judge, benchmark, telemetry",
   "author": {
     "name": "SW",
     "url": "https://github.com/sangwookp9591"

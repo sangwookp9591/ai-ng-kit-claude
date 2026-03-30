@@ -136,3 +136,63 @@ Sam Verdict (ACHIEVED / INCOMPLETE / FAILED)
 | Frontend | Iron | sonnet | React, wizard mode |
 | Mobile | Derek | sonnet | Flutter, cross-platform |
 | Motion | Rowan | sonnet | Animations, interactions |
+
+## Multi-AI Consensus (`scripts/multi-ai/`)
+
+Three independent AI voices (Claude, Codex, Gemini) vote on non-trivial decisions through a structured consensus protocol.
+
+- **cli-bridge.mjs** — `createBridge(provider)` factory returns a uniform `.ask()` / `.review()` / `.challenge()` interface per AI backend.
+- **decision-classifier.mjs** — Classifies every decision into one of four types: `MECHANICAL` (auto-pass, 1 voice), `TASTE` (majority, 3 voices), `USER_CHALLENGE` (unanimous + user confirm), `SECURITY_WARNING` (unanimous + user block).
+- **consensus-voter.mjs** — Collects votes, applies quorum rules (unanimous / majority / split / reject), and routes results to the User Sovereignty gate.
+- Integration with `outside-voice.mjs`: external voices now provide genuine cross-model adversarial review instead of single-model devil's advocate.
+
+See `docs/MULTI-AI.md` for the full architecture document.
+
+## MCP Browse QA (`scripts/review/`)
+
+Browser-based QA testing using Playwright MCP, integrated into the evidence chain.
+
+- **browser-evidence.mjs** — Drives headless Playwright via MCP to navigate pages, capture screenshots, and produce structured evidence entries (URL, selector, assertion, screenshot path).
+- **aria-refs.mjs** — ARIA accessibility tree element addressing system. Maps semantic roles to stable selectors so browser-evidence assertions survive DOM changes.
+- Evidence from browser tests feeds into `evidence-chain.mjs` alongside unit/build/lint results, giving the Sam verdict a full picture of application health.
+
+## PDCA Auto-Scaling
+
+The PDCA engine now auto-scales iteration limits and review depth based on the complexity score (0-15) from `complexity-scorer.mjs`.
+
+| Complexity Range | Profile | Max PDCA Cycles | Review Tier            |
+|:----------------:|---------|:---------------:|------------------------|
+| 0-4              | Solo    | 2               | Eng only               |
+| 5-8              | Duo     | 3               | Eng + Design           |
+| 9-12             | Squad   | 5               | Eng + Design + CEO     |
+| 13-15            | Full    | 7               | All 4 tiers + CSO      |
+
+`pdca-engine.mjs` accepts `complexityScore` in `startPdca()` and uses it to set cycle bounds and select which reviewers participate. This eliminates over-review of trivial changes and under-review of complex ones.
+
+## Confidence Decay Learning (`scripts/core/project-memory.mjs`)
+
+Project memory entries now carry `confidence` (0-1), `source` (inferred / user-stated), and `lastDecayed` fields.
+
+- **Decay schedule**: Entries decay by 0.1 every 30 days. When confidence drops below 0.3, the entry is flagged for user re-confirmation.
+- **User-stated entries never decay**: If the user explicitly set a preference (`source: "user-stated"`), confidence is locked at 1.0.
+- **Re-confirmation flow**: Flagged entries surface during the next planning phase. The user can confirm (reset to 1.0), update, or remove them.
+
+This prevents stale assumptions from silently influencing agent behavior over time.
+
+## Security (`scripts/guardrail/prompt-injection-guard.mjs`)
+
+A dedicated prompt injection guard provides defense-in-depth against injection attacks:
+
+- **7 regex patterns** detect common injection vectors: role-override attempts, system prompt leaks, ignore-previous-instructions, base64-encoded payloads, markdown/HTML injection, Unicode homoglyph attacks, and indirect prompt injection via tool output.
+- **XML trust boundary wrapping**: All external content (tool output, user-provided files, API responses) is wrapped in `<untrusted>` XML tags before being included in agent context. Agents are instructed to treat content within these tags as data, never as instructions.
+- **Fail-closed**: If the guard detects a pattern, the request is blocked and logged. No fallback execution occurs.
+
+## Cost Dashboard (session-end hook)
+
+The agent cost dashboard provides automatic cost tracking and summary at session end:
+
+- **session-end hook** aggregates token usage across all agents spawned during the session.
+- Per-agent breakdown: model, input tokens, output tokens, estimated cost (USD).
+- Session total with comparison to the 7-day rolling average.
+- Cost data is persisted in `.aing/telemetry/` for trend analysis via `aing-analytics.mjs`.
+- Alerts when a session exceeds 2x the rolling average, helping catch runaway agent loops early.
