@@ -16,8 +16,9 @@
 // ── Agent Team (shared across all tiers) ──
 
 const AGENT_TEAM_ONELINER =
-  'Agents: Able(계획), Klay(탐색/리뷰), Milla(보안/검증), Derek(실행), Jay(실행/성능), ' +
-  'Sam(검증), Jun(분석), Simon(LSP), Jerry(테스트), Rowan(리팩터), Willji(디자인), Iron(오케스트레이터)';
+  'Agents: Simon(CEO/전략), Sam(CTO/검증), Able(계획), Klay(탐색/리뷰), Milla(보안/검증), ' +
+  'Jay(백엔드), Jerry(DB/인프라), Derek(모바일), Iron(프론트엔드), Rowan(모션), ' +
+  'Willji(디자인), Jun(성능), Kain(코드분석/LSP)';
 
 // ── Tier 1: Core (~200 tokens) ──
 

@@ -30,7 +30,7 @@ export const SKILL_TOUCHFILES = {
   'test': ['skills/test/', 'agents/jay.md'],
   'perf': ['skills/perf/', 'agents/jun.md', 'agents/klay.md'],
   'refactor': ['skills/refactor/', 'agents/klay.md', 'agents/jay.md', 'agents/derek.md'],
-  'lsp': ['skills/lsp/', 'agents/simon.md', 'agents/milla.md'],
+  'lsp': ['skills/lsp/', 'agents/kain.md', 'agents/milla.md'],
   'figma-read': ['skills/figma-read/', 'agents/figma-reader.md'],
   'flutter-architecture': ['skills/flutter-architecture/'],
   'flutter-animation': ['skills/flutter-animation/'],

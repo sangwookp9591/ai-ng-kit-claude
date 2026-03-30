@@ -114,9 +114,9 @@ export const REVIEW_AGENTS = {
     description: 'Architecture, code quality, tests, performance, security',
   },
   'ceo-review': {
-    agents: ['able', 'sam'],
-    focus: ['scope', 'product-fit', 'strategy', 'user-impact'],
-    description: 'Product scope, strategy, user impact',
+    agents: ['simon', 'able'],
+    focus: ['scope', 'product-fit', 'strategy', 'user-impact', 'competitive-analysis'],
+    description: 'Product scope, strategy, user impact (Simon CEO + Able PM)',
   },
   'design-review': {
     agents: ['willji', 'iron'],

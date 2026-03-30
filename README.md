@@ -56,21 +56,22 @@ git push && git push origin vNEW
 
 ---
 
-<h2 id="team">Agent Team (14 named agents)</h2>
+<h2 id="team">Agent Team (15 named agents)</h2>
 
 <table>
 <tr>
 <td width="50%" valign="top">
 
-### <img src="images/sam.svg" width="16"> Leadership
+### Leadership
 
 | | Name | Role | Model |
 |:---:|------|------|:-----:|
+| | **Simon** | CEO / Product Strategy | `opus` |
 | <img src="images/sam.svg" width="18"> | **Sam** | CTO / Lead | `opus` |
 | <img src="images/able.svg" width="18"> | **Able** | PM / Planning | `sonnet` |
 | <img src="images/klay.svg" width="18"> | **Klay** | Architect / Explorer | `opus` |
 
-### <img src="images/willji.svg" width="16"> Design
+### Design
 
 | | Name | Role | Model |
 |:---:|------|------|:-----:|
@@ -79,7 +80,7 @@ git push && git push origin vNEW
 </td>
 <td width="50%" valign="top">
 
-### <img src="images/jay.svg" width="16"> Backend
+### Backend
 
 | | Name | Role | Model |
 |:---:|------|------|:-----:|
@@ -87,9 +88,9 @@ git push && git push origin vNEW
 | <img src="images/jerry.svg" width="18"> | **Jerry** | DB / Infrastructure | `sonnet` |
 | <img src="images/milla.svg" width="18"> | **Milla** | Security / Auth | `sonnet` |
 | | **Jun** | Performance / Optimization | `sonnet` |
-| | **Simon** | Code Intelligence / Dead Code | `sonnet` |
+| | **Kain** | Code Intelligence / Static Analysis | `sonnet` |
 
-### <img src="images/derek.svg" width="16"> Frontend
+### Frontend
 
 | | Name | Role | Model |
 |:---:|------|------|:-----:|
@@ -101,7 +102,7 @@ git push && git push origin vNEW
 <tr>
 <td width="100%" colspan="2" valign="top">
 
-### <img src="images/iron.svg" width="16"> Magic
+### Magic
 
 | | Name | Role | Model |
 |:---:|------|------|:-----:|
