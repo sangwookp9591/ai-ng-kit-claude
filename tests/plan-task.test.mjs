@@ -22,7 +22,7 @@ describe('Plan Manager', () => {
   });
 
   it('createPlan should create .aing/plans/{date}-{feature}.md', async () => {
-    const { createPlan } = await import('../scripts/task/plan-manager.mjs');
+    const { createPlan } = await import('../dist/scripts/task/plan-manager.js');
 
     const result = createPlan({
       feature: 'auth-api',
@@ -51,7 +51,7 @@ describe('Plan Manager', () => {
   });
 
   it('createPlan should also create a task with subtasks', async () => {
-    const { createPlan } = await import('../scripts/task/plan-manager.mjs');
+    const { createPlan } = await import('../dist/scripts/task/plan-manager.js');
 
     const result = createPlan({
       feature: 'search',
@@ -74,7 +74,7 @@ describe('Plan Manager', () => {
   });
 
   it('listPlans should return created plans', async () => {
-    const { listPlans } = await import('../scripts/task/plan-manager.mjs');
+    const { listPlans } = await import('../dist/scripts/task/plan-manager.js');
 
     const plans = listPlans(TEST_DIR);
     assert.ok(plans.length >= 2, 'Should have at least 2 plans');
@@ -83,7 +83,7 @@ describe('Plan Manager', () => {
   });
 
   it('getPlan should return plan content', async () => {
-    const { getPlan } = await import('../scripts/task/plan-manager.mjs');
+    const { getPlan } = await import('../dist/scripts/task/plan-manager.js');
 
     const content = getPlan('auth-api', TEST_DIR);
     assert.ok(content, 'getPlan should return content');
@@ -97,7 +97,7 @@ describe('Task Manager', () => {
   });
 
   it('createTask should create .aing/tasks/{id}.json', async () => {
-    const { createTask } = await import('../scripts/task/task-manager.mjs');
+    const { createTask } = await import('../dist/scripts/task/task-manager.js');
 
     const result = createTask({
       title: 'Implement Auth',
@@ -121,7 +121,7 @@ describe('Task Manager', () => {
   });
 
   it('checkSubtask should mark subtask as done', async () => {
-    const { createTask, checkSubtask } = await import('../scripts/task/task-manager.mjs');
+    const { createTask, checkSubtask } = await import('../dist/scripts/task/task-manager.js');
 
     const { taskId } = createTask({
       title: 'Test Task',
@@ -135,7 +135,7 @@ describe('Task Manager', () => {
   });
 
   it('checkSubtask should complete main task when all subtasks done', async () => {
-    const { createTask, checkSubtask, getTask } = await import('../scripts/task/task-manager.mjs');
+    const { createTask, checkSubtask, getTask } = await import('../dist/scripts/task/task-manager.js');
 
     const { taskId } = createTask({
       title: 'Small Task',
@@ -152,7 +152,7 @@ describe('Task Manager', () => {
   });
 
   it('listTasks should return task index', async () => {
-    const { listTasks } = await import('../scripts/task/task-manager.mjs');
+    const { listTasks } = await import('../dist/scripts/task/task-manager.js');
 
     const tasks = listTasks(TEST_DIR);
     assert.ok(tasks.length >= 1, 'Should have at least 1 task');
@@ -161,7 +161,7 @@ describe('Task Manager', () => {
 
 describe('persist.mjs CLI', () => {
   const CLI_TEST_DIR = join(tmpdir(), `aing-cli-test-${Date.now()}`);
-  const persistPath = new URL('../scripts/cli/persist.mjs', import.meta.url).pathname;
+  const persistPath = new URL('../dist/scripts/cli/persist.js', import.meta.url).pathname;
 
   before(() => {
     mkdirSync(CLI_TEST_DIR, { recursive: true });
@@ -223,7 +223,7 @@ describe('createPlan extended fields', () => {
   });
 
   it('should include ## Options section when options provided', async () => {
-    const { createPlan } = await import('../scripts/task/plan-manager.mjs');
+    const { createPlan } = await import('../dist/scripts/task/plan-manager.js');
 
     const result = createPlan({
       feature: 'ext-options',
@@ -245,7 +245,7 @@ describe('createPlan extended fields', () => {
   });
 
   it('should include ## Review Notes section when reviewNotes provided', async () => {
-    const { createPlan } = await import('../scripts/task/plan-manager.mjs');
+    const { createPlan } = await import('../dist/scripts/task/plan-manager.js');
 
     const result = createPlan({
       feature: 'ext-review',
@@ -265,7 +265,7 @@ describe('createPlan extended fields', () => {
   });
 
   it('should include ## Complexity section and header metadata when complexityScore/Level provided', async () => {
-    const { createPlan } = await import('../scripts/task/plan-manager.mjs');
+    const { createPlan } = await import('../dist/scripts/task/plan-manager.js');
 
     const result = createPlan({
       feature: 'ext-complexity',
@@ -285,7 +285,7 @@ describe('createPlan extended fields', () => {
   });
 
   it('should omit optional sections when fields not provided (backward compat)', async () => {
-    const { createPlan } = await import('../scripts/task/plan-manager.mjs');
+    const { createPlan } = await import('../dist/scripts/task/plan-manager.js');
 
     const result = createPlan({
       feature: 'ext-basic',
@@ -303,7 +303,7 @@ describe('createPlan extended fields', () => {
 
 describe('persist.mjs --stdin JSON mode', () => {
   const STDIN_TEST_DIR = join(tmpdir(), `aing-stdin-test-${Date.now()}`);
-  const persistPath = new URL('../scripts/cli/persist.mjs', import.meta.url).pathname;
+  const persistPath = new URL('../dist/scripts/cli/persist.js', import.meta.url).pathname;
 
   before(() => {
     mkdirSync(STDIN_TEST_DIR, { recursive: true });

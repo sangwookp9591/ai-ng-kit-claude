@@ -26,7 +26,7 @@ describe('confidence decay', async () => {
     setupTmpProject();
   });
 
-  const { addMemoryEntry, applyConfidenceDecay, loadMemory, getMemorySummary } = await import('../scripts/memory/project-memory.mjs');
+  const { addMemoryEntry, applyConfidenceDecay, loadMemory, getMemorySummary } = await import('../dist/scripts/memory/project-memory.js');
 
   it('addMemoryEntry stores confidence and source', () => {
     addMemoryEntry('patterns', 'test entry', tmpDir, { confidence: 9, source: 'user' });

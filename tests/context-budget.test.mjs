@@ -20,7 +20,7 @@ const {
   getBudgetStatus,
   resetBudget,
   trimToTokenBudget,
-} = await import('../scripts/core/context-budget.mjs');
+} = await import('../dist/scripts/core/context-budget.js');
 
 describe('Context Budget — GAP coverage', () => {
   beforeEach(() => resetBudget());

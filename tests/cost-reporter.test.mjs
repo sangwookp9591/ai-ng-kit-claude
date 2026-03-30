@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 import { mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { writeState } from '../scripts/core/state.mjs';
+import { writeState } from '../dist/scripts/core/state.js';
 
 const TEST_DIR = join(tmpdir(), `aing-cost-reporter-test-${Date.now()}`);
 const COST_PATH = join(TEST_DIR, '.aing', 'state', 'cost-tracker.json');
@@ -43,7 +43,7 @@ describe('cost-reporter: generateCostReport', () => {
   });
 
   it('returns report object with required shape', async () => {
-    const { generateCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData());
 
@@ -56,7 +56,7 @@ describe('cost-reporter: generateCostReport', () => {
   });
 
   it('totals has required fields', async () => {
-    const { generateCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData());
 
@@ -68,7 +68,7 @@ describe('cost-reporter: generateCostReport', () => {
   });
 
   it('aggregates agent actions from trace summary', async () => {
-    const { generateCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData({
       summary: {
@@ -86,7 +86,7 @@ describe('cost-reporter: generateCostReport', () => {
   });
 
   it('totals.actions is sum of all agent actions', async () => {
-    const { generateCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData({
       summary: {
@@ -101,7 +101,7 @@ describe('cost-reporter: generateCostReport', () => {
   });
 
   it('estimatedTokens is actions * 2000 per agent', async () => {
-    const { generateCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData({
       summary: {
@@ -116,7 +116,7 @@ describe('cost-reporter: generateCostReport', () => {
   });
 
   it('estimatedCostUSD is non-negative number', async () => {
-    const { generateCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker({ tokensUsed: 50000, apiCalls: 10 }));
     writeState(TRACE_PATH, makeTraceData({
       summary: {
@@ -131,7 +131,7 @@ describe('cost-reporter: generateCostReport', () => {
   });
 
   it('works with empty trace (no agents)', async () => {
-    const { generateCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData());
 
@@ -144,7 +144,7 @@ describe('cost-reporter: generateCostReport', () => {
   });
 
   it('works when state files do not exist (graceful fallback)', async () => {
-    const { generateCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     const emptyDir = join(tmpdir(), `aing-cost-empty-${Date.now()}`);
 
     const report = generateCostReport(emptyDir);
@@ -154,7 +154,7 @@ describe('cost-reporter: generateCostReport', () => {
   });
 
   it('costTracker reflects data from cost-tracker.json', async () => {
-    const { generateCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     const trackerData = makeCostTracker({ tokensUsed: 12345, apiCalls: 7 });
     writeState(COST_PATH, trackerData);
     writeState(TRACE_PATH, makeTraceData());
@@ -172,7 +172,7 @@ describe('cost-reporter: formatCostReport', () => {
   });
 
   it('returns a non-empty string', async () => {
-    const { generateCostReport, formatCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport, formatCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData());
 
@@ -184,7 +184,7 @@ describe('cost-reporter: formatCostReport', () => {
   });
 
   it('contains aing Cost Report header', async () => {
-    const { generateCostReport, formatCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport, formatCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData());
 
@@ -195,7 +195,7 @@ describe('cost-reporter: formatCostReport', () => {
   });
 
   it('shows agent names when agents are present', async () => {
-    const { generateCostReport, formatCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport, formatCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData({
       summary: {
@@ -211,7 +211,7 @@ describe('cost-reporter: formatCostReport', () => {
   });
 
   it('shows Totals section with actions and cost', async () => {
-    const { generateCostReport, formatCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport, formatCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData({
       summary: {
@@ -228,7 +228,7 @@ describe('cost-reporter: formatCostReport', () => {
   });
 
   it('contains disclaimer that cost is estimated', async () => {
-    const { generateCostReport, formatCostReport } = await import('../scripts/evidence/cost-reporter.mjs');
+    const { generateCostReport, formatCostReport } = await import('../dist/scripts/evidence/cost-reporter.js');
     writeState(COST_PATH, makeCostTracker());
     writeState(TRACE_PATH, makeTraceData());
 

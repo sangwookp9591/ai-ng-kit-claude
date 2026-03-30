@@ -8,7 +8,7 @@ import {
   advancePdca,
   resetPdca,
   getPdcaStatus,
-} from '../scripts/pdca/pdca-engine.mjs';
+} from '../dist/scripts/pdca/pdca-engine.js';
 
 const TEST_DIR = join(import.meta.dirname, '.test-pdca-autoscale-tmp');
 

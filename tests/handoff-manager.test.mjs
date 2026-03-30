@@ -2,7 +2,7 @@ import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
-import { writeHandoff, readHandoff, listHandoffs, getResumeContext } from '../scripts/pipeline/handoff-manager.mjs';
+import { writeHandoff, readHandoff, listHandoffs, getResumeContext } from '../dist/scripts/pipeline/handoff-manager.js';
 
 const TEST_DIR = join(import.meta.dirname, '.test-handoff-tmp');
 

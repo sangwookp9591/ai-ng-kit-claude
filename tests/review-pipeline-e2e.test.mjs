@@ -9,7 +9,7 @@ import assert from 'node:assert';
 
 describe('Review Pipeline Integration', () => {
   it('should select tiers based on complexity', async () => {
-    const { selectTiers } = await import('../scripts/review/review-engine.mjs');
+    const { selectTiers } = await import('../dist/scripts/review/review-engine.js');
 
     const low = selectTiers('low');
     assert.deepStrictEqual(low, ['eng-review']);
@@ -24,7 +24,7 @@ describe('Review Pipeline Integration', () => {
   });
 
   it('should run checklist on real-looking diff', async () => {
-    const { runChecklist, classifyResults } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist, classifyResults } = await import('../dist/scripts/review/review-checklist.js');
 
     const diff = [
       '+const query = "SELECT * FROM users WHERE id = " + req.params.id;',
@@ -42,7 +42,7 @@ describe('Review Pipeline Integration', () => {
   });
 
   it('should build review dashboard', async () => {
-    const { buildDashboard, formatDashboard } = await import('../scripts/review/review-dashboard.mjs');
+    const { buildDashboard, formatDashboard } = await import('../dist/scripts/review/review-dashboard.js');
     const dashboard = buildDashboard('/tmp');
     assert.ok(dashboard.rows.length >= 4);
     assert.ok(dashboard.rows.some(r => r.key === 'eng-review'));
@@ -53,7 +53,7 @@ describe('Review Pipeline Integration', () => {
   });
 
   it('should check ship readiness via PDCA integration', async () => {
-    const { checkShipReadiness } = await import('../scripts/review/pdca-integration.mjs');
+    const { checkShipReadiness } = await import('../dist/scripts/review/pdca-integration.js');
     const result = checkShipReadiness({
       pdcaStage: 'review',
       pdcaVerdict: 'ACHIEVED',
@@ -66,7 +66,7 @@ describe('Review Pipeline Integration', () => {
   });
 
   it('should format ship readiness', async () => {
-    const { formatShipReadiness } = await import('../scripts/review/pdca-integration.mjs');
+    const { formatShipReadiness } = await import('../dist/scripts/review/pdca-integration.js');
     const formatted = formatShipReadiness(
       { canShip: false, reason: 'test', blockers: ['Review not cleared'] },
       { rows: [] }
@@ -77,7 +77,7 @@ describe('Review Pipeline Integration', () => {
 
 describe('Scope Drift Integration', () => {
   it('should analyze drift with three-way comparison', async () => {
-    const { threeWayComparison, formatThreeWay } = await import('../scripts/review/scope-drift.mjs');
+    const { threeWayComparison, formatThreeWay } = await import('../dist/scripts/review/scope-drift.js');
 
     const result = threeWayComparison({
       todosContent: '- [x] Add login API\n- [ ] Add signup API',
@@ -96,7 +96,7 @@ describe('Scope Drift Integration', () => {
 
 describe('Outside Voice', () => {
   it('should build adversarial prompt', async () => {
-    const { buildAdversarialPrompt } = await import('../scripts/review/outside-voice.mjs');
+    const { buildAdversarialPrompt } = await import('../dist/scripts/review/outside-voice.js');
     const prompt = buildAdversarialPrompt({
       planContent: 'Build JWT auth with refresh tokens',
       feature: 'auth',
@@ -109,7 +109,7 @@ describe('Outside Voice', () => {
 
 describe('Autoplan Integration', () => {
   it('should build pipeline based on complexity', async () => {
-    const { buildAutoplanPipeline } = await import('../scripts/pipeline/autoplan-engine.mjs');
+    const { buildAutoplanPipeline } = await import('../dist/scripts/pipeline/autoplan-engine.js');
 
     const low = buildAutoplanPipeline({ feature: 'test', complexityLevel: 'low' });
     assert.ok(low.phases.length >= 1);
@@ -125,7 +125,7 @@ describe('Autoplan Integration', () => {
   });
 
   it('should classify decisions', async () => {
-    const { classifyDecision, DECISION_TYPES } = await import('../scripts/pipeline/autoplan-engine.mjs');
+    const { classifyDecision, DECISION_TYPES } = await import('../dist/scripts/pipeline/autoplan-engine.js');
 
     // Mechanical: clear winner
     const mech = classifyDecision({ optionScoreDelta: 5 });
@@ -145,7 +145,7 @@ describe('Autoplan Integration', () => {
 
 describe('CSO Audit Integration', () => {
   it('should build audit prompt with all phases', async () => {
-    const { buildAuditPrompt, CSO_PHASES } = await import('../scripts/review/cso-audit.mjs');
+    const { buildAuditPrompt, CSO_PHASES } = await import('../dist/scripts/review/cso-audit.js');
     const prompt = buildAuditPrompt({ stack: 'Node.js + Next.js' });
     assert.ok(prompt.includes('CSO Security Audit'));
     assert.ok(prompt.includes('OWASP'));
@@ -160,7 +160,7 @@ describe('CSO Audit Integration', () => {
 
 describe('Evidence Chain Integration', () => {
   it('should add and evaluate evidence', async () => {
-    const { addEvidence, evaluateChain } = await import('../scripts/evidence/evidence-chain.mjs');
+    const { addEvidence, evaluateChain } = await import('../dist/scripts/evidence/evidence-chain.js');
 
     // Add evidence to temp location
     addEvidence('e2e-test', { type: 'test', result: 'pass', source: 'jest' }, '/tmp');
@@ -174,7 +174,7 @@ describe('Evidence Chain Integration', () => {
 
 describe('LLM Judge Integration', () => {
   it('should parse judge response from mixed text', async () => {
-    const { parseJudgeResponse } = await import('../scripts/evidence/llm-judge.mjs');
+    const { parseJudgeResponse } = await import('../dist/scripts/evidence/llm-judge.js');
     const response = 'Analysis: {"score": 7, "issues": ["naming"], "summary": "Good"}';
     const result = parseJudgeResponse(response);
     assert.strictEqual(result.score, 7);
@@ -182,7 +182,7 @@ describe('LLM Judge Integration', () => {
   });
 
   it('should select criteria for different signals', async () => {
-    const { selectCriteria, JUDGE_CRITERIA } = await import('../scripts/evidence/llm-judge.mjs');
+    const { selectCriteria, JUDGE_CRITERIA } = await import('../dist/scripts/evidence/llm-judge.js');
 
     const uiCriteria = selectCriteria({ hasUI: true, hasSecurity: true });
     assert.ok(uiCriteria.includes(JUDGE_CRITERIA.UX_QUALITY));
@@ -193,7 +193,7 @@ describe('LLM Judge Integration', () => {
 
 describe('Telemetry Integration', () => {
   it('should log and read usage', async () => {
-    const { logSkillUsage, readUsageLog } = await import('../scripts/telemetry/telemetry-engine.mjs');
+    const { logSkillUsage, readUsageLog } = await import('../dist/scripts/telemetry/telemetry-engine.js');
 
     logSkillUsage({
       skill: 'e2e-test',
@@ -210,7 +210,7 @@ describe('Telemetry Integration', () => {
   });
 
   it('should generate usage summary', async () => {
-    const { getUsageSummary, formatUsageSummary } = await import('../scripts/telemetry/telemetry-engine.mjs');
+    const { getUsageSummary, formatUsageSummary } = await import('../dist/scripts/telemetry/telemetry-engine.js');
     const summary = getUsageSummary('/tmp');
     assert.ok(summary.totalSessions >= 0);
 

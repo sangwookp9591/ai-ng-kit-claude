@@ -9,7 +9,7 @@ import assert from 'node:assert';
 
 describe('ARIA Ref E2E', () => {
   it('should parse complex snapshot with nested elements', async () => {
-    const { parseAriaSnapshot, findRefs, checkStale } = await import('../scripts/review/aria-refs.mjs');
+    const { parseAriaSnapshot, findRefs, checkStale } = await import('../dist/scripts/review/aria-refs.js');
 
     const snapshot = `- navigation "Main Nav"
 - link "Home"
@@ -45,7 +45,7 @@ describe('ARIA Ref E2E', () => {
 
 describe('Browser Evidence E2E', () => {
   it('should build complete QA test plan', async () => {
-    const { orchestrateBrowserQA } = await import('../scripts/review/browser-evidence.mjs');
+    const { orchestrateBrowserQA } = await import('../dist/scripts/review/browser-evidence.js');
 
     const result = orchestrateBrowserQA('login-feature', {
       baseUrl: 'http://localhost:3000',
@@ -60,14 +60,14 @@ describe('Browser Evidence E2E', () => {
   });
 
   it('should format empty browser evidence', async () => {
-    const { formatBrowserEvidence } = await import('../scripts/review/browser-evidence.mjs');
+    const { formatBrowserEvidence } = await import('../dist/scripts/review/browser-evidence.js');
     assert.ok(formatBrowserEvidence([]).includes('No browser evidence'));
   });
 });
 
 describe('Design Scoring E2E', () => {
   it('should detect multiple AI slop patterns', async () => {
-    const { detectAISlop, calculateDesignScore } = await import('../scripts/review/design-scoring.mjs');
+    const { detectAISlop, calculateDesignScore } = await import('../dist/scripts/review/design-scoring.js');
 
     const content = `
       bg-gradient-to-r from-purple-500 to-indigo-600
@@ -91,7 +91,7 @@ describe('Design Scoring E2E', () => {
   });
 
   it('should build design audit prompt', async () => {
-    const { buildDesignAuditPrompt } = await import('../scripts/review/design-scoring.mjs');
+    const { buildDesignAuditPrompt } = await import('../dist/scripts/review/design-scoring.js');
     const prompt = buildDesignAuditPrompt({ files: ['src/components/Hero.tsx'] });
     assert.ok(prompt.includes('AI Slop Blacklist'));
     assert.ok(prompt.includes('Litmus Checks'));
@@ -101,7 +101,7 @@ describe('Design Scoring E2E', () => {
 
 describe('Benchmark E2E', () => {
   it('should detect performance regressions', async () => {
-    const { compareMetrics, checkBudgets, calculateGrade, formatBenchmarkReport } = await import('../scripts/review/benchmark-engine.mjs');
+    const { compareMetrics, checkBudgets, calculateGrade, formatBenchmarkReport } = await import('../dist/scripts/review/benchmark-engine.js');
 
     const baseline = { fcp: 400, lcp: 800, domComplete: 1200, jsBundle: 300000, totalRequests: 30 };
     const current = { fcp: 500, lcp: 1800, domComplete: 1500, jsBundle: 800000, totalRequests: 45 };
@@ -127,7 +127,7 @@ describe('Benchmark E2E', () => {
 
 describe('Retro E2E', () => {
   it('should classify diverse commit types', async () => {
-    const { classifyCommits, calculateFocusScore, detectSessions } = await import('../scripts/review/retro-engine.mjs');
+    const { classifyCommits, calculateFocusScore, detectSessions } = await import('../dist/scripts/review/retro-engine.js');
 
     const commits = [
       { message: 'feat: user auth' },
@@ -181,7 +181,7 @@ describe('Retro E2E', () => {
 
 describe('Freeze Engine E2E', () => {
   it('should enforce freeze boundaries', async () => {
-    const { setFreeze, getFreezeDir, checkFreeze, clearFreeze } = await import('../scripts/guardrail/freeze-engine.mjs');
+    const { setFreeze, getFreezeDir, checkFreeze, clearFreeze } = await import('../dist/scripts/guardrail/freeze-engine.js');
 
     // Set freeze
     setFreeze('/tmp/test-freeze/src', '/tmp/test-freeze');
@@ -206,7 +206,7 @@ describe('Freeze Engine E2E', () => {
 
 describe('Deploy Detection E2E', () => {
   it('should detect platform from project files', async () => {
-    const { detectPlatform, formatDeployConfig, healthCheck } = await import('../scripts/ship/deploy-detect.mjs');
+    const { detectPlatform, formatDeployConfig, healthCheck } = await import('../dist/scripts/ship/deploy-detect.js');
 
     // Current project should detect github-actions (has .github/workflows/)
     const result = detectPlatform();
@@ -220,7 +220,7 @@ describe('Deploy Detection E2E', () => {
 
 describe('Intent Router E2E', () => {
   it('should route 16 test cases correctly', async () => {
-    const { routeIntent } = await import('../scripts/routing/intent-router.mjs');
+    const { routeIntent } = await import('../dist/scripts/routing/intent-router.js');
 
     const cases = [
       { input: '로그인하면 500 에러 나', expected: 'plan' },
@@ -248,7 +248,7 @@ describe('Intent Router E2E', () => {
 
 describe('Doc Release E2E', () => {
   it('should identify stale docs from agent changes', async () => {
-    const { findStaleDocs, buildDocUpdatePrompt } = await import('../scripts/ship/doc-release.mjs');
+    const { findStaleDocs, buildDocUpdatePrompt } = await import('../dist/scripts/ship/doc-release.js');
 
     const staleDocs = findStaleDocs([
       'agents/sam.md',

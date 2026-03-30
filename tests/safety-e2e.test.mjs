@@ -9,7 +9,7 @@ import assert from 'node:assert';
 
 describe('Careful Checklist', () => {
   it('should detect dangerous commands', async () => {
-    const { checkCommand } = await import('../scripts/guardrail/careful-checklist.mjs');
+    const { checkCommand } = await import('../dist/scripts/guardrail/careful-checklist.js');
 
     assert.strictEqual(checkCommand('rm -rf /').safe, false);
     assert.strictEqual(checkCommand('git push --force').safe, false);
@@ -19,7 +19,7 @@ describe('Careful Checklist', () => {
   });
 
   it('should allow safe commands', async () => {
-    const { checkCommand } = await import('../scripts/guardrail/careful-checklist.mjs');
+    const { checkCommand } = await import('../dist/scripts/guardrail/careful-checklist.js');
 
     assert.strictEqual(checkCommand('rm -rf node_modules').safe, true);
     assert.strictEqual(checkCommand('git push origin main').safe, true);
@@ -30,7 +30,7 @@ describe('Careful Checklist', () => {
   });
 
   it('should format safety warnings', async () => {
-    const { checkCommand, formatSafetyCheck } = await import('../scripts/guardrail/careful-checklist.mjs');
+    const { checkCommand, formatSafetyCheck } = await import('../dist/scripts/guardrail/careful-checklist.js');
     const result = checkCommand('rm -rf /important');
     const formatted = formatSafetyCheck(result);
     assert.ok(formatted.includes('SAFETY WARNING'));
@@ -40,7 +40,7 @@ describe('Careful Checklist', () => {
 
 describe('Mutation Guard', () => {
   it('should record and retrieve mutations', async () => {
-    const { recordMutation, getRecentMutations, formatMutationAudit } = await import('../scripts/guardrail/mutation-guard.mjs');
+    const { recordMutation, getRecentMutations, formatMutationAudit } = await import('../dist/scripts/guardrail/mutation-guard.js');
 
     recordMutation('src/auth.ts', 'edit', 'jay', '/tmp');
     recordMutation('src/api.ts', 'create', 'jay', '/tmp');
@@ -57,7 +57,7 @@ describe('Mutation Guard', () => {
 
 describe('Canary Monitor', () => {
   it('should export healthCheck and alert thresholds', async () => {
-    const { healthCheck, ALERT_THRESHOLDS } = await import('../scripts/ship/canary-monitor.mjs');
+    const { healthCheck, ALERT_THRESHOLDS } = await import('../dist/scripts/ship/canary-monitor.js');
 
     assert.ok(typeof healthCheck === 'function');
     assert.ok(ALERT_THRESHOLDS.CRITICAL);
@@ -69,7 +69,7 @@ describe('Canary Monitor', () => {
   });
 
   it('should format canary results', async () => {
-    const { formatCanaryResult } = await import('../scripts/ship/canary-monitor.mjs');
+    const { formatCanaryResult } = await import('../dist/scripts/ship/canary-monitor.js');
 
     const healthy = formatCanaryResult({
       passed: true,
@@ -90,7 +90,7 @@ describe('Canary Monitor', () => {
 
 describe('Config Manager', () => {
   it('should set and get config values', async () => {
-    const { setConfig, getConfig, listConfig } = await import('../scripts/cli/aing-config.mjs');
+    const { setConfig, getConfig, listConfig } = await import('../dist/scripts/cli/aing-config.js');
 
     setConfig('test.key', 'value123', '/tmp');
     const value = getConfig('test.key', null, '/tmp');
@@ -106,7 +106,7 @@ describe('Config Manager', () => {
 
 describe('Diff Scope', () => {
   it('should export detectScope and formatScope', async () => {
-    const { detectScope, formatScope } = await import('../scripts/cli/aing-diff-scope.mjs');
+    const { detectScope, formatScope } = await import('../dist/scripts/cli/aing-diff-scope.js');
     assert.ok(typeof detectScope === 'function');
     assert.ok(typeof formatScope === 'function');
 
@@ -118,7 +118,7 @@ describe('Diff Scope', () => {
 
 describe('Analytics', () => {
   it('should generate analytics report', async () => {
-    const { generateAnalyticsReport } = await import('../scripts/cli/aing-analytics.mjs');
+    const { generateAnalyticsReport } = await import('../dist/scripts/cli/aing-analytics.js');
     // Will show no activity or existing telemetry data
     const report = generateAnalyticsReport('7d', '/tmp');
     assert.ok(typeof report === 'string');
@@ -127,7 +127,7 @@ describe('Analytics', () => {
 
 describe('Doctor', () => {
   it('should run health check', async () => {
-    const { runHealthCheck, formatHealthCheck } = await import('../scripts/cli/aing-doctor.mjs');
+    const { runHealthCheck, formatHealthCheck } = await import('../dist/scripts/cli/aing-doctor.js');
     const result = runHealthCheck();
     assert.ok(result.checks.length >= 5);
     assert.ok(result.checks.some(c => c.name === 'Node.js'));

@@ -7,7 +7,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 
-const { routeIntent } = await import('../scripts/routing/intent-router.mjs');
+const { routeIntent } = await import('../dist/scripts/routing/intent-router.js');
 
 // ─────────────────────────────────────────────
 // 앵커 탐지
@@ -196,7 +196,7 @@ describe('CLI 실행', () => {
   it('node intent-router.mjs로 실행 시 JSON stdout 출력', () => {
     const output = execFileSync(
       process.execPath,
-      [new URL('../scripts/routing/intent-router.mjs', import.meta.url).pathname, 'src/auth.ts에 JWT 추가해줘'],
+      [new URL('../dist/scripts/routing/intent-router.js', import.meta.url).pathname, 'src/auth.ts에 JWT 추가해줘'],
       { encoding: 'utf-8' }
     );
     const parsed = JSON.parse(output.trim());

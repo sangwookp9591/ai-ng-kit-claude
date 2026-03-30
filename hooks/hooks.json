@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-hooks.json",
-  "description": "aing Harness Engineering Agent v2.4.8",
+  "description": "aing Harness Engineering Agent v3.0.0",
   "hooks": {
     "SessionStart": [
       {
@@ -8,7 +8,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks-handlers/session-start.mjs",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/hooks-handlers/session-start.js",
             "timeout": 5000
           }
         ]
@@ -19,7 +19,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks-handlers/user-prompt-submit.mjs",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/hooks-handlers/user-prompt-submit.js",
             "timeout": 3000
           }
         ]
@@ -31,7 +31,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks-handlers/pre-tool-use.mjs",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/hooks-handlers/pre-tool-use.js",
             "timeout": 5000
           }
         ]
@@ -43,7 +43,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks-handlers/post-tool-use.mjs",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/hooks-handlers/post-tool-use.js",
             "timeout": 5000
           }
         ]
@@ -55,7 +55,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks-handlers/pre-compact.mjs",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/hooks-handlers/pre-compact.js",
             "timeout": 5000
           }
         ]
@@ -66,7 +66,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks-handlers/stop.mjs",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/hooks-handlers/stop.js",
             "timeout": 10000
           }
         ]
@@ -77,8 +77,30 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks-handlers/stop-failure.mjs",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/hooks-handlers/stop-failure.js",
             "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/hooks-handlers/subagent-start.js",
+            "timeout": 3000
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/dist/hooks-handlers/subagent-stop.js",
+            "timeout": 3000
           }
         ]
       }

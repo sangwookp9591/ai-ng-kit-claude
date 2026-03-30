@@ -1,6 +1,6 @@
 ---
 name: lsp
-description: "죽은 코드 탐지. LSP + AST 기반 미사용 export/함수/타입/파일 탐색. Simon(분석) + Milla(검증)."
+description: "죽은 코드 탐지. LSP + AST 기반 미사용 export/함수/타입/파일 탐색. Kain(분석) + Milla(검증)."
 triggers: ["lsp", "dead code", "죽은 코드", "unused", "미사용", "unreachable", "안쓰는"]
 ---
 
@@ -22,12 +22,12 @@ triggers: ["lsp", "dead code", "죽은 코드", "unused", "미사용", "unreacha
 
 ---
 
-## Step 1: Simon — LSP/AST 기반 죽은 코드 탐지
+## Step 1: Kain — LSP/AST 기반 죽은 코드 탐지
 
 ```
 Agent({
-  subagent_type: "aing:simon",
-  description: "Simon: 죽은 코드 탐지 — {target}",
+  subagent_type: "aing:kain",
+  description: "Kain: 죽은 코드 탐지 — {target}",
   model: "sonnet",
   prompt: "[DEAD CODE DETECTION]
 다음 대상에서 죽은 코드를 찾으세요: {target or 'entire project'}
@@ -138,7 +138,7 @@ Agent({
 다음 죽은 코드를 제거하세요.
 
 === DEAD CODE REPORT ===
-{Simon's report — HIGH CONFIDENCE items only}
+{Kain's report — HIGH CONFIDENCE items only}
 
 Rules:
 - **high confidence만 제거** (medium은 건드리지 않음)

@@ -4,7 +4,7 @@ import { mkdirSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 describe('aing-bench', async () => {
-  const { benchmark, runBenchSuite, formatBenchResults } = await import('../scripts/cli/aing-bench.mjs');
+  const { benchmark, runBenchSuite, formatBenchResults } = await import('../dist/scripts/cli/aing-bench.js');
 
   it('benchmark returns timing stats', () => {
     const result = benchmark('noop', () => {}, 50);
@@ -36,7 +36,7 @@ describe('aing-learn', async () => {
   // Note: these tests use the real LEARNINGS_DIR (~/.aing/learnings/)
   // We test with a unique slug to avoid polluting real data
   const slug = 'test-learn-' + Date.now();
-  const { listLearnings, searchLearnings, addLearning, pruneLearnings, getStats } = await import('../scripts/cli/aing-learn.mjs');
+  const { listLearnings, searchLearnings, addLearning, pruneLearnings, getStats } = await import('../dist/scripts/cli/aing-learn.js');
 
   it('listLearnings returns empty for new slug', () => {
     const result = listLearnings(slug);

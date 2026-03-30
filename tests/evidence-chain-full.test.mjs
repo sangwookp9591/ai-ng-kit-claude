@@ -29,7 +29,7 @@ function cleanDir(dir) {
 }
 
 const { addEvidence, evaluateChain } =
-  await import('../scripts/evidence/evidence-chain.mjs');
+  await import('../dist/scripts/evidence/evidence-chain.js');
 
 describe('Evidence Chain — GAP coverage', () => {
   let tempDir;

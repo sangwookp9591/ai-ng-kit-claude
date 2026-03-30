@@ -31,7 +31,7 @@ function cleanDir(dir) {
 // 1. Careful Checklist
 // ─────────────────────────────────────────────────────────────────
 describe('Careful Checklist — dangerous command detection', async () => {
-  const { checkCommand } = await import('../scripts/guardrail/careful-checklist.mjs');
+  const { checkCommand } = await import('../dist/scripts/guardrail/careful-checklist.js');
 
   it('blocks rm -rf /', () => {
     const result = checkCommand('rm -rf /');
@@ -88,7 +88,7 @@ describe('Careful Checklist — dangerous command detection', async () => {
 // ─────────────────────────────────────────────────────────────────
 describe('Freeze Engine — directory-scoped edit restriction', async () => {
   const { setFreeze, clearFreeze, checkFreeze } =
-    await import('../scripts/guardrail/freeze-engine.mjs');
+    await import('../dist/scripts/guardrail/freeze-engine.js');
 
   let tempDir;
 
@@ -132,7 +132,7 @@ describe('Freeze Engine — directory-scoped edit restriction', async () => {
 // 3. Safety Invariants
 // ─────────────────────────────────────────────────────────────────
 describe('Safety Invariants — hard limits', async () => {
-  const { loadInvariants } = await import('../scripts/guardrail/safety-invariants.mjs');
+  const { loadInvariants } = await import('../dist/scripts/guardrail/safety-invariants.js');
 
   it('loadInvariants returns at least 5 invariant keys', () => {
     const inv = loadInvariants();
@@ -161,7 +161,7 @@ describe('Safety Invariants — hard limits', async () => {
 // ─────────────────────────────────────────────────────────────────
 describe('Cost Ceiling — budget enforcement', async () => {
   const { recordUsage, initCostTracker, loadLimits } =
-    await import('../scripts/guardrail/cost-ceiling.mjs');
+    await import('../dist/scripts/guardrail/cost-ceiling.js');
 
   let tempDir;
 

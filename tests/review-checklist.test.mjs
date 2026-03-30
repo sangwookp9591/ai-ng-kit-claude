@@ -9,13 +9,13 @@ import assert from 'node:assert';
 
 describe('Review Checklist', () => {
   it('should export all 18 categories', async () => {
-    const { CATEGORIES } = await import('../scripts/review/review-checklist.mjs');
+    const { CATEGORIES } = await import('../dist/scripts/review/review-checklist.js');
     const keys = Object.keys(CATEGORIES);
     assert.ok(keys.length >= 18, `Expected >= 18 categories, got ${keys.length}`);
   });
 
   it('should detect SQL injection patterns', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = '+const result = db.query("SELECT * FROM users WHERE id = " + userId);';
     const results = runChecklist(diff);
     const sqlFindings = results.filter(r => r.category === 'sql-safety');
@@ -23,7 +23,7 @@ describe('Review Checklist', () => {
   });
 
   it('should detect LLM trust boundary issues', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+element.innerHTML = response.output;
 +div.dangerouslySetInnerHTML = { __html: completion };`;
     const results = runChecklist(diff);
@@ -32,7 +32,7 @@ describe('Review Checklist', () => {
   });
 
   it('should detect eval usage', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+eval(response.output);`;
     const results = runChecklist(diff);
     const findings = results.filter(r => r.category === 'llm-trust-boundary');
@@ -40,7 +40,7 @@ describe('Review Checklist', () => {
   });
 
   it('should detect N+1 queries', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+for (const id of ids) {
 +  const user = await db.find(id);
 +}`;
@@ -50,7 +50,7 @@ describe('Review Checklist', () => {
   });
 
   it('should detect empty catch blocks', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+try { doSomething(); } catch (e) {}`;
     const results = runChecklist(diff);
     const errHandling = results.filter(r => r.category === 'missing-error-handling');
@@ -58,7 +58,7 @@ describe('Review Checklist', () => {
   });
 
   it('should detect Math.random usage', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+const token = Math.random().toString(36);`;
     const results = runChecklist(diff);
     const crypto = results.filter(r => r.category === 'crypto-entropy');
@@ -66,7 +66,7 @@ describe('Review Checklist', () => {
   });
 
   it('should detect full lodash import', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+import _ from 'lodash';`;
     const results = runChecklist(diff);
     const perf = results.filter(r => r.category === 'performance-bundle');
@@ -74,7 +74,7 @@ describe('Review Checklist', () => {
   });
 
   it('should detect auth bypass patterns', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+skip_before_action :authenticate_user`;
     const results = runChecklist(diff);
     const auth = results.filter(r => r.category === 'auth-bypass');
@@ -82,7 +82,7 @@ describe('Review Checklist', () => {
   });
 
   it('should return empty for clean diff', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+const x = 1;
 +console.log(x);`;
     const results = runChecklist(diff);
@@ -90,7 +90,7 @@ describe('Review Checklist', () => {
   });
 
   it('should classify CRITICAL as needs-ask', async () => {
-    const { runChecklist, classifyResults } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist, classifyResults } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+eval(response.output);`;
     const results = runChecklist(diff);
     const classified = classifyResults(results);
@@ -98,7 +98,7 @@ describe('Review Checklist', () => {
   });
 
   it('should classify dead-code as auto-fix', async () => {
-    const { runChecklist, classifyResults } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist, classifyResults } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+// TODO fix this later
 +return;
 +const unreachable = true;`;
@@ -110,7 +110,7 @@ describe('Review Checklist', () => {
   });
 
   it('should sort CRITICAL before INFORMATIONAL', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `+eval(response.output);
 +// TODO fix
 +import _ from 'lodash';`;
@@ -124,19 +124,19 @@ describe('Review Checklist', () => {
   });
 
   it('should handle empty diff', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const results = runChecklist('');
     assert.deepStrictEqual(results, []);
   });
 
   it('should handle null diff', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const results = runChecklist(null);
     assert.deepStrictEqual(results, []);
   });
 
   it('should only check added lines (not removed)', async () => {
-    const { runChecklist } = await import('../scripts/review/review-checklist.mjs');
+    const { runChecklist } = await import('../dist/scripts/review/review-checklist.js');
     const diff = `-eval(oldCode);
  normal line
 +const safe = true;`;
@@ -148,19 +148,19 @@ describe('Review Checklist', () => {
 
 describe('Pre-Landing Reviewer', () => {
   it('should export runPreLandingReview', async () => {
-    const mod = await import('../scripts/review/pre-landing-reviewer.mjs');
+    const mod = await import('../dist/scripts/review/pre-landing-reviewer.js');
     assert.ok(typeof mod.runPreLandingReview === 'function');
   });
 });
 
 describe('CEO Reviewer', () => {
   it('should export CEO checks', async () => {
-    const { CEO_CHECKS } = await import('../scripts/review/ceo-reviewer.mjs');
+    const { CEO_CHECKS } = await import('../dist/scripts/review/ceo-reviewer.js');
     assert.ok(CEO_CHECKS.length >= 6, `Expected >= 6 CEO checks, got ${CEO_CHECKS.length}`);
   });
 
   it('should build CEO review prompt', async () => {
-    const { buildCEOReviewPrompt } = await import('../scripts/review/ceo-reviewer.mjs');
+    const { buildCEOReviewPrompt } = await import('../dist/scripts/review/ceo-reviewer.js');
     const prompt = buildCEOReviewPrompt({ feature: 'auth', branch: 'feat/auth' });
     assert.ok(prompt.includes('CEO Review'));
     assert.ok(prompt.includes('Demand Reality'));
@@ -169,19 +169,19 @@ describe('CEO Reviewer', () => {
 
 describe('Eng Reviewer', () => {
   it('should export eng sections', async () => {
-    const { ENG_SECTIONS } = await import('../scripts/review/eng-reviewer.mjs');
+    const { ENG_SECTIONS } = await import('../dist/scripts/review/eng-reviewer.js');
     assert.ok(ENG_SECTIONS.length >= 5);
   });
 });
 
 describe('Design Reviewer', () => {
   it('should export design dimensions', async () => {
-    const { DESIGN_DIMENSIONS } = await import('../scripts/review/design-reviewer.mjs');
+    const { DESIGN_DIMENSIONS } = await import('../dist/scripts/review/design-reviewer.js');
     assert.ok(DESIGN_DIMENSIONS.length >= 10);
   });
 
   it('should detect AI slop in diff', async () => {
-    const { runDesignReview } = await import('../scripts/review/design-reviewer.mjs');
+    const { runDesignReview } = await import('../dist/scripts/review/design-reviewer.js');
     const diff = `+<div className="bg-gradient-to-r from-purple-500 to-indigo-600">`;
     const result = runDesignReview(diff);
     assert.ok(result.slopCount > 0, 'Should detect purple gradient');

@@ -1,6 +1,6 @@
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { routeModel, getCostMode } from '../scripts/routing/model-router.mjs';
+import { routeModel, getCostMode } from '../dist/scripts/routing/model-router.js';
 
 describe('Model Router', () => {
   it('should return agent default when no signals', () => {

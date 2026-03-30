@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import { strict as assert } from 'node:assert';
-import { sanitizeUserMessage, wrapXML, detectInjection } from '../scripts/security/prompt-injection-guard.mjs';
+import { sanitizeUserMessage, wrapXML, detectInjection } from '../dist/scripts/security/prompt-injection-guard.js';
 
 describe('sanitizeUserMessage', () => {
   it('escapes < > & " quotes', () => {

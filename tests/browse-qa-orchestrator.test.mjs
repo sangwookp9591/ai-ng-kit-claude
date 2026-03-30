@@ -7,7 +7,7 @@ import {
   formatBrowserEvidence,
   addScreenshotEvidence,
   addConsoleEvidence,
-} from '../scripts/review/browser-evidence.mjs';
+} from '../dist/scripts/review/browser-evidence.js';
 
 describe('MCP Browse QA Orchestrator', () => {
   it('buildBrowserTestPlan creates tests for routes', () => {

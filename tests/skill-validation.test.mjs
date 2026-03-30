@@ -7,7 +7,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { validateAllSkills, checkFreshness } from './helpers/skill-validator.mjs';
-import { SKILL_TOUCHFILES } from '../scripts/build/touchfiles.mjs';
+import { SKILL_TOUCHFILES } from '../dist/scripts/build/touchfiles.js';
 import { readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 

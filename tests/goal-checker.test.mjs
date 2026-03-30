@@ -23,7 +23,7 @@ function cleanDir(dir) {
 }
 
 const { checkGoalAchievement, deriveAssertions, saveGoalResult, loadGoalResult } =
-  await import('../scripts/evidence/goal-checker.mjs');
+  await import('../dist/scripts/evidence/goal-checker.js');
 
 // ─────────────────────────────────────────────
 // checkGoalAchievement

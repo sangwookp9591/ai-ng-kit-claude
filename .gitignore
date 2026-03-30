@@ -14,3 +14,5 @@ coverage/
 .DS_Store
 .pdca-status.json
 skills-lock.json
+gemini-extension.json
+docs/superpowers/

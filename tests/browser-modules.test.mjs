@@ -9,7 +9,7 @@ import assert from 'node:assert';
 
 describe('ARIA Ref System', () => {
   it('should parse interactive elements from snapshot', async () => {
-    const { parseAriaSnapshot } = await import('../scripts/review/aria-refs.mjs');
+    const { parseAriaSnapshot } = await import('../dist/scripts/review/aria-refs.js');
 
     const snapshot = `- button "Submit"
 - link "Home"
@@ -32,7 +32,7 @@ describe('ARIA Ref System', () => {
   });
 
   it('should handle duplicate role+name with nth()', async () => {
-    const { parseAriaSnapshot } = await import('../scripts/review/aria-refs.mjs');
+    const { parseAriaSnapshot } = await import('../dist/scripts/review/aria-refs.js');
 
     const snapshot = `- button "Save"
 - button "Save"
@@ -50,19 +50,19 @@ describe('ARIA Ref System', () => {
   });
 
   it('should return empty map for empty snapshot', async () => {
-    const { parseAriaSnapshot } = await import('../scripts/review/aria-refs.mjs');
+    const { parseAriaSnapshot } = await import('../dist/scripts/review/aria-refs.js');
     const refs = parseAriaSnapshot('');
     assert.strictEqual(refs.size, 0);
   });
 
   it('should return empty map for null input', async () => {
-    const { parseAriaSnapshot } = await import('../scripts/review/aria-refs.mjs');
+    const { parseAriaSnapshot } = await import('../dist/scripts/review/aria-refs.js');
     const refs = parseAriaSnapshot(null);
     assert.strictEqual(refs.size, 0);
   });
 
   it('should format refs for display', async () => {
-    const { parseAriaSnapshot, formatRefs } = await import('../scripts/review/aria-refs.mjs');
+    const { parseAriaSnapshot, formatRefs } = await import('../dist/scripts/review/aria-refs.js');
 
     const snapshot = `- button "Submit"
 - link "Home"`;
@@ -76,7 +76,7 @@ describe('ARIA Ref System', () => {
   });
 
   it('should find refs by partial name', async () => {
-    const { parseAriaSnapshot, findRefs } = await import('../scripts/review/aria-refs.mjs');
+    const { parseAriaSnapshot, findRefs } = await import('../dist/scripts/review/aria-refs.js');
 
     const snapshot = `- button "Submit Form"
 - button "Cancel"
@@ -89,7 +89,7 @@ describe('ARIA Ref System', () => {
   });
 
   it('should detect stale refs', async () => {
-    const { parseAriaSnapshot, checkStale } = await import('../scripts/review/aria-refs.mjs');
+    const { parseAriaSnapshot, checkStale } = await import('../dist/scripts/review/aria-refs.js');
 
     const oldSnapshot = `- button "A"
 - button "B"
@@ -107,7 +107,7 @@ describe('ARIA Ref System', () => {
   });
 
   it('should build MCP actions from refs', async () => {
-    const { parseAriaSnapshot, buildAction } = await import('../scripts/review/aria-refs.mjs');
+    const { parseAriaSnapshot, buildAction } = await import('../dist/scripts/review/aria-refs.js');
 
     const snapshot = `- button "Submit"`;
     const refs = parseAriaSnapshot(snapshot);
@@ -126,7 +126,7 @@ describe('ARIA Ref System', () => {
 
 describe('Browser Evidence Types', () => {
   it('should export evidence type constants', async () => {
-    const { BROWSER_EVIDENCE_TYPES } = await import('../scripts/review/browser-evidence.mjs');
+    const { BROWSER_EVIDENCE_TYPES } = await import('../dist/scripts/review/browser-evidence.js');
 
     assert.ok(BROWSER_EVIDENCE_TYPES.SCREENSHOT);
     assert.ok(BROWSER_EVIDENCE_TYPES.CONSOLE);
@@ -136,7 +136,7 @@ describe('Browser Evidence Types', () => {
   });
 
   it('should build browser test plan', async () => {
-    const { buildBrowserTestPlan } = await import('../scripts/review/browser-evidence.mjs');
+    const { buildBrowserTestPlan } = await import('../dist/scripts/review/browser-evidence.js');
 
     const plan = buildBrowserTestPlan({
       feature: 'login',
@@ -157,7 +157,7 @@ describe('Browser Evidence Types', () => {
   });
 
   it('should format browser evidence', async () => {
-    const { formatBrowserEvidence } = await import('../scripts/review/browser-evidence.mjs');
+    const { formatBrowserEvidence } = await import('../dist/scripts/review/browser-evidence.js');
 
     const entries = [
       { type: 'browser-screenshot', result: 'pass', details: { url: 'http://localhost:3000' } },
@@ -170,7 +170,7 @@ describe('Browser Evidence Types', () => {
   });
 
   it('should orchestrate browser QA', async () => {
-    const { orchestrateBrowserQA } = await import('../scripts/review/browser-evidence.mjs');
+    const { orchestrateBrowserQA } = await import('../dist/scripts/review/browser-evidence.js');
 
     const result = orchestrateBrowserQA('auth-feature', {
       baseUrl: 'http://localhost:3000',
@@ -188,7 +188,7 @@ describe('Browser Evidence Types', () => {
 
 describe('Benchmark Engine', () => {
   it('should compare metrics and detect regressions', async () => {
-    const { compareMetrics } = await import('../scripts/review/benchmark-engine.mjs');
+    const { compareMetrics } = await import('../dist/scripts/review/benchmark-engine.js');
 
     const baseline = { fcp: 400, lcp: 800, jsBundle: 400000, totalRequests: 40 };
     const current = { fcp: 700, lcp: 1800, jsBundle: 600000, totalRequests: 40 };
@@ -201,7 +201,7 @@ describe('Benchmark Engine', () => {
   });
 
   it('should check performance budgets', async () => {
-    const { checkBudgets } = await import('../scripts/review/benchmark-engine.mjs');
+    const { checkBudgets } = await import('../dist/scripts/review/benchmark-engine.js');
 
     const metrics = { fcp: 500, lcp: 1200, totalJs: 800000 };
     const results = checkBudgets(metrics);
@@ -216,7 +216,7 @@ describe('Benchmark Engine', () => {
   });
 
   it('should calculate performance grade', async () => {
-    const { calculateGrade } = await import('../scripts/review/benchmark-engine.mjs');
+    const { calculateGrade } = await import('../dist/scripts/review/benchmark-engine.js');
 
     assert.strictEqual(calculateGrade([
       { status: 'PASS' }, { status: 'PASS' }, { status: 'PASS' },
@@ -230,7 +230,7 @@ describe('Benchmark Engine', () => {
 
 describe('Retro Engine', () => {
   it('should classify commits by type', async () => {
-    const { classifyCommits } = await import('../scripts/review/retro-engine.mjs');
+    const { classifyCommits } = await import('../dist/scripts/review/retro-engine.js');
 
     const commits = [
       { message: 'feat: add login' },
@@ -250,7 +250,7 @@ describe('Retro Engine', () => {
   });
 
   it('should detect sessions with 45-min gap', async () => {
-    const { detectSessions } = await import('../scripts/review/retro-engine.mjs');
+    const { detectSessions } = await import('../dist/scripts/review/retro-engine.js');
 
     const commits = [
       { date: '2026-03-30T10:00:00' },
@@ -268,7 +268,7 @@ describe('Retro Engine', () => {
   });
 
   it('should calculate focus score', async () => {
-    const { calculateFocusScore } = await import('../scripts/review/retro-engine.mjs');
+    const { calculateFocusScore } = await import('../dist/scripts/review/retro-engine.js');
 
     const hotspots = [
       { file: 'src/auth/login.ts', changes: 5 },
@@ -285,7 +285,7 @@ describe('Retro Engine', () => {
 
 describe('Freeze Engine', () => {
   it('should check freeze boundaries with trailing slash', async () => {
-    const { checkFreeze } = await import('../scripts/guardrail/freeze-engine.mjs');
+    const { checkFreeze } = await import('../dist/scripts/guardrail/freeze-engine.js');
 
     // No freeze = everything allowed
     const result = checkFreeze('/any/path');
@@ -295,7 +295,7 @@ describe('Freeze Engine', () => {
 
 describe('Deploy Detection', () => {
   it('should have platform definitions', async () => {
-    const { PLATFORMS } = await import('../scripts/ship/deploy-detect.mjs');
+    const { PLATFORMS } = await import('../dist/scripts/ship/deploy-detect.js');
 
     assert.ok(PLATFORMS.length >= 5, `Expected >= 5 platforms, got ${PLATFORMS.length}`);
 
@@ -308,7 +308,7 @@ describe('Deploy Detection', () => {
 
 describe('Doc Release', () => {
   it('should identify stale docs from changed files', async () => {
-    const { findStaleDocs } = await import('../scripts/ship/doc-release.mjs');
+    const { findStaleDocs } = await import('../dist/scripts/ship/doc-release.js');
 
     const staleDocs = findStaleDocs([
       'agents/sam.md',
@@ -322,7 +322,7 @@ describe('Doc Release', () => {
   });
 
   it('should always suggest checking TODOS.md', async () => {
-    const { findStaleDocs } = await import('../scripts/ship/doc-release.mjs');
+    const { findStaleDocs } = await import('../dist/scripts/ship/doc-release.js');
 
     const staleDocs = findStaleDocs(['any-file.ts']);
     const todos = staleDocs.find(d => d.file === 'TODOS.md');
@@ -332,7 +332,7 @@ describe('Doc Release', () => {
 
 describe('LLM Judge', () => {
   it('should parse JSON judge response', async () => {
-    const { parseJudgeResponse } = await import('../scripts/evidence/llm-judge.mjs');
+    const { parseJudgeResponse } = await import('../dist/scripts/evidence/llm-judge.js');
 
     const response = 'Some preamble text. {"score": 8, "issues": ["minor naming"], "summary": "Good quality"} trailing text.';
     const result = parseJudgeResponse(response);
@@ -343,14 +343,14 @@ describe('LLM Judge', () => {
   });
 
   it('should clamp scores to 0-10', async () => {
-    const { parseJudgeResponse } = await import('../scripts/evidence/llm-judge.mjs');
+    const { parseJudgeResponse } = await import('../dist/scripts/evidence/llm-judge.js');
 
     assert.strictEqual(parseJudgeResponse('{"score": 15, "issues": [], "summary": ""}').score, 10);
     assert.strictEqual(parseJudgeResponse('{"score": -5, "issues": [], "summary": ""}').score, 0);
   });
 
   it('should select criteria based on signals', async () => {
-    const { selectCriteria, JUDGE_CRITERIA } = await import('../scripts/evidence/llm-judge.mjs');
+    const { selectCriteria, JUDGE_CRITERIA } = await import('../dist/scripts/evidence/llm-judge.js');
 
     const uiCriteria = selectCriteria({ hasUI: true });
     assert.ok(uiCriteria.includes(JUDGE_CRITERIA.UX_QUALITY));
@@ -363,7 +363,7 @@ describe('LLM Judge', () => {
 
 describe('Telemetry', () => {
   it('should have telemetry tier constants', async () => {
-    const { TELEMETRY_TIERS } = await import('../scripts/telemetry/telemetry-engine.mjs');
+    const { TELEMETRY_TIERS } = await import('../dist/scripts/telemetry/telemetry-engine.js');
     assert.strictEqual(TELEMETRY_TIERS.COMMUNITY, 'community');
     assert.strictEqual(TELEMETRY_TIERS.ANONYMOUS, 'anonymous');
     assert.strictEqual(TELEMETRY_TIERS.OFF, 'off');

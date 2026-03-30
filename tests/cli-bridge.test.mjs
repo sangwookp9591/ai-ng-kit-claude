@@ -13,7 +13,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
 const { createBridge, buildReviewPrompt } =
-  await import('../scripts/multi-ai/cli-bridge.mjs');
+  await import('../dist/scripts/multi-ai/cli-bridge.js');
 
 describe('CLI Bridge — GAP coverage', () => {
 

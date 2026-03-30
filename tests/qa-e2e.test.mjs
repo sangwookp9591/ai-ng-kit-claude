@@ -9,12 +9,12 @@ import assert from 'node:assert';
 
 describe('QA Orchestrator', () => {
   it('should export runQACycle', async () => {
-    const { runQACycle } = await import('../scripts/qa/qa-orchestrator.mjs');
+    const { runQACycle } = await import('../dist/scripts/qa/qa-orchestrator.js');
     assert.ok(typeof runQACycle === 'function');
   });
 
   it('should format QA results', async () => {
-    const { formatQAResult } = await import('../scripts/qa/qa-orchestrator.mjs');
+    const { formatQAResult } = await import('../dist/scripts/qa/qa-orchestrator.js');
     const result = {
       healthScore: 85,
       grade: 'B',
@@ -35,7 +35,7 @@ describe('QA Orchestrator', () => {
   });
 
   it('should format all-fixed result', async () => {
-    const { formatQAResult } = await import('../scripts/qa/qa-orchestrator.mjs');
+    const { formatQAResult } = await import('../dist/scripts/qa/qa-orchestrator.js');
     const result = { healthScore: 100, grade: 'A', cycles: 1, findings: [], allFixed: true };
     const formatted = formatQAResult(result);
     assert.ok(formatted.includes('ALL FIXED'));
@@ -45,7 +45,7 @@ describe('QA Orchestrator', () => {
 
 describe('Regression Detector', () => {
   it('should detect new failures vs baseline', async () => {
-    const { detectRegression } = await import('../scripts/qa/regression-detector.mjs');
+    const { detectRegression } = await import('../dist/scripts/qa/regression-detector.js');
     // No baseline = no regression
     const result = detectRegression('nonexistent-feature', { passCount: 10, errors: ['err1'] }, '/tmp');
     assert.strictEqual(result.hasRegression, false);
@@ -53,7 +53,7 @@ describe('Regression Detector', () => {
   });
 
   it('should format regression results', async () => {
-    const { formatRegression } = await import('../scripts/qa/regression-detector.mjs');
+    const { formatRegression } = await import('../dist/scripts/qa/regression-detector.js');
 
     const noBaseline = formatRegression({ details: { noBaseline: true } });
     assert.ok(noBaseline.includes('No baseline'));
@@ -69,7 +69,7 @@ describe('Regression Detector', () => {
   });
 
   it('should format regression detected', async () => {
-    const { formatRegression } = await import('../scripts/qa/regression-detector.mjs');
+    const { formatRegression } = await import('../dist/scripts/qa/regression-detector.js');
     const regressed = formatRegression({
       hasRegression: true,
       newFailures: ['test_auth_login'],
@@ -83,7 +83,7 @@ describe('Regression Detector', () => {
 
 describe('QA Health Score Integration', () => {
   it('should calculate weighted health score', async () => {
-    const { calculateHealthScore } = await import('../scripts/review/qa-health-score.mjs');
+    const { calculateHealthScore } = await import('../dist/scripts/review/qa-health-score.js');
 
     // Perfect score
     const perfect = calculateHealthScore({
@@ -107,7 +107,7 @@ describe('QA Health Score Integration', () => {
   });
 
   it('should format health score with bars', async () => {
-    const { calculateHealthScore, formatHealthScore } = await import('../scripts/review/qa-health-score.mjs');
+    const { calculateHealthScore, formatHealthScore } = await import('../dist/scripts/review/qa-health-score.js');
     const score = calculateHealthScore({ console: { errors: 0 } });
     const formatted = formatHealthScore(score);
     assert.ok(formatted.includes('QA Health Score'));

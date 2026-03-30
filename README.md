@@ -150,7 +150,7 @@
 
 ---
 
-### 18 Innovations
+### 24 Innovations
 
 | # | Innovation | What it solves |
 |:-:|-----------|---------------|
@@ -177,6 +177,7 @@
 | 21 | **Team Heartbeat** | Worker health monitoring + phase gate verification |
 | 22 | **Learner Hook** | Auto-detect reusable command/file/error-fix patterns |
 | 23 | **Persistent Mode** | Don't-stop execution with session recovery |
+| 24 | **Production Browse Server** | Session/activity/auth/crash-recovery (1,706 LOC) |
 
 ### Harness 4-Axis
 
@@ -184,7 +185,7 @@
 |------|:-----:|---------|
 | Constrain | 93 | Guardrail(7), Safety Invariants(5), Cost Ceiling, Freeze, Phase Gate |
 | Inform | 93 | Context Budget, Progress, Compaction, Telemetry, 3-Tier Notepad, Learner |
-| Verify | 92 | Evidence Chain, LLM Judge(7), Review(4-tier), QA Health, 210+ Tests |
+| Verify | 95 | Evidence Chain, LLM Judge(7), Review(4-tier), QA Health, 1,712 Tests, 10 E2E Suites |
 | Correct | 92 | Circuit Breaker, Retry, Recovery, Rollback, Persistent Mode, Heartbeat |
 
 ---

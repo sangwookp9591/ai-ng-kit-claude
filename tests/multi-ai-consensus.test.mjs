@@ -11,7 +11,7 @@ import assert from 'node:assert';
 
 describe('Consensus Engine', () => {
   it('unanimous approve with high confidence → autoDecide true', async () => {
-    const { buildConsensus } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { buildConsensus } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     const result = buildConsensus([
       { source: 'claude', verdict: 'approve', confidence: 9, reasoning: 'Looks good' },
       { source: 'codex', verdict: 'approve', confidence: 8, reasoning: 'Clean code' },
@@ -25,7 +25,7 @@ describe('Consensus Engine', () => {
   });
 
   it('unanimous approve with low confidence → autoDecide false', async () => {
-    const { buildConsensus } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { buildConsensus } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     const result = buildConsensus([
       { source: 'claude', verdict: 'approve', confidence: 5 },
       { source: 'codex', verdict: 'approve', confidence: 6 },
@@ -36,7 +36,7 @@ describe('Consensus Engine', () => {
   });
 
   it('2-1 split → present to user, not autoDecide', async () => {
-    const { buildConsensus } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { buildConsensus } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     const result = buildConsensus([
       { source: 'claude', verdict: 'approve', confidence: 8 },
       { source: 'codex', verdict: 'approve', confidence: 7 },
@@ -50,7 +50,7 @@ describe('Consensus Engine', () => {
   });
 
   it('all reject → USER_CHALLENGE', async () => {
-    const { buildConsensus, DECISION_TYPES } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { buildConsensus, DECISION_TYPES } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     const result = buildConsensus([
       { source: 'claude', verdict: 'reject', confidence: 9, reasoning: 'Fundamentally wrong' },
       { source: 'codex', verdict: 'reject', confidence: 8, reasoning: 'Bad approach' },
@@ -63,7 +63,7 @@ describe('Consensus Engine', () => {
   });
 
   it('security keyword in reasoning → SECURITY_WARNING', async () => {
-    const { buildConsensus, DECISION_TYPES } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { buildConsensus, DECISION_TYPES } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     const result = buildConsensus([
       { source: 'claude', verdict: 'reject', confidence: 9, reasoning: 'SQL injection vulnerability found' },
       { source: 'codex', verdict: 'reject', confidence: 8, reasoning: 'XSS possible' },
@@ -72,7 +72,7 @@ describe('Consensus Engine', () => {
   });
 
   it('taste disagreement (split, no security) → TASTE', async () => {
-    const { buildConsensus, DECISION_TYPES } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { buildConsensus, DECISION_TYPES } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     const result = buildConsensus([
       { source: 'claude', verdict: 'approve', confidence: 7, reasoning: 'Style is fine' },
       { source: 'codex', verdict: 'reject', confidence: 6, reasoning: 'Prefer different naming' },
@@ -82,7 +82,7 @@ describe('Consensus Engine', () => {
   });
 
   it('2-voter mode (no gemini)', async () => {
-    const { buildConsensus } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { buildConsensus } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     const result = buildConsensus([
       { source: 'claude', verdict: 'approve', confidence: 8 },
       { source: 'codex', verdict: 'approve', confidence: 9 },
@@ -94,7 +94,7 @@ describe('Consensus Engine', () => {
   });
 
   it('single-voter mode (claude only)', async () => {
-    const { buildConsensus } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { buildConsensus } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     const result = buildConsensus([
       { source: 'claude', verdict: 'approve', confidence: 10 },
     ]);
@@ -105,7 +105,7 @@ describe('Consensus Engine', () => {
   });
 
   it('empty votes → no_votes', async () => {
-    const { buildConsensus } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { buildConsensus } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     assert.deepStrictEqual(
       buildConsensus([]),
       { decision: 'no_votes', unanimous: false, autoDecide: false },
@@ -117,7 +117,7 @@ describe('Consensus Engine', () => {
   });
 
   it('reasoning gets truncated to 500 chars', async () => {
-    const { buildConsensus } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { buildConsensus } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     const longReasoning = 'A'.repeat(1000);
     const result = buildConsensus([
       { source: 'claude', verdict: 'approve', confidence: 8, reasoning: longReasoning },
@@ -130,7 +130,7 @@ describe('Consensus Engine', () => {
 
 describe('classifyDecision', () => {
   it('security always wins', async () => {
-    const { classifyDecision, DECISION_TYPES } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { classifyDecision, DECISION_TYPES } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     assert.strictEqual(
       classifyDecision({ hasSecurity: true, isUnanimous: true }),
       DECISION_TYPES.SECURITY_WARNING,
@@ -142,7 +142,7 @@ describe('classifyDecision', () => {
   });
 
   it('unanimous without security → MECHANICAL', async () => {
-    const { classifyDecision, DECISION_TYPES } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { classifyDecision, DECISION_TYPES } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     assert.strictEqual(
       classifyDecision({ hasSecurity: false, isUnanimous: true }),
       DECISION_TYPES.MECHANICAL,
@@ -150,7 +150,7 @@ describe('classifyDecision', () => {
   });
 
   it('non-unanimous without security → TASTE', async () => {
-    const { classifyDecision, DECISION_TYPES } = await import('../scripts/multi-ai/consensus-engine.mjs');
+    const { classifyDecision, DECISION_TYPES } = await import('../dist/scripts/multi-ai/consensus-engine.js');
     assert.strictEqual(
       classifyDecision({ hasSecurity: false, isUnanimous: false }),
       DECISION_TYPES.TASTE,
@@ -162,7 +162,7 @@ describe('classifyDecision', () => {
 
 describe('CLI Bridge', () => {
   it('createBridge returns correct interface', async () => {
-    const { createBridge } = await import('../scripts/multi-ai/cli-bridge.mjs');
+    const { createBridge } = await import('../dist/scripts/multi-ai/cli-bridge.js');
     const bridge = createBridge('test-tool', 'test-cmd');
     assert.strictEqual(bridge.name, 'test-tool');
     assert.strictEqual(bridge.command, 'test-cmd');
@@ -171,13 +171,13 @@ describe('CLI Bridge', () => {
   });
 
   it('isAvailable returns false for nonexistent command', async () => {
-    const { createBridge } = await import('../scripts/multi-ai/cli-bridge.mjs');
+    const { createBridge } = await import('../dist/scripts/multi-ai/cli-bridge.js');
     const bridge = createBridge('fake', 'nonexistent-ai-tool-xyz-999');
     assert.strictEqual(bridge.isAvailable(), false);
   });
 
   it('getAvailableBridges filters unavailable tools', async () => {
-    const { getAvailableBridges } = await import('../scripts/multi-ai/cli-bridge.mjs');
+    const { getAvailableBridges } = await import('../dist/scripts/multi-ai/cli-bridge.js');
     const available = getAvailableBridges();
     // Each returned bridge must actually be available
     for (const b of available) {
@@ -186,7 +186,7 @@ describe('CLI Bridge', () => {
   });
 
   it('buildReviewPrompt includes diff content', async () => {
-    const { buildReviewPrompt } = await import('../scripts/multi-ai/cli-bridge.mjs');
+    const { buildReviewPrompt } = await import('../dist/scripts/multi-ai/cli-bridge.js');
     const prompt = buildReviewPrompt('+ added line\n- removed line', 'Check for typos');
     assert.ok(prompt.includes('+ added line'));
     assert.ok(prompt.includes('- removed line'));
@@ -195,7 +195,7 @@ describe('CLI Bridge', () => {
   });
 
   it('buildReviewPrompt truncates diff at 50K', async () => {
-    const { buildReviewPrompt } = await import('../scripts/multi-ai/cli-bridge.mjs');
+    const { buildReviewPrompt } = await import('../dist/scripts/multi-ai/cli-bridge.js');
     const hugeDiff = 'X'.repeat(100_000);
     const prompt = buildReviewPrompt(hugeDiff);
     // The prompt should contain at most 50K of the diff, plus preamble
@@ -204,14 +204,14 @@ describe('CLI Bridge', () => {
   });
 
   it('buildReviewPrompt works without instructions', async () => {
-    const { buildReviewPrompt } = await import('../scripts/multi-ai/cli-bridge.mjs');
+    const { buildReviewPrompt } = await import('../dist/scripts/multi-ai/cli-bridge.js');
     const prompt = buildReviewPrompt('some diff');
     assert.ok(!prompt.includes('Instructions:'));
     assert.ok(prompt.includes('some diff'));
   });
 
   it('ask returns error for nonexistent command', async () => {
-    const { createBridge } = await import('../scripts/multi-ai/cli-bridge.mjs');
+    const { createBridge } = await import('../dist/scripts/multi-ai/cli-bridge.js');
     const bridge = createBridge('fake', 'nonexistent-ai-tool-xyz-999');
     const result = bridge.ask('hello');
     assert.strictEqual(result.ok, false);
@@ -224,7 +224,7 @@ describe('CLI Bridge', () => {
 
 describe('Outside Voice Multi-AI Integration', () => {
   it('buildMultiAIReviewPlan always includes claude', async () => {
-    const { buildMultiAIReviewPlan } = await import('../scripts/review/outside-voice.mjs');
+    const { buildMultiAIReviewPlan } = await import('../dist/scripts/review/outside-voice.js');
     const plan = buildMultiAIReviewPlan({ feature: 'test', branch: 'main' });
     assert.ok(plan.available.includes('claude'));
     assert.ok(plan.voterCount >= 1);
@@ -233,7 +233,7 @@ describe('Outside Voice Multi-AI Integration', () => {
   });
 
   it('buildMultiAIReviewPlan voterCount matches available length', async () => {
-    const { buildMultiAIReviewPlan } = await import('../scripts/review/outside-voice.mjs');
+    const { buildMultiAIReviewPlan } = await import('../dist/scripts/review/outside-voice.js');
     const plan = buildMultiAIReviewPlan({ feature: 'x' });
     assert.strictEqual(plan.voterCount, plan.available.length);
   });

@@ -38,7 +38,7 @@ function readJson(p) {
 // ─────────────────────────────────────────────
 describe('Innovation #1: Context Budget', async () => {
   const { estimateTokens, trackInjection, getBudgetStatus, resetBudget, trimToTokenBudget } =
-    await import('../scripts/core/context-budget.mjs');
+    await import('../dist/scripts/core/context-budget.js');
 
   beforeEach(() => resetBudget());
 
@@ -105,8 +105,8 @@ describe('Innovation #1: Context Budget', async () => {
 // 2. Adaptive Routing
 // ─────────────────────────────────────────────
 describe('Innovation #2: Adaptive Routing', async () => {
-  const { scoreComplexity } = await import('../scripts/routing/complexity-scorer.mjs');
-  const { recordRouting, getSuccessRate } = await import('../scripts/routing/routing-history.mjs');
+  const { scoreComplexity } = await import('../dist/scripts/routing/complexity-scorer.js');
+  const { recordRouting, getSuccessRate } = await import('../dist/scripts/routing/routing-history.js');
 
   describe('Complexity Scorer', () => {
     it('기본값 → low 복잡도', () => {
@@ -179,8 +179,8 @@ describe('Innovation #2: Adaptive Routing', async () => {
 // 3. Evidence Chain
 // ─────────────────────────────────────────────
 describe('Innovation #3: Evidence Chain', async () => {
-  const { addEvidence, evaluateChain, formatChain } = await import('../scripts/evidence/evidence-chain.mjs');
-  const { collectBasicEvidence } = await import('../scripts/evidence/evidence-collector-lite.mjs');
+  const { addEvidence, evaluateChain, formatChain } = await import('../dist/scripts/evidence/evidence-chain.js');
+  const { collectBasicEvidence } = await import('../dist/scripts/evidence/evidence-collector-lite.js');
 
   let tmpDir;
   beforeEach(() => { tmpDir = makeTempDir(); });
@@ -273,10 +273,10 @@ describe('Innovation #3: Evidence Chain', async () => {
 // 4. Self-Healing
 // ─────────────────────────────────────────────
 describe('Innovation #4: Self-Healing', async () => {
-  const { recordFailure, isCircuitOpen, recordSuccess } = await import('../scripts/recovery/circuit-breaker.mjs');
-  const { retryWithBackoff, getRetrySchedule } = await import('../scripts/recovery/retry-engine.mjs');
-  const { recoverState } = await import('../scripts/recovery/recovery-engine.mjs');
-  const { runHealthCheck } = await import('../scripts/recovery/health-check.mjs');
+  const { recordFailure, isCircuitOpen, recordSuccess } = await import('../dist/scripts/recovery/circuit-breaker.js');
+  const { retryWithBackoff, getRetrySchedule } = await import('../dist/scripts/recovery/retry-engine.js');
+  const { recoverState } = await import('../dist/scripts/recovery/recovery-engine.js');
+  const { runHealthCheck } = await import('../dist/scripts/recovery/health-check.js');
 
   describe('Circuit Breaker', () => {
     let tmpDir;
@@ -441,8 +441,8 @@ describe('Innovation #4: Self-Healing', async () => {
 // ─────────────────────────────────────────────
 describe('Innovation #5: Cross-Session Learning', async () => {
   const { loadMemory, saveMemory, addMemoryEntry, getMemorySummary } =
-    await import('../scripts/memory/project-memory.mjs');
-  const { captureLearning } = await import('../scripts/memory/learning-capture.mjs');
+    await import('../dist/scripts/memory/project-memory.js');
+  const { captureLearning } = await import('../dist/scripts/memory/learning-capture.js');
 
   describe('Project Memory', () => {
     it('초기 메모리 → 빈 구조', () => {
@@ -552,7 +552,7 @@ describe('Innovation #5: Cross-Session Learning', async () => {
 // ─────────────────────────────────────────────
 describe('PDCA Cycle Engine', async () => {
   const { startPdca, advancePdca, getPdcaStatus, completePdca, resetPdca, STAGES } =
-    await import('../scripts/pdca/pdca-engine.mjs');
+    await import('../dist/scripts/pdca/pdca-engine.js');
 
   let tmpDir;
   beforeEach(() => { tmpDir = makeTempDir(); });
@@ -681,7 +681,7 @@ describe('PDCA Cycle Engine', async () => {
 // ─────────────────────────────────────────────
 describe('Cost Ceiling (Budget Guardrail)', async () => {
   const { initCostTracker, recordUsage, loadLimits, formatCostStatus } =
-    await import('../scripts/guardrail/cost-ceiling.mjs');
+    await import('../dist/scripts/guardrail/cost-ceiling.js');
 
   let tmpDir;
   beforeEach(() => { tmpDir = makeTempDir(); });
@@ -735,7 +735,7 @@ describe('Cost Ceiling (Budget Guardrail)', async () => {
 // ─────────────────────────────────────────────
 describe('Core: State Manager', async () => {
   const { readState, writeState, readStateOrDefault, deleteState } =
-    await import('../scripts/core/state.mjs');
+    await import('../dist/scripts/core/state.js');
 
   let tmpDir;
   beforeEach(() => { tmpDir = makeTempDir(); });
@@ -784,7 +784,7 @@ describe('Regression: Bug Fixes', async () => {
 
   it('[C1] getBudgetStatus 반환값 수정해도 내부 상태 오염 안됨', async () => {
     const { trackInjection, getBudgetStatus, resetBudget } =
-      await import('../scripts/core/context-budget.mjs');
+      await import('../dist/scripts/core/context-budget.js');
     resetBudget();
     trackInjection('test-hook', 'some data');
 
@@ -799,8 +799,8 @@ describe('Regression: Bug Fixes', async () => {
   });
 
   it('[C2] evidence-report: 마크다운 파일 정상 생성', async () => {
-    const { generateReport } = await import('../scripts/evidence/evidence-report.mjs');
-    const { addEvidence } = await import('../scripts/evidence/evidence-chain.mjs');
+    const { generateReport } = await import('../dist/scripts/evidence/evidence-report.js');
+    const { addEvidence } = await import('../dist/scripts/evidence/evidence-chain.js');
     const d = makeTempDir();
     try {
       addEvidence('rpt-test', { type: 'test', result: 'pass', source: 'jest' }, d);
@@ -816,9 +816,9 @@ describe('Regression: Bug Fixes', async () => {
   });
 
   it('[H3] learning-capture: 트리밍 결과 저장됨', async () => {
-    const { captureLearning } = await import('../scripts/memory/learning-capture.mjs');
-    const { loadMemory } = await import('../scripts/memory/project-memory.mjs');
-    const { resetConfigCache } = await import('../scripts/core/config.mjs');
+    const { captureLearning } = await import('../dist/scripts/memory/learning-capture.js');
+    const { loadMemory } = await import('../dist/scripts/memory/project-memory.js');
+    const { resetConfigCache } = await import('../dist/scripts/core/config.js');
 
     const d = makeTempDir();
     try {
@@ -841,7 +841,7 @@ describe('Regression: Bug Fixes', async () => {
   });
 
   it('[H7] evidence-chain: result 없는 증거도 크래시 안됨', async () => {
-    const { addEvidence, evaluateChain } = await import('../scripts/evidence/evidence-chain.mjs');
+    const { addEvidence, evaluateChain } = await import('../dist/scripts/evidence/evidence-chain.js');
     const d = makeTempDir();
     try {
       addEvidence('no-result', { type: 'test', source: 'manual' }, d); // result 없음

@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 import { mkdirSync, rmSync, existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { writeState } from '../scripts/core/state.mjs';
+import { writeState } from '../dist/scripts/core/state.js';
 
 const TEST_DIR = join(tmpdir(), `aing-status-view-test-${Date.now()}`);
 const STATE_PATH = join(TEST_DIR, '.aing', 'state', 'pdca-status.json');
@@ -41,7 +41,7 @@ describe('status-view: generateStatusView', () => {
   });
 
   it('creates STATUS.md at .aing/STATUS.md', async () => {
-    const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
+    const { generateStatusView } = await import('../dist/scripts/pdca/status-view.js');
     writeState(STATE_PATH, { version: 1, features: {}, activeFeature: null });
 
     const result = generateStatusView(TEST_DIR);
@@ -51,7 +51,7 @@ describe('status-view: generateStatusView', () => {
   });
 
   it('returns correct featureCount', async () => {
-    const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
+    const { generateStatusView } = await import('../dist/scripts/pdca/status-view.js');
     writeState(STATE_PATH, {
       version: 1,
       features: {
@@ -66,7 +66,7 @@ describe('status-view: generateStatusView', () => {
   });
 
   it('returns activeFeature name', async () => {
-    const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
+    const { generateStatusView } = await import('../dist/scripts/pdca/status-view.js');
     writeState(STATE_PATH, {
       version: 1,
       features: {
@@ -80,7 +80,7 @@ describe('status-view: generateStatusView', () => {
   });
 
   it('returns correct zombieCount', async () => {
-    const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
+    const { generateStatusView } = await import('../dist/scripts/pdca/status-view.js');
     writeState(STATE_PATH, {
       version: 1,
       features: {
@@ -100,7 +100,7 @@ describe('status-view: generateStatusView', () => {
   });
 
   it('STATUS.md contains required header', async () => {
-    const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
+    const { generateStatusView } = await import('../dist/scripts/pdca/status-view.js');
     writeState(STATE_PATH, { version: 1, features: {}, activeFeature: null });
 
     generateStatusView(TEST_DIR);
@@ -110,7 +110,7 @@ describe('status-view: generateStatusView', () => {
   });
 
   it('STATUS.md contains Active Feature section when activeFeature is set', async () => {
-    const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
+    const { generateStatusView } = await import('../dist/scripts/pdca/status-view.js');
     writeState(STATE_PATH, {
       version: 1,
       features: {
@@ -127,7 +127,7 @@ describe('status-view: generateStatusView', () => {
   });
 
   it('STATUS.md contains All Features table', async () => {
-    const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
+    const { generateStatusView } = await import('../dist/scripts/pdca/status-view.js');
     writeState(STATE_PATH, {
       version: 1,
       features: {
@@ -147,7 +147,7 @@ describe('status-view: generateStatusView', () => {
   });
 
   it('STATUS.md shows Zombie warning when zombies exist', async () => {
-    const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
+    const { generateStatusView } = await import('../dist/scripts/pdca/status-view.js');
     writeState(STATE_PATH, {
       version: 1,
       features: {
@@ -163,7 +163,7 @@ describe('status-view: generateStatusView', () => {
   });
 
   it('STATUS.md shows no Warnings section when no zombies', async () => {
-    const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
+    const { generateStatusView } = await import('../dist/scripts/pdca/status-view.js');
     writeState(STATE_PATH, {
       version: 1,
       features: {
@@ -182,7 +182,7 @@ describe('status-view: generateStatusView', () => {
   });
 
   it('returns { path, featureCount, zombieCount, activeFeature } shape', async () => {
-    const { generateStatusView } = await import('../scripts/pdca/status-view.mjs');
+    const { generateStatusView } = await import('../dist/scripts/pdca/status-view.js');
     writeState(STATE_PATH, { version: 1, features: {}, activeFeature: null });
 
     const result = generateStatusView(TEST_DIR);

@@ -9,7 +9,7 @@ import {
   completeStage,
   getResumeInfo,
   endSession,
-} from '../scripts/core/session-state.mjs';
+} from '../dist/scripts/core/session-state.js';
 
 const TEST_DIR = join(import.meta.dirname, '.test-session-tmp');
 
