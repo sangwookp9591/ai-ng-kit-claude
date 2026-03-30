@@ -1,5 +1,112 @@
 # Changelog
 
+## [2.5.0] - 2026-03-30
+
+### Added — gstack 200% 흡수 + v3.0 로드맵 전체 완료
+
+**에이전트 팀 (14명 → 15명)**
+- Simon: Code Intelligence → CEO / Product Strategy 역할 전환 (opus)
+- Kain: 신규 — Code Intelligence / Static Analysis (sonnet)
+
+**Review Pipeline (11 modules, gstack 동등)**
+- review-checklist.mjs: 18-category 코드 리뷰 (6 CRITICAL + 12 INFORMATIONAL)
+- pre-landing-reviewer.mjs: diff 기반 체크리스트 자동 실행 (ship step 4)
+- ceo-reviewer.mjs: 6-question Office Hours + scope decision
+- eng-reviewer.mjs: 5-section 아키텍처/품질/테스트/보안/성능
+- design-reviewer.mjs: AI Slop 10 + Litmus 7 + 10-dimension scoring
+- review-dashboard.mjs: Review Readiness Dashboard + staleness 감지
+- scope-drift.mjs: 3-way 비교 (intent vs plan vs diff)
+- outside-voice.mjs: Cross-model adversarial review
+- cso-audit.mjs: 14-phase OWASP + STRIDE 보안 감사
+- aria-refs.mjs: ARIA 접근성 트리 ref 시스템
+- browser-evidence.mjs: MCP Playwright → Evidence Chain 통합
+
+**Ship Workflow (7 modules, gstack 동등)**
+- ship-orchestrator.mjs: 7단계 실제 git 실행 파이프라인
+- preflight-check.mjs: 4가지 사전 검증 (branch/clean/review/sync)
+- test-triage.mjs: pre-existing vs branch-new failure 분류
+- version-bump.mjs: 시맨틱 버전 자동 bump
+- changelog-gen.mjs: Conventional commit → CHANGELOG 생성
+- pr-creator.mjs: gh CLI PR 자동 생성
+- canary-monitor.mjs: 배포 후 헬스 체크 루프
+
+**QA Engine (2 modules)**
+- qa-orchestrator.mjs: health score + fix loop (max 5) + error 중복 감지
+- regression-detector.mjs: baseline 대비 회귀 감지
+
+**Evidence & Scoring**
+- llm-judge.mjs: 7-criteria LLM 품질 평가 (0-10)
+- qa-health-score.mjs: 8-category 가중 건강 점수 (A-F)
+- design-scoring.mjs: AI Slop 10 + Hard Rejection 7 + Litmus 7
+- benchmark-engine.mjs: 성능 회귀 감지 (50%/500ms 임계값)
+- completeness-scorer.mjs: 목표-역방향 검증 (0-10)
+
+**Pipeline & Autoplan**
+- autoplan-engine.mjs: 6-principle 자동 결정 (mechanical/taste/user-challenge)
+- retro-engine.mjs: 13-step 회고 (45m 세션 감지, focus score)
+
+**Safety & Guardrails**
+- careful-checklist.mjs: 8 위험 패턴 감지 + safe exception
+- mutation-guard.mjs: 파일 변이 감사 추적
+- freeze-engine.mjs: 디렉토리 스코프 편집 제한
+
+**Telemetry**
+- telemetry-engine.mjs: 3-tier (community/anonymous/off) + pending marker 크래시 복구
+- session-start/stop 훅 연동 (자동 수집)
+
+**CLI Utilities (4 modules)**
+- aing-config.mjs: dot-notation 설정 관리
+- aing-diff-scope.mjs: 6-category 변경 범위 감지
+- aing-analytics.mjs: 사용 통계 대시보드
+- aing-doctor.mjs: 설치 상태 진단
+
+**Build System**
+- gen-skill-docs.mjs: 20개 placeholder resolver
+- resolvers/: review, ship, evidence, qa 4개 리졸버
+- generate-all.mjs: 풀 빌드 파이프라인 (--check, --force)
+- touchfiles.mjs: diff-based 스킬 의존성 매핑
+
+**Intent Router 강화**
+- 11-route 자연어 직접 라우팅 (debug, review, perf, explore, tdd, cso, refactor)
+- 행동 키워드 감지 ("추가해"/"만들어" → auto)
+- case-insensitive 매칭
+
+**Documentation**
+- docs/USER-GUIDE.md: 전체 사용자 가이드 (5 patterns, 9 상황, FAQ)
+- docs/ROADMAP-v3.md: v3.0 로드맵 (7 Phase, ~14K LOC)
+- ARCHITECTURE.md: 모듈 구조, 보안 모델, 에이전트 팀
+- CONTRIBUTING.md: 셋업, 테스트, 컨벤션 가이드
+
+**CI Pipelines (3 workflows)**
+- .github/workflows/skill-docs.yml: 스킬 freshness CI
+- .github/workflows/tests.yml: 유닛+통합 테스트 CI
+- .github/workflows/evals.yml: E2E eval (manual dispatch)
+
+**Skills (2 신규)**
+- skills/review-pipeline/: 4-tier 리뷰 파이프라인
+- skills/ship/: 7-step 자동 Ship
+
+**Tests: 123/123 ALL PASS**
+- 22 test files, 53 suites
+- E2E: ship, qa, review-pipeline, browser, safety
+- Unit: review-modules, browser-modules, review-checklist, skill-validation
+
+### Changed
+- Simon: Code Intelligence → CEO / Product Strategy (opus)
+- README.md: 5 Usage Patterns + 초보자 가이드 + FAQ + Quick Reference
+- agents/sam.md: + Boil the Lake 철학
+- agents/able.md: + Boil the Lake + Office Hours 6-question
+- agents/milla.md: + Review Pipeline + CSO 14-phase
+- agents/willji.md: + AI Slop Detection + Litmus Checks
+- review-engine.mjs: CEO Review 에이전트 able+sam → simon+able
+
+### Fixed
+- scope-drift.mjs: glob regex 이스케이프 버그 (. 매칭 오류)
+- changelog-gen.mjs: pipe(|) 포함 커밋 메시지 파싱 오류
+- deploy-detect.mjs: ESM에서 require() 사용 (ReferenceError)
+- review-log.mjs: 멀티 에이전트 경쟁 조건 (atomic write)
+- review-checklist.mjs: severity sort에서 || → ?? (falsy 0 버그)
+
 ## [2.4.8] - 2026-03-27
 
 ### Added — GitHub Issue 자동 처리 파이프라인

@@ -695,10 +695,13 @@ ai-ng-kit/
 |--------|--------|
 | Hook response | **5ms** (budget: 5,000ms) |
 | Config cold start | **36ms** |
-| Test suite | **76/76 ALL GREEN** |
+| Test suite | **123/123 ALL PASS** |
 | External dependencies | **0** |
-| Script modules | **38 modules** (11,545 LOC) |
+| Script modules | **95+ modules** (~19K LOC) |
 | Placeholder resolvers | **20** |
+| Review categories | **18** (6 CRITICAL + 12 INFORMATIONAL) |
+| Ship steps | **7** (실제 git 실행) |
+| Agents | **15** named |
 | Harness maturity | **Level 5 / 5** |
 
 ## Requirements
