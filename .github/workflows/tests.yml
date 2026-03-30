@@ -18,34 +18,20 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Run unit tests
-        run: node --test tests/*.test.mjs
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Run skill validation
-        run: |
-          node -e "
-            import { validateAllSkills } from './tests/helpers/skill-validator.mjs';
-            const results = validateAllSkills();
-            const errors = results.filter(r => !r.valid);
-            console.log('Skills validated:', results.length, '| Errors:', errors.length);
-            if (errors.length > 0) {
-              for (const e of errors) console.log('  FAIL:', e.skill, e.errors.join(', '));
-              process.exit(1);
-            }
-          "
+      - name: Build TypeScript
+        run: npm run build:ts
 
-      - name: Check touchfiles coverage
-        run: |
-          node -e "
-            import { SKILL_TOUCHFILES } from './scripts/build/touchfiles.mjs';
-            import { readdirSync, existsSync } from 'node:fs';
-            const skills = readdirSync('skills', { withFileTypes: true })
-              .filter(e => e.isDirectory()).map(e => e.name);
-            const covered = Object.keys(SKILL_TOUCHFILES);
-            const missing = skills.filter(s => !covered.includes(s));
-            console.log('Skills:', skills.length, '| Touchfiles:', covered.length);
-            if (missing.length > 0) {
-              console.log('Missing touchfiles:', missing.join(', '));
-              // Warning only, not blocking
-            }
-          "
+      - name: Run .mjs tests (dist-based)
+        run: node --test tests/*.test.mjs tests/eval/*.mjs tests/unit/land-orchestrator.test.mjs
+
+      - name: Run vitest unit tests
+        run: npx vitest run
+
+      - name: Run E2E skill tests
+        run: npx tsx --test tests/e2e/skills/*.e2e.test.ts tests/e2e/browse/*.test.ts
+
+      - name: Run teaching tests
+        run: npx tsx --test tests/teaching/*.test.ts

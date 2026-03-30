@@ -29,8 +29,12 @@
     "build:force": "node dist/scripts/build/generate-all.js --force",
     "check:skills": "node dist/scripts/build/check-freshness.js",
     "typecheck": "tsc --noEmit",
-    "test": "node --test tests/**/*.test.ts",
-    "test:e2e": "EVALS=1 node --test tests/e2e/**/*.test.ts",
+    "pretest": "tsc",
+    "test": "node --test tests/*.test.mjs tests/eval/*.mjs tests/unit/land-orchestrator.test.mjs",
+    "test:unit": "npx vitest run",
+    "test:e2e": "npx tsx --test tests/e2e/skills/*.e2e.test.ts tests/e2e/browse/*.test.ts",
+    "test:teaching": "npx tsx --test tests/teaching/*.test.ts",
+    "test:all": "npm run test:unit && npm test && npm run test:e2e && npm run test:teaching",
     "prepublishOnly": "npm run build"
   },
   "engines": {
