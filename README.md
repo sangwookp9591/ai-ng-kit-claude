@@ -17,7 +17,7 @@
 
 업데이트: `claude plugin update aing@aing-marketplace`
 
-> 릴리즈 방법: [docs/RELEASE.md](docs/) 참고. `package.json` + `.claude-plugin/marketplace.json` + `.claude-plugin/plugin.json` 3곳 버전 동일 필수.
+> 릴리즈 방법: [docs/RELEASE.md](docs/RELEASE.md) 참고. `package.json` + `.claude-plugin/marketplace.json` + `.claude-plugin/plugin.json` 3곳 버전 동일 필수.
 
 ---
 
