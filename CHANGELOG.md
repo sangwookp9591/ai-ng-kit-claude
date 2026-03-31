@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.81] - 2026-03-31 — Fix: dist/ included in git for plugin cache
+
+### Fixed
+
+- **dist/ git 포함:** `.gitignore`에서 `dist/` 제거, 빌드 결과물을 git에 커밋하여 플러그인 캐시(git clone) 호환성 확보
+- 플러그인 설치 후 `npm install && npm run build` 불필요
+
 ## [2.8.8] - 2026-03-31 — Fix: .mjs script path resolution
 
 ### Fixed
