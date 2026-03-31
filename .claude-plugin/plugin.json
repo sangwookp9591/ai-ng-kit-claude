@@ -1,7 +1,7 @@
 {
   "name": "aing",
-  "version": "2.8.6",
-  "description": "Harness Engineering Agent — 16 named agents, 1,712 tests, Production Browse Server (1,706 LOC), 10 E2E eval suites, 11-step Ship→Deploy chain, ETHOS 8 principles, 24 Innovations",
+  "version": "2.8.7",
+  "description": "Harness Engineering Agent — 16 named agents, 40 skills, Harness Architect (7-feature meta-skill), 1,712 tests, Production Browse Server, 25 Innovations",
   "author": {
     "name": "SW",
     "url": "https://github.com/sangwookp9591"

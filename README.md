@@ -82,12 +82,12 @@
 
 <h2 id="why">Why aing</h2>
 
-**16 agents, 39 skills, 60 browse commands, 1,712 tests, AST grep.**
+**16 agents, 40 skills, 60 browse commands, 1,712 tests, AST grep.**
 
 | | aing | gstack |
 |:--|:----:|:------:|
 | Named agents | **16** | 0 |
-| Skills | **39** | ~30 |
+| Skills | **40** | ~30 |
 | Browse commands | **60** | ~45 |
 | PDCA lifecycle | **auto-scaling** | -- |
 | Cost intelligence | **budget + ceiling + router** | -- |
@@ -123,6 +123,7 @@
 | 버그 | `/aing debug "증상"` 또는 `/aing investigate` |
 | 코드 리뷰 | `/aing review-pipeline` |
 | 보안 감사 | `/aing review cso` |
+| 하네스 설계 | `/aing harness "리서치 팀 만들어"` |
 | PR + 배포 | `/aing ship` → `/aing land-and-deploy` |
 | 교육/학습 | `/aing teacher "배우고 싶은 기능"` |
 | 디자인 시스템 | `/aing design-consultation` |
@@ -178,6 +179,7 @@
 | 22 | **Learner Hook** | Auto-detect reusable command/file/error-fix patterns |
 | 23 | **Persistent Mode** | Don't-stop execution with session recovery |
 | 24 | **Production Browse Server** | Session/activity/auth/crash-recovery (1,706 LOC) |
+| 25 | **Harness Architect** | Meta-skill: auto-design + validate + gallery + simulate + evolve + compose + debug (2,523 LOC) |
 
 ### Harness 4-Axis
 
@@ -197,10 +199,10 @@
 | Hook response | **5ms** |
 | Test suite | **~84 files / 1,712+ cases** (vitest + E2E + eval) |
 | Runtime deps | **1** (@ast-grep/napi) |
-| Modules | **140+** (~36K LOC) |
+| Modules | **149+** (~38.5K LOC) |
 | Hook events | **10** (7 → +Subagent/Compact) |
 | Browse commands | **60** |
-| Skills | **39** |
+| Skills | **40** |
 | Agents | **16** |
 | Design system | **1,200+ LOC** (5 modules) |
 | vs gstack | **Orchestration + Infra 역전** (1,706 vs 1,218 LOC) |

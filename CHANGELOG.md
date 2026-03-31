@@ -1,5 +1,47 @@
 # Changelog
 
+## [2.8.7] - 2026-03-31 — Harness Architect: 7-Feature Meta-Skill
+
+### Added
+
+**`/aing harness` — 하네스 설계 메타 스킬 (40번째 스킬)**
+- ZIVO/harness 프로젝트를 분석·흡수하여 aing 네이티브 스킬로 재구성
+- 6-Phase 워크플로우 (도메인 분석 → 팀 설계 → 에이전트 정의 → 스킬 생성 → 오케스트레이션 → 검증)
+- 6개 reference 문서 포팅 (agent-design-patterns, orchestrator-template, skill-writing-guide, skill-testing-guide, team-examples, qa-agent-guide)
+
+**7개 서브커맨드 + 9개 TypeScript 엔진 (2,523 LOC)**
+
+| 서브커맨드 | 엔진 | 기능 |
+|-----------|------|------|
+| `/aing harness "task"` | `adaptive-architect.ts` (413 LOC) | 복잡도 기반 자동 설계 — 6개 도메인 프로파일, 패턴/에이전트/모델 자동 추천 |
+| `/aing harness check` | `validate-harness.ts` (272 LOC) | 구조/연결/품질/팀크기 4축 자동 검증 — 순환의존성·고립에이전트·dead link 탐지 |
+| `/aing harness find` | `harness-gallery.ts` (251 LOC) | 패턴 DB + 추천 — 5개 빌트인 패턴, 사용자 패턴 자동 등록, 성공률 기반 정렬 |
+| `/aing harness sim` | `harness-simulator.ts` (271 LOC) | 데이터 흐름 시뮬레이션 — Phase별 입출력 추적, 파일명 불일치·에러 시나리오 탐지 |
+| `/aing harness log` | `harness-evolution.ts` (236 LOC) | 버전 관리 + A/B 비교 — 스냅샷, 메트릭 기록, 개선/퇴보 판정 |
+| `/aing harness chain` | `harness-composer.ts` (204 LOC) | 멀티 하네스 파이프라인 — `"a → b → c"` 조합, 실행 계획 생성 |
+| `/aing harness fix` | `harness-debugger.ts` (292 LOC) | 런타임 진단 — 멈춘 에이전트·누락 산출물·단절 데이터 흐름 탐지 + 수정 제안 |
+
+**Foundation 모듈**
+- `harness-types.ts` (219 LOC): 전체 harness 모듈 공유 타입 — 17개 인터페이스
+- `harness-parser.ts` (365 LOC): 에이전트/스킬 마크다운 파서 — frontmatter, 섹션 추출, 데이터 흐름 추출, 패턴 자동 감지
+
+**기존 모듈 재사용**
+- `complexity-scorer` → Adaptive Architect 팀 규모 산정
+- `model-router` → 에이전트별 모델 라우팅
+- `state.ts` → 갤러리/이력 상태 저장
+- `logger.ts` → 전 모듈 구조화 로깅
+- `path-utils.ts` → 파일명 안전화
+
+### Tests
+- 44개 통합 테스트 전체 통과 (7개 기능 × 3~9개 테스트 케이스)
+- TypeScript 컴파일 에러 0개
+
+### Stats
+- Skills: 39 → **40** (+1)
+- TS LOC: 36K → **~38.5K** (+2,523)
+- Harness modules: 0 → **9**
+- Innovation count: 24 → **25** (Harness Architect)
+
 ## [2.8.6] - 2026-03-30 — Stop Hook Schema Fix + Build Pipeline
 
 ### Fixed
