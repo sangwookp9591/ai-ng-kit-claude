@@ -64,6 +64,18 @@ const TEAM_PRESETS = {
         ],
         when: 'complexity.level === "high"',
         description: '대규모 기능, 아키텍처 변경, 보안 민감 작업'
+    },
+    'ai-pipeline': {
+        name: 'AI Pipeline',
+        cost: 'medium-high',
+        workers: [
+            { name: 'hugg', agent: 'executor', model: 'sonnet', role: '🔍 Hugg — 모델 탐색+비교' },
+            { name: 'jo', agent: 'executor', model: 'sonnet', role: '🧠 Jo — 모델 구현+API' },
+            { name: 'jay', agent: 'executor', model: 'sonnet', role: '⚙️ Jay — 테스트+통합' },
+            { name: 'milla', agent: 'reviewer', model: 'haiku', role: '🔒 Milla — 보안+라이선스 검증' }
+        ],
+        when: 'signals.hasAI || signals.hasModel',
+        description: 'AI 모델 탐색 → 비교 → 구현 → API → 테스트 자동 파이프라인'
     }
 };
 /**
@@ -141,6 +153,12 @@ Role: ${params.role}
 - Use absolute file paths
 - MUST report evidence with every completion
 - MUST follow TDD for code changes
+
+== CONTEXT MANAGEMENT ==
+- You are a sub-agent with a LIMITED context window. You CANNOT use /compact, /half-clone, or resume.
+- NEVER suggest "claude -r" or "resume session" — you are a child process, not a CLI session.
+- Keep responses concise. Avoid re-reading files already read.
+- If your task is large, complete the most critical part first, then report partial results via SendMessage.
 
 == YOUR TASKS ==
 ${params.tasks.map((t, i) => `${i + 1}. ${t}`).join('\n')}

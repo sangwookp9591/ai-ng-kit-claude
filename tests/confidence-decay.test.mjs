@@ -3,10 +3,14 @@ import { strict as assert } from 'node:assert';
 import { mkdirSync, writeFileSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-// Use temp dir for isolation
-const tmpDir = join('/tmp', 'aing-decay-test-' + Date.now());
+// Use temp dir for isolation — unique per test to avoid module-level read cache collisions
+const baseTmpDir = join('/tmp', 'aing-decay-test-' + Date.now());
+let testCounter = 0;
+let tmpDir = baseTmpDir;
 
 function setupTmpProject() {
+  testCounter++;
+  tmpDir = join(baseTmpDir, String(testCounter));
   mkdirSync(join(tmpDir, '.aing'), { recursive: true });
   writeFileSync(join(tmpDir, '.aing', 'project-memory.json'), JSON.stringify({
     techStack: {}, conventions: {},
@@ -22,7 +26,6 @@ function setupTmpProject() {
 
 describe('confidence decay', async () => {
   beforeEach(() => {
-    if (existsSync(tmpDir)) rmSync(tmpDir, { recursive: true });
     setupTmpProject();
   });
 

@@ -14,15 +14,13 @@
  */
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { getPreamble, getAgentTeam } from './preamble-tiers.js';
 import { resolveReviewTiers, resolveReviewDashboard, resolveScopeDriftCheck } from './resolvers/review-resolver.js';
 import { resolveShipSteps, resolveShipPrerequisites } from './resolvers/ship-resolver.js';
 import { resolveEvidenceTypes, resolveJudgeCriteria } from './resolvers/evidence-resolver.js';
 import { resolveHealthCategories, resolveBenchmarkThresholds } from './resolvers/qa-resolver.js';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const ROOT = join(__dirname, '..', '..');
+// process.cwd() is always the project root when invoked via npm run scripts.
+const ROOT = process.cwd();
 // -- Config --
 const SKILLS_DIR = join(ROOT, 'skills');
 const TMPL_FILENAME = 'SKILL.md.tmpl';

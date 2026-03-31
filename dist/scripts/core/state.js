@@ -55,31 +55,41 @@ function acquireLock(filePath) {
     const lp = lockPath(filePath);
     const deadline = Date.now() + LOCK_TIMEOUT_MS;
     while (Date.now() < deadline) {
-        // Check for stale lock
+        // Check for stale lock — remove if the owning PID is dead
         if (existsSync(lp)) {
             try {
-                const stat = statSync(lp);
-                const age = Date.now() - stat.mtimeMs;
-                if (age > LOCK_STALE_MS) {
-                    try {
-                        const content = readFileSync(lp, 'utf-8').trim();
-                        const pid = parseInt(content, 10);
-                        if (!isNaN(pid) && isProcessAlive(pid)) {
-                            // PID still alive, lock is valid — wait
-                        }
-                        else {
-                            unlinkSync(lp);
-                        }
+                const content = readFileSync(lp, 'utf-8').trim();
+                const pid = parseInt(content, 10);
+                if (!isNaN(pid) && isProcessAlive(pid)) {
+                    // PID still alive; check age as safety net for unresponsive processes
+                    const stat = statSync(lp);
+                    const age = Date.now() - stat.mtimeMs;
+                    if (age <= LOCK_STALE_MS) {
+                        // Lock is fresh and owner is alive — spin
                     }
-                    catch {
+                    else {
+                        // Owner alive but lock is very old — force remove
                         try {
                             unlinkSync(lp);
                         }
                         catch { /* best effort */ }
                     }
                 }
+                else {
+                    // Owner dead (or unreadable PID) — stale lock, remove it
+                    try {
+                        unlinkSync(lp);
+                    }
+                    catch { /* best effort */ }
+                }
             }
-            catch { /* stat failed, try to acquire */ }
+            catch {
+                // Could not read lock file — try to remove it
+                try {
+                    unlinkSync(lp);
+                }
+                catch { /* best effort */ }
+            }
         }
         if (!existsSync(lp)) {
             try {

@@ -6,8 +6,8 @@ description: |
 
 # /aing ship — Automated Ship Workflow
 
-> 7단계 자동화 ship 파이프라인
-> PDCA review 단계와 통합
+> gstack 흡수: 7단계 자동화 ship 파이프라인
+> PDCA review 단계와 통합 (aing 시너지)
 
 ## 사용법
 

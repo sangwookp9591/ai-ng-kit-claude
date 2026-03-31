@@ -37,6 +37,7 @@ export const SKILL_TOUCHFILES = {
     'progress-check': ['skills/progress-check/', 'agents/progress-checker.md'],
     'review-pipeline': ['skills/review-pipeline/', 'scripts/review/', 'agents/milla.md', 'agents/klay.md', 'agents/sam.md', 'agents/simon.md', 'agents/able.md', 'agents/willji.md', 'agents/iron.md'],
     'ship': ['skills/ship/', 'scripts/ship/', 'scripts/review/', 'scripts/evidence/', 'scripts/qa/'],
+    'ai-pipeline': ['skills/ai-pipeline/', 'agents/jo.md', 'agents/hugg.md'],
 };
 /**
  * Shared infrastructure patterns that affect ALL skills when changed.

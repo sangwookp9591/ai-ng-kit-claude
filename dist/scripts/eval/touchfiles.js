@@ -38,6 +38,7 @@ export const DEFAULT_EVAL_REGISTRY = [
     { name: 'rollback', touchfiles: ['skills/rollback/', 'scripts/recovery/'] },
     { name: 'init', touchfiles: ['skills/init/', 'scripts/setup/'] },
     { name: 'do', touchfiles: ['skills/do/', 'scripts/routing/'] },
+    { name: 'ai-pipeline', touchfiles: ['skills/ai-pipeline/', 'agents/jo.md', 'agents/hugg.md'] },
 ];
 /**
  * Global touchfiles that trigger ALL evals when changed.

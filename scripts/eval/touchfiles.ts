@@ -53,6 +53,7 @@ export const DEFAULT_EVAL_REGISTRY: EvalRegistryEntry[] = [
   { name: 'rollback', touchfiles: ['skills/rollback/', 'scripts/recovery/'] },
   { name: 'init', touchfiles: ['skills/init/', 'scripts/setup/'] },
   { name: 'do', touchfiles: ['skills/do/', 'scripts/routing/'] },
+  { name: 'ai-pipeline', touchfiles: ['skills/ai-pipeline/', 'agents/jo.md', 'agents/hugg.md'] },
 ];
 
 /**

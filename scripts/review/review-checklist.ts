@@ -50,6 +50,8 @@ export interface ClassifiedResults {
 // Detection patterns for unsanitized HTML rendering (used in code review, not execution)
 const UNSAFE_HTML_PATTERN = /dangerouslySetInnerHTML|v-html|innerHTML\s*=/gi;
 const UNSAFE_EVAL_PATTERN = /system.*prompt.*\$\{.*user/gi;
+// Detects bare eval() calls which can execute arbitrary code
+const UNSAFE_EVAL_CALL_PATTERN = /\beval\s*\(/gi;
 
 /**
  * 18 review categories with detection patterns.
@@ -82,6 +84,7 @@ export const CATEGORIES: Record<string, CheckCategory> = {
     patterns: [
       { regex: UNSAFE_HTML_PATTERN, desc: 'Unsanitized HTML rendering' },
       { regex: UNSAFE_EVAL_PATTERN, desc: 'User input in system prompt' },
+      { regex: UNSAFE_EVAL_CALL_PATTERN, desc: 'eval() call (may execute LLM output)' },
     ],
   },
   'enum-completeness': {

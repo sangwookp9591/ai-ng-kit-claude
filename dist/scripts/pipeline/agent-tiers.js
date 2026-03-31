@@ -22,6 +22,9 @@ export const AGENT_TIERS = {
     'db-impl': { agent: 'jerry', tier: 2, model: 'sonnet', description: 'DB schema/migration' },
     'motion-impl': { agent: 'rowan', tier: 2, model: 'sonnet', description: 'Animation/interaction' },
     'design-impl': { agent: 'willji', tier: 2, model: 'sonnet', description: 'UI/UX design' },
+    // T2.5 — AI Pipeline (model research + implementation)
+    'ai-research': { agent: 'hugg', tier: 2, model: 'sonnet', description: 'AI model discovery & comparison' },
+    'ai-impl': { agent: 'jo', tier: 2, model: 'sonnet', description: 'AI model integration & API scaffolding' },
     // T3 — Planning (multi-domain coordination)
     plan: { agent: 'able', tier: 3, model: 'sonnet', description: 'Full planning with Search Before Building' },
     architect: { agent: 'klay', tier: 3, model: 'opus', description: 'Architecture design' },

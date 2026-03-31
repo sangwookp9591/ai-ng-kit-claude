@@ -21,7 +21,7 @@
 
 ---
 
-<h2 id="team">Agent Team (16 named agents)</h2>
+<h2 id="team">Agent Team (18 named agents)</h2>
 
 <table>
 <tr>
@@ -67,6 +67,13 @@
 <tr>
 <td colspan="2">
 
+### AI / ML
+
+| | Name | Role | Model |
+|:---:|------|------|:-----:|
+| | **Jo** | AI Implementation Senior | `sonnet` |
+| | **Hugg** | AI Model Research Senior | `sonnet` |
+
 ### Special
 
 | | Name | Role | Model |
@@ -82,12 +89,12 @@
 
 <h2 id="why">Why aing</h2>
 
-**16 agents, 40 skills, 60 browse commands, 1,712 tests, AST grep.**
+**18 agents, 41 skills, 60 browse commands, 1,098 tests, AST grep.**
 
 | Feature | Spec |
 |:--------|:-----|
-| Named Agents | **16** (role, personality, model tier) |
-| Skills | **40** (debug, review, ship, TDD, perf, CSO, harness...) |
+| Named Agents | **18** (role, personality, model tier) |
+| Skills | **41** (debug, review, ship, TDD, perf, CSO, harness, ai-pipeline...) |
 | Browse Commands | **60** (MCP Playwright) |
 | PDCA Lifecycle | **auto-scaling** (complexity 0-15) |
 | Cost Intelligence | **budget + ceiling + model router** |
@@ -96,7 +103,7 @@
 | Evidence Chain | **6-type mandatory proof** |
 | Design System | **5 modules** (token/compare/iterate/evolve/gallery) |
 | Ship Pipeline | **11 steps** (test → review → version → PR) |
-| Tests | **1,712+** pass |
+| Tests | **1,098** pass |
 | Eval System | **10 E2E suites** |
 | Runtime Deps | **1** (ast-grep) |
 | Hook Response | **5ms** |
@@ -126,6 +133,7 @@
 | PR + 배포 | `/aing ship` → `/aing land-and-deploy` |
 | 교육/학습 | `/aing teacher "배우고 싶은 기능"` |
 | 디자인 시스템 | `/aing design-consultation` |
+| AI 파이프라인 | `/aing ai-pipeline "감성 분석 모델 브라우저 실행"` |
 | 성능 분석 | `/aing perf runtime` |
 | 실수 복구 | `/aing rollback` |
 | 비개발자 | `/aing wizard` |
@@ -168,7 +176,7 @@
 | 12 | **Prompt Injection Guard** | 7 patterns + XML trust boundary |
 | 13 | **Design System Engine** | Token gen/compare/iterate/evolve/gallery |
 | 14 | **Teacher Agent** | Socratic learning by questioning |
-| 15 | **40 Skills** | Full workflow coverage |
+| 15 | **41 Skills** | Full workflow coverage |
 | 16 | **60 Browse Commands** | MCP Playwright powered |
 | 17 | **Autoplan Engine** | 6-principle auto-decision |
 | 18 | **Confidence Decay** | 30-day decay for observed learnings |
@@ -196,13 +204,13 @@
 | Metric | Result |
 |--------|--------|
 | Hook response | **5ms** |
-| Test suite | **~84 files / 1,712+ cases** (vitest + E2E + eval) |
+| Test suite | **1,098 cases / 255 suites** (node:test + E2E + eval) |
 | Runtime deps | **1** (@ast-grep/napi) |
 | Modules | **149+** (~38.5K LOC) |
 | Hook events | **10** (7 → +Subagent/Compact) |
 | Browse commands | **60** |
-| Skills | **40** |
-| Agents | **16** |
+| Skills | **41** |
+| Agents | **18** |
 | Design system | **1,200+ LOC** (5 modules) |
 | Browse server | **1,706 LOC** (production grade) |
 

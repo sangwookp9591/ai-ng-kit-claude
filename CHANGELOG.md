@@ -1,5 +1,30 @@
 # Changelog
 
+## [2.8.86] - 2026-03-31 — AI Pipeline + Sub-Agent Context Fix + Test Suite Green
+
+### Added
+
+- **Jo 에이전트** (`agents/jo.md`): AI 구현 시니어 — 모델→코드→API 변환 전문가
+  - Transformers.js / ONNX.js (browser), TFLite / CoreML (mobile), FastAPI / Node (server)
+  - 전처리/후처리 파이프라인, 양자화 wrapper, TDD 필수
+- **Hugg 에이전트** (`agents/hugg.md`): AI 모델 리서치 시니어 — HuggingFace 모델 탐색/비교/선정
+  - 정량 비교 매트릭스 (accuracy/latency/size/license), Lightweight 우선 필터
+  - TOP 3 선정 + Implementation Spec 작성
+- **AI Pipeline 스킬** (`skills/ai-pipeline/SKILL.md`): 5-Phase 자동 파이프라인
+  - DISCOVER → COMPARE → IMPLEMENT → API → TEST
+- `ai-pipeline` 프리셋 (`team-orchestrator.ts`): hugg→jo→jay→milla 팀 구성
+- `ai-research`, `ai-impl` 에이전트 티어 (`agent-tiers.ts`)
+
+### Fixed
+
+- **Sub-Agent Context Overflow**: sub-agent가 context 꽉 차면 잘못된 resume 안내하던 문제
+  - `subagent-start.ts` hook에 context 관리 규칙 자동 주입
+  - `generateWorkerPrompt()`에 CONTEXT MANAGEMENT 섹션 추가
+  - Stop hook에서 200K 하드코딩된 check-context.sh 제거
+- **테스트 10개 전부 수정** (1098 pass, 0 fail):
+  - confidence-decay, intent-router CLI, review-checklist, safety-e2e, ship-e2e, skill-validation
+- **SKILL.md.tmpl frontmatter 누락** (review-pipeline, ship)
+
 ## [2.8.82] - 2026-03-31 — Independent: remove all external references
 
 ### Changed

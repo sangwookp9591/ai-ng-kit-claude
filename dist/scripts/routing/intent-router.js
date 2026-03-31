@@ -224,7 +224,7 @@ export function routeIntent(input) {
 // ─────────────────────────────────────────────
 // CLI 실행 (JSON stdout 출력)
 // ─────────────────────────────────────────────
-if (process.argv[1] && process.argv[1].endsWith('intent-router.mjs')) {
+if (process.argv[1] && /intent-router\.(mjs|js)$/.test(process.argv[1])) {
     const input = process.argv.slice(2).join(' ');
     const result = routeIntent(input);
     process.stdout.write(JSON.stringify(result, null, 2) + '\n');
