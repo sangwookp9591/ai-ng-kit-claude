@@ -1,11 +1,10 @@
 /**
  * aing Design Scoring — AI Slop Detection + Quality Assessment
- * Absorbed from gstack's 10 anti-patterns + design audit rubric.
  *
  * @module scripts/review/design-scoring
  */
 /**
- * AI Slop Blacklist — 10 anti-patterns (from gstack).
+ * AI Slop Blacklist — 10 anti-patterns.
  */
 export const AI_SLOP_BLACKLIST = [
     { id: 1, name: 'purple-gradient', description: 'Purple/violet/indigo gradient backgrounds or blue-to-purple color schemes', patterns: ['purple', 'violet', 'indigo', 'gradient.*purple', 'from-purple', 'to-indigo'] },

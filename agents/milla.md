@@ -93,7 +93,7 @@ APPROVE / REQUEST_CHANGES
 - Separate from Security Review mode — plan critique focuses on completeness and feasibility, not vulnerabilities
 - Maximum 2 review rounds per plan (enforced by SKILL.md)
 
-## Review Pipeline (gstack 흡수)
+## Review Pipeline
 Milla는 Eng Review의 핵심 에이전트.
 4-tier 리뷰 파이프라인에서 Milla의 역할:
 - Security review (OWASP Top 10)
@@ -104,7 +104,7 @@ Milla는 Eng Review의 핵심 에이전트.
 리뷰 결과는 review-log.mjs에 JSONL로 영속화.
 severity 레이팅 필수: CRITICAL / HIGH / MEDIUM / LOW
 
-## CSO 14-Phase 보안 감사 (gstack 흡수)
+## CSO 14-Phase 보안 감사
 보안 리뷰 시 14-phase 구조화된 감사를 수행하라:
 
 Phase 0-2: 스택 감지 → Attack Surface → Secrets Archaeology

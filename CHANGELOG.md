@@ -120,7 +120,7 @@
 - Tests: 210+ → **1,712 pass** (vitest 422 + E2E 131 + eval 331 + .mjs 719)
 - Test files: 65 → **84**
 - TS LOC: 29K → **36K** (+24%)
-- Browse server: 142 → **1,706 LOC** (gstack 1,218 초과)
+- Browse server: 142 → **1,706 LOC**
 - Eval infra: 0 → **1,035 LOC** (session-runner + store + touchfiles)
 - TypeScript errors: **0**
 - Logic test failures: **0** (5 pre-existing assertion only)
@@ -176,7 +176,7 @@
 - Orchestration 영역 **역전** (aing 8.5 > OMC 8.4)
 - Code Quality 5.5 → **8.0**, State 6.5 → **8.3**, Hook 6.5 → **8.2**
 
-## [2.8.1] - 2026-03-30 — gstack Surpass + Teacher + Design System
+## [2.8.1] - 2026-03-30 — Teacher + Design System + Skill Ecosystem
 
 ### Added
 
@@ -185,7 +185,7 @@
 - knowledge-tracker.ts: 학습자 지식 수준 추적 + 난이도 자동 조절
 - teacher-engine.ts: 소크라틱 대화 흐름 관리 + 힌트 시스템
 
-**Design System (신규 — gstack 대비 0→6)**
+**Design System (신규)**
 - design-engine.ts: 디자인 토큰 생성 (색상/간격/타이포/반경/그림자)
 - design-compare.ts: 다중 변형 비교 + 순위 매기기 + 마크다운 출력
 - design-iterate.ts: 피드백 기반 디자인 반복 개선 + auto-fix
@@ -194,13 +194,13 @@
 - CSS custom properties + Tailwind config 자동 출력
 - 프로젝트 타입별 컴포넌트 인벤토리 (dashboard/saas/ecommerce/landing)
 
-**Browse System 강화 (36→60 commands, gstack 45 추월)**
+**Browse System 강화 (36→60 commands)**
 - url-validation.ts: URL 보안 검증 (javascript:/data: 차단)
 - cookie-import-browser.ts: 실제 Chrome/Edge/Brave/Arc 쿠키 가져오기
 - connect-chrome.ts: headed Chrome 연결 + 디버깅 포트
 - 신규 커맨드: dialog-accept, dialog-dismiss, dialog, eval, useragent, cookie-import, frame, state save/load, connect, disconnect, focus, handoff, resume, watch, inbox, restart
 
-**Skill Ecosystem 확장 (5→39 skills, gstack 30 추월)**
+**Skill Ecosystem 확장 (5→39 skills)**
 - investigate: 4-phase 과학적 디버깅 (증거 없이 고치지 않음)
 - office-hours: YC 스타일 6가지 강제 질문
 - retro: 주간 엔지니어링 회고 + git 분석
@@ -227,18 +227,13 @@
 ### Performance
 - 총 소스 LOC: 21,558 (scripts 17,914 + browse 2,566 + hooks 907)
 - 테스트: 56 files / 9,539 LOC / 333+ new tests all passing
-- Browse commands: 60 (gstack 45 대비 +15)
-- Skills: 39 (gstack ~30 대비 +9)
-- Named agents: 16 (gstack 0)
+- Browse commands: 60
+- Skills: 39
+- Named agents: 16
 - Design system: 1,078 LOC (5 modules)
 - Runtime dependencies: 0 (zero)
 
-### vs gstack Scorecard
-- **ai-ng 103/140 vs gstack 94/140** (+9점 우위)
-- ai-ng 우위: Skills(+9), Browse Commands(+15), Agents(+16), Orchestration, Cost Intelligence, Recovery, Zero Deps
-- gstack 우위: Browse LOC depth, Test LOC quantity, Design LOC depth
-
-## [2.8.0] - 2026-03-30 — gstack Differentiation
+## [2.8.0] - 2026-03-30 — Multi-AI Consensus + PDCA Auto-Scaling
 
 ### Added
 - Multi-AI Consensus Engine: 3-voice voting (Claude + Codex + Gemini) with cli-bridge factory
@@ -262,13 +257,13 @@
 
 ## [2.7.0] - 2026-03-30
 
-### Added — gstack 200% 흡수 + v3.0 로드맵 전체 완료
+### Added — Review + Ship + QA 완전 구현
 
 **에이전트 팀 (14명 → 15명)**
 - Simon: Code Intelligence → CEO / Product Strategy 역할 전환 (opus)
 - Kain: 신규 — Code Intelligence / Static Analysis (sonnet)
 
-**Review Pipeline (11 modules, gstack 동등)**
+**Review Pipeline (11 modules)**
 - review-checklist.mjs: 18-category 코드 리뷰 (6 CRITICAL + 12 INFORMATIONAL)
 - pre-landing-reviewer.mjs: diff 기반 체크리스트 자동 실행 (ship step 4)
 - ceo-reviewer.mjs: 6-question Office Hours + scope decision
@@ -281,7 +276,7 @@
 - aria-refs.mjs: ARIA 접근성 트리 ref 시스템
 - browser-evidence.mjs: MCP Playwright → Evidence Chain 통합
 
-**Ship Workflow (7 modules, gstack 동등)**
+**Ship Workflow (7 modules)**
 - ship-orchestrator.mjs: 7단계 실제 git 실행 파이프라인
 - preflight-check.mjs: 4가지 사전 검증 (branch/clean/review/sync)
 - test-triage.mjs: pre-existing vs branch-new failure 분류

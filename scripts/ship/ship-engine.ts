@@ -1,6 +1,5 @@
 /**
  * aing Ship Engine — Automated Ship Workflow
- * Absorbed from gstack's /ship 7-step automated pipeline.
  * Integrates with aing's PDCA review stage and evidence chain.
  *
  * Pipeline:

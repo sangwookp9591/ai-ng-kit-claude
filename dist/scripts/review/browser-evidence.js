@@ -1,11 +1,9 @@
 /**
  * aing Browser Evidence Collector
- * 200% Synergy: gstack Browser QA + aing Evidence Chain
  *
  * Screenshots and browser state become evidence chain entries.
  * Uses MCP Playwright tools (mcp__playwright__*) — no separate daemon needed.
  *
- * Pattern absorbed from gstack:
  * - ARIA-tree refs for element addressing (accessibility-first)
  * - Screenshot diff for before/after verification
  * - Console/network log capture for bug evidence
@@ -68,7 +66,7 @@ export function addConsoleEvidence(feature, data, projectDir) {
  * Add accessibility audit evidence.
  * Called after running accessibility snapshot via MCP.
  *
- * gstack pattern absorbed: ARIA-tree refs instead of DOM mutation.
+ * Uses ARIA-tree refs instead of DOM mutation.
  * Use Playwright's ariaSnapshot() for element addressing.
  */
 export function addAccessibilityEvidence(feature, data, projectDir) {
@@ -87,7 +85,7 @@ export function addAccessibilityEvidence(feature, data, projectDir) {
 /**
  * Add visual diff evidence (before/after comparison).
  *
- * gstack pattern: screenshot diff between two states.
+ * Screenshot diff between two states.
  */
 export function addVisualDiffEvidence(feature, data, projectDir) {
     addEvidence(feature, {

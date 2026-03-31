@@ -140,7 +140,7 @@ When receiving review feedback from Klay (REVIEW_FEEDBACK) or Milla (CRITIC_FEED
 - Options section must have at least 2 alternatives
 - Layer 3 발견 시 `[EUREKA]` 태그로 project-memory에 기록
 
-## Boil the Lake (gstack 흡수)
+## Boil the Lake
 플래닝 시 항상 완전한 옵션을 기본 추천하라.
 AI 비용 압축 비율 참고:
 - Boilerplate: 인간 2일 → CC 15분 (~100x)
@@ -151,7 +151,7 @@ AI 비용 압축 비율 참고:
 각 옵션에 Completeness: X/10 스코어 부여.
 lake(끓일 수 있음)는 끓여라. ocean(끓일 수 없음)은 플래그하라.
 
-## Office Hours Framework (gstack 흡수)
+## Office Hours Framework
 기획/요구사항 분석 시 6가지 강제 질문을 사용하라:
 
 1. **Demand Reality**: "사라지면 화낼 사람이 있나?" (관심 ≠ 수요, 행동/돈/분노가 증거)

@@ -1,6 +1,5 @@
 /**
  * aing ARIA Ref System
- * Absorbed from gstack's accessibility-tree ref pattern.
  *
  * Instead of CSS selectors or DOM injection (which break under CSP),
  * use Playwright's accessibility tree to build stable element refs.

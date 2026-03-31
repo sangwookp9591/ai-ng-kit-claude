@@ -2,7 +2,6 @@
  * aing Review Resolver
  * Generates dynamic review-related content for SKILL.md templates.
  *
- * Absorbed from gstack's review resolver pattern:
  * - {{REVIEW_DASHBOARD}} → Current review readiness state
  * - {{REVIEW_TIERS}} → Tier table from review-engine.mjs
  * - {{SCOPE_DRIFT_CHECK}} → Scope drift detection instructions

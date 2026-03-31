@@ -1,6 +1,5 @@
 /**
  * aing Benchmark Engine — Performance Regression Detection
- * Absorbed from gstack's /benchmark using browse daemon.
  * Uses MCP Playwright for browser-based performance measurement.
  *
  * @module scripts/review/benchmark-engine

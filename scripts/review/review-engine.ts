@@ -1,6 +1,5 @@
 /**
  * aing Review Engine — 4-Tier Review Pipeline
- * Absorbed from gstack's multi-tier review system.
  * Maps review tiers to aing's named agents.
  *
  * Tier mapping:
@@ -57,7 +56,7 @@ export interface TierOptions {
 }
 
 /**
- * Review passes (absorbed from gstack's two-pass review system).
+ * Review passes (two-pass review system).
  * Pass 1: CRITICAL (blocks ship)
  * Pass 2: INFORMATIONAL (quality improvement)
  */
@@ -97,7 +96,7 @@ export function classifyFinding(finding: ReviewFinding): 'auto-fix' | 'ask' {
 }
 
 /**
- * Format review results in gstack's output format.
+ * Format review results.
  */
 export function formatReviewResults(findings: ReviewFinding[]): string {
   const critical = findings.filter(f => f.severity === 'CRITICAL');

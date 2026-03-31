@@ -1,6 +1,5 @@
 /**
  * aing Design Scoring — AI Slop Detection + Quality Assessment
- * Absorbed from gstack's 10 anti-patterns + design audit rubric.
  *
  * @module scripts/review/design-scoring
  */
@@ -41,7 +40,7 @@ export interface DesignAuditContext {
     files?: string[];
 }
 /**
- * AI Slop Blacklist — 10 anti-patterns (from gstack).
+ * AI Slop Blacklist — 10 anti-patterns.
  */
 export declare const AI_SLOP_BLACKLIST: AISlopPattern[];
 /**

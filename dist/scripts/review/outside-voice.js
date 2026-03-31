@@ -1,6 +1,5 @@
 /**
  * aing Outside Voice — Cross-Model Adversarial Review
- * Absorbed from gstack's outside voice pattern.
  * Dispatches review to a Claude subagent with fresh context.
  * @module scripts/review/outside-voice
  */

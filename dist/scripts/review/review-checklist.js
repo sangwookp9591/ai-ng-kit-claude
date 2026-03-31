@@ -1,6 +1,5 @@
 /**
  * aing Review Checklist — 18-Category Code Review Engine
- * Absorbed from gstack's checklist.md (221 lines, 18 categories).
  *
  * Pass 1 (CRITICAL): SQL, Race, LLM, Enum, Auth, Data Exposure
  * Pass 2 (INFORMATIONAL): Async, Magic, Dead, N+1, Stale, Error, Type, Crypto, Time, View, Perf, Distribution

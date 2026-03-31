@@ -1,13 +1,12 @@
 /**
  * aing Careful Guard (Phase 4 — 200% Differentiator)
  *
- * Combines aing's circuit breaker with gstack's careful pattern detection.
  * Enhanced destructive command detection beyond the base guardrail-engine.
  *
  * @module scripts/guardrail/careful-guard
  */
 /**
- * Enhanced destructive command patterns (from gstack's careful).
+ * Enhanced destructive command patterns.
  * More comprehensive than the base guardrail-engine patterns.
  * Patterns are checked in order; 'allow' matches short-circuit.
  */
@@ -98,7 +97,7 @@ export function checkCareful(command) {
 }
 /**
  * Check a file path against freeze boundaries.
- * Similar to gstack's freeze but using aing's config system.
+ * Check a file path against freeze boundaries using aing's config system.
  */
 export function checkFreeze(filePath, config) {
     const freezeDirs = config?.guardrail?.freezeDirs || [];

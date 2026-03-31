@@ -5,7 +5,7 @@
  * Tier 2: E2E via `claude -p` subprocess (~$3.85)
  * Tier 3: LLM-as-judge quality scoring (~$0.15)
  *
- * Modeled after gstack's eval system with aing-native patterns.
+ * Eval system with aing-native patterns.
  *
  * @module scripts/eval/eval-engine
  */

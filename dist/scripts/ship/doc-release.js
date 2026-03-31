@@ -1,6 +1,5 @@
 /**
  * aing Document Release — Post-Ship Documentation Update
- * Absorbed from gstack's /document-release.
  * Cross-references diff against docs, updates stale sections.
  *
  * @module scripts/ship/doc-release

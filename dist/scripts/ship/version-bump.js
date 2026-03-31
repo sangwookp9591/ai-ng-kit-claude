@@ -1,6 +1,5 @@
 /**
  * aing Version Bump — Semantic Version Auto-Detection
- * Absorbed from gstack's VERSION bump logic.
  * Reads VERSION file, determines bump type from diff, writes new version.
  * @module scripts/ship/version-bump
  */

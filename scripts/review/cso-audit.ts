@@ -1,6 +1,5 @@
 /**
  * aing CSO 14-Phase Security Audit
- * Absorbed from gstack's /cso skill.
  * Integrates with Milla agent for comprehensive security assessment.
  *
  * @module scripts/review/cso-audit

@@ -1,6 +1,6 @@
 # E2E Test Framework for ai-ng Claude
 
-A 3-tier evaluation infrastructure for testing ai-ng skills end-to-end, modeled after gstack's testing architecture.
+A 3-tier evaluation infrastructure for testing ai-ng skills end-to-end.
 
 ## Architecture
 

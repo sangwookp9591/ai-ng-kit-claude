@@ -2,7 +2,7 @@
  * aing Evidence-Based Completeness Scorer (Phase 4 — 200% Differentiator)
  *
  * Automatically calculates Completeness score from evidence artifacts.
- * Combines gstack's X/10 scoring with aing's evidence chain.
+ * Uses X/10 scoring with aing's evidence chain.
  *
  * @module scripts/evidence/completeness-scorer
  */

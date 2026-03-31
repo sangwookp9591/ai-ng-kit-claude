@@ -1,6 +1,5 @@
 /**
  * aing Diff Scope — Detect change categories from git diff
- * Absorbed from gstack's gstack-diff-scope.
  * @module scripts/cli/aing-diff-scope
  */
 import { execSync } from 'node:child_process';

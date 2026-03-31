@@ -84,25 +84,24 @@
 
 **16 agents, 40 skills, 60 browse commands, 1,712 tests, AST grep.**
 
-| | aing | gstack |
-|:--|:----:|:------:|
-| Named agents | **16** | 0 |
-| Skills | **40** | ~30 |
-| Browse commands | **60** | ~45 |
-| PDCA lifecycle | **auto-scaling** | -- |
-| Cost intelligence | **budget + ceiling + router** | -- |
-| Recovery | **circuit breaker + retry** | -- |
-| Multi-AI consensus | **3-voice voting** | -- |
-| Evidence chain | **6-type mandatory proof** | -- |
-| Design system | **5 modules** (token/compare/iterate/evolve/gallery) | 16 files |
-| Runtime deps | **1** (ast-grep) | 3 |
-| Tests | **1,712** pass | ~100 |
-| Browse server | **1,706 LOC** | 1,218 LOC |
-| Eval system | **10 E2E suites** | 10 |
-| Ship pipeline | **11 steps (code)** | (prompt) |
-| **Scorecard** | **112/140** | 94/140 |
+| Feature | Spec |
+|:--------|:-----|
+| Named Agents | **16** (role, personality, model tier) |
+| Skills | **40** (debug, review, ship, TDD, perf, CSO, harness...) |
+| Browse Commands | **60** (MCP Playwright) |
+| PDCA Lifecycle | **auto-scaling** (complexity 0-15) |
+| Cost Intelligence | **budget + ceiling + model router** |
+| Self-Healing | **circuit breaker + retry + rollback** |
+| Multi-AI Consensus | **3-voice voting** (Claude + Codex + Gemini) |
+| Evidence Chain | **6-type mandatory proof** |
+| Design System | **5 modules** (token/compare/iterate/evolve/gallery) |
+| Ship Pipeline | **11 steps** (test → review → version → PR) |
+| Tests | **1,712+** pass |
+| Eval System | **10 E2E suites** |
+| Runtime Deps | **1** (ast-grep) |
+| Hook Response | **5ms** |
 
-> 상세 비교: [docs/WHY-AING.md](docs/WHY-AING.md)
+> 상세: [docs/WHY-AING.md](docs/WHY-AING.md)
 
 ---
 
@@ -169,8 +168,8 @@
 | 12 | **Prompt Injection Guard** | 7 patterns + XML trust boundary |
 | 13 | **Design System Engine** | Token gen/compare/iterate/evolve/gallery |
 | 14 | **Teacher Agent** | Socratic learning by questioning |
-| 15 | **39 Skills** | gstack 30 추월 |
-| 16 | **60 Browse Commands** | gstack 45 추월 |
+| 15 | **40 Skills** | Full workflow coverage |
+| 16 | **60 Browse Commands** | MCP Playwright powered |
 | 17 | **Autoplan Engine** | 6-principle auto-decision |
 | 18 | **Confidence Decay** | 30-day decay for observed learnings |
 | 19 | **AST Grep** | Structural code search/replace via @ast-grep/napi |
@@ -205,7 +204,7 @@
 | Skills | **40** |
 | Agents | **16** |
 | Design system | **1,200+ LOC** (5 modules) |
-| vs gstack | **Orchestration + Infra 역전** (1,706 vs 1,218 LOC) |
+| Browse server | **1,706 LOC** (production grade) |
 
 ## Requirements
 

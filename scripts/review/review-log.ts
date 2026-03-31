@@ -1,6 +1,5 @@
 /**
  * aing Review Log — JSONL persistence for review results.
- * Absorbed from gstack's review-log pattern.
  * @module scripts/review/review-log
  */
 import { readFileSync, writeFileSync, renameSync, existsSync, mkdirSync } from 'node:fs';

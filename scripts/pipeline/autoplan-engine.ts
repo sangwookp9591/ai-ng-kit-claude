@@ -1,6 +1,5 @@
 /**
  * aing Autoplan Engine — 6-Principle Auto-Decision System
- * Absorbed from gstack's /autoplan pipeline.
  *
  * Chains: CEO → Design → Eng reviews with auto-decisions.
  * Integrates with aing's complexity scorer for review depth.
@@ -61,7 +60,7 @@ interface AutoplanContext {
 }
 
 /**
- * 6 auto-decision principles (from gstack).
+ * 6 auto-decision principles.
  */
 export const DECISION_PRINCIPLES: DecisionPrinciple[] = [
   {

@@ -83,14 +83,14 @@ export declare function addConsoleEvidence(feature: string, data: ConsoleData, p
  * Add accessibility audit evidence.
  * Called after running accessibility snapshot via MCP.
  *
- * gstack pattern absorbed: ARIA-tree refs instead of DOM mutation.
+ * Uses ARIA-tree refs instead of DOM mutation.
  * Use Playwright's ariaSnapshot() for element addressing.
  */
 export declare function addAccessibilityEvidence(feature: string, data: AccessibilityData, projectDir?: string): void;
 /**
  * Add visual diff evidence (before/after comparison).
  *
- * gstack pattern: screenshot diff between two states.
+ * Screenshot diff between two states.
  */
 export declare function addVisualDiffEvidence(feature: string, data: VisualDiffData, projectDir?: string): void;
 /**

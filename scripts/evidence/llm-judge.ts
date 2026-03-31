@@ -1,6 +1,5 @@
 /**
  * aing LLM Judge — AI-Powered Quality Evaluation
- * 200% Synergy: gstack LLM Judge + aing Evidence Chain
  *
  * Adds LLM-based evaluation as a first-class evidence type.
  * The judge evaluates outputs against expected quality criteria

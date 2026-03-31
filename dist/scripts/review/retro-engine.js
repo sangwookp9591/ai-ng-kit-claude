@@ -1,6 +1,5 @@
 /**
  * aing Retrospective Engine
- * Absorbed from gstack's /retro 13-step retrospective.
  * Analyzes git history, work patterns, and code quality metrics.
  *
  * @module scripts/review/retro-engine

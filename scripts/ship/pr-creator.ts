@@ -1,6 +1,5 @@
 /**
  * aing PR Creator — Automated Pull Request Generation
- * Absorbed from gstack's /ship Step 7.
  * Generates PR title and body from commit history and review data.
  * @module scripts/ship/pr-creator
  */

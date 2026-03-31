@@ -40,7 +40,7 @@ interface AutoplanContext {
     hasProductChange: boolean;
 }
 /**
- * 6 auto-decision principles (from gstack).
+ * 6 auto-decision principles.
  */
 export declare const DECISION_PRINCIPLES: DecisionPrinciple[];
 /**

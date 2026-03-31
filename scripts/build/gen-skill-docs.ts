@@ -77,7 +77,7 @@ function buildPlaceholders(): Placeholders {
 
 /**
  * Estimate token count from content length.
- * Same heuristic as gstack: ~4 chars per token.
+ * Estimate token count: ~4 chars per token.
  */
 function estimateTokens(content: string): number {
   return Math.round(content.length / 4);

@@ -29,7 +29,7 @@ export interface TierOptions {
     hasProductChange?: boolean;
 }
 /**
- * Review passes (absorbed from gstack's two-pass review system).
+ * Review passes (two-pass review system).
  * Pass 1: CRITICAL (blocks ship)
  * Pass 2: INFORMATIONAL (quality improvement)
  */
@@ -41,7 +41,7 @@ export declare const REVIEW_PASSES: Record<string, string[]>;
  */
 export declare function classifyFinding(finding: ReviewFinding): 'auto-fix' | 'ask';
 /**
- * Format review results in gstack's output format.
+ * Format review results.
  */
 export declare function formatReviewResults(findings: ReviewFinding[]): string;
 /**

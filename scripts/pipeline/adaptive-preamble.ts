@@ -2,8 +2,7 @@
  * aing Adaptive Preamble Selector (Phase 4 — 200% Differentiator)
  *
  * Automatically selects preamble tier based on complexity score.
- * This is the synergy between gstack's tier system and aing's
- * complexity scoring — adaptive context sizing per agent.
+ * Adaptive context sizing per agent based on complexity scoring.
  *
  * @module scripts/pipeline/adaptive-preamble
  */

@@ -1,6 +1,5 @@
 /**
  * aing Canary Monitor — Post-deploy health monitoring loop
- * Absorbed from gstack's /canary skill.
  * Note: Uses execSync with curl for health checks (fixed command template), safe from injection.
  * @module scripts/ship/canary-monitor
  */

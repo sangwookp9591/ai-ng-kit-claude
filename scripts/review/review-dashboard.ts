@@ -1,6 +1,5 @@
 /**
  * aing Review Readiness Dashboard
- * Absorbed from gstack's review readiness dashboard pattern.
  * Shows review status across all tiers.
  * @module scripts/review/review-dashboard
  */

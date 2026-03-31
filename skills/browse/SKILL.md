@@ -1,7 +1,7 @@
 ---
 name: browse
 description: "Browser QA via MCP Playwright. Navigate, snapshot, interact, verify."
-triggers: ["browse", "qa browser", "browser test", "화면 테스트"]
+triggers: ["aing browse", "aing-browse", "qa browser", "browser test", "화면 테스트", "브라우저"]
 ---
 
 # /aing browse — Browser QA via MCP Playwright

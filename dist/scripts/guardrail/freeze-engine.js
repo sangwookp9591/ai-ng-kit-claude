@@ -1,6 +1,5 @@
 /**
  * aing Freeze Engine — Directory-Scoped Edit Restriction
- * Absorbed from gstack's /freeze + /unfreeze skills.
  *
  * Restricts Edit/Write tools to a specific directory.
  * Uses trailing slash semantics: /src/ won't match /src-old/

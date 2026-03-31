@@ -1,8 +1,7 @@
 /**
  * aing Telemetry Engine — Session Analytics
- * 200% Synergy: gstack Telemetry + aing Context Budget
  *
- * 3-tier privacy model (absorbed from gstack):
+ * 3-tier privacy model:
  *   - community: stable device ID for trend tracking
  *   - anonymous: counter only, no ID
  *   - off: local JSONL only, nothing sent

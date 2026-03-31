@@ -1,6 +1,5 @@
 /**
  * aing Deploy Platform Detector
- * Absorbed from gstack's /setup-deploy platform detection.
  *
  * Auto-detects deployment platform from project files.
  * Priority: Fly.io -> Render -> Vercel -> Netlify -> GitHub Actions -> Manual

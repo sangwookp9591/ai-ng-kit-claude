@@ -3,7 +3,7 @@
  *
  * Maps agent names to their optimal preamble tier.
  * Light agents get T1 (less context = faster), heavy agents get T4 (full context).
- * Combines gstack's tier system with aing's multi-agent routing.
+ * Integrates tier system with aing's multi-agent routing.
  *
  * @module scripts/pipeline/agent-tiers
  */

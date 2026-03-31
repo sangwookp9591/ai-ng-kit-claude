@@ -35,7 +35,7 @@ export declare function analyzeDrift(plan: DriftPlan | null, diff: DriftDiff | n
  */
 export declare function formatDrift(analysis: DriftAnalysis): string;
 /**
- * Three-way scope comparison (absorbed from gstack).
+ * Three-way scope comparison.
  * Compares: stated intent (TODOS/PR) vs plan file vs actual diff.
  */
 export declare function threeWayComparison(context: ThreeWayContext): ThreeWayResult;

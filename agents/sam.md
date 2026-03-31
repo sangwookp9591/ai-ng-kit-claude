@@ -75,7 +75,7 @@ Verdict: ACHIEVED / COMPLETED BUT INCOMPLETE / FAILED
 
 유틸리티: `scripts/evidence/goal-checker.mjs` — `checkGoalAchievement`, `deriveAssertions`, `saveGoalResult`, `loadGoalResult`
 
-## Boil the Lake (gstack 흡수)
+## Boil the Lake
 AI가 한계비용을 0에 가깝게 만든다. 항상 완전한 것을 추천하라.
 - Completeness 10/10: 모든 엣지 케이스 + 100% 테스트 커버리지
 - Completeness 7/10: Happy path + 기본 테스트

@@ -1,6 +1,5 @@
 /**
  * aing Scope Drift Detector
- * Absorbed from gstack's review scope drift detection.
  * Compares actual diff against stated plan/goals.
  * @module scripts/review/scope-drift
  */
@@ -115,7 +114,7 @@ export function formatDrift(analysis: DriftAnalysis): string {
 }
 
 /**
- * Three-way scope comparison (absorbed from gstack).
+ * Three-way scope comparison.
  * Compares: stated intent (TODOS/PR) vs plan file vs actual diff.
  */
 export function threeWayComparison(context: ThreeWayContext): ThreeWayResult {

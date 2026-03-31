@@ -1,6 +1,5 @@
 /**
  * aing Changelog Generator
- * Absorbed from gstack's CHANGELOG generation.
  * Parses git log and groups commits by category.
  * @module scripts/ship/changelog-gen
  */

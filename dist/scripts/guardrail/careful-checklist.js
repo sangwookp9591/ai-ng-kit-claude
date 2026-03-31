@@ -1,6 +1,5 @@
 /**
  * aing Careful Checklist — Pre-deploy safety verification
- * Absorbed from gstack's /careful skill.
  * @module scripts/guardrail/careful-checklist
  */
 export const DANGEROUS_PATTERNS = [

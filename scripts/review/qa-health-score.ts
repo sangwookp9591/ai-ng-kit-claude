@@ -1,6 +1,5 @@
 /**
  * aing QA Health Score Calculator
- * Absorbed from gstack's 8-category weighted health score.
  *
  * @module scripts/review/qa-health-score
  */
