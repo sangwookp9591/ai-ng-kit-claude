@@ -83,8 +83,9 @@ scripts/**/*.ts        →    dist/scripts/**/*.js        (SKILL.md에서 참조
 
 - `.mjs` 확장자를 스킬에서 사용하지 말 것. `tsc`는 `module: "NodeNext"`에서 `.js`로 출력
 - `prepublishOnly`가 `npm run build`를 실행하므로, npm publish 시 자동 빌드됨
-- 플러그인 캐시(`~/.claude/plugins/cache/`)는 git clone 기반이므로, `dist/`가 git에 포함되어야 함
-  - 또는 설치 후 `npm install && npm run build` 실행 필요
+- **`dist/`는 반드시 git에 커밋해야 함.** 플러그인 캐시(`~/.claude/plugins/cache/`)는 git clone 기반이므로, `dist/`가 git에 없으면 hooks와 scripts가 MODULE_NOT_FOUND 에러 발생
+- `.gitignore`에서 `dist/`를 제외하지 말 것
+- 릴리즈 전 `npm run build:ts`로 빌드 후 `dist/` 변경분도 함께 커밋
 
 ## 버전 히스토리 확인
 

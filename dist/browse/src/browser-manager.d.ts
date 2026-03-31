@@ -1,0 +1,70 @@
+import { BrowserContext, Page, Locator, Frame } from 'playwright';
+import { LogEntry, NetworkEntry, DialogEntry } from './buffers.js';
+import type { SnapshotOptions } from './types.js';
+export declare class BrowserManager {
+    private browser;
+    private context;
+    private pages;
+    private activeTabId;
+    private nextTabId;
+    private refMap;
+    private cRefMap;
+    private previousSnapshot;
+    private consoleBuffer;
+    private networkBuffer;
+    private dialogBuffer;
+    private customHeaders;
+    private dialogOverride;
+    private currentFrame;
+    private _userAgent;
+    constructor();
+    launch(headless?: boolean): Promise<void>;
+    private _attachPageListeners;
+    shutdown(): Promise<void>;
+    getActivePage(): Page;
+    getContext(): BrowserContext | null;
+    newTab(url?: string): Promise<number>;
+    switchTab(id: number): Promise<void>;
+    closeTab(id?: number): Promise<void>;
+    listTabs(): Array<{
+        id: number;
+        url: string;
+        title: string;
+    }>;
+    listTabsAsync(): Promise<Array<{
+        id: number;
+        url: string;
+        title: string;
+        active: boolean;
+    }>>;
+    buildRefs(options: SnapshotOptions): Promise<string>;
+    resolveRef(ref: string): Promise<Locator>;
+    clearRefs(): void;
+    getConsoleEntries(errorsOnly?: boolean): LogEntry[];
+    clearConsole(): void;
+    getNetworkEntries(): NetworkEntry[];
+    clearNetwork(): void;
+    getDialogEntries(): DialogEntry[];
+    setCustomHeader(name: string, value: string): Promise<void>;
+    setDialogBehavior(action: 'accept' | 'dismiss', text?: string): void;
+    clearDialogs(): void;
+    setUserAgent(ua: string): Promise<void>;
+    importCookies(cookies: Array<{
+        name: string;
+        value: string;
+        domain?: string;
+        path?: string;
+        url?: string;
+        [key: string]: any;
+    }>): Promise<void>;
+    private get stateDir();
+    saveState(name: string): Promise<void>;
+    loadState(name: string): Promise<void>;
+    switchToFrame(target: string): Promise<Frame>;
+    switchToFrameByName(name: string): Promise<Frame>;
+    switchToFrameByUrl(pattern: string): Promise<Frame>;
+    switchToMainFrame(): void;
+    getCurrentFrame(): Frame | null;
+    isLaunched(): boolean;
+}
+//# sourceMappingURL=browser-manager.d.ts.map

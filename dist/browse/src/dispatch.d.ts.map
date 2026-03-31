@@ -1,0 +1,1 @@
+{"version":3,"file":"dispatch.d.ts","sourceRoot":"","sources":["../../../browse/src/dispatch.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,cAAc,EAAE,MAAM,sBAAsB,CAAC;AAC3D,OAAO,KAAK,EAAE,aAAa,EAAE,MAAM,YAAY,CAAC;AAMhD,wBAAsB,eAAe,CACnC,GAAG,EAAE,MAAM,EACX,IAAI,EAAE,MAAM,EAAE,EACd,EAAE,EAAE,cAAc,EAClB,QAAQ,EAAE,MAAM,IAAI,GACnB,OAAO,CAAC,aAAa,CAAC,CAoBxB"}
