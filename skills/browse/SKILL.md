@@ -1,5 +1,5 @@
 ---
-name: aing-browse
+name: browser
 description: "Browser QA via MCP Playwright. Navigate, snapshot, interact, verify."
 triggers: ["aing browse", "aing-browse", "qa browser", "browser test", "화면 테스트", "브라우저"]
 ---
