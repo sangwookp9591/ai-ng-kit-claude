@@ -51,9 +51,9 @@ Sam이 수집하는 증거:
 
 Sam 에이전트에게 전달할 때 이 구분을 포함하세요.
 
-유틸리티: `scripts/evidence/goal-checker.mjs`
+유틸리티: `dist/scripts/evidence/goal-checker.js`
 ```js
-import { checkGoalAchievement, deriveAssertions } from './scripts/evidence/goal-checker.mjs';
+import { checkGoalAchievement, deriveAssertions } from './dist/scripts/evidence/goal-checker.js';
 
 // 목표에서 assertion 자동 도출
 const assertions = deriveAssertions(goalDescription);

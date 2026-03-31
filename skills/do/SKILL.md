@@ -19,10 +19,10 @@ triggers: ["do", "해줘", "만들어", "추가해", "수정해", "고쳐"]
 
 ## Step 1: Intent 분석
 
-`${CLAUDE_PLUGIN_ROOT}/scripts/routing/intent-router.mjs`를 실행하여 라우팅 결정을 받습니다:
+`${CLAUDE_PLUGIN_ROOT}/dist/scripts/routing/intent-router.js`를 실행하여 라우팅 결정을 받습니다:
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/routing/intent-router.mjs" "<사용자 입력>"
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/routing/intent-router.js" "<사용자 입력>"
 ```
 
 출력 예시:

@@ -103,7 +103,7 @@ Read the task description and estimate complexity:
 Before creating the CC team, **persist the plan to disk**:
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" plan \
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/cli/persist.js" plan \
   --dir "$(pwd)" \
   --feature "{feature}" \
   --goal "{task description}" \
@@ -269,7 +269,7 @@ After displaying the completion report:
 3. TeamDelete({ team_name: "<feature-slug>" })
 4. **Persist completion report and learning**:
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" report --dir "$(pwd)" --feature "{feature}" --lessons "{lesson1}|{lesson2}"
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/cli/persist.js" report --dir "$(pwd)" --feature "{feature}" --lessons "{lesson1}|{lesson2}"
 ```
 5. This generates `.aing/reports/{date}-{feature}.md`
 

@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.8.8] - 2026-03-31 — Fix: .mjs script path resolution
+
+### Fixed
+
+- **스킬 스크립트 경로 수정:** 모든 스킬의 `scripts/*.mjs` 참조를 `dist/scripts/*.js`로 변경
+  - 원인: `tsc` 빌드가 `dist/`로 출력하지만 스킬 파일들이 소스 경로의 `.mjs`를 참조
+  - 영향: `stop.js`, `intent-router.mjs`, `persist.mjs`, `setup-progress.mjs` 등 MODULE_NOT_FOUND 에러
+  - 수정 파일: `do`, `auto`, `team`, `plan-task`, `debug`, `start`, `agent-ui`, `verify-evidence` SKILL.md
+  - hooks.json은 이미 `dist/hooks-handlers/*.js`를 올바르게 참조 (변경 없음)
+
+### Changed
+
+- **버전 동기화:** `package.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` 3곳 모두 `2.8.8`로 통일
+- **docs 업데이트:** `docs/USER-GUIDE.md` 버전 헤더 `v2.5.0` → `v2.8.8`
+
 ## [2.8.7] - 2026-03-31 — Harness Architect: 7-Feature Meta-Skill
 
 ### Added

@@ -39,7 +39,7 @@ mkdir -p .aing/debug
 ### Step 2: DEBUG.md 파일 생성
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" debug-init \
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/cli/persist.js" debug-init \
   --dir "$(pwd)" \
   --slug "{slug}" \
   --title "{symptom}" \

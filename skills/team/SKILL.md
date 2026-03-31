@@ -144,7 +144,7 @@ Able 에이전트가 수행:
 Able 완료 후 **반드시 실행**:
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" plan \
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/cli/persist.js" plan \
   --dir "$(pwd)" \
   --feature "{feature}" \
   --goal "{goal from Able}" \
@@ -511,7 +511,7 @@ PROTOCOL:
 3. TeamDelete({ team_name: "<feature-slug>" })
 4. **Persist report + learning**:
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/cli/persist.mjs" report --dir "$(pwd)" --feature "{feature}" --lessons "{lesson1}|{lesson2}"
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/cli/persist.js" report --dir "$(pwd)" --feature "{feature}" --lessons "{lesson1}|{lesson2}"
 ```
 5. This generates `.aing/reports/{date}-{feature}.md`
 

@@ -66,7 +66,7 @@ EXAMPLES:
 
 Run this command to check:
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" check
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/setup/setup-progress.js" check
 ```
 
 ### If Already Configured (and no --force flag)
@@ -95,7 +95,7 @@ Use AskUserQuestion:
 Phase 실행 전에 이전 세션 상태 확인:
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" resume
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/setup/setup-progress.js" resume
 ```
 
 "fresh"가 아니면 AskUserQuestion:
@@ -108,7 +108,7 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" resume
 
 Option 2 선택 시:
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" clear
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/setup/setup-progress.js" clear
 ```
 
 ---
@@ -180,14 +180,14 @@ aing CLAUDE.md 설정 완료
 ### Save Progress
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" save 1 <CONFIG_TARGET>
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/setup/setup-progress.js" save 1 <CONFIG_TARGET>
 ```
 
 ### Early Exit for Flag Mode
 
 `--local` 또는 `--global` 플래그 사용 시:
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" clear
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/setup/setup-progress.js" clear
 ```
 Phase 2로 진행하지 않고 **여기서 중단**.
 
@@ -234,11 +234,11 @@ const candidates = [
 ].filter(Boolean);
 
 let pluginRoot = candidates.find(p => {
-  try { return existsSync(join(p, 'scripts/hud/statusline.mjs')); } catch { return false; }
+  try { return existsSync(join(p, 'dist/scripts/hud/statusline.js')); } catch { return false; }
 }) || candidates[0];
 
 try {
-  const result = execFileSync('node', [join(pluginRoot, 'scripts/hud/statusline.mjs')], {
+  const result = execFileSync('node', [join(pluginRoot, 'dist/scripts/hud/statusline.js')], {
     env: { ...process.env, CLAUDE_PLUGIN_ROOT: pluginRoot },
     timeout: 3000
   });
@@ -257,7 +257,7 @@ try {
 ### Save Progress
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" save 2 <CONFIG_TARGET>
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/setup/setup-progress.js" save 2 <CONFIG_TARGET>
 ```
 
 ---
@@ -278,7 +278,7 @@ AskUserQuestion:
 ### Save Progress
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" save 3 <CONFIG_TARGET>
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/setup/setup-progress.js" save 3 <CONFIG_TARGET>
 ```
 
 ---
@@ -288,7 +288,7 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" save 3 <CONFIG_TAR
 ### Mark Completion
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/scripts/setup/setup-progress.mjs" complete "2.1.7" "<CONFIG_TARGET>" "<HUD_ENABLED>" "<DEFAULT_MODE>"
+node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/setup/setup-progress.js" complete "2.1.7" "<CONFIG_TARGET>" "<HUD_ENABLED>" "<DEFAULT_MODE>"
 ```
 
 ### Show Welcome
