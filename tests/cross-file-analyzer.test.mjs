@@ -1,103 +1,138 @@
-/**
- * aing Cross-File Analyzer Test Suite
- * Tests import graph analysis, circular dep detection, depth limiting.
- *
- * Run: node --test tests/cross-file-analyzer.test.mjs
- */
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import { analyzeImports, detectCircularDeps } from '../dist/scripts/review/cross-file-analyzer.js';
 
-const TEST_DIR = join(tmpdir(), `aing-cross-file-test-${Date.now()}`);
-const MOD_PATH = '../dist/scripts/review/cross-file-analyzer.js';
+// Create temp dir for test fixtures
+const TMP = join(tmpdir(), `cross-file-test-${Date.now()}`);
 
 before(() => {
-  mkdirSync(join(TEST_DIR, 'src'), { recursive: true });
+  mkdirSync(TMP, { recursive: true });
 });
 
 after(() => {
-  rmSync(TEST_DIR, { recursive: true, force: true });
+  rmSync(TMP, { recursive: true, force: true });
 });
 
-describe('analyzeImports', () => {
-  it('파일 간 import 관계를 추출한다', async () => {
-    const { analyzeImports } = await import(MOD_PATH);
-    const dir = join(TEST_DIR, 'src');
-    writeFileSync(join(dir, 'a.ts'), `import { foo } from './b.js';`);
-    writeFileSync(join(dir, 'b.ts'), `export const foo = 1;`);
+describe('cross-file-analyzer', () => {
+  describe('analyzeImports — import parsing', () => {
+    it('parses named imports', () => {
+      const fileA = join(TMP, 'a.ts');
+      const fileB = join(TMP, 'b.ts');
+      writeFileSync(fileA, `import { foo, bar } from './b.js';\n`);
+      writeFileSync(fileB, `export function foo() {}\nexport function bar() {}\n`);
 
-    const result = analyzeImports([join(dir, 'a.ts')], TEST_DIR);
-    assert.ok(result.imports.length >= 1);
-    assert.equal(result.imports[0].source, join(dir, 'a.ts'));
+      const result = analyzeImports([fileA], TMP);
+      assert.equal(result.imports.length, 1);
+      assert.equal(result.imports[0].source, fileA);
+      assert.ok(result.imports[0].specifiers.includes('foo'));
+      assert.ok(result.imports[0].specifiers.includes('bar'));
+    });
+
+    it('parses default imports', () => {
+      const fileC = join(TMP, 'c.ts');
+      const fileD = join(TMP, 'd.ts');
+      writeFileSync(fileC, `import MyDefault from './d.js';\n`);
+      writeFileSync(fileD, `export default function MyDefault() {}\n`);
+
+      const result = analyzeImports([fileC], TMP);
+      assert.equal(result.imports.length, 1);
+      assert.ok(result.imports[0].specifiers.includes('MyDefault'));
+    });
+
+    it('parses star imports', () => {
+      const fileE = join(TMP, 'e.ts');
+      const fileF = join(TMP, 'f.ts');
+      writeFileSync(fileE, `import * as utils from './f.js';\n`);
+      writeFileSync(fileF, `export const x = 1;\n`);
+
+      const result = analyzeImports([fileE], TMP);
+      assert.equal(result.imports.length, 1);
+      assert.ok(result.imports[0].specifiers[0].startsWith('* as'));
+    });
+
+    it('skips node_modules and absolute imports', () => {
+      const fileG = join(TMP, 'g.ts');
+      writeFileSync(fileG, `import { readFile } from 'node:fs';\nimport React from 'react';\n`);
+
+      const result = analyzeImports([fileG], TMP);
+      assert.equal(result.imports.length, 0);
+    });
+
+    it('returns empty for empty file', () => {
+      const fileH = join(TMP, 'empty.ts');
+      writeFileSync(fileH, '');
+
+      const result = analyzeImports([fileH], TMP);
+      assert.equal(result.imports.length, 0);
+      assert.equal(result.circularDeps.length, 0);
+      assert.equal(result.unusedExports.length, 0);
+    });
   });
 
-  it('depth limit 초과 시 탐색을 중단한다', async () => {
-    const { analyzeImports } = await import(MOD_PATH);
-    const chainDir = join(TEST_DIR, 'chain');
-    mkdirSync(chainDir, { recursive: true });
-    // d0 → d1 → d2 → d3 → d4
-    for (let i = 0; i < 5; i++) {
-      const content = i < 4
-        ? `import { x } from './d${i + 1}.js';`
-        : 'export const x = 1;';
-      writeFileSync(join(chainDir, `d${i}.ts`), content);
-    }
-    const result = analyzeImports([join(chainDir, 'd0.ts')], TEST_DIR, 2);
-    // Should stop before reaching d4
-    assert.ok(result.depth <= 2);
+  describe('detectCircularDeps', () => {
+    it('detects simple A→B→A cycle', () => {
+      const cycles = detectCircularDeps([
+        { source: 'a', target: 'b', specifiers: [] },
+        { source: 'b', target: 'a', specifiers: [] },
+      ]);
+      assert.ok(cycles.length >= 1);
+      const flatCycle = cycles[0];
+      assert.ok(flatCycle.includes('a'));
+      assert.ok(flatCycle.includes('b'));
+    });
+
+    it('detects no cycle in linear chain', () => {
+      const cycles = detectCircularDeps([
+        { source: 'a', target: 'b', specifiers: [] },
+        { source: 'b', target: 'c', specifiers: [] },
+      ]);
+      assert.equal(cycles.length, 0);
+    });
+
+    it('detects 3-node cycle A→B→C→A', () => {
+      const cycles = detectCircularDeps([
+        { source: 'a', target: 'b', specifiers: [] },
+        { source: 'b', target: 'c', specifiers: [] },
+        { source: 'c', target: 'a', specifiers: [] },
+      ]);
+      assert.ok(cycles.length >= 1);
+    });
+
+    it('returns empty for no imports', () => {
+      const cycles = detectCircularDeps([]);
+      assert.equal(cycles.length, 0);
+    });
   });
 
-  it('depth limit 이내면 전체 탐색', async () => {
-    const { analyzeImports } = await import(MOD_PATH);
-    const shallowDir = join(TEST_DIR, 'shallow');
-    mkdirSync(shallowDir, { recursive: true });
-    writeFileSync(join(shallowDir, 'root.ts'), `import { x } from './leaf.js';`);
-    writeFileSync(join(shallowDir, 'leaf.ts'), 'export const x = 1;');
-    const result = analyzeImports([join(shallowDir, 'root.ts')], TEST_DIR, 3);
-    assert.ok(result.imports.length >= 1);
+  describe('analyzeImports — depth limit', () => {
+    it('respects maxDepth=1 and does not traverse deeper', () => {
+      const d1 = join(TMP, 'depth1.ts');
+      const d2 = join(TMP, 'depth2.ts');
+      const d3 = join(TMP, 'depth3.ts');
+      writeFileSync(d1, `import { x } from './depth2.js';\n`);
+      writeFileSync(d2, `import { y } from './depth3.js';\nexport const x = 1;\n`);
+      writeFileSync(d3, `export const y = 2;\n`);
+
+      // maxDepth=1: only d1→d2 edge, d2→d3 not explored
+      const result = analyzeImports([d1], TMP, 1);
+      const targets = result.imports.map(e => e.target);
+      assert.ok(targets.includes(d2), 'Should include d2');
+      assert.ok(!targets.includes(d3), 'Should NOT include d3 at depth>1');
+    });
   });
 
-  it('node 내장 모듈은 무시한다', async () => {
-    const { analyzeImports } = await import(MOD_PATH);
-    const nodeDir = join(TEST_DIR, 'node-test');
-    mkdirSync(nodeDir, { recursive: true });
-    writeFileSync(join(nodeDir, 'main.ts'), `import { readFileSync } from 'node:fs';`);
-    const result = analyzeImports([join(nodeDir, 'main.ts')], TEST_DIR);
-    // node:fs should not appear as import target
-    assert.equal(result.imports.length, 0);
-  });
-});
+  describe('analyzeImports — circular dep via actual files', () => {
+    it('detects circular deps in file graph', () => {
+      const ca = join(TMP, 'circ-a.ts');
+      const cb = join(TMP, 'circ-b.ts');
+      writeFileSync(ca, `import { b } from './circ-b.js';\nexport const a = 1;\n`);
+      writeFileSync(cb, `import { a } from './circ-a.js';\nexport const b = 2;\n`);
 
-describe('detectCircularDeps', () => {
-  it('순환 참조를 감지한다', async () => {
-    const { detectCircularDeps } = await import(MOD_PATH);
-    const edges = [
-      { source: '/a.ts', target: '/b.ts', specifiers: ['x'] },
-      { source: '/b.ts', target: '/c.ts', specifiers: ['y'] },
-      { source: '/c.ts', target: '/a.ts', specifiers: ['z'] },
-    ];
-    const cycles = detectCircularDeps(edges);
-    assert.ok(cycles.length > 0, 'Should detect at least one cycle');
-    const flatCycle = cycles[0];
-    assert.ok(flatCycle.includes('/a.ts'));
-    assert.ok(flatCycle.includes('/b.ts'));
-    assert.ok(flatCycle.includes('/c.ts'));
-  });
-
-  it('순환 없으면 빈 배열', async () => {
-    const { detectCircularDeps } = await import(MOD_PATH);
-    const edges = [
-      { source: '/a.ts', target: '/b.ts', specifiers: ['x'] },
-      { source: '/b.ts', target: '/c.ts', specifiers: ['y'] },
-    ];
-    const cycles = detectCircularDeps(edges);
-    assert.deepStrictEqual(cycles, []);
-  });
-
-  it('빈 입력은 빈 배열', async () => {
-    const { detectCircularDeps } = await import(MOD_PATH);
-    assert.deepStrictEqual(detectCircularDeps([]), []);
+      const result = analyzeImports([ca], TMP, 3);
+      assert.ok(result.circularDeps.length >= 1);
+    });
   });
 });

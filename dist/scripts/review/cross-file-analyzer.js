@@ -14,6 +14,15 @@ function resolveImportPath(source, importPath) {
     if (!importPath.startsWith('.'))
         return null; // Skip node_modules / absolute
     const base = dirname(source);
+    // ESM pattern: import './foo.js' → try ./foo.ts first
+    if (importPath.endsWith('.js')) {
+        const tsPath = resolve(base, importPath.replace(/\.js$/, '.ts'));
+        if (existsSync(tsPath))
+            return tsPath;
+        const tsxPath = resolve(base, importPath.replace(/\.js$/, '.tsx'));
+        if (existsSync(tsxPath))
+            return tsxPath;
+    }
     const extensions = ['.ts', '.tsx', '.js', '.jsx', ''];
     for (const ext of extensions) {
         const candidate = resolve(base, importPath + ext);
