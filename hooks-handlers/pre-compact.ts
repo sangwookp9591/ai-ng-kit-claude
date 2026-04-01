@@ -107,7 +107,7 @@ try {
 
   if (parts.length > 0) {
     process.stdout.write(JSON.stringify({
-      hookSpecificOutput: { additionalContext: parts.join('\n\n') }
+      systemMessage: parts.join('\n\n')
     }));
     log.info('Compaction context injected', { hasBudgetWarning: budgetLines.length > 0 });
   } else {
