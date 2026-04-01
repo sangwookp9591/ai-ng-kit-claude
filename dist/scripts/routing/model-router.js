@@ -4,6 +4,7 @@
  * @module scripts/routing/model-router
  */
 import { scoreComplexity } from './complexity-scorer.js';
+import { loadConfig } from '../core/config.js';
 /**
  * Model tiers ordered by capability.
  */
@@ -131,6 +132,13 @@ export function getCostMode() {
     const env = process.env.SWKIT_COST_MODE;
     if (env && ['quality', 'balanced', 'budget'].includes(env))
         return env;
+    try {
+        const config = loadConfig();
+        const costMode = config.profile?.costMode;
+        if (costMode && ['quality', 'balanced', 'budget'].includes(costMode))
+            return costMode;
+    }
+    catch { /* fallback */ }
     return 'balanced';
 }
 //# sourceMappingURL=model-router.js.map

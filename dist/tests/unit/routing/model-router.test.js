@@ -162,5 +162,11 @@ describe('getCostMode', () => {
         process.env.SWKIT_COST_MODE = 'invalid';
         expect(getCostMode()).toBe('balanced');
     });
+    it('budget env takes priority when config would return quality', () => {
+        // env 우선 원칙: env=budget이면 config 무관하게 budget 반환
+        process.env.SWKIT_COST_MODE = 'budget';
+        // no need to mock config — env check happens first in getCostMode
+        expect(getCostMode()).toBe('budget');
+    });
 });
 //# sourceMappingURL=model-router.test.js.map

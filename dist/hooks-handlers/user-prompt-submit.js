@@ -5,7 +5,8 @@
  */
 import { readStdinJSON } from '../scripts/core/stdin.js';
 import { detectIntent } from '../scripts/i18n/intent-detector.js';
-import { selectTeam, estimateTeamCost } from '../scripts/pipeline/team-orchestrator.js';
+import { selectTeamWithProfile, estimateTeamCost } from '../scripts/pipeline/team-orchestrator.js';
+import { resolveProfile } from '../scripts/routing/profile-resolver.js';
 import { getActiveSession, sanitizeSessionField } from '../scripts/core/session-reader.js';
 import { trackInjection, trimToTokenBudget } from '../scripts/core/context-budget.js';
 import { checkPlanGate } from '../scripts/hooks/plan-gate.js';
@@ -142,7 +143,12 @@ try {
         hasArchChange: /architect|refactor|migration|restructure|아키텍처|리팩토링|마이그레이션/i.test(prompt),
         lineCount: prompt.length > 200 ? 200 : prompt.length > 100 ? 80 : prompt.length > 50 ? 30 : 10,
     };
-    const team = selectTeam(signals);
+    let resolvedProfile;
+    try {
+        resolvedProfile = resolveProfile(projectDir);
+    }
+    catch { /* fallback */ }
+    const team = selectTeamWithProfile(signals, resolvedProfile);
     const cost = estimateTeamCost(team.preset);
     // Always show team recommendation with agent deployment table
     parts.push(`━━━ aing Team Deployment ━━━`);

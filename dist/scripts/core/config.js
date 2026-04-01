@@ -1,10 +1,11 @@
 /**
  * aing Configuration Loader
- * Single source of truth: aing.config.json
+ * Single source of truth: .aing/config.json > aing.config.json > DEFAULTS
  * @module scripts/core/config
  */
 import { readState } from './state.js';
 import { join } from 'node:path';
+import { statSync } from 'node:fs';
 const DEFAULTS = {
     pdca: {
         stages: ['plan', 'do', 'check', 'act', 'review'],
@@ -35,23 +36,66 @@ const DEFAULTS = {
     i18n: {
         defaultLocale: 'ko',
         supportedLocales: ['ko', 'en']
+    },
+    profile: {
+        costMode: 'balanced',
+        maxTeamSize: 7,
+        tokenLimit: null,
+        agents: {
+            categories: {
+                leadership: true,
+                backend: true,
+                frontend: true,
+                design: true,
+                aiml: true,
+                special: true
+            },
+            deny: [],
+            allow: []
+        }
     }
 };
 let _configCache = null;
 let _cachedDir = null;
+let _cachedMtimes = null;
 /**
- * Load aing configuration with defaults merge.
+ * Safely read mtime of a file. Returns '0' if file does not exist.
+ */
+function safeStatMtime(path) {
+    try {
+        return statSync(path).mtimeMs.toString();
+    }
+    catch {
+        return '0';
+    }
+}
+/**
+ * Load aing configuration with 3-way defaults merge.
+ * Priority: .aing/config.json > aing.config.json > DEFAULTS
+ * Cache is invalidated when either file's mtime changes.
  * @param projectDir - Project root directory
  */
 export function loadConfig(projectDir) {
     const dir = projectDir || process.cwd();
-    if (_configCache && _cachedDir === dir)
+    const aingConfigPath = join(dir, '.aing', 'config.json');
+    const legacyConfigPath = join(dir, 'aing.config.json');
+    const currentMtimes = safeStatMtime(aingConfigPath) + ':' + safeStatMtime(legacyConfigPath);
+    if (_configCache && _cachedDir === dir && _cachedMtimes === currentMtimes) {
         return _configCache;
-    const configPath = join(dir, 'aing.config.json');
-    const result = readState(configPath);
-    const userConfig = result.ok ? result.data : {};
+    }
+    const aingResult = readState(aingConfigPath);
+    const aingUserConfig = aingResult.ok
+        ? aingResult.data
+        : {};
+    const legacyResult = readState(legacyConfigPath);
+    const legacyUserConfig = legacyResult.ok
+        ? legacyResult.data
+        : {};
+    // 3-way merge: DEFAULTS < legacyConfig < aingConfig
+    const merged = deepMerge(deepMerge(DEFAULTS, legacyUserConfig), aingUserConfig);
     _cachedDir = dir;
-    _configCache = Object.freeze(deepMerge(DEFAULTS, userConfig));
+    _cachedMtimes = currentMtimes;
+    _configCache = Object.freeze(merged);
     return _configCache;
 }
 /**
@@ -76,6 +120,7 @@ export function getConfig(path, fallback) {
 export function resetConfigCache() {
     _configCache = null;
     _cachedDir = null;
+    _cachedMtimes = null;
 }
 function deepMerge(target, source) {
     const result = { ...target };

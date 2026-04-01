@@ -48,6 +48,17 @@ export declare function getTokenSummary(projectDir?: string): TokenSummary;
  */
 export declare function formatTokenReport(summary: TokenSummary): string;
 /**
+ * Check whether the current session token usage has exceeded the given limit.
+ *
+ * @param limit - token limit, or null to disable the check
+ * @param projectDir - optional project directory for telemetry lookup
+ */
+export declare function checkSessionTokenLimit(limit: number | null, projectDir?: string): {
+    exceeded: boolean;
+    usage: number;
+    limit: number | null;
+};
+/**
  * Delete the token usage file (for testing / reset).
  */
 export declare function clearTokenUsage(projectDir?: string): void;

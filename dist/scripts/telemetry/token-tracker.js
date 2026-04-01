@@ -136,6 +136,20 @@ export function formatTokenReport(summary) {
     return lines.join('\n');
 }
 /**
+ * Check whether the current session token usage has exceeded the given limit.
+ *
+ * @param limit - token limit, or null to disable the check
+ * @param projectDir - optional project directory for telemetry lookup
+ */
+export function checkSessionTokenLimit(limit, projectDir) {
+    if (limit === null) {
+        return { exceeded: false, usage: 0, limit: null };
+    }
+    const summary = getTokenSummary(projectDir);
+    const usage = summary.total.tokens;
+    return { exceeded: usage >= limit, usage, limit };
+}
+/**
  * Delete the token usage file (for testing / reset).
  */
 export function clearTokenUsage(projectDir) {

@@ -13,6 +13,7 @@
  */
 import { createLogger } from '../core/logger.js';
 import { scoreComplexity } from '../routing/complexity-scorer.js';
+import { filterWorkers } from '../routing/profile-resolver.js';
 const log = createLogger('team');
 /**
  * Team templates — cost-optimized presets.
@@ -208,6 +209,57 @@ export function getTeamPresets() {
         cost: preset.cost,
         description: preset.description
     }));
+}
+/**
+ * Preset order by team size (smallest first).
+ * Used to find a smaller preset when maxTeamSize is too restrictive.
+ */
+const PRESET_SIZE_ORDER = ['solo', 'duo', 'squad', 'full'];
+/**
+ * Find the largest preset whose worker count fits within maxTeamSize.
+ */
+function findFittingPreset(maxTeamSize) {
+    let best = PRESET_SIZE_ORDER[0];
+    for (const key of PRESET_SIZE_ORDER) {
+        const preset = TEAM_PRESETS[key];
+        if (preset && preset.workers.length <= maxTeamSize) {
+            best = key;
+        }
+    }
+    return best;
+}
+/**
+ * Select team and apply profile constraints (maxTeamSize + allowedAgents).
+ * Wraps selectTeam() — existing callers are unaffected.
+ *
+ * If the selected preset exceeds maxTeamSize, automatically downgrades
+ * to the largest fitting preset before applying filterWorkers.
+ */
+export function selectTeamWithProfile(signals = {}, profile) {
+    let selection = selectTeam(signals);
+    if (!profile)
+        return selection;
+    // Downgrade preset if it exceeds maxTeamSize
+    if (selection.team.workers.length > profile.maxTeamSize) {
+        const fittingPreset = findFittingPreset(profile.maxTeamSize);
+        const fittingTeam = TEAM_PRESETS[fittingPreset];
+        selection = {
+            ...selection,
+            preset: fittingPreset,
+            team: fittingTeam,
+        };
+    }
+    const originalCount = selection.team.workers.length;
+    const filtered = filterWorkers(selection.team.workers, profile);
+    const filteredCount = filtered.length;
+    const annotation = filteredCount < originalCount
+        ? ` [profile-limited: ${originalCount}→${filteredCount}]`
+        : '';
+    return {
+        ...selection,
+        team: { ...selection.team, workers: filtered },
+        reason: selection.reason + annotation,
+    };
 }
 export { TEAM_PRESETS };
 //# sourceMappingURL=team-orchestrator.js.map

@@ -9,6 +9,7 @@ import { createLogger } from '../core/logger.js';
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 const log = createLogger('task');
+let _taskIdCounter = 0;
 function getTaskDir(projectDir) {
     const dir = join(projectDir || process.cwd(), '.aing', 'tasks');
     mkdirSync(dir, { recursive: true });
@@ -21,7 +22,7 @@ function getTaskPath(taskId, projectDir) {
  * Create a main task with sub-tasks.
  */
 export function createTask(params, projectDir) {
-    const taskId = `task-${Date.now()}`;
+    const taskId = `task-${Date.now()}-${++_taskIdCounter}`;
     const task = {
         id: taskId,
         title: params.title,

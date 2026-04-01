@@ -7,6 +7,11 @@ export declare function getConfig(key: string, fallback?: unknown, projectDir?: 
  */
 export declare function setConfig(key: string, value: unknown, projectDir?: string): void;
 /**
+ * Apply a named profile preset to config.
+ * Returns true if preset was found and applied, false otherwise.
+ */
+export declare function applyProfilePreset(presetName: string, projectDir?: string): boolean;
+/**
  * List all config values.
  */
 export declare function listConfig(projectDir?: string): Record<string, unknown>;

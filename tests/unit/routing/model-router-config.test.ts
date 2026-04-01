@@ -2,7 +2,7 @@
  * Unit tests for getCostMode — config integration (Step 4)
  * TDD: env > config > 'balanced' priority
  */
-import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 
 // Mock config module so we can control what loadConfig returns
 vi.mock('../../../scripts/core/config.js', () => ({

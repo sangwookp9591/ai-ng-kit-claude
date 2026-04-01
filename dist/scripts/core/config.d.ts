@@ -1,6 +1,6 @@
 /**
  * aing Configuration Loader
- * Single source of truth: aing.config.json
+ * Single source of truth: .aing/config.json > aing.config.json > DEFAULTS
  * @module scripts/core/config
  */
 interface PdcaConfig {
@@ -40,6 +40,24 @@ interface I18nConfig {
     defaultLocale: string;
     supportedLocales: string[];
 }
+interface AgentsConfig {
+    categories: {
+        leadership: boolean;
+        backend: boolean;
+        frontend: boolean;
+        design: boolean;
+        aiml: boolean;
+        special: boolean;
+    };
+    deny: string[];
+    allow: string[];
+}
+interface ProfileConfig {
+    costMode: 'quality' | 'balanced' | 'budget';
+    maxTeamSize: number;
+    tokenLimit: number | null;
+    agents: AgentsConfig;
+}
 interface AingConfig {
     pdca: PdcaConfig;
     context: ContextConfig;
@@ -47,10 +65,13 @@ interface AingConfig {
     learning: LearningConfig;
     recovery: RecoveryConfig;
     i18n: I18nConfig;
+    profile: ProfileConfig;
     [key: string]: unknown;
 }
 /**
- * Load aing configuration with defaults merge.
+ * Load aing configuration with 3-way defaults merge.
+ * Priority: .aing/config.json > aing.config.json > DEFAULTS
+ * Cache is invalidated when either file's mtime changes.
  * @param projectDir - Project root directory
  */
 export declare function loadConfig(projectDir?: string): Readonly<AingConfig>;

@@ -2,8 +2,8 @@
  * Unit tests for checkSessionTokenLimit (token-tracker.ts) — Step 5
  * TDD: null limit, below limit, above limit, existing function stability
  */
-import { describe, it, expect, vi, afterEach } from 'vitest';
-import { mkdirSync, writeFileSync, rmSync, existsSync } from 'node:fs';
+import { describe, it, expect } from 'vitest';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 

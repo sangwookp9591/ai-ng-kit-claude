@@ -32,7 +32,7 @@ const INTENT_PATTERNS = {
     },
     // Wizard mode (non-developer friendly)
     wizard: {
-        ko: ['만들어줘', '도와줘', '어떻게', '모르겠', '초보', '처음', '마법사'],
+        ko: ['도와줘', '어떻게', '모르겠', '초보', '처음', '마법사'],
         en: ['help me', 'how do i', "don't know", 'beginner', 'first time', 'wizard', 'guide me']
     }
 };

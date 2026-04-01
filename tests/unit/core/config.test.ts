@@ -220,7 +220,7 @@ describe('ProfileConfig defaults', () => {
   it('includes profile field in loaded config object', () => {
     const config = loadConfig('/tmp/project');
     expect(config.profile).toBeDefined();
-    expect((config.profile as Record<string, unknown>).costMode).toBe('balanced');
+    expect((config.profile as unknown as Record<string, unknown>).costMode).toBe('balanced');
   });
 });
 
@@ -245,9 +245,9 @@ describe('3-way config merge', () => {
     const config = loadConfig('/tmp/project');
 
     // .aing/config.json wins over aing.config.json
-    expect((config.profile as Record<string, unknown>).costMode).toBe('budget');
+    expect((config.profile as unknown as Record<string, unknown>).costMode).toBe('budget');
     // aing.config.json value is preserved when .aing/config.json doesn't set it
-    expect((config.profile as Record<string, unknown>).maxTeamSize).toBe(3);
+    expect((config.profile as unknown as Record<string, unknown>).maxTeamSize).toBe(3);
   });
 
   it('aing.config.json values override DEFAULTS when .aing/config.json is missing', () => {
@@ -260,9 +260,9 @@ describe('3-way config merge', () => {
       });
 
     const config = loadConfig('/tmp/project');
-    expect((config.profile as Record<string, unknown>).costMode).toBe('quality');
+    expect((config.profile as unknown as Record<string, unknown>).costMode).toBe('quality');
     // Default preserved
-    expect((config.profile as Record<string, unknown>).maxTeamSize).toBe(7);
+    expect((config.profile as unknown as Record<string, unknown>).maxTeamSize).toBe(7);
   });
 
   it('loads without error when both config files are absent', () => {
@@ -283,9 +283,9 @@ describe('3-way config merge', () => {
       });
 
     const config = loadConfig('/tmp/project');
-    expect((config.profile as Record<string, unknown>).maxTeamSize).toBe(4);
-    expect((config.profile as Record<string, unknown>).costMode).toBe('balanced'); // default preserved
-    expect((config.profile as Record<string, unknown>).tokenLimit).toBeNull();   // default preserved
+    expect((config.profile as unknown as Record<string, unknown>).maxTeamSize).toBe(4);
+    expect((config.profile as unknown as Record<string, unknown>).costMode).toBe('balanced'); // default preserved
+    expect((config.profile as unknown as Record<string, unknown>).tokenLimit).toBeNull();   // default preserved
   });
 });
 

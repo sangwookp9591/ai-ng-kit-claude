@@ -77,9 +77,9 @@ export function threeWayComparison(context) {
     });
     const uniqueDelivered = [...new Set(delivered)];
     // Scope creep: files changed that don't match any intent
-    const scopeCreep = uniqueDelivered.filter(d => !intent.some(i => d.toLowerCase().includes(i.toLowerCase().split(' ')[0])));
+    const scopeCreep = uniqueDelivered.filter(d => !intent.some(i => matchesAnyWord(d, i)));
     // Missing: intent items not reflected in any changed file
-    const missing = intent.filter(i => !uniqueDelivered.some(d => d.toLowerCase().includes(i.toLowerCase().split(' ')[0])));
+    const missing = intent.filter(i => !uniqueDelivered.some(d => matchesAnyWord(d, i)));
     let verdict = 'CLEAN';
     if (scopeCreep.length > 0 && missing.length > 0) {
         verdict = 'DRIFT DETECTED + REQUIREMENTS MISSING';
@@ -141,6 +141,14 @@ export function formatThreeWay(result) {
         lines.push('\nAll changes align with stated intent.');
     }
     return lines.join('\n');
+}
+/**
+ * Check if path matches any significant word from intent.
+ */
+function matchesAnyWord(path, intent) {
+    const words = intent.toLowerCase().split(/\s+/).filter(w => w.length > 2);
+    const lowerPath = path.toLowerCase();
+    return words.some(word => lowerPath.includes(word));
 }
 function matchGlob(str, pattern) {
     const escaped = pattern

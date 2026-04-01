@@ -2,7 +2,7 @@
  * Unit tests for applyProfilePreset and setConfig cache invalidation — Step 6
  * TDD: preset application, stale cache prevention
  */
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 vi.mock('../../../scripts/core/state.js', () => ({
   readStateOrDefault: vi.fn(),
@@ -13,7 +13,7 @@ vi.mock('../../../scripts/core/config.js', () => ({
   resetConfigCache: vi.fn(),
 }));
 
-import { applyProfilePreset, setConfig, getConfig } from '../../../scripts/cli/aing-config.js';
+import { applyProfilePreset, setConfig } from '../../../scripts/cli/aing-config.js';
 import { readStateOrDefault, writeState } from '../../../scripts/core/state.js';
 import { resetConfigCache } from '../../../scripts/core/config.js';
 
@@ -24,7 +24,7 @@ const mockResetConfigCache = vi.mocked(resetConfigCache);
 beforeEach(() => {
   vi.clearAllMocks();
   mockReadStateOrDefault.mockReturnValue({});
-  mockWriteState.mockImplementation(() => {});
+  mockWriteState.mockImplementation(() => ({ ok: true }));
   mockResetConfigCache.mockImplementation(() => {});
 });
 

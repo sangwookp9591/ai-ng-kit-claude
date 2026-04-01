@@ -1,5 +1,43 @@
 # Changelog
 
+## [2.8.94] - 2026-04-01 — User Agent Profile + Plan-Task v2
+
+사용자별 에이전트/비용 설정 시스템 + 적응적 계획 파이프라인.
+토큰 사용량이 적은 사용자도 경량 프로필로 aing 활용 가능.
+
+### Added
+
+- **User Agent Profile** (`scripts/routing/profile-resolver.ts`): 사용자별 에이전트 범위 + 비용 한도 설정
+  - `resolveProfile()`: config에서 프로필 해석 (카테고리 ON/OFF + allow/deny + costMode)
+  - `filterWorkers()`: verifier-first pruning + sam protected + 0명 solo fallback
+  - `isAgentAllowed()`: OR 시맨틱 (다중 카테고리 에이전트 지원)
+  - `AGENT_CATEGORIES`: 21개 에이전트 → 6개 카테고리 단일 소스 매핑
+  - CLI 프리셋: `aing config profile light|standard|full`
+- **Config 3단 Merge** (`scripts/core/config.ts`): `.aing/config.json` > `aing.config.json` > DEFAULTS
+  - mtime 기반 캐시 무효화, `ProfileConfig` 인터페이스
+- **selectTeamWithProfile** (`scripts/pipeline/team-orchestrator.ts`): 기존 selectTeam() API 불변 래퍼
+- **checkSessionTokenLimit** (`scripts/telemetry/token-tracker.ts`): 세션 토큰 한도 체크
+
+### Changed
+
+- **plan-task v2**: 적응적 모델 라우팅, Context-First Architecture
+  - Phase 0.5 Explore(haiku, 30초) → context snapshot → 전 에이전트 주입
+  - 복잡도별 모델 자동 결정 (low: haiku/sonnet, mid: sonnet/opus, high: opus)
+  - 2단계 Complexity 재평가 (정적 + Ryan Constraint 기반 동적)
+  - Tool Call Budget + Timeout (Critic: 5/10, Ryan: 5, Klay: 15)
+  - Klay Missing Constraints 파이프라인 내 복구 (Phase 1 재실행 없음)
+  - antithesis=0 → INVALID (rubber stamp 구조적 차단)
+  - 수렴 감지 강화 (stagnation + cosmetic diff 감지)
+- **getCostMode()**: 환경변수 외에 config profile.costMode도 읽기
+- **user-prompt-submit hook**: selectTeam → selectTeamWithProfile 교체
+
+### Fixed
+
+- **intent-detector**: '만들어줘' wizard 패턴이 pdca_do '만들어'와 충돌 — wizard에서 제거
+- **scope-drift**: threeWayComparison 첫 단어만 매칭 → any word 매칭
+- **task-manager**: Date.now() 기반 taskId 중복 — counter 추가
+- **team-orchestrator**: getTeamPresets 카운트 4→5 (ai-pipeline)
+
 ## [2.8.93] - 2026-04-01 — Token Tracker: Hook-Enforced Usage Tracking
 
 PostToolUse hook에서 Agent 완료 시 `<usage>` 태그를 자동 파싱하여 토큰 사용량을 기록.

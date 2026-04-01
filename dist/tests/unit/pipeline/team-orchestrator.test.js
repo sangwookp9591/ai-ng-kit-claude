@@ -205,9 +205,9 @@ describe('formatTeamSelection', () => {
 });
 // ── getTeamPresets ────────────────────────────────────────────────────────
 describe('getTeamPresets', () => {
-    it('returns all 4 preset configurations', () => {
+    it('returns all 5 preset configurations', () => {
         const presets = getTeamPresets();
-        expect(presets).toHaveLength(4);
+        expect(presets).toHaveLength(5);
     });
     it('each preset has key, name, workers, cost, description', () => {
         for (const preset of getTeamPresets()) {

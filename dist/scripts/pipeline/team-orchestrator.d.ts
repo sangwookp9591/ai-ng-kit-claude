@@ -11,6 +11,7 @@
  *
  * @module scripts/pipeline/team-orchestrator
  */
+import type { ResolvedProfile } from '../routing/profile-resolver.js';
 interface Worker {
     name: string;
     agent: string;
@@ -85,5 +86,13 @@ export declare function formatTeamSelection(selection: TeamSelection): string;
  * Get available team presets for display.
  */
 export declare function getTeamPresets(): PresetInfo[];
+/**
+ * Select team and apply profile constraints (maxTeamSize + allowedAgents).
+ * Wraps selectTeam() — existing callers are unaffected.
+ *
+ * If the selected preset exceeds maxTeamSize, automatically downgrades
+ * to the largest fitting preset before applying filterWorkers.
+ */
+export declare function selectTeamWithProfile(signals?: Record<string, unknown>, profile?: ResolvedProfile): TeamSelection;
 export { TEAM_PRESETS };
 //# sourceMappingURL=team-orchestrator.d.ts.map

@@ -30,7 +30,7 @@ describe('detectIntent — PDCA stages (English)', () => {
         expect(result.pdcaStage).toBe('check');
     });
     it('detects act/improve intent', () => {
-        const result = detectIntent('fix the broken tests');
+        const result = detectIntent('fix the broken logic');
         expect(result.pdcaStage).toBe('act');
     });
     it('detects build as do stage', () => {

@@ -3,7 +3,7 @@
  * TDD: RED phase — tests written before implementation.
  * Covers: resolveProfile, isAgentAllowed, filterWorkers, checkTokenLimit
  */
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 
 import {
   resolveProfile,
@@ -13,7 +13,7 @@ import {
   AGENT_CATEGORIES,
 } from '../../../scripts/routing/profile-resolver.js';
 
-import type { ProfileConfig, AgentsConfig } from '../../../scripts/routing/profile-resolver.js';
+import type { AgentsConfig } from '../../../scripts/routing/profile-resolver.js';
 
 import { TEAM_PRESETS } from '../../../scripts/pipeline/team-orchestrator.js';
 
@@ -37,7 +37,7 @@ function makeAgents(overrides: Partial<AgentsConfig> = {}): AgentsConfig {
   };
 }
 
-function makeWorker(name: string, agent: string = 'executor', model = 'sonnet', role = 'dev') {
+function makeWorker(name: string, agent: string = 'executor', model: 'haiku' | 'sonnet' | 'opus' = 'sonnet', role = 'dev') {
   return { name, agent, model, role };
 }
 

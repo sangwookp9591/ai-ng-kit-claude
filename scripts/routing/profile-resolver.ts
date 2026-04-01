@@ -93,7 +93,7 @@ export interface ResolvedProfile {
 export interface Worker {
   name: string;
   agent: string;  // executor | planner | reviewer | sam
-  model: string;
+  model: 'haiku' | 'sonnet' | 'opus';
   role: string;
 }
 
