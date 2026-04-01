@@ -1,7 +1,7 @@
 {
   "name": "aing",
-  "version": "2.8.87",
-  "description": "Harness Engineering Agent — 18 named agents, 41 skills, AI Pipeline, 1,098 tests, Sub-Agent Context Management, 26 Innovations",
+  "version": "2.8.9",
+  "description": "Harness Engineering Agent — 21 named agents, 41 skills, AING-DR Consensus Planning, AI Pipeline, 1,098 tests, 29 Innovations",
   "author": {
     "name": "SW",
     "url": "https://github.com/sangwookp9591"
