@@ -1,9 +1,10 @@
 /**
- * aing PostToolUse Hook v1.4.0
+ * aing PostToolUse Hook v1.5.0
  */
 import { readStdinJSON } from '../scripts/core/stdin.js';
 import { collectBasicEvidence } from '../scripts/evidence/evidence-collector-lite.js';
 import { recordToolUse } from '../scripts/trace/agent-trace.js';
+import { recordToolError, clearToolErrors } from '../scripts/hooks/error-recovery.js';
 import { resetErrorCount } from '../scripts/guardrail/safety-invariants.js';
 import { norchToolUse, norchAgentDone } from '../scripts/core/norch-bridge.js';
 import { detectLearnablePattern, recordPatternUse } from '../scripts/hooks/learnable-pattern.js';
@@ -49,6 +50,17 @@ try {
   if (toolName === 'Bash' && toolResponse) {
     const ev: BasicEvidence | null = collectBasicEvidence(toolName, toolResponse);
     if (ev) process.stderr.write(`[aing:evidence] ${ev.type}: ${ev.result}\n`);
+
+    // Error recovery: track repeated failures and suggest alternatives
+    const isError = toolResponse.includes('Error') || toolResponse.includes('FAIL') || toolResponse.includes('error:');
+    if (isError) {
+      const { guidance } = recordToolError(projectDir, toolName, toolResponse.slice(0, 500));
+      if (guidance) {
+        process.stderr.write(`\n${guidance}\n`);
+      }
+    } else {
+      clearToolErrors(projectDir, toolName);
+    }
   }
 
   // Pattern learning: detect and record reusable patterns
