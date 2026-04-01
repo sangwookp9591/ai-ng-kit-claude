@@ -9,6 +9,23 @@ import { resetErrorCount } from '../scripts/guardrail/safety-invariants.js';
 import { norchToolUse, norchAgentDone } from '../scripts/core/norch-bridge.js';
 import { detectLearnablePattern, recordPatternUse } from '../scripts/hooks/learnable-pattern.js';
 import { autoAdvancePhase } from '../scripts/hooks/plan-state.js';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+function detectStage(dir: string): string {
+  try {
+    const sessionPath = join(dir, '.aing', 'state', 'team-session.json');
+    if (existsSync(sessionPath)) {
+      const session = JSON.parse(readFileSync(sessionPath, 'utf-8')) as Record<string, unknown>;
+      const stage = (session.currentStage as string) || '';
+      if (stage.includes('plan')) return 'plan';
+      if (stage.includes('exec')) return 'exec';
+      if (stage.includes('verify')) return 'verify';
+      if (stage.includes('fix')) return 'fix';
+    }
+  } catch { /* best-effort */ }
+  return 'other';
+}
 
 interface ParsedInput {
   tool_name?: string;
@@ -48,6 +65,28 @@ try {
           }
         } catch { /* phase advance is best-effort */ }
       }
+
+      // Token tracking: parse <usage> from agent response and log automatically
+      try {
+        const usageMatch = toolResponse.match(/<usage>([\s\S]*?)<\/usage>/);
+        if (usageMatch) {
+          const usageText = usageMatch[1];
+          const totalTokensMatch = usageText.match(/total_tokens:\s*(\d+)/);
+          const toolUsesMatch = usageText.match(/tool_uses:\s*(\d+)/);
+          const durationMsMatch = usageText.match(/duration_ms:\s*(\d+)/);
+
+          const { logTokenUsage } = await import('../scripts/telemetry/token-tracker.js');
+          logTokenUsage({
+            ts: new Date().toISOString(),
+            agent: agentName,
+            stage: detectStage(projectDir),
+            model: (toolInput.model as string) || 'sonnet',
+            totalTokens: totalTokensMatch ? parseInt(totalTokensMatch[1], 10) : null,
+            toolUses: toolUsesMatch ? parseInt(toolUsesMatch[1], 10) : null,
+            durationMs: durationMsMatch ? parseInt(durationMsMatch[1], 10) : null,
+          }, projectDir);
+        }
+      } catch { /* token tracking is best-effort */ }
     } else if (toolName === 'SendMessage' && toolInput.to) {
       const agentKey: string = (toolInput.to as string).replace('aing:', '');
       recordToolUse(toolName, { ...toolInput, _agentName: agentKey }, toolResponse, projectDir);

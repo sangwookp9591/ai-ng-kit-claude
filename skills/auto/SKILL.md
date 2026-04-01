@@ -140,6 +140,26 @@ Each spawned agent prompt MUST include:
 
 Status icons: 🔄 실행 중, ✅ 완료, ❌ 실패, ⏳ 대기 중. Between transitions, forward `@{Name}❯` messages as single lines.
 
+## Token Tracking (MANDATORY per Agent)
+
+Agent(subagent) 스폰 결과를 받으면, 결과의 `<usage>` 블록에서 수치를 추출하여 기록한다:
+- total_tokens, tool_uses, duration_ms
+
+기록 방법:
+```bash
+node -e "
+const {logTokenUsage} = require('${CLAUDE_PLUGIN_ROOT}/dist/scripts/telemetry/token-tracker.js');
+logTokenUsage({ts:new Date().toISOString(), agent:'{name}', stage:'{stage}', model:'{model}', totalTokens:{N}, toolUses:{N}, durationMs:{N}}, process.cwd());
+"
+```
+
+Completion Report에 Token Summary 포함:
+```
+Token Usage:
+  {stage}: ~{N}k tokens ({agent1} {N}k, {agent2} {N}k)
+  total:   ~{N}k tokens
+```
+
 ## Step 7-8: Completion + Shutdown
 
 → Report format + Shutdown + Persist: `references/worker-and-report.md` 참조

@@ -112,6 +112,26 @@ circuit breaker(20회/5분)만이 fail-safe로 존재. 명시적 cancel 또는 P
 
 → 상세: `references/stage-exec.md` 참조
 
+## Token Tracking (MANDATORY per Agent)
+
+Agent(subagent) 스폰 결과를 받으면, 결과의 `<usage>` 블록에서 수치를 추출하여 기록한다:
+- total_tokens, tool_uses, duration_ms
+
+기록 방법:
+```bash
+node -e "
+const {logTokenUsage} = require('${CLAUDE_PLUGIN_ROOT}/dist/scripts/telemetry/token-tracker.js');
+logTokenUsage({ts:new Date().toISOString(), agent:'{name}', stage:'{stage}', model:'{model}', totalTokens:{N}, toolUses:{N}, durationMs:{N}}, process.cwd());
+"
+```
+
+Completion Report에 Token Summary 포함:
+```
+Token Usage:
+  {stage}: ~{N}k tokens ({agent1} {N}k, {agent2} {N}k)
+  total:   ~{N}k tokens
+```
+
 ---
 
 ## Stage 3: team-verify

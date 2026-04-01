@@ -33,6 +33,12 @@
   Files changed: 12
   Duration: ~12 min
   Fix loops: 1
+
+  Token Usage:
+    plan:   ~{N}k tokens ({agent1} {N}k, {agent2} {N}k)
+    exec:   ~{N}k tokens ({agent1} {N}k, {agent2} {N}k)
+    total:  ~{N}k tokens
+
   Report: .aing/reports/{date}-{feature}.md
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

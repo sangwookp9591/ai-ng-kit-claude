@@ -73,6 +73,12 @@ After all tasks complete, ALWAYS display:
 
   Files changed: 12
   Duration: ~8 min
+
+  Token Usage:
+    plan:   ~{N}k tokens ({agent1} {N}k, {agent2} {N}k)
+    exec:   ~{N}k tokens ({agent1} {N}k, {agent2} {N}k)
+    total:  ~{N}k tokens
+
   Learning: saved to .aing/project-memory.json
   Report: .aing/reports/{date}-{feature}.md
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
