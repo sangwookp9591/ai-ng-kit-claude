@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.8.96] - 2026-04-01 — Session Hygiene + Code Quality
+
+세션 간 stale data 유출 방지 + 코드 리뷰 기반 품질 강화.
+
+### Fixed
+
+- **session-start GC**: 완료된 team-session/plan-state/persistent-mode 자동 정리 (stale 세션 참조 방지)
+- **progress-tracker**: 완료/만료(24h) feature를 session-start에서 주입 차단
+- **notepad**: compaction 항목 중복 append → 동일 feature 덮어쓰기
+- **deepMerge**: `__proto__`/`constructor`/`prototype` 키 스킵 (prototype pollution 방지)
+- **intent-detector**: "reviewr" 오타 → "reviewer" (agent name mapping table)
+- **scope-drift**: stop-word 필터로 false positive 방지 ("the", "add" 등)
+
+### Changed
+
+- **타입 중복 제거**: ProfileConfig/AgentsConfig를 config.ts에서 export, Worker를 team-orchestrator에서 re-export
+- **checkTokenLimit 통합**: profile-resolver가 token-tracker의 checkSessionTokenLimit에 위임
+- **config TTL 캐시**: loadConfig()에 5초 statSync TTL 추가 (매 호출 2x statSync → TTL 내 0회)
+- **model-router**: unsafe `as Record` cast 제거, 타입 안전 접근
+
 ## [2.8.94] - 2026-04-01 — User Agent Profile + Plan-Task v2
 
 사용자별 에이전트/비용 설정 시스템 + 적응적 계획 파이프라인.

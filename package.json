@@ -1,6 +1,6 @@
 {
   "name": "ai-ng-kit-claude",
-  "version": "2.8.94",
+  "version": "2.8.96",
   "type": "module",
   "description": "Harness Engineering Agent for Claude Code — 21 named agents, 41 skills, AING-DR Consensus Planning, AI Pipeline, 654 tests, 30 Innovations",
   "license": "Apache-2.0",
