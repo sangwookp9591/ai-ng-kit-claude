@@ -41,4 +41,28 @@ export function scoreComplexity(signals = {}) {
     const level = score <= 3 ? 'low' : score <= 7 ? 'mid' : 'high';
     return { score, level, breakdown };
 }
+/**
+ * Determine DR depth based on complexity level.
+ */
+export function getDRDepth(level) {
+    switch (level) {
+        case 'low': return 'lite';
+        case 'mid': return 'standard';
+        case 'high': return 'deep';
+    }
+}
+/**
+ * Determine if --deliberate mode should be auto-triggered.
+ * Triggers on: (hasSecurity OR hasArchChange) AND score > 5
+ */
+export function shouldForceDeliberate(signals, score) {
+    const hasRisk = (signals.hasSecurity === true) || (signals.hasArchChange === true);
+    return hasRisk && score > 5;
+}
+/**
+ * Get max consensus iterations based on complexity level.
+ */
+export function getMaxIterations(level) {
+    return level === 'low' ? 3 : 5;
+}
 //# sourceMappingURL=complexity-scorer.js.map

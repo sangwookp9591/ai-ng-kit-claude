@@ -56,3 +56,36 @@ export function scoreComplexity(signals: ComplexitySignals = {}): ComplexityResu
 
   return { score, level, breakdown };
 }
+
+// ---------------------------------------------------------------------------
+// AING-DR Extensions
+// ---------------------------------------------------------------------------
+
+export type DRDepth = 'lite' | 'standard' | 'deep';
+
+/**
+ * Determine DR depth based on complexity level.
+ */
+export function getDRDepth(level: ComplexityLevel): DRDepth {
+  switch (level) {
+    case 'low': return 'lite';
+    case 'mid': return 'standard';
+    case 'high': return 'deep';
+  }
+}
+
+/**
+ * Determine if --deliberate mode should be auto-triggered.
+ * Triggers on: (hasSecurity OR hasArchChange) AND score > 5
+ */
+export function shouldForceDeliberate(signals: ComplexitySignals, score: number): boolean {
+  const hasRisk = (signals.hasSecurity === true) || (signals.hasArchChange === true);
+  return hasRisk && score > 5;
+}
+
+/**
+ * Get max consensus iterations based on complexity level.
+ */
+export function getMaxIterations(level: ComplexityLevel): number {
+  return level === 'low' ? 3 : 5;
+}

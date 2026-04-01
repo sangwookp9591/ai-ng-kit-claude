@@ -21,4 +21,18 @@ export interface ComplexityResult {
  * Score task complexity based on observable signals.
  */
 export declare function scoreComplexity(signals?: ComplexitySignals): ComplexityResult;
+export type DRDepth = 'lite' | 'standard' | 'deep';
+/**
+ * Determine DR depth based on complexity level.
+ */
+export declare function getDRDepth(level: ComplexityLevel): DRDepth;
+/**
+ * Determine if --deliberate mode should be auto-triggered.
+ * Triggers on: (hasSecurity OR hasArchChange) AND score > 5
+ */
+export declare function shouldForceDeliberate(signals: ComplexitySignals, score: number): boolean;
+/**
+ * Get max consensus iterations based on complexity level.
+ */
+export declare function getMaxIterations(level: ComplexityLevel): number;
 //# sourceMappingURL=complexity-scorer.d.ts.map
