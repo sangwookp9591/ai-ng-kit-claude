@@ -14,6 +14,7 @@ import { createPlan, listPlans } from '../task/plan-manager.js';
 import { createTask, listTasks, formatAllTasks } from '../task/task-manager.js';
 import { generateReport } from '../evidence/evidence-report.js';
 import { readStdinRaw } from '../core/stdin.js';
+import { checkQualityGate } from '../hooks/quality-gate.js';
 const args = process.argv.slice(2);
 const command = args[0];
 const useStdin = args.includes('--stdin');
@@ -51,6 +52,20 @@ const projectDir = getArg('dir') || process.cwd();
                     if (!feature || !goal || steps.length === 0) {
                         console.log(JSON.stringify({ ok: false, error: 'Required: feature, goal, steps (non-empty array)' }));
                         process.exit(1);
+                    }
+                    // Quality Gate check (if AING-DR fields present)
+                    if (data.peterVerdict || data.criticVerdict) {
+                        const planText = [
+                            `## Steps`,
+                            ...steps.map(s => `- ${s}`),
+                            `## Risks`,
+                            ...(data.risks || []).map(r => `- ${r}`),
+                        ].join('\n');
+                        const qg = checkQualityGate(planText, data, data.criticVerdict ? JSON.stringify(data.criticVerdict) : '', data.peterVerdict ? JSON.stringify(data.peterVerdict) : '');
+                        if (!qg.pass) {
+                            console.error(`[aing:quality-gate] FAIL — ${qg.failures.join('; ')}`);
+                            // Continue with save but emit warning (non-blocking — Critic already gated)
+                        }
                     }
                     result = createPlan({
                         feature,

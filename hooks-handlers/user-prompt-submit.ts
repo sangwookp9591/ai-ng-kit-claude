@@ -8,6 +8,8 @@ import { detectIntent } from '../scripts/i18n/intent-detector.js';
 import { selectTeam, estimateTeamCost } from '../scripts/pipeline/team-orchestrator.js';
 import { getActiveSession, sanitizeSessionField } from '../scripts/core/session-reader.js';
 import { trackInjection, trimToTokenBudget } from '../scripts/core/context-budget.js';
+import { checkPlanGate } from '../scripts/hooks/plan-gate.js';
+import { getResumeInfo as getPlanResumeInfo } from '../scripts/hooks/plan-state.js';
 import { readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -144,6 +146,23 @@ try {
   const parts: string[] = [];
   const projectDir: string = process.env.PROJECT_DIR || process.cwd();
   const lower: string = prompt.toLowerCase();
+
+  // --- Plan gate check (Phase 0 enforcement) ---
+  const isPlanRequest: boolean = ['plan', '계획', '기획', '설계'].some(kw => lower.includes(kw));
+  if (isPlanRequest) {
+    const gateResult = checkPlanGate(prompt);
+    if (gateResult.verdict === 'BLOCK') {
+      parts.push(`[aing:plan-gate] BLOCK — ${gateResult.reason}`);
+      parts.push(`요청이 모호합니다. 구체적 앵커(파일 경로, 코드 심볼, 번호 매기기 단계, 수락 기준)를 추가하거나 "force:" 접두사로 강제 진행하세요.`);
+    }
+  }
+
+  // --- Plan session resume detection ---
+  const planResume = getPlanResumeInfo(projectDir);
+  if (planResume.canResume) {
+    parts.push(`[aing:plan-state] 이전 계획 세션 감지: "${planResume.feature}" — Phase: ${planResume.phase}, Iteration: ${planResume.iteration}`);
+    parts.push(`재개하려면 /aing plan 실행. 새로 시작하려면 .aing/state/plan-state.json 삭제.`);
+  }
 
   // --- Keyword routing suggestions ---
   const keywordMatches: string[] = detectKeywordRoutes(lower);

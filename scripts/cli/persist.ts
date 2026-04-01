@@ -15,6 +15,7 @@ import { createPlan, listPlans } from '../task/plan-manager.js';
 import { createTask, listTasks, formatAllTasks } from '../task/task-manager.js';
 import { generateReport } from '../evidence/evidence-report.js';
 import { readStdinRaw } from '../core/stdin.js';
+import { checkQualityGate } from '../hooks/quality-gate.js';
 
 const args: string[] = process.argv.slice(2);
 const command: string = args[0];
@@ -44,6 +45,14 @@ interface PlanStdinData {
   reviewNotes?: Array<{ reviewer: string; verdict: string; highlights: string[] }>;
   complexityScore?: number;
   complexityLevel?: string;
+  // AING-DR fields
+  constraints?: Array<{ name: string; source: string; evidence: string; violationImpact: string }>;
+  preferences?: Array<{ name: string; priority: string; tradeoffThreshold: string; why: string }>;
+  drivers?: Array<{ name: string; status: string; source?: string }>;
+  steelman?: { antithesis: string; tradeoffs: string[]; newDrivers: string[]; synthesisPath: string | null };
+  peterVerdict?: { verdict: string; absorbed: number; rebutted: number; acknowledged: number; ignored: number; reflectionScore: number; deltaScore: number | null; confidence: string };
+  criticVerdict?: { verdict: string; mode: string; critical: number; major: number; minor: number; selfAuditDowngrades: number; constraintCompliance: string; criteriaTestability: string; evidenceCoverage: string };
+  adr?: { decision: string; confidence: string; constraintsHonored: string[]; alternativesRejected: string[]; consequences: { positive: string[]; negative: string[] } };
 }
 
 (async () => {
@@ -71,6 +80,26 @@ try {
           process.exit(1);
         }
 
+        // Quality Gate check (if AING-DR fields present)
+        if (data.peterVerdict || data.criticVerdict) {
+          const planText = [
+            `## Steps`,
+            ...steps.map(s => `- ${s}`),
+            `## Risks`,
+            ...(data.risks || []).map(r => `- ${r}`),
+          ].join('\n');
+          const qg = checkQualityGate(
+            planText,
+            data as unknown as Record<string, unknown>,
+            data.criticVerdict ? JSON.stringify(data.criticVerdict) : '',
+            data.peterVerdict ? JSON.stringify(data.peterVerdict) : ''
+          );
+          if (!qg.pass) {
+            console.error(`[aing:quality-gate] FAIL — ${qg.failures.join('; ')}`);
+            // Continue with save but emit warning (non-blocking — Critic already gated)
+          }
+        }
+
         result = createPlan({
           feature,
           goal,
@@ -81,6 +110,14 @@ try {
           reviewNotes: Array.isArray(data.reviewNotes) && data.reviewNotes.length > 0 ? data.reviewNotes : undefined,
           complexityScore: data.complexityScore,
           complexityLevel: data.complexityLevel,
+          // AING-DR fields pass-through
+          constraints: Array.isArray(data.constraints) && data.constraints.length > 0 ? data.constraints : undefined,
+          preferences: Array.isArray(data.preferences) && data.preferences.length > 0 ? data.preferences : undefined,
+          drivers: Array.isArray(data.drivers) && data.drivers.length > 0 ? data.drivers : undefined,
+          steelman: data.steelman || undefined,
+          peterVerdict: data.peterVerdict || undefined,
+          criticVerdict: data.criticVerdict || undefined,
+          adr: data.adr || undefined,
         }, projectDir);
       } else {
         const feature = getArg('feature');
