@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.9.12] - 2026-04-02 — 에이전트 활동 모니터링 + 범용 가드레일
+
+### Added
+
+- **live-monitor.ts**: 에이전트 파일 활동 실시간 모니터. 별도 터미널에서 `node live-monitor.js --dir .`로 📖Read/✏️Write/🔧Edit/⚡Bash 실시간 표시
+- **post-tool-use 활동 요약**: 에이전트 완료 시 파일 활동을 파싱하여 터미널에 자동 표시 (별도 터미널 불필요)
+- **worker prompt LIVE MONITOR 지시**: 에이전트가 파일 변경 시 `.aing/state/agent-live.jsonl`에 이벤트 기록
+- **auto/team 능동 모니터링**: 병렬 에이전트 대기 시 "기다리겠습니다"만 출력하고 멈추지 않도록 지시 추가
+
 ## [2.9.11] - 2026-04-02 — 범용 에이전트 버짓 가드레일 (코드 레벨)
 
 ### Added
