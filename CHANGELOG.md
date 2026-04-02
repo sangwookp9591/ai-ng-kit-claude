@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.9.1] - 2026-04-02 — 코드 레벨 가드레일 + plan-only + task 보강
+
+### Added
+
+- **plan-only 스킬**: 에이전트 0회 경량 플래닝. 오케스트레이터가 직접 플랜 작성 → persist (1~3분)
+- **intent-router plan-only 라우팅**: 짧은 입력/low complexity → plan-only, 아키텍처 키워드 → plan 자동 분기
+- **코드 레벨 iteration guard**: `isIterationTimedOut()` 3분/iteration, `trackAgentCall()` 10회 cap, `MAX_PLAN_DURATION_MS` 15분 하드캡
+- **pre-tool-use iteration timeout/agent cap**: warn 방식 (강제 차단 안 함)
+- **post-tool-use slow-agent 경고**: 5분 초과 에이전트 stderr 경고 (모든 스킬 적용)
+- **--max N 옵션**: 사용자가 plan iteration 횟수 지정 가능
+- **preamble Directory Boundary**: T1~T4 전 tier에 `.aing/` 디렉토리만 사용 규칙 추가
+- **task from-plan 액션**: 플랜 Steps를 체크리스트로 자동 변환
+- **plan-only → task 연결**: Step 4에서 `/aing:task` 옵션 제공
+
+### Fixed
+
+- **plan-state.ts**: DEFAULT_MAX_ITERATIONS 3/5/5 → 2/3/3 (SKILL.md와 동기화)
+- **guardrail 테스트**: block→warn 변경 반영 (696/696 pass)
+- **Targeted Patch Mode 강화**: Able 에이전트 재호출 금지, 오케스트레이터 직접 Edit
+- **에이전트 .omc/ 탐색 방지**: preamble에 Directory Boundary 규칙 추가
+
+### Changed
+
+- **`/aing task` → `/aing:task`**: 전체 스킬 콜론 포맷 통일
+- **Critic model**: high/deliberate에서만 opus 허용, 나머지 sonnet
+
 ## [2.9.0] - 2026-04-02 — Consensus Loop 무한반복 방지
 
 plan-task Critic ITERATE 시 Phase 2~6 전체 재실행으로 40분+ 설계 루프에 빠지는 문제 수정.

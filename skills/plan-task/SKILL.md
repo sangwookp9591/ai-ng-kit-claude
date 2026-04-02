@@ -38,7 +38,7 @@ Team Routing:
 Directory Boundary: aing 상태/산출물은 `.aing/` 디렉토리만 사용한다. `.omc/`, `.gsd/`, `.planning/` 등 다른 도구의 디렉토리를 읽거나 쓰지 않는다.
 <!-- /preamble -->
 
-# /aing:plan — AING-DR Consensus Planning
+# /aing:plan— AING-DR Consensus Planning
 
 6자 역할 분담 합의 시스템. 품질 우선 — 비용보다 결정의 정확성을 우선한다.
 Confirmation bias 구조적 차단 + 변증법 검증 + 수렴 측정 + 상태 관리.
@@ -82,14 +82,14 @@ Gate BLOCK 시 AskUserQuestion:
 3. 수락 기준 (어떻게 되면 완료인지)
 
 또는 "force:" 접두사로 강제 진행:
-  /aing:plan force: {request}
+  /aing:planforce: {request}
 ```
 
 `force:` 접두사 → Gate 무시하고 Phase 1 진행.
 
 ## Usage
 ```
-/aing:plan <task-description>
+/aing:plan<task-description>
 /aing:plan "사용자 인증 API 구현"
 /aing:plan "데이터 마이그레이션" --deliberate       # 고위험: pre-mortem + rollback 강제
 /aing:plan "API 리팩토링" --interactive             # 사용자 개입 포인트 활성화
@@ -160,7 +160,7 @@ Phase 7: Able — Living ADR Generation + Persist
 1. **Phase 시작 전 State 기록 필수**: 모든 Phase 시작 시 state 파일을 먼저 갱신한 후 에이전트를 스폰한다.
 2. **Phase 시작 전 State 읽기 필수**: 모든 Phase 시작 시 state 파일을 읽어 현재 phase와 일치하는지 확인한다. 불일치 시 경고를 출력하고 state를 교정한다.
 3. **State 미기록 시 Critic 검증**: Critic(Phase 6)이 state 파일을 읽어 phase 이력이 연속적인지 확인. 누락된 phase가 있으면 MAJOR finding으로 보고.
-4. **Execution Handoff 전 State 비활성화 필수**: Phase 7 완료 후 `/aing:team` 또는 `/aing auto` 호출 전에 반드시 `active: false` 기록. 미기록 시 다음 세션에서 stale state 발생.
+4. **Execution Handoff 전 State 비활성화 필수**: Phase 7 완료 후 `/aing:team` 또는 `/aing:auto` 호출 전에 반드시 `active: false` 기록. 미기록 시 다음 세션에서 stale state 발생.
 5. **Terminal Exit 시 State 정리 필수**: REJECT, 최대 반복 초과, 조기 종료 시 반드시 terminated state 기록.
 
 ### State Lifecycle
@@ -846,7 +846,7 @@ Creates: `.aing/plans/{date}-{feature}.md` + `.aing/tasks/task-{id}.json`
 3. **저장만** — 계획만 저장하고 나중에 실행
 
 - Option 1 → `/aing:team --plan .aing/plans/{date}-{feature}.md`
-- Option 2 → `/aing auto` with plan context
+- Option 2 → `/aing:auto` with plan context
 - Option 3 → Confirm save and end
 
 ## Error Handling
