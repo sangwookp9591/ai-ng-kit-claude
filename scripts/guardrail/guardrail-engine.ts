@@ -35,29 +35,31 @@ interface CheckResult {
  */
 const DEFAULT_RULES: GuardrailRule[] = [
   // Dangerous bash commands
+  // Note: Claude Code's BashTool already blocks these via Tree-sitter AST analysis.
+  // aing adds warn-level context only, to avoid double-blocking with Claude's built-in checks.
   {
-    id: 'block-rm-rf',
+    id: 'warn-rm-rf',
     type: 'bash',
     pattern: /rm\s+(-[a-zA-Z]*r[a-zA-Z]*f|--recursive\s+--force|-[a-zA-Z]*f[a-zA-Z]*r)\s/,
-    action: 'block',
+    action: 'warn',
     severity: 'critical',
-    message: 'rm -rf 명령이 차단되었습니다. 파일 삭제는 개별적으로 수행하세요.'
+    message: 'rm -rf 명령이 감지되었습니다. 파일 삭제는 개별적으로 수행하세요.'
   },
   {
-    id: 'block-force-push',
+    id: 'warn-force-push',
     type: 'bash',
     pattern: /git\s+push\s+.*--force(?!\-with\-lease)/,
-    action: 'block',
+    action: 'warn',
     severity: 'critical',
-    message: 'git push --force가 차단되었습니다. --force-with-lease를 사용하세요.'
+    message: 'git push --force가 감지되었습니다. --force-with-lease를 사용하세요.'
   },
   {
-    id: 'block-reset-hard',
+    id: 'warn-reset-hard',
     type: 'bash',
     pattern: /git\s+reset\s+--hard/,
-    action: 'block',
+    action: 'warn',
     severity: 'high',
-    message: 'git reset --hard가 차단되었습니다. 변경사항을 먼저 확인하세요.'
+    message: 'git reset --hard가 감지되었습니다. 변경사항을 먼저 확인하세요.'
   },
   {
     id: 'warn-drop-table',

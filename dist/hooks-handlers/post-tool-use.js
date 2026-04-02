@@ -103,21 +103,23 @@ try {
             clearToolErrors(projectDir, toolName);
         }
     }
-    // Pattern learning: detect and record reusable patterns
-    if (toolName === 'Bash' || toolName === 'Glob') {
+    // Pattern learning: detect and record reusable patterns (lightweight — skip short commands)
+    if ((toolName === 'Bash' || toolName === 'Glob') && toolResponse.length > 0) {
         const toolInput = parsed.tool_input || {};
         try {
-            // Record use first (increments counter)
-            if (toolName === 'Bash' && toolInput.command) {
-                recordPatternUse(projectDir, 'command', toolInput.command);
-            }
-            else if (toolName === 'Glob' && toolInput.pattern) {
-                recordPatternUse(projectDir, 'filePattern', toolInput.pattern);
-            }
-            // Then check if a threshold was crossed
-            const pattern = detectLearnablePattern(projectDir, toolName, toolInput, toolResponse);
-            if (pattern) {
-                process.stderr.write(`[aing:learn] ${pattern.type}: ${pattern.suggestion || pattern.pattern}\n`);
+            // Only record patterns for non-trivial commands (skip simple ls, pwd, etc.)
+            const cmd = toolInput.command || toolInput.pattern || '';
+            if (cmd.length > 10) {
+                if (toolName === 'Bash' && toolInput.command) {
+                    recordPatternUse(projectDir, 'command', toolInput.command);
+                }
+                else if (toolName === 'Glob' && toolInput.pattern) {
+                    recordPatternUse(projectDir, 'filePattern', toolInput.pattern);
+                }
+                const pattern = detectLearnablePattern(projectDir, toolName, toolInput, toolResponse);
+                if (pattern) {
+                    process.stderr.write(`[aing:learn] ${pattern.type}: ${pattern.suggestion || pattern.pattern}\n`);
+                }
             }
         }
         catch { /* pattern learning is best-effort */ }

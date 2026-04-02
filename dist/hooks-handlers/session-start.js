@@ -173,6 +173,7 @@ try {
         ctx.push('');
         ctx.push(`### Evidence Required`);
         ctx.push(`Never claim "done" without evidence. Run tests, build, or lint to prove completion.`);
+        ctx.push(`Exception: trivial changes (≤2 files, ≤10 lines) may skip evidence.`);
         ctx.push('');
         ctx.push(`> Completion Report, Completeness Score, TDD, AskUser, Voice rules -> see agent .md files`);
         ctx.push('');
@@ -236,6 +237,7 @@ try {
         ctx.push('');
         ctx.push(`### Rule 6: Evidence Required`);
         ctx.push(`Never claim "done" without evidence. Run tests, build, or lint to prove completion.`);
+        ctx.push(`Exception: trivial changes (≤2 files, ≤10 lines, e.g. typo fix, comment update) may skip evidence collection.`);
         ctx.push('');
         ctx.push(`### Rule 7: AskUserQuestion Format (Required for all user questions)`);
         ctx.push(`When asking the user a question, use this structured format:`);

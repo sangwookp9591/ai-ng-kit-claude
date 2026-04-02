@@ -33,11 +33,13 @@ try {
     const agentKey = (toolInput.name as string) || (toolInput.subagent_type as string).replace('aing:', '');
     norchAgentSpawn('session', agentKey, toolInput.description as string);
 
-    // Phase gate: block agent spawns that violate AING-DR phase ordering
+    // Phase gate: only enforce AING-DR phase ordering when a plan session is actively running
     const subagentType = toolInput.subagent_type as string;
     if (subagentType.startsWith('aing:')) {
       const phaseCheck = checkAgentAllowed(projectDir, subagentType);
-      if (!phaseCheck.allowed) {
+      // Only block if phase check explicitly says not allowed AND has an active reason
+      // (avoids blocking due to stale state files from completed/terminated sessions)
+      if (!phaseCheck.allowed && phaseCheck.reason && !phaseCheck.reason.includes('no active')) {
         const expected = getExpectedAgent(projectDir);
         const guidance = expected
           ? `Current phase "${expected.phase}" expects: ${expected.agents.map(a => `aing:${a}`).join(' or ')}. Spawn the correct agent first.`

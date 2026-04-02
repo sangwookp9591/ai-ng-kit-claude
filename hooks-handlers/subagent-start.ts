@@ -102,10 +102,7 @@ try {
   const context = [
     `[aing:agent-trace] SubagentStart: ${agentName} (${subagentType}) model=${model}`,
     `Active agents: ${activeCount} | Total spawned this session: ${store.totalSpawned}`,
-    `[aing:context-rule] You are a SUB-AGENT with a limited context window. CRITICAL RULES:`,
-    `- You CANNOT use /compact, /half-clone, or any slash commands.`,
-    `- NEVER suggest "claude -r", "resume session", or "run /compact" — you are a child process, NOT a CLI session.`,
-    `- If you feel context pressure (long conversation, many file reads), prioritize completing the most critical subtask FIRST.`,
+    `[aing:context-rule] You are a SUB-AGENT. Keep work focused and efficient:`,
     `- If your task is too large, report partial results immediately via SendMessage before context runs out.`,
     `- Keep responses concise. Avoid re-reading files you've already read. Minimize unnecessary tool calls.`,
   ].join('\n');

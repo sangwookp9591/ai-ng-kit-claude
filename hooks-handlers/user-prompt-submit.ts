@@ -165,10 +165,14 @@ try {
     parts.push(`재개하려면 /aing plan 실행. 새로 시작하려면 .aing/state/plan-state.json 삭제.`);
   }
 
-  // --- Keyword routing suggestions ---
-  const keywordMatches: string[] = detectKeywordRoutes(lower);
-  for (const msg of keywordMatches) {
-    parts.push(msg);
+  // --- Keyword routing suggestions (only when intent is confident enough) ---
+  // Skip keyword suggestions when confidence < 0.7 to avoid misleading the AI
+  // e.g., "버그 리포트 문서를 작성해줘" should not trigger debug suggestion
+  if (intent.confidence >= 0.7) {
+    const keywordMatches: string[] = detectKeywordRoutes(lower);
+    for (const msg of keywordMatches) {
+      parts.push(msg);
+    }
   }
 
   // --- Codex delegation suggestion (plan/review only, when Codex available) ---

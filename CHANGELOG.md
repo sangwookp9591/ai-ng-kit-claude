@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.8.99] - 2026-04-02 — Claude Code 처리 흐름 정합성 개선
+
+Claude Code 소스 분석(claude-code-analysis.md)을 기반으로 aing이 Claude의 내장 기능을 억제하거나 중복하는 10개 항목을 식별하고 7건 수정.
+
+### Fixed
+
+- **subagent-start**: Sub-agent에 `/compact`, `/half-clone` 금지 프롬프트 제거 — Claude의 auto-compact 시스템 레벨 기능을 불필요하게 억제하던 문제 해결
+- **harness/SKILL.md**: `model: "opus"` 강제를 권장으로 완화 — Sonnet 구독자도 harness 사용 가능, API 에러 시 sonnet 자동 대체
+- **pre-tool-use**: Phase Gate가 stale state 파일에 의해 의도치 않게 Agent 스폰을 차단하던 문제 수정
+- **user-prompt-submit**: intent confidence < 0.7일 때 키워드 라우팅 주입 스킵 — AI 자율 판단 선점 방지
+- **session-start**: Evidence Required 규칙에 소규모 변경(≤2파일, ≤10줄) 예외 추가
+- **guardrail-engine**: Claude 내장 BashTool(Tree-sitter AST) 보안과 중복되는 3개 규칙(rm-rf, force-push, reset-hard)을 `block`→`warn`으로 변경 — 이중 거부 메시지 해소
+
+### Changed
+
+- **hooks.json**: PostToolUse timeout 5s→3s 축소
+- **post-tool-use**: 패턴 학습에서 단순 명령(≤10자) 스킵으로 경량화
+
 ## [2.8.98] - 2026-04-02 — claw-code-main 기술 이식 + Codex Plugin 연동
 
 claw-code-main 프로젝트 심층 분석 후 현실적으로 적용 가능한 기술 4건 이식. OpenAI codex-plugin-cc 연동 기반 구축.

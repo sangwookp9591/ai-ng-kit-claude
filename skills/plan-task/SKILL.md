@@ -94,91 +94,54 @@ Gate BLOCK 시 AskUserQuestion:
 /aing plan "결제 시스템" --deliberate --interactive  # 고위험 + 사용자 개입
 ```
 
-## Agent Roles (역할 분담) — 적응적 모델 라우팅
+## Agent Roles (역할 분담)
 
-에이전트 모델은 complexity level에 따라 자동 결정된다.
-
-| Agent | Role | low (≤3) | mid (4-7) | high (>7) | 핵심 책임 | Tool Call 상한 | Timeout |
-|-------|------|----------|-----------|-----------|----------|---------------|---------|
-| **Explore** | Context Scanner | haiku | haiku | haiku | 코드베이스 구조 스캔 → context snapshot | 20 | 30초 (soft) / 60초 (hard) |
-| **Ryan** | Deliberation Facilitator | haiku | sonnet | sonnet | Constraints/Preferences 도출. **Options 없이** 원칙 확정 | 5 (fallback: 10) | 90초 |
-| **Able** | PM / Planner | sonnet | opus | opus | Options 설계, Steps 분해, Living ADR 생성 | 5 | 3분 |
-| **Klay** | Architect / Steelman | sonnet | opus | opus | 반론(antithesis), 트레이드오프, 원칙-옵션 정합성, 새 Driver 제안 | 15 | 3분 |
-| **Peter** | Synthesis Verifier | — (스킵) | sonnet (조건부) | sonnet | 반론 반영 검증, Delta Score, Confidence Level | 3 | 1분 |
-| **Critic** | Deliberation Critic | sonnet | sonnet | opus | 심의 품질 비평 (문서 기반 + high만 spot-check) | 5 (high: 10) | 2분 (high: 3분) |
-
-**Critic 역할 재정의**: Critic은 이전 에이전트 출력물의 **논리적 일관성만** 검증한다.
-코드 사실은 Klay/Explore가 이미 확인했으므로 Critic이 재확인할 필요 없다.
-high에서만 spot-check 허용 (의심스러운 claim 2-3개만 직접 확인).
+| Agent | Role | Model | 핵심 책임 |
+|-------|------|-------|----------|
+| **Ryan** | Deliberation Facilitator | opus | Constraints/Preferences 도출. **Options 없이** 원칙 확정 |
+| **Able** | PM / Planner | opus | Options 설계, Steps 분해, Living ADR 생성 |
+| **Klay** | Architect / Steelman | opus | 반론(antithesis), 트레이드오프, 원칙-옵션 정합성, 새 Driver 제안 |
+| **Peter** | Synthesis Verifier | sonnet | 반론 반영 검증, Delta Score, Confidence Level |
+| **Critic** | Deliberation Critic | opus | 5-Phase 심의 품질 비평, Adaptive Harshness, 최종 verdict |
 
 **Milla는 plan-task에 참여하지 않는다** — 보안 전문가 본연의 역할에 집중. 심의 품질은 전용 Critic이 담당.
-
-**Timeout 시 처리**:
-- 불완전 출력 → JSON 파싱 시도 → 성공: 부분 결과 사용 + Confidence 1단계 하락
-- JSON 파싱 실패 → 해당 Phase 재시도 1회 (timeout +30초)
-- 재실패 → Phase 스킵 + Confidence 2단계 하락
 
 ## Pipeline Overview
 
 ```
-Phase 0: Gate (모호 요청 차단)
-  ↓ PASS
-Phase 0.5: Explore(haiku, 30초) → context snapshot + Complexity 1단계 측정
+Phase 1: Ryan — Foundation (Constraints + Preferences)
   ↓
-Phase 1: Ryan ← context 주입 + Complexity 2단계 재평가
-  ↓ level 확정 → 경로 분기
+Phase 2: Able — Option Design (AING-DR Draft)
+  ↓ Complexity Score (0-15)
   ↓
-      ┌────┴──────────────┬──────────────────┐
-     low                  mid                high
-      │                   │                  │
-  Phase 2: Able(sonnet)   Able(opus)         Able(opus)
-      │                   │                  │
-  Phase 3: Klay(sonnet)   Klay(opus)         Klay(opus)
-      │                   │                  │
-      │               반론≥2?             Phase 4: Able synthesis
-      │               no→skip             Phase 5: Peter
-      │               yes→Phase 4,5          │
-      │                   │                  │
-  Phase 6: Critic      Critic(sonnet)     Critic(opus)
-   (sonnet,문서기반)    (문서+spot-check)   (문서+spot-check)
-      │                   │                  │
-  Phase 7: ADR          ADR                ADR
-      │                   │                  │
-    ~4분                ~10분              ~15분
+  ↓ [--interactive: User Review Point 1 — 초안 확인]
+  ↓
+Phase 3: Klay — Steelman Deliberation
+  ↓
+Phase 4: Able — Synthesis (반론 통합)
+  ↓
+Phase 5: Peter — Synthesis Verification + Delta Score
+  ↓ PASS → Phase 6  |  REVISE → Phase 4 재작성
+  ↓
+Phase 6: Critic — 5-Phase Deliberation Critique
+  ↓ APPROVE → Phase 7  |  ITERATE → Phase 2 재설계  |  REJECT → 중단
+  ↓
+  ↓ [--interactive: User Review Point 2 — 최종 승인]
+  ↓
+Phase 7: Able — Living ADR Generation + Persist
 ```
 
-**판정 우선순위** (명시적):
-1. Critic REJECT → 중단 (terminal)
-2. Peter REVISE → Phase 4 복귀 (inner loop)
-3. Critic ITERATE → Phase 2 복귀 (outer loop)
-4. Peter PASS + Critic APPROVE → Phase 7 진행
+## 복잡도별 실행 경로 (품질 우선)
 
-## 복잡도별 실행 경로 (적응적 품질)
+| Level | Score | Ryan | Able | Klay | Peter | Critic | Pre-mortem | Rollback | 합의 루프 |
+|-------|-------|------|------|------|-------|--------|------------|----------|----------|
+| **low** | ≤ 3 | ✓ | DR Lite | ✓ steelman | ✓ synthesis | ✓ THOROUGH | — | — | 최대 3회 |
+| **mid** | 4-7 | ✓ | DR Standard | ✓ steelman | ✓ synthesis + delta | ✓ THOROUGH | — | — | 최대 5회 |
+| **high** | > 7 | ✓ | DR Deep | ✓ steelman | ✓ synthesis + delta | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 5회 |
+| **`--deliberate`** | any | ✓ | DR Deep | ✓ steelman | ✓ synthesis + delta | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 5회 |
 
-| Level | Score | Explore | Ryan | Able | Klay | Peter | Critic | Pre-mortem | Rollback | 합의 루프 |
-|-------|-------|---------|------|------|------|-------|--------|------------|----------|----------|
-| **low** | ≤ 3 | haiku 30s | haiku | sonnet DR Lite | sonnet lite | — 스킵 | sonnet THOROUGH (문서기반, tool 0) | — | — | 최대 2회 |
-| **mid** | 4-7 | haiku 30s | sonnet | opus DR Standard | opus | sonnet (반론 2+개만) | sonnet (문서+spot-check, tool ≤5) | — | — | 최대 3회 |
-| **high** | > 7 | haiku 30s | sonnet | opus DR Deep | opus | sonnet (필수) | opus (문서+spot-check, tool ≤10) | ✓ 필수 | ✓ 필수 | 최대 5회 |
-| **`--deliberate`** | any | haiku 30s | sonnet | opus DR Deep | opus | sonnet (필수) | opus (문서+spot-check, tool ≤10) | ✓ 필수 | ✓ 필수 | 최대 5회 |
-
-**적응적 정책**: 복잡도에 따라 에이전트 참여와 모델이 달라진다. Low에서는 Peter 스킵 + 경량 파이프라인.
+**품질 우선 정책**: 모든 레벨에서 Ryan → Klay → Peter → Critic 전원 참여.
 **자동 `--deliberate` 트리거**: hasSecurity=true 또는 hasArchChange=true이고 score > 5
-
-### Complexity 2단계 재평가
-
-**1단계 (Phase 0.5)**: 정적 시그널 — fileCount + domainCount + hasArchChange + hasSecurity = score
-**2단계 (Phase 1 후)**: Ryan Constraints에서 동적 재평가:
-- Constraint에 "auth", "payment", "migration", "encryption" → +2
-- Constraint에 "external API", "third-party" → +1
-- Constraint 5개 이상 → +1
-
-재평가 결과 level이 상승하면:
-- low → mid: **현재 Phase부터** mid 모델로 전환 (이미 완료된 Phase 재실행 안 함)
-- mid → high: Able을 opus로 전환 + Critic을 opus로 전환 + pre-mortem/rollback 활성화
-
-**Klay complexityOverride**: Klay가 steelman 중 "이건 high여야 한다"고 판단하면 `complexityOverride: "high"` 신호.
-오케스트레이터가 수용 시 남은 Phase 에스컬레이션. (수용 기준: Klay가 file:line 증거와 함께 에스컬레이션 근거를 제시한 경우)
 
 ---
 
@@ -204,12 +167,8 @@ Phase 0 (Gate):
   mkdir -p .aing/state
   state = { active: true, phase: "gate", feature: "...", startedAt: "...", iteration: 0 }
 
-Phase 0.5 시작:
-  READ state → 확인 → state.phase = "explore"
-
 Phase 1 시작:
   READ state → 확인 → state.phase = "foundation"
-  + Complexity 2단계 재평가 → state.complexityLevel = "low|mid|high"
 
 Phase N 시작:
   READ state → phase 연속성 확인 → state.phase = "{current phase}"
@@ -244,72 +203,41 @@ mkdir -p .aing/state && printf '%s' '{"active":true,"phase":"foundation","featur
 
 ### State Integrity Check (Critic이 수행)
 Critic Phase 6에서 state 파일을 읽어 검증:
-- phase 전환 이력이 연속적인가? (gate → explore → foundation → option-design → steelman → synthesis → synthesis-check → critique)
+- phase 전환 이력이 연속적인가? (gate → foundation → option-design → steelman → synthesis → synthesis-check → critique)
 - iteration 카운트가 일치하는가?
 - 비정상이면 MINOR finding으로 보고 (state 관리 개선 필요)
 
 ---
 
-## Phase 0.5: Explore — Context-First Architecture
-
-Explore(haiku)가 코드베이스를 스캔하여 context snapshot을 생성한다.
-**모든 후속 에이전트에 동일 context를 주입**하여 개별 탐색 시간을 제거한다.
-
-**Explore ∥ Ryan 병렬은 하지 않는다**: Ryan은 Explore 결과에 soft-depend하므로 병렬 시 타이밍 불일치 발생.
-Explore를 haiku + 30초 timeout으로 충분히 빠르게 만들어서 순차 실행해도 overhead 최소화.
-
-**캐시 전략**: `.aing/context/{domain}.md`
-- 캐시 히트 조건: 동일 도메인 + 파일 변경 없음 (git status clean) + 캐시 age < 24시간
-- 캐시 히트 시: Explore 스킵 → 즉시 Phase 1 진입 (~30초 절감)
-- 캐시 미스 시: Explore 실행 → 결과를 `.aing/context/`에 저장
-
-```
-# 캐시 확인
-# 1. .aing/context/{도메인}.md 존재 + 24시간 이내 + git status clean → 캐시 히트 → Phase 1
-# 2. 캐시 미스 → Explore 스폰
-
-Agent({
-  subagent_type: "Explore",
-  description: "Explore: context 수집 — {feature}",
-  model: "haiku",
-  prompt: "{task}에 관련된 코드베이스를 스캔하세요.
-
-탐색 수준: medium
-다음을 파악하세요:
-1. 관련 파일 목록 + 디렉토리 구조
-2. 핵심 인터페이스/타입 정의
-3. 기존 패턴/컨벤션
-4. 의존성 관계
-
-결과를 .aing/context/{도메인}.md에 캐시하세요."
-})
-```
-
-**Explore 실패 시**: Ryan에게 "자체 탐색 허용 (max 10 tool calls)" fallback. Confidence에는 영향 없음.
-
-→ State: `phase: "explore"` → Complexity 1단계 측정 (정적 시그널)
-
 ## Phase 1: Ryan — Foundation (ALL levels)
 
-Ryan이 **Options 없이** Constraints와 Preferences를 도출한다. 모델은 complexity level에 따라 결정 (low: haiku, mid/high: sonnet).
+Ryan(sonnet)이 **Options 없이** Constraints와 Preferences를 도출한다.
 
 **왜 분리하는가**: Able이 원칙과 옵션을 동시에 만들면, 원칙이 결론을 정당화하는 방향으로 편향된다.
 Ryan은 제약/선호를 확정한 뒤, 그 결과를 Able에게 넘긴다.
 
-**Context-First**: Explore의 context snapshot이 프롬프트에 주입된다. Ryan은 자체 탐색을 최소화한다.
+**토큰 효율화**: Ryan 호출 전에 오케스트레이터가 다음을 수행한다:
+1. `.aing/context/` 에 관련 캐시가 있으면 읽어서 프롬프트에 포함
+2. 캐시가 없으면 Glob/Grep으로 핵심 구조만 파악하여 컨텍스트로 전달
+3. Ryan은 전달받은 컨텍스트로 바로 원칙 도출 — 자체 탐색 최소화
 
 ```
+# 오케스트레이터: Ryan 호출 전 컨텍스트 수집
+# 1. .aing/context/{관련도메인}.md 캐시 확인
+# 2. 캐시 없으면 Glob으로 관련 파일 목록 + 핵심 파일 Read
+# 3. 수집한 컨텍스트를 프롬프트에 포함
+
 Agent({
   subagent_type: "aing:ryan",
   description: "Ryan: 원칙 도출 — {feature}",
-  model: "{low: haiku, mid/high: sonnet}",
+  model: "sonnet",
   prompt: "다음 작업에 대한 Constraints와 Preferences를 도출하세요: {task}
 
-## Explore Context Snapshot
-{Explore 에이전트가 수집한 코드베이스 컨텍스트 — 파일 구조, 핵심 코드, 패턴}
+## 사전 수집된 컨텍스트
+{오케스트레이터가 수집한 코드베이스 컨텍스트 — 파일 구조, 핵심 코드, 패턴}
 
 위 컨텍스트를 기반으로 **추가 탐색 없이** 원칙을 도출하세요.
-컨텍스트가 부족한 경우에만 최소한의 Glob/Grep을 수행하세요 (tool call 5회 이내, Explore 실패 시 10회).
+컨텍스트가 부족한 경우에만 최소한의 Glob/Grep을 수행하세요 (tool call 10회 이내).
 
 FOUNDATION 포맷으로 출력:
 ## Constraints (불변 — 위반 시 플랜 무효)
@@ -338,7 +266,7 @@ Rules:
 
 ## Phase 2: Able — Option Design (ALL levels)
 
-Able이 Ryan의 FOUNDATION 기반으로 AING-DR Draft를 생성한다. 모델: low=sonnet, mid/high=opus.
+Able(opus)이 Ryan의 FOUNDATION 기반으로 AING-DR Draft를 생성한다.
 
 ### Complexity Scoring
 
@@ -365,7 +293,7 @@ Able이 Ryan의 FOUNDATION 기반으로 AING-DR Draft를 생성한다. 모델: l
 Agent({
   subagent_type: "aing:able",
   description: "Able: AING-DR 설계 — {feature}",
-  model: "{low: sonnet, mid/high: opus}",
+  model: "opus",
   prompt: "Ryan의 FOUNDATION을 기반으로 AING-DR Draft를 생성하세요.
 
 === RYAN FOUNDATION ===
@@ -450,17 +378,13 @@ Options: {N}개 → 추천: {name}
 
 ## Phase 3: Klay — Steelman Deliberation (ALL levels)
 
-Klay가 모든 플랜에 대해 STEELMAN_REVIEW를 수행. 모델: low=sonnet, mid/high=opus.
-
-**antithesis=0 검증 (rubber stamp 구조적 차단)**:
-Klay APPROVE + antithesis 0개 = **INVALID**. 오케스트레이터가 REJECT → Phase 3 재실행 (1회만).
-antithesis 없는 APPROVE는 검토를 하지 않은 것과 같다.
+Klay(opus)가 모든 플랜에 대해 STEELMAN_REVIEW를 수행:
 
 ```
 Agent({
   subagent_type: "aing:klay",
   description: "Klay: steelman 리뷰 — {feature}",
-  model: "{low: sonnet, mid/high: opus}",
+  model: "opus",
   prompt: "[PLAN REVIEW MODE]
 다음 AING-DR Draft의 steelman 리뷰를 수행하세요.
 
@@ -492,65 +416,31 @@ STEELMAN_REVIEW 포맷으로 출력:
 ## Synthesis Path (optional)
 {경쟁 옵션의 장점을 결합하는 제3의 경로}
 
-## Missing Constraints (신규 — Ryan이 놓친 제약 발견 시)
-- MC1: {name} — Evidence: {file:line}
-
 ## Architecture Risks
 - {risk}: severity={HIGH/MED/LOW}, {detail}
-
-## Complexity Override (optional)
-{이 작업이 현재 level보다 높아야 한다고 판단하면}
-complexityOverride: {high} — Reason: {file:line 증거}
 
 ## Verdict
 APPROVE / SUGGEST_CHANGES
 
 Rules:
 - Steelman Antithesis와 최소 1개 Tradeoff Tension은 필수
-- **antithesis 없는 APPROVE = INVALID** (rubber stamp 구조적 차단)
+- Rubber stamp 금지
 - 코드베이스를 직접 탐색하여 file:line 증거 제시
-- Constraint-Option Consistency 테이블은 mid+ 필수
-- Missing Constraints 발견 시 반드시 MC 섹션에 기록"
+- Constraint-Option Consistency 테이블은 mid+ 필수"
 })
 ```
 
 → State: `phase: "steelman"`
 
-### Post-Phase 3: 오케스트레이터 처리
+## Phase 4: Able — Synthesis (ALL levels)
 
-**1. antithesis=0 검증**:
-Klay APPROVE + antithesis 0개 → INVALID → Phase 3 재실행 (1회만, "antithesis 필수" 강조).
-재실행 후에도 antithesis 0개 → 경고 + 진행 (Confidence 1단계 하락).
-
-**2. Missing Constraints 복구**:
-Klay가 MC (Missing Constraints)를 발견한 경우:
-1. MC를 Ryan Foundation에 추가 (**Phase 1 재실행 안 함**)
-2. MC를 Able synthesis 프롬프트에 주입
-3. Peter가 MC 반영 여부도 검증
-4. Critic finding에 "Late Constraint Discovery" MINOR 기록
-
-**3. Complexity Override 처리**:
-Klay가 `complexityOverride: "high"` 신호를 보낸 경우 (file:line 증거 포함):
-- 오케스트레이터가 수용 → 남은 Phase 에스컬레이션 (모델 업그레이드 + pre-mortem/rollback 활성화)
-- 이미 완료된 Phase는 유지
-
-**4. 스킵 경로 결정** (Peter 참여 여부):
-| Klay 결과 | Peter | Critic |
-|-----------|-------|--------|
-| APPROVE (반론 0개) — antithesis 검증 후 | 스킵 | **THOROUGH** (반론 없는 플랜이야말로 의심) |
-| SUGGEST (반론 1개 minor) | 스킵 | OK |
-| SUGGEST (반론 2+개 또는 major) | **필수** | OK |
-
-## Phase 4: Able — Synthesis (low: 경량, mid/high: 표준)
-
-Able이 Klay의 STEELMAN_REVIEW를 받아 플랜을 수정. 모델: low=sonnet, mid/high=opus.
-**Low에서는 경량 synthesis** — Klay lite가 1-2개만 제안하므로 1줄 코멘트로 수용/반박 가능.
+Able(opus)이 Klay의 STEELMAN_REVIEW를 받아 플랜을 수정:
 
 ```
 Agent({
   subagent_type: "aing:able",
   description: "Able: 반론 통합 — {feature}",
-  model: "{low: sonnet, mid/high: opus}",
+  model: "opus",
   prompt: "Klay의 steelman 반론을 통합하여 플랜을 수정하세요.
 
 === RYAN FOUNDATION ===
@@ -579,10 +469,9 @@ Rules:
 
 → State: `phase: "synthesis"`
 
-## Phase 5: Peter — Synthesis Verification (조건부)
+## Phase 5: Peter — Synthesis Verification (ALL levels)
 
-Peter(sonnet)가 Able의 synthesis 품질을 검증.
-**Low: 스킵. Mid: Klay 반론 2+개일 때만. High: 필수.**
+Peter(sonnet)가 Able의 synthesis 품질을 검증:
 
 ```
 Agent({
@@ -638,15 +527,13 @@ Rules:
 
 ## Phase 6: Critic — 5-Phase Deliberation Critique (ALL levels)
 
-**Peter PASS 후에만 실행** (sequential). Peter 스킵 시에도 실행.
-모델: low/mid=sonnet, high=opus. **문서 기반 논리 일관성 검증** — 코드 사실은 Klay/Explore가 이미 확인.
-high에서만 spot-check 허용 (tool call ≤10, 의심스러운 claim 2-3개만).
+**Peter PASS 후에만 실행** (sequential).
 
 ```
 Agent({
   subagent_type: "aing:critic",
   description: "Critic: 심의 비평 — {feature}",
-  model: "{low/mid: sonnet, high: opus}",
+  model: "opus",
   prompt: "AING-DR 심의의 품질을 5-Phase 프로토콜로 비평하세요.
 
 === RYAN FOUNDATION ===
@@ -716,14 +603,10 @@ Critic ITERATE → Phase 2 (Able 재설계) → Phase 3~6 전체 반복
 
 | Level | 최대 반복 |
 |-------|----------|
-| low | 2회 |
-| mid | 3회 |
-| high / deliberate | 5회 |
+| low | 3회 |
+| mid / high / deliberate | 5회 |
 
-**조기 종료 (3가지 수렴 감지)**:
-1. Peter의 Delta Score가 2연속 ≤ 0 → 최선 버전으로 진행 + Confidence: LOW
-2. Critic findings가 2연속 동일 → **stagnation 감지** → 조기 종료 + Confidence: LOW
-3. iteration N의 plan과 N-1의 plan diff가 cosmetic only → 조기 종료 + Confidence: LOW
+**조기 종료**: Peter의 Delta Score가 2연속 ≤ 0 → 최선 버전으로 진행 + Confidence: LOW
 
 **최대 반복 초과 시**: 최선 버전을 사용자에게 제시 + "전문가 합의 미도달" 표시 + Confidence: LOW
 
