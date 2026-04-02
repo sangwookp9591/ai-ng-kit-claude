@@ -6,8 +6,8 @@ description: |
 
 # /aing review-pipeline — 4-Tier Review Pipeline
 
-> gstack 흡수: 4-tier 리뷰 파이프라인 + Review Readiness Dashboard
-> 복잡도 기반 자동 리뷰 깊이 선택 (aing 시너지)
+> 4-tier 리뷰 파이프라인 + Review Readiness Dashboard
+> 복잡도 기반 자동 리뷰 깊이 선택
 
 ## 사용법
 

@@ -1,6 +1,5 @@
 /**
  * aing Session Runner — E2E Skill Test Runner
- * Absorbed from gstack's session-runner.ts pattern.
  * Spawns claude -p subprocess, streams NDJSON, tracks cost/duration.
  *
  * @module tests/helpers/session-runner

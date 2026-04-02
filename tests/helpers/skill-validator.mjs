@@ -1,6 +1,5 @@
 /**
  * aing Skill Validator — Validates SKILL.md files
- * Absorbed from gstack's skill-parser.ts pattern.
  *
  * @module tests/helpers/skill-validator
  */
