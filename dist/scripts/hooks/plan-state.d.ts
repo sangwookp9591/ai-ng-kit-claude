@@ -38,9 +38,14 @@ export declare function readPlanState(projectDir: string): PlanState | null;
 export declare function advancePhase(projectDir: string, nextPhase: PlanPhase): PlanState | null;
 /**
  * Increment iteration (on Critic ITERATE).
- * Returns false if max iterations reached.
+ * Returns false if max iterations reached or time budget exceeded.
  */
 export declare function incrementIteration(projectDir: string): boolean;
+/**
+ * Check if the current iteration has exceeded its time budget.
+ * Called by hooks to force early termination of stuck iterations.
+ */
+export declare function isIterationTimedOut(projectDir: string): boolean;
 /**
  * Complete the plan (Phase 7 done).
  */

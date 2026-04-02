@@ -37,25 +37,26 @@ beforeEach(() => {
 // checkBashCommand — dangerous commands (block)
 // ---------------------------------------------------------------------------
 describe('checkBashCommand — dangerous commands', () => {
-    it('blocks rm -rf', () => {
+    it('warns on rm -rf (not block — Claude BashTool handles blocking)', () => {
         const result = checkBashCommand('rm -rf /');
-        expect(result.allowed).toBe(false);
+        expect(result.allowed).toBe(true);
         expect(result.violations.length).toBeGreaterThanOrEqual(1);
-        expect(result.violations[0].rule.id).toBe('block-rm-rf');
+        expect(result.violations[0].rule.id).toBe('warn-rm-rf');
     });
-    it('blocks rm -fr (reversed flags)', () => {
+    it('warns on rm -fr (reversed flags)', () => {
         const result = checkBashCommand('rm -fr /tmp/data ');
-        expect(result.allowed).toBe(false);
+        expect(result.allowed).toBe(true);
+        expect(result.violations.length).toBeGreaterThanOrEqual(1);
     });
-    it('blocks git push --force', () => {
+    it('warns on git push --force (not block)', () => {
         const result = checkBashCommand('git push --force origin main');
-        expect(result.allowed).toBe(false);
-        expect(result.violations.some(v => v.rule.id === 'block-force-push')).toBe(true);
+        expect(result.allowed).toBe(true);
+        expect(result.violations.some(v => v.rule.id === 'warn-force-push')).toBe(true);
     });
-    it('blocks git reset --hard', () => {
+    it('warns on git reset --hard (not block)', () => {
         const result = checkBashCommand('git reset --hard HEAD~5');
-        expect(result.allowed).toBe(false);
-        expect(result.violations.some(v => v.rule.id === 'block-reset-hard')).toBe(true);
+        expect(result.allowed).toBe(true);
+        expect(result.violations.some(v => v.rule.id === 'warn-reset-hard')).toBe(true);
     });
     it('warns on DROP TABLE (not block)', () => {
         const result = checkBashCommand('psql -c "DROP TABLE users;"');
@@ -153,13 +154,13 @@ describe('loadRules', () => {
     it('filters out disabled rules', () => {
         mockGetConfig.mockImplementation((path, fallback) => {
             if (path === 'guardrail.disabled')
-                return ['block-rm-rf'];
+                return ['warn-rm-rf'];
             return fallback;
         });
         const rules = loadRules();
-        expect(rules.find(r => r.id === 'block-rm-rf')).toBeUndefined();
+        expect(rules.find(r => r.id === 'warn-rm-rf')).toBeUndefined();
         // Other rules still present
-        expect(rules.find(r => r.id === 'block-force-push')).toBeDefined();
+        expect(rules.find(r => r.id === 'warn-force-push')).toBeDefined();
     });
     it('includes user-defined rules from config', () => {
         mockGetConfig.mockImplementation((path, fallback) => {
@@ -191,10 +192,10 @@ describe('formatViolations', () => {
     it('formats block violations with header', () => {
         const violations = [{
                 rule: {
-                    id: 'block-rm-rf',
+                    id: 'warn-rm-rf',
                     type: 'bash',
                     pattern: /rm/,
-                    action: 'block',
+                    action: 'warn',
                     severity: 'critical',
                     message: 'rm -rf blocked',
                 },

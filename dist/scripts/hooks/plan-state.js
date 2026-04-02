@@ -15,9 +15,9 @@ const PHASE_ORDER = [
     'synthesis', 'synthesis-check', 'critique', 'adr',
 ];
 const DEFAULT_MAX_ITERATIONS = {
-    low: 3,
-    mid: 5,
-    high: 5,
+    low: 2,
+    mid: 3,
+    high: 3,
 };
 /**
  * Phase → allowed agent mapping.
@@ -43,7 +43,7 @@ const PHASE_NEXT = {
     'steelman': 'synthesis',
     'synthesis': 'synthesis-check',
     'synthesis-check': 'critique', // PASS → critique; REVISE → synthesis (handled by caller)
-    'critique': 'adr', // APPROVE → adr; ITERATE → option-design (handled by caller)
+    'critique': 'adr', // APPROVE → adr; ITERATE → synthesis-check (Targeted Patch: orchestrator edits plan, then Peter re-verifies)
     'adr': 'completed',
 };
 // ---------------------------------------------------------------------------
@@ -115,14 +115,24 @@ export function advancePhase(projectDir, nextPhase) {
     log.info('Phase advanced', { from: state.phaseHistory[state.phaseHistory.length - 2], to: nextPhase });
     return state;
 }
+/** Max planning duration in milliseconds (15 min hard cap). */
+const MAX_PLAN_DURATION_MS = 15 * 60 * 1000;
+/** Max iteration duration in milliseconds (3 min per iteration). */
+const MAX_ITERATION_DURATION_MS = 3 * 60 * 1000;
 /**
  * Increment iteration (on Critic ITERATE).
- * Returns false if max iterations reached.
+ * Returns false if max iterations reached or time budget exceeded.
  */
 export function incrementIteration(projectDir) {
     const state = readPlanState(projectDir);
     if (!state?.active)
         return false;
+    // Time-based guard: total planning duration
+    const elapsed = Date.now() - new Date(state.startedAt).getTime();
+    if (elapsed > MAX_PLAN_DURATION_MS) {
+        log.info('Planning time budget exceeded', { elapsedMs: elapsed, maxMs: MAX_PLAN_DURATION_MS });
+        return false;
+    }
     state.iteration += 1;
     state.updatedAt = new Date().toISOString();
     if (state.iteration >= state.maxIterations) {
@@ -131,6 +141,17 @@ export function incrementIteration(projectDir) {
     }
     const result = writeState(statePath(projectDir), state);
     return result.ok;
+}
+/**
+ * Check if the current iteration has exceeded its time budget.
+ * Called by hooks to force early termination of stuck iterations.
+ */
+export function isIterationTimedOut(projectDir) {
+    const state = readPlanState(projectDir);
+    if (!state?.active)
+        return false;
+    const sinceUpdate = Date.now() - new Date(state.updatedAt).getTime();
+    return sinceUpdate > MAX_ITERATION_DURATION_MS;
 }
 /**
  * Complete the plan (Phase 7 done).

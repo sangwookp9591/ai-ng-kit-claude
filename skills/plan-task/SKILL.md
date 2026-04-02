@@ -617,26 +617,51 @@ Critic ITERATE → Targeted Patch (아래 참조)
 
 ### Targeted Patch Mode (Critic ITERATE 시)
 
-**Phase 2~6 전체 재실행은 금지한다.** Critic ITERATE 시 오케스트레이터가 직접 패치한다:
+**Phase 2~6 전체 재실행은 금지한다.** **에이전트 재호출도 금지한다.**
 
-1. Critic의 MAJOR findings를 추출한다
-2. 기존 Able 플랜에 MAJOR findings만 targeted로 반영한다 (Able 에이전트 재호출 없이 오케스트레이터가 직접 수정)
-3. MAJOR 건수가 3건 이하이면: 오케스트레이터가 직접 플랜 수정 → Phase 5 (Peter) → Phase 6 (Critic) 재실행 (Phase 2~4 생략)
-4. MAJOR 건수가 4건 이상이면: Able(sonnet — opus 아님) 1회만 호출하여 패치 → Phase 5 → Phase 6
+Critic ITERATE 시 **오케스트레이터(당신)가 직접** 패치한다:
+
+1. Critic의 Patch Guide 테이블에서 MAJOR findings + Patch Instruction을 추출한다
+2. 기존 플랜 파일(`.aing/plans/`에 있는 최신 버전)을 Read한다
+3. **에이전트를 호출하지 않고** Edit 도구로 직접 플랜을 수정한다
+4. 수정된 플랜으로 Phase 5 (Peter, sonnet) → Phase 6 (Critic, sonnet) 재실행
 
 ```
-Critic ITERATE (MAJOR ≤ 3):
-  → 오케스트레이터 직접 패치 → Peter → Critic (2 agent calls)
+Critic ITERATE (모든 경우):
+  → 오케스트레이터가 Edit으로 직접 패치 → Peter(sonnet) → Critic(sonnet)
+  → 에이전트 호출: 2회만 (Peter + Critic)
+  → Able/Klay 재호출 금지
+```
 
-Critic ITERATE (MAJOR 4+):
-  → Able(sonnet) 패치 → Peter → Critic (3 agent calls)
+**왜 에이전트를 호출하지 않는가:**
+- Able(opus)은 303줄 프롬프트 + 코드베이스 탐색으로 10분+ 소요
+- `model: "sonnet"` 오버라이드를 지시해도 agents/able.md의 `model: opus`가 적용됨
+- Critic의 Patch Guide는 1줄 수정 지시이므로 오케스트레이터가 직접 수행 가능
+
+**Peter/Critic 호출 시 model은 complexity에 따라 결정:**
+| Complexity | Peter model | Critic model |
+|------------|-------------|--------------|
+| low / mid  | sonnet      | sonnet       |
+| high / deliberate | sonnet | opus      |
+
+```
+Agent({
+  subagent_type: "aing:peter",
+  model: "sonnet",   // ← 필수: agents/*.md의 기본 model을 오버라이드
+  ...
+})
+Agent({
+  subagent_type: "aing:critic",
+  model: "sonnet",   // low/mid — high/deliberate는 "opus"
+  ...
+})
 ```
 
 **Phase 2~6 전체 루프(5 agent calls)는 절대 반복하지 않는다.**
 
 ### Iteration Budget
 
-**iteration당 최대 시간: 5분.** 5분 내 완료되지 않으면 현재 최선 버전으로 진행한다.
+**iteration당 최대 시간: 3분.** 3분 내 완료되지 않으면 현재 최선 버전으로 확정한다.
 
 ### 빠른 종료 조건 (하나라도 해당 시 즉시 종료)
 
