@@ -1,5 +1,27 @@
 # Changelog
 
+## [2.9.11] - 2026-04-02 — 범용 에이전트 버짓 가드레일 (코드 레벨)
+
+### Added
+
+- **agent-budget.ts**: 세션 레벨 에이전트 예산 추적 (plan-state 무관, auto/team/모든 스킬 적용)
+  - `trackAgentSpawn()`: 스폰 카운트 (max 20/session), warn on cap
+  - `recordAgentCompletion()`: duration 기록 + slow agent 감지 (>5min)
+  - `resetAgentBudget()`: 세션 시작 시 자동 리셋
+- **task-cli.ts**: SKILL.md에서 참조하던 누락 CLI wrapper 추가 (create/check/list/show/add)
+- **auto SKILL.md Guardrails 섹션**: worker timeout 5분, 에이전트 15회 cap, QA cycle max 3
+
+### Fixed
+
+- **task-cli.js MODULE_NOT_FOUND**: task SKILL.md가 참조하지만 없던 파일 생성
+- **post-tool-use slow-agent**: 개별 경고 → agent-budget 통합 (중복 제거)
+
+### Changed
+
+- **pre-tool-use.ts**: agent-budget 체크를 plan-state 체크 앞에 배치 (범용 적용)
+- **session-start.ts**: `resetAgentBudget()` 호출 추가
+- **auto QA cycle**: max 5 → max 3 축소
+
 ## [2.9.1] - 2026-04-02 — 코드 레벨 가드레일 + plan-only + task 보강
 
 ### Added

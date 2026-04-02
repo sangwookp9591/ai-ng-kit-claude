@@ -9,6 +9,7 @@ import { resetErrorCount } from '../scripts/guardrail/safety-invariants.js';
 import { norchToolUse, norchAgentDone } from '../scripts/core/norch-bridge.js';
 import { detectLearnablePattern, recordPatternUse } from '../scripts/hooks/learnable-pattern.js';
 import { autoAdvancePhase } from '../scripts/hooks/plan-state.js';
+import { recordAgentCompletion } from '../scripts/guardrail/agent-budget.js';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -87,9 +88,10 @@ try {
             durationMs,
           }, projectDir);
 
-          // Slow agent warning: flag agents that took > 5 min
-          if (durationMs && durationMs > 5 * 60 * 1000) {
-            process.stderr.write(`[aing:slow-agent] ${agentName} took ${Math.round(durationMs / 1000)}s (>${Math.round(5 * 60)}s threshold). Consider using sonnet model or reducing prompt size.\n`);
+          // Agent budget: record completion + slow agent detection
+          if (durationMs) {
+            const budgetWarn = recordAgentCompletion(projectDir, agentName, durationMs);
+            if (budgetWarn) process.stderr.write(budgetWarn + '\n');
           }
         }
       } catch { /* token tracking is best-effort */ }

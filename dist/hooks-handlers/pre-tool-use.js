@@ -7,6 +7,7 @@ import { checkBashCommand, checkFilePath, formatViolations } from '../scripts/gu
 import { checkStepLimit, checkFileChangeLimit, checkForbiddenPath } from '../scripts/guardrail/safety-invariants.js';
 import { isDryRunActive, queueChange, formatPreview } from '../scripts/guardrail/dry-run.js';
 import { checkAgentAllowed, getExpectedAgent, isIterationTimedOut, trackAgentCall } from '../scripts/hooks/plan-state.js';
+import { trackAgentSpawn } from '../scripts/guardrail/agent-budget.js';
 const parsed = await readStdinJSON();
 try {
     const toolName = parsed.tool_name || '';
@@ -17,8 +18,14 @@ try {
     if ((toolName === 'Agent' || toolName === 'Task') && toolInput.subagent_type) {
         const agentKey = toolInput.name || toolInput.subagent_type.replace('aing:', '');
         norchAgentSpawn('session', agentKey, toolInput.description);
-        // Phase gate: only enforce AING-DR phase ordering when a plan session is actively running
+        // Universal agent budget guard (works for all skills: auto, team, plan-task, etc.)
         const subagentType = toolInput.subagent_type;
+        if (subagentType.startsWith('aing:')) {
+            const budget = trackAgentSpawn(projectDir, agentKey);
+            if (budget.warn)
+                ctx.push(budget.warn);
+        }
+        // Phase gate: only enforce AING-DR phase ordering when a plan session is actively running
         if (subagentType.startsWith('aing:')) {
             // Iteration timeout guard: warn (not block) when iteration budget is exceeded
             if (isIterationTimedOut(projectDir)) {

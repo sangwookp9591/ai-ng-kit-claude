@@ -24,7 +24,7 @@ If a plan file path is provided (e.g., from `/aing plan` → auto transition), r
 |-------|------|--------|---------------|
 | 1. Planning | Structured plan + complexity scoring | Able, Klay (if mid+) | Existing plan |
 | 2. Execution | Parallel worker spawn | Based on preset | — |
-| 3. QA Cycling | Test → fix loop (max 5) | Jay (auto-fix) | Tests pass |
+| 3. QA Cycling | Test → fix loop (max 3) | Jay (auto-fix) | Tests pass |
 | 4. Validation | Security + quality review | Milla, Klay (mid+), Jay (high) | — |
 | 5. Completion | Report + persist | — | — |
 
@@ -99,6 +99,18 @@ TaskUpdate({ taskId: "1", owner: "jay" })
 ```
 
 Never skip this step. The user must see who is doing what before agents start working.
+
+## Guardrails (전 Phase 공통)
+
+| 가드레일 | 값 | 동작 |
+|---------|-----|------|
+| Worker timeout | **5분** | 초과 시 현재 결과로 진행, 재시도 금지 |
+| 총 에이전트 호출 | **15회** | 초과 시 현재 상태로 Phase 5 직행 |
+| QA cycle | **max 3회** | 초과 시 최선 버전으로 Phase 4 진행 |
+| Phase 4→2 loop | **max 2회** | 초과 시 Phase 5 직행 (경고 포함) |
+| Stuck 감지 | 에이전트 응답 없이 **5분** | 현재 최선 결과로 다음 Phase 진행 |
+
+**에이전트가 stuck되면 기다리지 않는다.** 5분 응답 없으면 해당 워커를 완료 처리하고 다음 Phase로 진행한다.
 
 ## Step 5: Spawn Workers (PARALLEL)
 

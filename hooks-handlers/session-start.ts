@@ -9,6 +9,7 @@ import { createLogger } from '../scripts/core/logger.js';
 import { resetBudget, trackInjection, trimToTokenBudget } from '../scripts/core/context-budget.js';
 import { getProgressSummary } from '../scripts/guardrail/progress-tracker.js';
 import { resetTrackers } from '../scripts/guardrail/safety-invariants.js';
+import { resetAgentBudget } from '../scripts/guardrail/agent-budget.js';
 import { isSetupComplete } from '../scripts/setup/setup-progress.js';
 import { norchSessionStart } from '../scripts/core/norch-bridge.js';
 import { readNotepad, pruneWorking } from '../scripts/memory/notepad.js';
@@ -73,6 +74,7 @@ try {
 
   resetBudget();
   resetTrackers(projectDir);
+  resetAgentBudget(projectDir);
 
   const setupStatus: SetupStatus = isSetupComplete();
   const pdcaState = readStateOrDefault(join(projectDir, '.aing', 'state', 'pdca-status.json'), null) as PdcaState | null;
