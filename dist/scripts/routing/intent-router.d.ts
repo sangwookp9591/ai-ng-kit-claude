@@ -3,7 +3,7 @@
  * 자연어 입력을 분석하여 최적의 aing 파이프라인으로 라우팅합니다.
  * @module scripts/routing/intent-router
  */
-type Route = 'auto' | 'plan' | 'team' | 'wizard' | 'debug' | 'review-pipeline' | 'review-cso' | 'explore' | 'perf' | 'refactor' | 'tdd';
+type Route = 'auto' | 'plan' | 'plan-only' | 'team' | 'wizard' | 'debug' | 'review-pipeline' | 'review-cso' | 'explore' | 'perf' | 'refactor' | 'tdd';
 type Preset = 'solo' | 'duo' | 'squad' | 'full' | 'design';
 interface IntentResult {
     route: Route;

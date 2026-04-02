@@ -132,6 +132,13 @@ Skill("aing:plan-task") 호출
 - plan 완료 후 → auto/team 선택 프롬프트 표시 (plan-task SKILL.md Step 3)
 ```
 
+### route = "plan-only"
+```
+Skill("aing:plan-only") 호출
+- 에이전트 0회, 오케스트레이터가 직접 플랜 작성 → persist
+- 짧은 입력, low complexity, 앵커 있는 계획 요청에서 자동 선택
+```
+
 ### route = "team"
 ```
 Skill("aing:team") 호출
@@ -158,12 +165,12 @@ Skill("aing:team") 호출
 | 시그널 | 라우팅 | 이유 |
 |--------|--------|------|
 | "디자인"/"UI"/"화면" | `auto` (Design preset) | 디자인 도메인 |
-| "계획"/"분석"/"설계" | `plan` | 계획 수립 필요 |
+| "계획"/"분석"/"설계" + 앵커 + low complexity | `plan-only` | 경량 플래닝 |
+| "계획"/"분석"/"설계" + high complexity | `plan` | 합의 플래닝 |
 | "팀"/"전체"/"대규모" | `team` | 팀 파이프라인 필요 |
 | 파일 경로/앵커 + complexity ≤ 4 | `auto` (Solo/Duo) | 구체적 → 즉시 실행 |
 | 파일 경로/앵커 + complexity ≥ 5 | `team` | 복잡도 높음 |
-| 짧은 구체적 요청 (4-15단어) | `auto` (Solo) | 빠른 실행 |
-| 너무 짧은 입력 (≤3단어) | `plan` | 스코핑 필요 |
+| 짧은 입력 (≤15단어) | `plan-only` | 경량 플래닝 |
 | 기본 | `auto` | 자동 실행 |
 
 ## 앵커란?

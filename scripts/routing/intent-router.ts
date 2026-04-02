@@ -210,7 +210,7 @@ function estimateComplexity(input: string, _anchorInfo: AnchorResult): number {
 // preset 결정
 // ─────────────────────────────────────────────
 
-type Route = 'auto' | 'plan' | 'team' | 'wizard' | 'debug' | 'review-pipeline' | 'review-cso' | 'explore' | 'perf' | 'refactor' | 'tdd';
+type Route = 'auto' | 'plan' | 'plan-only' | 'team' | 'wizard' | 'debug' | 'review-pipeline' | 'review-cso' | 'explore' | 'perf' | 'refactor' | 'tdd';
 type Preset = 'solo' | 'duo' | 'squad' | 'full' | 'design';
 
 interface IntentResult {
@@ -301,11 +301,27 @@ export function routeIntent(input: string | null): IntentResult {
     confidence = 0.88;
     reason = `디자인 도메인 감지`;
   }
-  // ── 우선순위 3: 계획/분석 키워드 → plan ──
+  // ── 우선순위 3: 계획/분석 키워드 → plan 또는 plan-only ──
   else if (isPlanIntent) {
-    route = 'plan';
-    confidence = 0.82;
-    reason = `계획/분석 키워드 감지`;
+    const hasArchKeyword = /아키텍처|architecture|시스템\s*설계|system\s*design/i.test(safeInput);
+    // 아키텍처 키워드 or high complexity → full plan (합의)
+    if (hasArchKeyword || complexityScore >= 5) {
+      route = 'plan';
+      confidence = 0.82;
+      reason = `계획/분석 키워드 감지${hasArchKeyword ? ' + 아키텍처 결정 필요' : ''}`;
+    }
+    // complexity 낮고 앵커 있으면 plan-only (경량)
+    else if (complexityScore <= 4 && anchorInfo.hasAnchor) {
+      route = 'plan-only';
+      confidence = 0.82;
+      reason = `계획 키워드 + 앵커 있음 + low complexity ${complexityScore} → 경량 플래닝`;
+    }
+    // 그 외 → plan-only
+    else {
+      route = 'plan-only';
+      confidence = 0.75;
+      reason = `계획 키워드 + low complexity ${complexityScore} → 경량 플래닝`;
+    }
   }
   // ── 우선순위 4: 앵커 있음 → auto (또는 complexity ≥ 5 이면 team) ──
   else if (anchorInfo.hasAnchor) {
@@ -325,11 +341,11 @@ export function routeIntent(input: string | null): IntentResult {
     confidence = 0.75;
     reason = `complexity ${complexityScore} ≥ 5 — 팀 필요`;
   }
-  // ── 우선순위 6: 짧고 단순한 입력 (≤15단어, 앵커 없음) → plan ──
+  // ── 우선순위 6: 짧고 단순한 입력 (≤15단어, 앵커 없음) → plan-only ──
   else if (wordCount <= 15) {
-    route = 'plan';
+    route = 'plan-only';
     confidence = 0.70;
-    reason = `짧은 입력 (${wordCount}단어, 앵커 없음) — 계획 수립 필요`;
+    reason = `짧은 입력 (${wordCount}단어) — 경량 플래닝`;
   }
   // ── 기본: auto ──
   else {
