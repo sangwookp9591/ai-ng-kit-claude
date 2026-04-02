@@ -109,6 +109,13 @@ Agent({
 6. SendMessage to "team-lead" on completion
 7. **할당된 파일 목록** — scope 초과 시 경고 기준
 
+### 병렬 대기 시 능동 모니터링
+
+병렬 워커를 spawn한 후 "기다리겠습니다"만 출력하고 멈추지 않는다:
+- 하나가 완료될 때마다 즉시 결과를 처리하고 진행 상태를 다시 출력한다
+- 남은 워커 목록 + 소요 시간을 표시한다
+- 모든 워커가 완료되면 즉시 Gate Review로 진행한다
+
 ### Worker Timeout
 
 각 워커에 **5분 timeout** 적용:

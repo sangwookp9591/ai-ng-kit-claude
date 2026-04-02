@@ -140,6 +140,11 @@ Each spawned agent prompt MUST include:
 
 ## Step 6: Monitor with Live Progress
 
+**병렬 에이전트 대기 시 반드시 능동적 모니터링:**
+- 에이전트를 spawn한 후 "기다리겠습니다"만 출력하고 멈추지 않는다
+- 대기 중에도 **완료된 에이전트의 결과를 즉시 처리**하고, 나머지 대기 상태를 업데이트 출력한다
+- 2개 이상 에이전트가 동시 실행 중이면, 하나가 완료될 때마다 진행 테이블을 다시 출력한다
+
 **On state transitions** (start, complete, fail, block):
 ```
 ┌──────────┬───────────────────────────┬───────────────────────┐
