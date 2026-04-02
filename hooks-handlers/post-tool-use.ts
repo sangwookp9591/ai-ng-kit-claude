@@ -67,6 +67,32 @@ try {
         } catch { /* phase advance is best-effort */ }
       }
 
+      // Activity summary: extract file operations from agent response and show inline
+      if (subagentType.startsWith('aing:') && toolResponse) {
+        try {
+          const files: string[] = [];
+          // Parse tool call patterns: Read(...), Write(...), Edit(...)
+          const readMatches = toolResponse.match(/Read\(([^)]+)\)/g) || [];
+          const writeMatches = toolResponse.match(/Write\(([^)]+)\)/g) || [];
+          const editMatches = toolResponse.match(/Edit\(([^)]+)\)/g) || [];
+          const bashMatches = toolResponse.match(/Bash\(([^)]{0,60})/g) || [];
+
+          for (const m of readMatches) files.push(`📖 ${m.slice(5, -1)}`);
+          for (const m of writeMatches) files.push(`✏️ ${m.slice(6, -1)}`);
+          for (const m of editMatches) files.push(`🔧 ${m.slice(5, -1)}`);
+
+          // Deduplicate and limit
+          const unique = [...new Set(files)].slice(0, 8);
+          const bashCount = bashMatches.length;
+
+          if (unique.length > 0 || bashCount > 0) {
+            const summary = unique.join(', ') + (bashCount > 0 ? ` ⚡bash×${bashCount}` : '');
+            const more = files.length > 8 ? ` +${files.length - 8} more` : '';
+            process.stderr.write(`[aing:${agentName}] ${summary}${more}\n`);
+          }
+        } catch { /* activity summary is best-effort */ }
+      }
+
       // Token tracking: parse <usage> from agent response and log automatically
       try {
         const usageMatch = toolResponse.match(/<usage>([\s\S]*?)<\/usage>/);
