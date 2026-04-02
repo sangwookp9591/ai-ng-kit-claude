@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.9.0] - 2026-04-02 — Consensus Loop 무한반복 방지
+
+plan-task Critic ITERATE 시 Phase 2~6 전체 재실행으로 40분+ 설계 루프에 빠지는 문제 수정.
+
+### Fixed
+
+- **plan-task Consensus Loop**: Critic ITERATE 시 전체 루프(5 opus agents) 반복 대신 **Targeted Patch Mode** 도입 — MAJOR ≤3건은 오케스트레이터 직접 패치, 4+건은 Able(sonnet) 1회만 호출
+- **최대 반복 횟수 축소**: low 3→2회, mid/high/deliberate 5→3회
+- **Iteration Budget**: iteration당 5분 시간 제한 추가
+- **빠른 종료 조건 강화**: MAJOR 미감소 시 수렴 불가 판단, 총 에이전트 호출 10회 cap
+- **Critic Patch Guide**: ITERATE 판정 시 각 MAJOR에 1줄 수정 지시 포함 필수
+
+### Changed
+
+- **Pipeline Overview**: `ITERATE → Phase 2 재설계` → `ITERATE → Targeted Patch`로 흐름 변경
+- **Critic REJECT 기준**: MAJOR 3+ 자동 REJECT 제거 → CRITICAL 1+만 REJECT (MAJOR는 패치로 해결)
+
 ## [2.8.99] - 2026-04-02 — Claude Code 처리 흐름 정합성 개선
 
 Claude Code 소스 분석(claude-code-analysis.md)을 기반으로 aing이 Claude의 내장 기능을 억제하거나 중복하는 10개 항목을 식별하고 7건 수정.

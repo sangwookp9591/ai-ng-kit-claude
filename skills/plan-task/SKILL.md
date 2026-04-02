@@ -124,7 +124,7 @@ Phase 5: Peter — Synthesis Verification + Delta Score
   ↓ PASS → Phase 6  |  REVISE → Phase 4 재작성
   ↓
 Phase 6: Critic — 5-Phase Deliberation Critique
-  ↓ APPROVE → Phase 7  |  ITERATE → Phase 2 재설계  |  REJECT → 중단
+  ↓ APPROVE → Phase 7  |  ITERATE → Targeted Patch  |  REJECT → 중단
   ↓
   ↓ [--interactive: User Review Point 2 — 최종 승인]
   ↓
@@ -135,10 +135,10 @@ Phase 7: Able — Living ADR Generation + Persist
 
 | Level | Score | Ryan | Able | Klay | Peter | Critic | Pre-mortem | Rollback | 합의 루프 |
 |-------|-------|------|------|------|-------|--------|------------|----------|----------|
-| **low** | ≤ 3 | ✓ | DR Lite | ✓ steelman | ✓ synthesis | ✓ THOROUGH | — | — | 최대 3회 |
-| **mid** | 4-7 | ✓ | DR Standard | ✓ steelman | ✓ synthesis + delta | ✓ THOROUGH | — | — | 최대 5회 |
-| **high** | > 7 | ✓ | DR Deep | ✓ steelman | ✓ synthesis + delta | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 5회 |
-| **`--deliberate`** | any | ✓ | DR Deep | ✓ steelman | ✓ synthesis + delta | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 5회 |
+| **low** | ≤ 3 | ✓ | DR Lite | ✓ steelman | ✓ synthesis | ✓ THOROUGH | — | — | 최대 2회 |
+| **mid** | 4-7 | ✓ | DR Standard | ✓ steelman | ✓ synthesis + delta | ✓ THOROUGH | — | — | 최대 3회 |
+| **high** | > 7 | ✓ | DR Deep | ✓ steelman | ✓ synthesis + delta | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 3회 |
+| **`--deliberate`** | any | ✓ | DR Deep | ✓ steelman | ✓ synthesis + delta | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 3회 |
 
 **품질 우선 정책**: 모든 레벨에서 Ryan → Klay → Peter → Critic 전원 참여.
 **자동 `--deliberate` 트리거**: hasSecurity=true 또는 hasArchChange=true이고 score > 5
@@ -578,8 +578,14 @@ CRITIC_VERDICT 포맷으로 출력:
 
 ## Verdict: APPROVE / ITERATE / REJECT
 - APPROVE: CRITICAL 0, MAJOR 0 (confirmed), Constraints 100%
-- ITERATE: CRITICAL 0, MAJOR 1-2 (수정 가능) → Phase 2로 복귀
-- REJECT: Constraint 위반 / CRITICAL 1+ / MAJOR 3+ → 중단
+- ITERATE: CRITICAL 0, MAJOR 1+ (수정 가능) → Targeted Patch
+- REJECT: Constraint 위반 / CRITICAL 1+ → 중단
+
+## Patch Guide (ITERATE 시 필수)
+ITERATE 판정 시 각 MAJOR에 대해 1줄 수정 지시를 포함:
+| # | MAJOR Finding | Patch Instruction (1줄) |
+|---|--------------|------------------------|
+| 1 | {finding} | {구체적 수정 방법} |
 
 ## Mode: THOROUGH / ADVERSARIAL
 
@@ -598,15 +604,44 @@ Rules:
 
 ```
 Peter REVISE → Phase 4 (Able 재synthesis) → Phase 5 (Peter 재검증)
-Critic ITERATE → Phase 2 (Able 재설계) → Phase 3~6 전체 반복
+Critic ITERATE → Targeted Patch (아래 참조)
 ```
 
 | Level | 최대 반복 |
 |-------|----------|
-| low | 3회 |
-| mid / high / deliberate | 5회 |
+| low | 2회 |
+| mid | 3회 |
+| high / deliberate | 3회 |
 
-**조기 종료**: Peter의 Delta Score가 2연속 ≤ 0 → 최선 버전으로 진행 + Confidence: LOW
+### Targeted Patch Mode (Critic ITERATE 시)
+
+**Phase 2~6 전체 재실행은 금지한다.** Critic ITERATE 시 오케스트레이터가 직접 패치한다:
+
+1. Critic의 MAJOR findings를 추출한다
+2. 기존 Able 플랜에 MAJOR findings만 targeted로 반영한다 (Able 에이전트 재호출 없이 오케스트레이터가 직접 수정)
+3. MAJOR 건수가 3건 이하이면: 오케스트레이터가 직접 플랜 수정 → Phase 5 (Peter) → Phase 6 (Critic) 재실행 (Phase 2~4 생략)
+4. MAJOR 건수가 4건 이상이면: Able(sonnet — opus 아님) 1회만 호출하여 패치 → Phase 5 → Phase 6
+
+```
+Critic ITERATE (MAJOR ≤ 3):
+  → 오케스트레이터 직접 패치 → Peter → Critic (2 agent calls)
+
+Critic ITERATE (MAJOR 4+):
+  → Able(sonnet) 패치 → Peter → Critic (3 agent calls)
+```
+
+**Phase 2~6 전체 루프(5 agent calls)는 절대 반복하지 않는다.**
+
+### Iteration Budget
+
+**iteration당 최대 시간: 5분.** 5분 내 완료되지 않으면 현재 최선 버전으로 진행한다.
+
+### 빠른 종료 조건 (하나라도 해당 시 즉시 종료)
+
+- 최대 반복 초과
+- Peter Delta Score 2연속 ≤ 0
+- **iteration 1에서 MAJOR 건수가 줄지 않음** → 수렴 불가로 판단, 최선 버전 + Confidence: LOW
+- **총 에이전트 호출 수가 10회 초과** → 비용 보호 차단
 
 **최대 반복 초과 시**: 최선 버전을 사용자에게 제시 + "전문가 합의 미도달" 표시 + Confidence: LOW
 
