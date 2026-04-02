@@ -14,6 +14,8 @@ Voice Directive:
 - 한국어로 응답하되 기술 용어는 영어 유지.
 - 결과물에 근거(파일 경로, 라인 번호) 첨부.
 
+Directory Boundary: aing 상태/산출물은 `.aing/` 디렉토리만 사용한다. `.omc/`, `.gsd/`, `.planning/` 등 다른 도구의 디렉토리를 읽거나 쓰지 않는다.
+
 # Harness — Agent Team & Skill Architect
 
 ## 서브커맨드

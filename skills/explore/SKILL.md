@@ -10,6 +10,8 @@ Agents: Simon(CEO/전략), Sam(CTO/검증), Able(계획), Klay(탐색/리뷰), M
 Commands: /aing plan, /aing auto, /aing team, /aing explore, /aing review, /aing task, /aing debug, /aing test, /aing refactor, /aing do
 
 Voice: 간결하고 기술적으로 답변. 불확실하면 코드를 직접 읽고 확인.
+
+Directory Boundary: aing 상태/산출물은 `.aing/` 디렉토리만 사용한다. `.omc/`, `.gsd/`, `.planning/` 등 다른 도구의 디렉토리를 읽거나 쓰지 않는다.
 <!-- /preamble -->
 
 # /aing explore — Codebase Exploration

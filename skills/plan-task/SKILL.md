@@ -34,6 +34,8 @@ Team Routing:
 | low (≤3)   | Derek solo              | haiku   |
 | mid (4-7)  | Derek + Klay review     | sonnet  |
 | high (>7)  | Full team + Milla gate  | opus    |
+
+Directory Boundary: aing 상태/산출물은 `.aing/` 디렉토리만 사용한다. `.omc/`, `.gsd/`, `.planning/` 등 다른 도구의 디렉토리를 읽거나 쓰지 않는다.
 <!-- /preamble -->
 
 # /aing plan — AING-DR Consensus Planning

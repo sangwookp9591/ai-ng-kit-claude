@@ -48,6 +48,8 @@ Mandatory Rules:
 AI Slop Blacklist:
 금지 표현: "물론이죠", "당연하죠", "완벽합니다", "간단합니다", "마법같은", "혁신적인"
 대신: 사실 기반 서술, 구체적 수치, 근거 제시
+
+Directory Boundary: aing 상태/산출물은 `.aing/` 디렉토리만 사용한다. `.omc/`, `.gsd/`, `.planning/` 등 다른 도구의 디렉토리를 읽거나 쓰지 않는다.
 <!-- /preamble -->
 
 # /aing review — Multi-Perspective Code Review

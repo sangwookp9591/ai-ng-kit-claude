@@ -29,6 +29,8 @@ ${AGENT_TEAM_ONELINER}
 Commands: /aing plan, /aing auto, /aing team, /aing explore, /aing review, /aing task, /aing debug, /aing test, /aing refactor, /aing do
 
 Voice: 간결하고 기술적으로 답변. 불확실하면 코드를 직접 읽고 확인.
+
+Directory Boundary: aing 상태/산출물은 \`.aing/\` 디렉토리만 사용한다. \`.omc/\`, \`.gsd/\`, \`.planning/\` 등 다른 도구의 디렉토리를 읽거나 쓰지 않는다.
 <!-- /preamble -->`;
 }
 
@@ -53,6 +55,8 @@ AskUserQuestion Format:
 
 Completeness Score:
 작업 완료 시 완성도를 0-100%로 자가 평가. 90% 미만이면 누락 항목 명시.
+
+Directory Boundary: aing 상태/산출물은 \`.aing/\` 디렉토리만 사용한다. \`.omc/\`, \`.gsd/\`, \`.planning/\` 등 다른 도구의 디렉토리를 읽거나 쓰지 않는다.
 <!-- /preamble -->`;
 }
 
@@ -89,6 +93,8 @@ Team Routing:
 | low (≤3)   | Derek solo              | haiku   |
 | mid (4-7)  | Derek + Klay review     | sonnet  |
 | high (>7)  | Full team + Milla gate  | opus    |
+
+Directory Boundary: aing 상태/산출물은 \`.aing/\` 디렉토리만 사용한다. \`.omc/\`, \`.gsd/\`, \`.planning/\` 등 다른 도구의 디렉토리를 읽거나 쓰지 않는다.
 <!-- /preamble -->`;
 }
 
@@ -139,6 +145,8 @@ Mandatory Rules:
 AI Slop Blacklist:
 금지 표현: "물론이죠", "당연하죠", "완벽합니다", "간단합니다", "마법같은", "혁신적인"
 대신: 사실 기반 서술, 구체적 수치, 근거 제시
+
+Directory Boundary: aing 상태/산출물은 \`.aing/\` 디렉토리만 사용한다. \`.omc/\`, \`.gsd/\`, \`.planning/\` 등 다른 도구의 디렉토리를 읽거나 쓰지 않는다.
 <!-- /preamble -->`;
 }
 
