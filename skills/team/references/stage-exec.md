@@ -103,11 +103,12 @@ Agent({
 각 워커 프롬프트에 반드시 포함:
 1. Entrance banner (agents/*.md에서)
 2. 구체적 태스크
-3. TDD 강제 규칙 (테스트 먼저 작성 → 실패 확인 → 구현 → 통과 확인)
-4. 증거 수집 요구사항
-5. `@{Name}❯` 프리픽스 커뮤니케이션 포맷
-6. SendMessage to "team-lead" on completion
-7. **할당된 파일 목록** — scope 초과 시 경고 기준
+3. **VERSION CONTEXT** — `node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/context/version-detect.js" "$(pwd)"` 실행 후 결과를 프롬프트에 삽입
+4. TDD 강제 규칙 (테스트 먼저 작성 → 실패 확인 → 구현 → 통과 확인)
+5. 증거 수집 요구사항
+6. `@{Name}❯` 프리픽스 커뮤니케이션 포맷
+7. SendMessage to "team-lead" on completion
+8. **할당된 파일 목록** — scope 초과 시 경고 기준
 
 ### 병렬 대기 시 능동 모니터링
 

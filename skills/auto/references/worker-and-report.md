@@ -14,6 +14,12 @@ Role: {role description}
 
 TASK: {specific task description}
 
+VERSION CONTEXT (오케스트레이터가 주입):
+{오케스트레이터: 여기에 version-detect 결과를 삽입. 없으면 이 섹션 생략}
+- 프로젝트의 정확한 버전에 맞는 API를 사용하세요
+- deprecated/legacy 패턴 사용 금지
+- 불확실하면 context7 MCP(resolve-library-id → query-docs) 또는 WebSearch로 공식 문서 확인
+
 COMMUNICATION FORMAT:
 ALL SendMessage to "team-lead" MUST start with "@{Name}❯" prefix.
 Examples:

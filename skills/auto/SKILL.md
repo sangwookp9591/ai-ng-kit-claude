@@ -132,9 +132,10 @@ Agent({
 Each spawned agent prompt MUST include:
 1. Entrance banner (from agents/*.md)
 2. Specific task
-3. TDD enforcement rules
-4. Evidence collection requirement
-5. SendMessage to "team-lead" on completion
+3. **VERSION CONTEXT** — 오케스트레이터가 `node "${CLAUDE_PLUGIN_ROOT}/dist/scripts/context/version-detect.js" "$(pwd)"` 실행 후 결과를 프롬프트에 삽입. 프로젝트의 기술 스택 버전에 맞는 코드를 생성하도록 강제
+4. TDD enforcement rules
+5. Evidence collection requirement
+6. SendMessage to "team-lead" on completion
 
 → Worker Prompt Template: `references/worker-and-report.md` 참조
 

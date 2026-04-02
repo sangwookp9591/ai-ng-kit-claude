@@ -10,6 +10,7 @@ import { resetBudget, trackInjection, trimToTokenBudget } from '../scripts/core/
 import { getProgressSummary } from '../scripts/guardrail/progress-tracker.js';
 import { resetTrackers } from '../scripts/guardrail/safety-invariants.js';
 import { resetAgentBudget } from '../scripts/guardrail/agent-budget.js';
+import { generateVersionContext } from '../scripts/context/version-detect.js';
 import { isSetupComplete } from '../scripts/setup/setup-progress.js';
 import { norchSessionStart } from '../scripts/core/norch-bridge.js';
 import { readNotepad, pruneWorking } from '../scripts/memory/notepad.js';
@@ -105,6 +106,15 @@ try {
     ctx.push(`Setup: ${setupStatus.configTarget || 'configured'} | HUD: ${setupStatus.hudEnabled ? 'on' : 'off'} | Mode: ${setupStatus.defaultMode || 'auto'}`);
     ctx.push('');
   }
+
+  // === Tech Stack Version Context ===
+  try {
+    const versionCtx = generateVersionContext(projectDir);
+    if (versionCtx) {
+      ctx.push(versionCtx);
+      ctx.push('');
+    }
+  } catch { /* version detection is best-effort */ }
 
   // === Onboarding: Resume vs New (only when setup is done) ===
   if (setupStatus.completed && pdcaState?.activeFeature) {
