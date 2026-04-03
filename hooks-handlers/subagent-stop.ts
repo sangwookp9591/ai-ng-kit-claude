@@ -127,7 +127,8 @@ try {
         return -1;
       }, -1);
     }
-    if (idx === -1) {
+    // Last resort: only for unknown agents, match oldest active (FIFO)
+    if (idx === -1 && subagentType === 'unknown') {
       idx = store.agents.findIndex(entry => entry.status === 'active');
     }
 
