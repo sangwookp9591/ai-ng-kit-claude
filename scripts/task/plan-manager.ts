@@ -52,7 +52,7 @@ interface Steelman {
   synthesisPath: string | null;
 }
 
-interface PeterVerdict {
+interface NoaVerdict {
   verdict: string;
   absorbed: number;
   rebutted: number;
@@ -98,7 +98,7 @@ interface CreatePlanParams {
   preferences?: Preference[];
   drivers?: Driver[];
   steelman?: Steelman;
-  peterVerdict?: PeterVerdict;
+  noaVerdict?: NoaVerdict;
   criticVerdict?: CriticVerdict;
   adr?: ADR;
 }
@@ -239,8 +239,8 @@ export function createPlan(params: CreatePlanParams, projectDir?: string): Creat
     }
   }
 
-  if (params.peterVerdict) {
-    const pv = params.peterVerdict;
+  if (params.noaVerdict) {
+    const pv = params.noaVerdict;
     md.push(``, `## Synthesis Verification`);
     md.push(``, `| Metric | Value |`);
     md.push(`|--------|-------|`);

@@ -122,8 +122,8 @@ export function createPlan(params, projectDir) {
             md.push(``, `**Synthesis Path**: ${params.steelman.synthesisPath}`);
         }
     }
-    if (params.peterVerdict) {
-        const pv = params.peterVerdict;
+    if (params.noaVerdict) {
+        const pv = params.noaVerdict;
         md.push(``, `## Synthesis Verification`);
         md.push(``, `| Metric | Value |`);
         md.push(`|--------|-------|`);

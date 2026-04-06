@@ -37,7 +37,7 @@ interface Steelman {
     newDrivers: string[];
     synthesisPath: string | null;
 }
-interface PeterVerdict {
+interface NoaVerdict {
     verdict: string;
     absorbed: number;
     rebutted: number;
@@ -82,7 +82,7 @@ interface CreatePlanParams {
     preferences?: Preference[];
     drivers?: Driver[];
     steelman?: Steelman;
-    peterVerdict?: PeterVerdict;
+    noaVerdict?: NoaVerdict;
     criticVerdict?: CriticVerdict;
     adr?: ADR;
 }

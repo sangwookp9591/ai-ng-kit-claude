@@ -109,14 +109,14 @@ describe('plan-manager: AING-DR 필드 지원', () => {
     assert.ok(content.includes('런타임 오버헤드'), 'Should contain antithesis content');
   });
 
-  it('should include ## Synthesis Verification section when peterVerdict provided', async () => {
+  it('should include ## Synthesis Verification section when noaVerdict provided', async () => {
     const { createPlan } = await import('../dist/scripts/task/plan-manager.js');
 
     const result = createPlan({
-      feature: 'dr-peter',
-      goal: 'Test Peter verification persistence',
+      feature: 'dr-noa',
+      goal: 'Test Noa verification persistence',
       steps: ['Step 1'],
-      peterVerdict: {
+      noaVerdict: {
         verdict: 'PASS',
         absorbed: 3,
         rebutted: 1,
@@ -130,7 +130,7 @@ describe('plan-manager: AING-DR 필드 지원', () => {
 
     assert.equal(result.ok, true);
     const content = readFileSync(result.planPath, 'utf-8');
-    assert.ok(content.includes('## Synthesis Verification') || content.includes('## Peter'),
+    assert.ok(content.includes('## Synthesis Verification') || content.includes('## Noa'),
       'Should contain synthesis verification section');
     assert.ok(content.includes('PASS') || content.includes('pass'), 'Should contain verdict');
     assert.ok(content.includes('ABSORBED') || content.includes('absorbed') || content.includes('3'),
@@ -208,7 +208,7 @@ describe('plan-manager: AING-DR 필드 지원', () => {
         newDrivers: [],
         synthesisPath: null,
       },
-      peterVerdict: { verdict: 'PASS', absorbed: 2, rebutted: 1, acknowledged: 0, ignored: 0, reflectionScore: 100, deltaScore: null, confidence: 'HIGH' },
+      noaVerdict: { verdict: 'PASS', absorbed: 2, rebutted: 1, acknowledged: 0, ignored: 0, reflectionScore: 100, deltaScore: null, confidence: 'HIGH' },
       criticVerdict: { verdict: 'APPROVE', mode: 'THOROUGH', critical: 0, major: 0, minor: 1, selfAuditDowngrades: 0, constraintCompliance: '100%', criteriaTestability: '90%', evidenceCoverage: '80%' },
       adr: { decision: 'JWT 채택', confidence: 'HIGH', constraintsHonored: ['C1: ✓'], alternativesRejected: ['Session: stateful'], consequences: { positive: ['Scalable'], negative: ['No revocation'] } },
       complexityScore: 5,
@@ -268,14 +268,14 @@ describe('에이전트 정의: AING-DR 필수 프롬프트 검증', () => {
       'Klay should mention antithesis');
   });
 
-  it('peter.md should define SYNTHESIS_CHECK with ABSORBED/IGNORED classification', () => {
-    const content = readFileSync(join(AGENTS_DIR, 'peter.md'), 'utf-8');
-    assert.ok(content.includes('ABSORBED'), 'Peter should classify ABSORBED');
-    assert.ok(content.includes('IGNORED'), 'Peter should classify IGNORED');
+  it('noa.md should define SYNTHESIS_CHECK with ABSORBED/IGNORED classification', () => {
+    const content = readFileSync(join(AGENTS_DIR, 'noa.md'), 'utf-8');
+    assert.ok(content.includes('ABSORBED'), 'Noa should classify ABSORBED');
+    assert.ok(content.includes('IGNORED'), 'Noa should classify IGNORED');
     assert.ok(content.includes('Delta') || content.includes('delta'),
-      'Peter should measure Delta Score');
+      'Noa should measure Delta Score');
     assert.ok(content.includes('PASS') || content.includes('REVISE'),
-      'Peter should have PASS/REVISE verdict');
+      'Noa should have PASS/REVISE verdict');
   });
 
   it('critic.md should define 5-Phase protocol with Hard Gates', () => {
@@ -314,7 +314,7 @@ describe('State Lifecycle: Phase 전환 스펙 검증', () => {
     'option-design',    // Phase 2: Able
     'steelman',         // Phase 3: Klay
     'synthesis',        // Phase 4: Able
-    'synthesis-check',  // Phase 5: Peter
+    'synthesis-check',  // Phase 5: Noa
     'critique',         // Phase 6: Critic
     'adr',              // Phase 7: Able (Living ADR)
   ];
@@ -327,7 +327,7 @@ describe('State Lifecycle: Phase 전환 스펙 검증', () => {
     assert.equal(VALID_PHASE_SEQUENCE[2], 'option-design', 'Phase 2 = Able option design');
     assert.equal(VALID_PHASE_SEQUENCE[3], 'steelman', 'Phase 3 = Klay steelman');
     assert.equal(VALID_PHASE_SEQUENCE[4], 'synthesis', 'Phase 4 = Able synthesis');
-    assert.equal(VALID_PHASE_SEQUENCE[5], 'synthesis-check', 'Phase 5 = Peter verification');
+    assert.equal(VALID_PHASE_SEQUENCE[5], 'synthesis-check', 'Phase 5 = Noa verification');
     assert.equal(VALID_PHASE_SEQUENCE[6], 'critique', 'Phase 6 = Critic assessment');
     assert.equal(VALID_PHASE_SEQUENCE[7], 'adr', 'Phase 7 = Living ADR');
 
@@ -490,8 +490,8 @@ describe('Hook Enforcement: Phase-Agent 매핑', () => {
     initPlanState(VRD_DIR, 'verdict-test', { complexity: 'mid' });
     advancePhase(VRD_DIR, 'synthesis-check');
 
-    // Peter completes in synthesis-check → should NOT auto-advance (needs verdict)
-    const result = autoAdvancePhase(VRD_DIR, 'aing:peter');
+    // Noa completes in synthesis-check → should NOT auto-advance (needs verdict)
+    const result = autoAdvancePhase(VRD_DIR, 'aing:noa');
     assert.equal(result, null, 'Should NOT auto-advance from synthesis-check (verdict-based)');
 
     rmSync(VRD_DIR, { recursive: true, force: true });
@@ -519,8 +519,8 @@ describe('Hook Enforcement: Phase-Agent 매핑', () => {
       ['option-design', 'able', 'ryan'],     // able allowed, ryan blocked
       ['steelman', 'klay', 'able'],          // klay allowed, able blocked
       ['synthesis', 'able', 'klay'],
-      ['synthesis-check', 'peter', 'able'],
-      ['critique', 'critic', 'peter'],
+      ['synthesis-check', 'noa', 'able'],
+      ['critique', 'critic', 'noa'],
       ['adr', 'able', 'critic'],
     ];
 
@@ -558,7 +558,7 @@ describe('persist.js --stdin: AING-DR 확장 필드', () => {
       preferences: [{ name: 'P1', priority: 'HIGH', tradeoffThreshold: 'n/a', why: 'speed' }],
       drivers: [{ name: 'D1', status: 'unchanged' }],
       steelman: { antithesis: '반론 내용', tradeoffs: ['T1'], newDrivers: [], synthesisPath: null },
-      peterVerdict: { verdict: 'PASS', absorbed: 2, rebutted: 0, acknowledged: 0, ignored: 0, reflectionScore: 100, deltaScore: null, confidence: 'HIGH' },
+      noaVerdict: { verdict: 'PASS', absorbed: 2, rebutted: 0, acknowledged: 0, ignored: 0, reflectionScore: 100, deltaScore: null, confidence: 'HIGH' },
       criticVerdict: { verdict: 'APPROVE', mode: 'THOROUGH', critical: 0, major: 0, minor: 0, selfAuditDowngrades: 0, constraintCompliance: '100%', criteriaTestability: '100%', evidenceCoverage: '90%' },
       adr: { decision: 'Option A', confidence: 'HIGH', constraintsHonored: ['C1: ✓'], alternativesRejected: [], consequences: { positive: ['Good'], negative: [] } },
       complexityScore: 4,

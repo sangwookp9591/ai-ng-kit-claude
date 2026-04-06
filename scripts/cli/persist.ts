@@ -50,7 +50,7 @@ interface PlanStdinData {
   preferences?: Array<{ name: string; priority: string; tradeoffThreshold: string; why: string }>;
   drivers?: Array<{ name: string; status: string; source?: string }>;
   steelman?: { antithesis: string; tradeoffs: string[]; newDrivers: string[]; synthesisPath: string | null };
-  peterVerdict?: { verdict: string; absorbed: number; rebutted: number; acknowledged: number; ignored: number; reflectionScore: number; deltaScore: number | null; confidence: string };
+  noaVerdict?: { verdict: string; absorbed: number; rebutted: number; acknowledged: number; ignored: number; reflectionScore: number; deltaScore: number | null; confidence: string };
   criticVerdict?: { verdict: string; mode: string; critical: number; major: number; minor: number; selfAuditDowngrades: number; constraintCompliance: string; criteriaTestability: string; evidenceCoverage: string };
   adr?: { decision: string; confidence: string; constraintsHonored: string[]; alternativesRejected: string[]; consequences: { positive: string[]; negative: string[] } };
 }
@@ -81,7 +81,7 @@ try {
         }
 
         // Quality Gate check (if AING-DR fields present)
-        if (data.peterVerdict || data.criticVerdict) {
+        if (data.noaVerdict || data.criticVerdict) {
           const planText = [
             `## Steps`,
             ...steps.map(s => `- ${s}`),
@@ -92,7 +92,7 @@ try {
             planText,
             data as unknown as Record<string, unknown>,
             data.criticVerdict ? JSON.stringify(data.criticVerdict) : '',
-            data.peterVerdict ? JSON.stringify(data.peterVerdict) : ''
+            data.noaVerdict ? JSON.stringify(data.noaVerdict) : ''
           );
           if (!qg.pass) {
             console.error(`[aing:quality-gate] FAIL — ${qg.failures.join('; ')}`);
@@ -115,7 +115,7 @@ try {
           preferences: Array.isArray(data.preferences) && data.preferences.length > 0 ? data.preferences : undefined,
           drivers: Array.isArray(data.drivers) && data.drivers.length > 0 ? data.drivers : undefined,
           steelman: data.steelman || undefined,
-          peterVerdict: data.peterVerdict || undefined,
+          noaVerdict: data.noaVerdict || undefined,
           criticVerdict: data.criticVerdict || undefined,
           adr: data.adr || undefined,
         }, projectDir);

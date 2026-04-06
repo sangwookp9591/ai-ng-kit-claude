@@ -12,7 +12,7 @@ export const AGENT_CATEGORIES = {
     leadership: [
         { name: 'able', teamRole: 'planner' },
         { name: 'klay', teamRole: 'planner' },
-        { name: 'peter', teamRole: 'reviewer' },
+        { name: 'noa', teamRole: 'reviewer' },
         { name: 'ryan', teamRole: 'planner' },
         { name: 'milla', teamRole: 'reviewer' },
         { name: 'sam', teamRole: 'sam' },
@@ -40,7 +40,7 @@ export const AGENT_CATEGORIES = {
     special: [
         { name: 'sam', teamRole: 'sam' },
         { name: 'milla', teamRole: 'reviewer' },
-        { name: 'peter', teamRole: 'reviewer' },
+        { name: 'noa', teamRole: 'reviewer' },
     ],
 };
 // Pruning priority: higher number = removed first

@@ -28,7 +28,7 @@ const PHASE_AGENT_MAP = {
     'option-design': ['able'],
     'steelman': ['klay'],
     'synthesis': ['able'],
-    'synthesis-check': ['peter'],
+    'synthesis-check': ['noa'],
     'critique': ['critic'],
     'adr': ['able'],
 };
@@ -43,7 +43,7 @@ const PHASE_NEXT = {
     'steelman': 'synthesis',
     'synthesis': 'synthesis-check',
     'synthesis-check': 'critique', // PASS → critique; REVISE → synthesis (handled by caller)
-    'critique': 'adr', // APPROVE → adr; ITERATE → synthesis-check (Targeted Patch: orchestrator edits plan, then Peter re-verifies)
+    'critique': 'adr', // APPROVE → adr; ITERATE → synthesis-check (Targeted Patch: orchestrator edits plan, then Noa re-verifies)
     'adr': 'completed',
 };
 // ---------------------------------------------------------------------------

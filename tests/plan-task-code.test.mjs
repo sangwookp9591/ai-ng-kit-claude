@@ -226,10 +226,10 @@ describe('Plan-Task Code Enforcement', () => {
     });
 
     it('should count IGNORED steelman', () => {
-      const peter = `| 1 | antithesis | response | ABSORBED |
+      const noa = `| 1 | antithesis | response | ABSORBED |
 | 2 | tradeoff | noted | IGNORED |
 | 3 | driver | accepted | REBUTTED |`;
-      const count = mod.countIgnoredSteelman(peter);
+      const count = mod.countIgnoredSteelman(noa);
       assert.equal(count, 1);
     });
 

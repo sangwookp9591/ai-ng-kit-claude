@@ -74,7 +74,7 @@ try {
             'option-design': 'Able — Option Design',
             'steelman': 'Klay — Steelman Deliberation',
             'synthesis': 'Able — Synthesis',
-            'synthesis-check': 'Peter — Verification',
+            'synthesis-check': 'Noa — Verification',
             'critique': 'Critic — Assessment',
             'adr': 'Able — Living ADR',
         };

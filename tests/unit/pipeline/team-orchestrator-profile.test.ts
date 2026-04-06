@@ -45,7 +45,7 @@ import type { ResolvedProfile } from '../../../scripts/routing/profile-resolver.
 
 function makeProfile(overrides: Partial<ResolvedProfile> = {}): ResolvedProfile {
   return {
-    allowedAgents: new Set(['able', 'klay', 'peter', 'ryan', 'milla', 'sam', 'jay', 'jerry', 'derek', 'rowan', 'willji', 'wizard', 'iron', 'hugg', 'jo']),
+    allowedAgents: new Set(['able', 'klay', 'noa', 'ryan', 'milla', 'sam', 'jay', 'jerry', 'derek', 'rowan', 'willji', 'wizard', 'iron', 'hugg', 'jo']),
     costMode: 'balanced',
     maxTeamSize: 7,
     tokenLimit: null,
@@ -92,7 +92,7 @@ describe('selectTeamWithProfile — maxTeamSize limiting', () => {
 
   it('appends profile-limited annotation when allowedAgents removes a worker', () => {
     // duo(2 workers: jay+milla). Exclude milla → filterWorkers prunes 2→1 → annotation
-    const allowed = new Set(['jay', 'able', 'klay', 'sam', 'jerry', 'iron', 'derek', 'rowan', 'willji', 'wizard', 'hugg', 'jo', 'peter', 'ryan']);
+    const allowed = new Set(['jay', 'able', 'klay', 'sam', 'jerry', 'iron', 'derek', 'rowan', 'willji', 'wizard', 'hugg', 'jo', 'noa', 'ryan']);
     // explicitly do NOT include milla
     const profile = makeProfile({ allowedAgents: allowed, maxTeamSize: 2 });
     // Low complexity → duo (jay + milla)

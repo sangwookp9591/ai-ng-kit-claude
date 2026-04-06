@@ -68,7 +68,7 @@ const PHASE_AGENT_MAP: Record<string, string[]> = {
   'option-design':   ['able'],
   'steelman':        ['klay'],
   'synthesis':       ['able'],
-  'synthesis-check': ['peter'],
+  'synthesis-check': ['noa'],
   'critique':        ['critic'],
   'adr':             ['able'],
 };
@@ -84,7 +84,7 @@ const PHASE_NEXT: Record<string, PlanPhase> = {
   'steelman':        'synthesis',
   'synthesis':       'synthesis-check',
   'synthesis-check': 'critique',   // PASS → critique; REVISE → synthesis (handled by caller)
-  'critique':        'adr',        // APPROVE → adr; ITERATE → synthesis-check (Targeted Patch: orchestrator edits plan, then Peter re-verifies)
+  'critique':        'adr',        // APPROVE → adr; ITERATE → synthesis-check (Targeted Patch: orchestrator edits plan, then Noa re-verifies)
   'adr':             'completed',
 };
 

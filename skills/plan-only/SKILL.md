@@ -13,7 +13,7 @@ plan-task의 AING-DR 합의 파이프라인이 과잉일 때 사용.
 
 | | plan-task | plan-only |
 |---|----------|-----------|
-| 에이전트 | Ryan→Able→Klay→Peter→Critic (5+) | **0개** |
+| 에이전트 | Ryan→Able→Klay→Noa→Critic (5+) | **0개** |
 | 소요 시간 | 5~20분 | **1~3분** |
 | 합의 루프 | ITERATE 시 재설계 | **없음** |
 | 적합한 경우 | 아키텍처 결정, 고위험 변경 | 기능 추가, 버그픽스, 리팩토링 |

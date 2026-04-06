@@ -1,6 +1,6 @@
 ---
 name: plan-task
-description: "📋 AING-DR 6자 합의 계획. Ryan(원칙) → Able(설계) → Klay(반론) → Peter(검증) → Critic(비평) → Persist. 상태 관리 + Interactive + Living ADR."
+description: "📋 AING-DR 6자 합의 계획. Ryan(원칙) → Able(설계) → Klay(반론) → Noa(검증) → Critic(비평) → Persist. 상태 관리 + Interactive + Living ADR."
 triggers: ["plan", "계획", "기획", "설계"]
 ---
 
@@ -50,7 +50,7 @@ APPROVE 조건 — Critic이 검증하는 수치 기준:
 - **90%+ criteria are testable** — 수락 기준의 90% 이상이 두 개발자가 동일하게 판정 가능할 것
 - **100% Constraints honored** — Ryan의 Constraints 전체 충족 (위반 1개 → 자동 REJECT)
 - **0 FRAGILE assumptions unaddressed** — FRAGILE 가정이 모두 플랜에서 다뤄질 것
-- **0 IGNORED steelman points** — Klay 반론 중 무시된 항목 0개 (Peter 검증)
+- **0 IGNORED steelman points** — Klay 반론 중 무시된 항목 0개 (Noa 검증)
 
 이 수치에 미달하면 Critic은 APPROVE할 수 없다.
 
@@ -104,7 +104,7 @@ Gate BLOCK 시 AskUserQuestion:
 | **Ryan** | Deliberation Facilitator | opus | Constraints/Preferences 도출. **Options 없이** 원칙 확정 |
 | **Able** | PM / Planner | opus | Options 설계, Steps 분해, Living ADR 생성 |
 | **Klay** | Architect / Steelman | opus | 반론(antithesis), 트레이드오프, 원칙-옵션 정합성, 새 Driver 제안 |
-| **Peter** | Synthesis Verifier | sonnet | 반론 반영 검증, Delta Score, Confidence Level |
+| **Noa** | Synthesis Verifier | sonnet | 반론 반영 검증, Delta Score, Confidence Level |
 | **Critic** | Deliberation Critic | opus | 5-Phase 심의 품질 비평, Adaptive Harshness, 최종 verdict |
 
 **Milla는 plan-task에 참여하지 않는다** — 보안 전문가 본연의 역할에 집중. 심의 품질은 전용 Critic이 담당.
@@ -123,7 +123,7 @@ Phase 3: Klay — Steelman Deliberation
   ↓
 Phase 4: Able — Synthesis (반론 통합)
   ↓
-Phase 5: Peter — Synthesis Verification + Delta Score
+Phase 5: Noa — Synthesis Verification + Delta Score
   ↓ PASS → Phase 6  |  REVISE → Phase 4 재작성
   ↓
 Phase 6: Critic — 5-Phase Deliberation Critique
@@ -136,14 +136,14 @@ Phase 7: Able — Living ADR Generation + Persist
 
 ## 복잡도별 실행 경로 (품질 우선)
 
-| Level | Score | Ryan | Able | Klay | Peter | Critic | Pre-mortem | Rollback | 합의 루프 |
+| Level | Score | Ryan | Able | Klay | Noa | Critic | Pre-mortem | Rollback | 합의 루프 |
 |-------|-------|------|------|------|-------|--------|------------|----------|----------|
 | **low** | ≤ 3 | ✓ | DR Lite | ✓ steelman | ✓ synthesis | ✓ THOROUGH | — | — | 최대 2회 |
 | **mid** | 4-7 | ✓ | DR Standard | ✓ steelman | ✓ synthesis + delta | ✓ THOROUGH | — | — | 최대 3회 |
 | **high** | > 7 | ✓ | DR Deep | ✓ steelman | ✓ synthesis + delta | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 3회 |
 | **`--deliberate`** | any | ✓ | DR Deep | ✓ steelman | ✓ synthesis + delta | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 3회 |
 
-**품질 우선 정책**: 모든 레벨에서 Ryan → Klay → Peter → Critic 전원 참여.
+**품질 우선 정책**: 모든 레벨에서 Ryan → Klay → Noa → Critic 전원 참여.
 **자동 `--deliberate` 트리거**: hasSecurity=true 또는 hasArchChange=true이고 score > 5
 
 ---
@@ -372,7 +372,7 @@ Drivers: {top 3}
 Options: {N}개 → 추천: {name}
 
 선택:
-1. 리뷰 진행 (Klay steelman → Peter → Critic)
+1. 리뷰 진행 (Klay steelman → Noa → Critic)
 2. 수정 요청 (피드백 후 재작성)
 3. 리뷰 스킵 (ADR 생성 후 바로 저장)
 ```
@@ -472,14 +472,14 @@ Rules:
 
 → State: `phase: "synthesis"`
 
-## Phase 5: Peter — Synthesis Verification (ALL levels)
+## Phase 5: Noa — Synthesis Verification (ALL levels)
 
-Peter(sonnet)가 Able의 synthesis 품질을 검증:
+Noa(sonnet)가 Able의 synthesis 품질을 검증:
 
 ```
 Agent({
-  subagent_type: "aing:peter",
-  description: "Peter: 합의 검증 — {feature}",
+  subagent_type: "aing:noa",
+  description: "Noa: 합의 검증 — {feature}",
   model: "sonnet",
   prompt: "Able의 synthesis가 Klay의 steelman 반론을 실제로 반영했는지 검증하세요.
 
@@ -523,14 +523,14 @@ Rules:
 })
 ```
 
-**Peter REVISE** → Phase 4로 복귀 (Able 재synthesis)
-**Peter PASS** → Phase 6 진행
+**Noa REVISE** → Phase 4로 복귀 (Able 재synthesis)
+**Noa PASS** → Phase 6 진행
 
 → State: `phase: "synthesis-check"`
 
 ## Phase 6: Critic — 5-Phase Deliberation Critique (ALL levels)
 
-**Peter PASS 후에만 실행** (sequential).
+**Noa PASS 후에만 실행** (sequential).
 
 ```
 Agent({
@@ -549,7 +549,7 @@ Agent({
 {Klay's output}
 
 === PETER SYNTHESIS_CHECK ===
-{Peter's output}
+{Noa's output}
 
 === STATE FILE ===
 {.aing/state/plan-state.json 내용}
@@ -603,10 +603,10 @@ Rules:
 
 ## Consensus Loop (ALL levels)
 
-**Critic ITERATE 또는 Peter REVISE 시:**
+**Critic ITERATE 또는 Noa REVISE 시:**
 
 ```
-Peter REVISE → Phase 4 (Able 재synthesis) → Phase 5 (Peter 재검증)
+Noa REVISE → Phase 4 (Able 재synthesis) → Phase 5 (Noa 재검증)
 Critic ITERATE → Targeted Patch (아래 참조)
 ```
 
@@ -625,12 +625,12 @@ Critic ITERATE 시 **오케스트레이터(당신)가 직접** 패치한다:
 1. Critic의 Patch Guide 테이블에서 MAJOR findings + Patch Instruction을 추출한다
 2. 기존 플랜 파일(`.aing/plans/`에 있는 최신 버전)을 Read한다
 3. **에이전트를 호출하지 않고** Edit 도구로 직접 플랜을 수정한다
-4. 수정된 플랜으로 Phase 5 (Peter, sonnet) → Phase 6 (Critic, sonnet) 재실행
+4. 수정된 플랜으로 Phase 5 (Noa, sonnet) → Phase 6 (Critic, sonnet) 재실행
 
 ```
 Critic ITERATE (모든 경우):
-  → 오케스트레이터가 Edit으로 직접 패치 → Peter(sonnet) → Critic(sonnet)
-  → 에이전트 호출: 2회만 (Peter + Critic)
+  → 오케스트레이터가 Edit으로 직접 패치 → Noa(sonnet) → Critic(sonnet)
+  → 에이전트 호출: 2회만 (Noa + Critic)
   → Able/Klay 재호출 금지
 ```
 
@@ -639,15 +639,15 @@ Critic ITERATE (모든 경우):
 - `model: "sonnet"` 오버라이드를 지시해도 agents/able.md의 `model: opus`가 적용됨
 - Critic의 Patch Guide는 1줄 수정 지시이므로 오케스트레이터가 직접 수행 가능
 
-**Peter/Critic 호출 시 model은 complexity에 따라 결정:**
-| Complexity | Peter model | Critic model |
+**Noa/Critic 호출 시 model은 complexity에 따라 결정:**
+| Complexity | Noa model | Critic model |
 |------------|-------------|--------------|
 | low / mid  | sonnet      | sonnet       |
 | high / deliberate | sonnet | opus      |
 
 ```
 Agent({
-  subagent_type: "aing:peter",
+  subagent_type: "aing:noa",
   model: "sonnet",   // ← 필수: agents/*.md의 기본 model을 오버라이드
   ...
 })
@@ -667,7 +667,7 @@ Agent({
 ### 빠른 종료 조건 (하나라도 해당 시 즉시 종료)
 
 - 최대 반복 초과
-- Peter Delta Score 2연속 ≤ 0
+- Noa Delta Score 2연속 ≤ 0
 - **iteration 1에서 MAJOR 건수가 줄지 않음** → 수렴 불가로 판단, 최선 버전 + Confidence: LOW
 - **총 에이전트 호출 수가 10회 초과** → 비용 보호 차단
 
@@ -684,7 +684,7 @@ AING-DR 합의 완료. Confidence: {HIGH/MED/LOW}
 
 Constraints: {N}개 (all honored ✓)
 Steelman: {Klay 핵심 반론 1줄}
-Peter: {ABSORBED N / REBUTTED N}
+Noa: {ABSORBED N / REBUTTED N}
 Critic: APPROVE ({THOROUGH/ADVERSARIAL} mode)
 
 선택:
@@ -720,7 +720,7 @@ Agent({
 {Klay's output}
 
 === PETER SYNTHESIS_CHECK ===
-{Peter's output}
+{Noa's output}
 
 === CRITIC VERDICT ===
 {Critic's output}
@@ -744,7 +744,7 @@ Agent({
     \"newDrivers\": [\"...\"],
     \"synthesisPath\": \"...\"
   },
-  \"peterVerdict\": {
+  \"noaVerdict\": {
     \"verdict\": \"PASS\",
     \"absorbed\": N,
     \"rebutted\": N,
@@ -775,7 +775,7 @@ Agent({
   \"reviewNotes\": [
     { \"reviewer\": \"ryan\", \"verdict\": \"FOUNDATION\", \"highlights\": [\"...\"] },
     { \"reviewer\": \"klay\", \"verdict\": \"...\", \"highlights\": [\"...\"] },
-    { \"reviewer\": \"peter\", \"verdict\": \"PASS\", \"highlights\": [\"...\"] },
+    { \"reviewer\": \"noa\", \"verdict\": \"PASS\", \"highlights\": [\"...\"] },
     { \"reviewer\": \"critic\", \"verdict\": \"APPROVE\", \"highlights\": [\"...\"] }
   ],
   \"complexityScore\": N,
@@ -821,7 +821,7 @@ Creates: `.aing/plans/{date}-{feature}.md` + `.aing/tasks/task-{id}.json`
   Drivers: {initial N} → {final N} ({changes}개 변경)
   Options: {N}개 → Recommended: {name}
   Steelman: {Klay 핵심 반론 1줄}
-  Peter: {ABSORBED {n} / REBUTTED {n}}
+  Noa: {ABSORBED {n} / REBUTTED {n}}
   Critic: {THOROUGH/ADVERSARIAL} — {CRITICAL 0, MAJOR 0, MINOR N}
   ADR: ✓ Living ADR 생성됨
 
@@ -853,8 +853,8 @@ Creates: `.aing/plans/{date}-{feature}.md` + `.aing/tasks/task-{id}.json`
 
 - Ryan 실패 → Able이 자체적으로 Constraints 도출 (graceful degradation)
 - Klay 실패 → skip steelman, Able draft 직접 저장
-- Peter 실패 → Klay review만으로 진행 (synthesis 미검증 경고 + Confidence: LOW)
-- Critic 실패 → Peter review만으로 진행 (심의 미비평 경고 + Confidence: LOW)
+- Noa 실패 → Klay review만으로 진행 (synthesis 미검증 경고 + Confidence: LOW)
+- Critic 실패 → Noa review만으로 진행 (심의 미비평 경고 + Confidence: LOW)
 - Consensus loop 최대 반복 초과 → 최선 버전 + Confidence: LOW
 - Delta Score 2연속 정체 → 조기 종료 + 정체 사유 표시
 - State 파일 손상 → 새 플래닝 시작 (state 초기화)

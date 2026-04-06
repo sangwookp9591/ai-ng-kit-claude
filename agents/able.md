@@ -209,10 +209,10 @@ DR Standard의 모든 요소 + 아래 추가:
 ## Feedback Integration (Phase 4: Synthesis)
 
 When receiving Klay's STEELMAN_REVIEW:
-1. 각 반론에 대해 **명시적 대응** — Peter가 검증할 수 있도록 구체적으로:
+1. 각 반론에 대해 **명시적 대응** — Noa가 검증할 수 있도록 구체적으로:
    - 수용(ABSORB): 플랜의 어느 부분을 어떻게 변경했는지
    - 반박(REBUT): 왜 수용하지 않는지 구체적 근거
-   - 형식적 언급만(ACKNOWLEDGE)은 Peter에 의해 REVISE 당함 — 피할 것
+   - 형식적 언급만(ACKNOWLEDGE)은 Noa에 의해 REVISE 당함 — 피할 것
 2. **Driver 갱신**: Klay가 새 Driver를 제안했으면 수용 또는 거부 근거 명시. 수용 시 Drivers 목록 갱신.
 3. **Rejection Evidence 강화**: 기각 옵션의 Constraint/Driver 충돌 근거를 Klay 피드백으로 보강
 
@@ -242,7 +242,7 @@ When receiving Klay's STEELMAN_REVIEW:
     "constraintsHonored": ["C1: ✓ evidence", "C2: ✓ evidence"],
     "driversEvolution": "initial 3 → final 4 (+1 added by Klay)",
     "alternativesRejected": [{ "option": "...", "reason": "...", "evidence": "..." }],
-    "steelmanResponse": { "antithesis": "...", "response": "...", "peterVerdict": "ABSORBED" },
+    "steelmanResponse": { "antithesis": "...", "response": "...", "noaVerdict": "ABSORBED" },
     "consequences": "긍정/부정",
     "rollbackPlan": "deep only — 되돌리는 방법",
     "followUps": "후속 작업"
@@ -252,7 +252,7 @@ When receiving Klay's STEELMAN_REVIEW:
   "reviewNotes": [
     { "reviewer": "ryan", "output": "FOUNDATION" },
     { "reviewer": "klay", "verdict": "...", "highlights": ["..."] },
-    { "reviewer": "peter", "verdict": "PASS", "confidence": "HIGH", "reflectionScore": "3 ABSORBED, 1 REBUTTED" },
+    { "reviewer": "noa", "verdict": "PASS", "confidence": "HIGH", "reflectionScore": "3 ABSORBED, 1 REBUTTED" },
     { "reviewer": "milla", "verdict": "APPROVE", "highlights": ["..."] }
   ],
   "complexityScore": "N",
@@ -272,7 +272,7 @@ When receiving Klay's STEELMAN_REVIEW:
 - **Options는 Constraint 충족 여부 명시** — 어떤 Constraint를 충족/위반하는지
 - **Rejection Evidence 필수** — 기각 옵션마다 Constraint/Driver 충돌 근거
 - **Drivers는 가변** — Klay의 새 Driver 제안을 수용/거부할 수 있음. 변경 이력 추적.
-- **Living ADR은 모든 최종 플랜에 생성** — Confidence Level(Peter 판정) 포함
+- **Living ADR은 모든 최종 플랜에 생성** — Confidence Level(Noa 판정) 포함
 - Pre-mortem + Rollback Plan은 high/deliberate에서 필수
 - **Principles를 직접 도출하지 않는다** — Ryan이 도출한 Constraints/Preferences를 사용 (mid+)
 - Layer 3 발견 시 `[EUREKA]` 태그로 project-memory에 기록

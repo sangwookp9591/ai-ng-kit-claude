@@ -20,7 +20,7 @@ const COLORS: Record<string, string> = {
   milla:  '\x1b[31m',   // red
   able:   '\x1b[35m',   // magenta
   ryan:   '\x1b[37m',   // white
-  peter:  '\x1b[90m',   // gray
+  noa:    '\x1b[90m',   // gray
   critic: '\x1b[91m',   // bright red
   sam:    '\x1b[92m',   // bright green
   willji: '\x1b[95m',   // bright magenta

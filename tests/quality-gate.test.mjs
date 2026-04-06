@@ -298,8 +298,8 @@ describe('checkQualityGate: 통합 quality gate 검증', () => {
   });
 
   it('should return pass:false when steelman points are IGNORED', () => {
-    const peterWithIgnored = 'Point 1: IGNORED — synthesis did not address the latency concern';
-    const result = checkQualityGate(perfectPlanText, perfectPlanJson, '', peterWithIgnored);
+    const noaWithIgnored = 'Point 1: IGNORED — synthesis did not address the latency concern';
+    const result = checkQualityGate(perfectPlanText, perfectPlanJson, '', noaWithIgnored);
     assert.equal(result.pass, false);
     assert.ok(result.failures.some(f => f.toLowerCase().includes('steelman') || f.toLowerCase().includes('ignored')),
       `Expected IGNORED steelman failure, got: ${result.failures.join(', ')}`);

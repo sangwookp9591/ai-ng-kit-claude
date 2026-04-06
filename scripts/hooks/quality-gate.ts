@@ -122,10 +122,10 @@ export function countFragileUnaddressed(criticOutput: string): number {
 }
 
 /**
- * Count IGNORED steelman points from Peter's output.
+ * Count IGNORED steelman points from Noa's output.
  */
-export function countIgnoredSteelman(peterOutput: string): number {
-  const matches = peterOutput.match(/IGNORED/g);
+export function countIgnoredSteelman(noaOutput: string): number {
+  const matches = noaOutput.match(/IGNORED/g);
   return matches ? matches.length : 0;
 }
 
@@ -141,14 +141,14 @@ export function checkQualityGate(
   planText: string,
   planJson: Record<string, unknown>,
   criticOutput: string,
-  peterOutput: string
+  noaOutput: string
 ): QualityResult {
   const metrics: QualityMetrics = {
     evidenceCoverage: measureEvidenceCoverage(planText),
     criteriaTestability: measureCriteriaTestability(planText),
     constraintCompliance: measureConstraintCompliance(planJson),
     fragileUnaddressed: countFragileUnaddressed(criticOutput),
-    ignoredSteelman: countIgnoredSteelman(peterOutput),
+    ignoredSteelman: countIgnoredSteelman(noaOutput),
   };
 
   const failures: string[] = [];

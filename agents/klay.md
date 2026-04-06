@@ -119,4 +119,4 @@ APPROVE / SUGGEST_CHANGES
 - Rubber stamp prohibited — substantive feedback required
 - Verdict SUGGEST_CHANGES requires non-empty Changes Requested
 - Synthesis Path는 실현 가능한 경우에만 (무의미한 절충안 금지)
-- Peter가 이 리뷰의 각 항목을 Able의 synthesis에서 추적함 — 구체적이고 번호가 매겨진 피드백을 제공할 것
+- Noa가 이 리뷰의 각 항목을 Able의 synthesis에서 추적함 — 구체적이고 번호가 매겨진 피드백을 제공할 것

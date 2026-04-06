@@ -54,14 +54,14 @@ const projectDir = getArg('dir') || process.cwd();
                         process.exit(1);
                     }
                     // Quality Gate check (if AING-DR fields present)
-                    if (data.peterVerdict || data.criticVerdict) {
+                    if (data.noaVerdict || data.criticVerdict) {
                         const planText = [
                             `## Steps`,
                             ...steps.map(s => `- ${s}`),
                             `## Risks`,
                             ...(data.risks || []).map(r => `- ${r}`),
                         ].join('\n');
-                        const qg = checkQualityGate(planText, data, data.criticVerdict ? JSON.stringify(data.criticVerdict) : '', data.peterVerdict ? JSON.stringify(data.peterVerdict) : '');
+                        const qg = checkQualityGate(planText, data, data.criticVerdict ? JSON.stringify(data.criticVerdict) : '', data.noaVerdict ? JSON.stringify(data.noaVerdict) : '');
                         if (!qg.pass) {
                             console.error(`[aing:quality-gate] FAIL — ${qg.failures.join('; ')}`);
                             // Continue with save but emit warning (non-blocking — Critic already gated)
@@ -82,7 +82,7 @@ const projectDir = getArg('dir') || process.cwd();
                         preferences: Array.isArray(data.preferences) && data.preferences.length > 0 ? data.preferences : undefined,
                         drivers: Array.isArray(data.drivers) && data.drivers.length > 0 ? data.drivers : undefined,
                         steelman: data.steelman || undefined,
-                        peterVerdict: data.peterVerdict || undefined,
+                        noaVerdict: data.noaVerdict || undefined,
                         criticVerdict: data.criticVerdict || undefined,
                         adr: data.adr || undefined,
                     }, projectDir);

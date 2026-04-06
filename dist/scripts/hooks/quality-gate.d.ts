@@ -33,12 +33,12 @@ export declare function measureConstraintCompliance(planJson: Record<string, unk
  */
 export declare function countFragileUnaddressed(criticOutput: string): number;
 /**
- * Count IGNORED steelman points from Peter's output.
+ * Count IGNORED steelman points from Noa's output.
  */
-export declare function countIgnoredSteelman(peterOutput: string): number;
+export declare function countIgnoredSteelman(noaOutput: string): number;
 /**
  * Run all quality checks against a plan.
  * Returns pass/fail with detailed metrics and failure reasons.
  */
-export declare function checkQualityGate(planText: string, planJson: Record<string, unknown>, criticOutput: string, peterOutput: string): QualityResult;
+export declare function checkQualityGate(planText: string, planJson: Record<string, unknown>, criticOutput: string, noaOutput: string): QualityResult;
 //# sourceMappingURL=quality-gate.d.ts.map
