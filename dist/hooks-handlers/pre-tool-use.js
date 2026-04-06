@@ -86,6 +86,28 @@ try {
             ctx.push(formatPreview(projectDir));
         }
     }
+    // Reality check flag: indirect block (set by post-tool-use, cleared on session stop)
+    // Placed after isDryRunActive() check to avoid conflict with dry-run queuing
+    if (!isDryRunActive(projectDir)) {
+        try {
+            const { existsSync, readFileSync } = await import('node:fs');
+            const { join } = await import('node:path');
+            const flagPath = join(projectDir, '.aing', 'state', 'reality-check-flag.json');
+            if (existsSync(flagPath)) {
+                const flag = JSON.parse(readFileSync(flagPath, 'utf-8'));
+                if (flag.active) {
+                    process.stdout.write(JSON.stringify({
+                        hookSpecificOutput: {
+                            decision: 'block',
+                            reason: `[aing:reality-check] Reality check flag active (scenario: ${flag.scenario || 'unknown'}). Session requires review before proceeding.`,
+                        }
+                    }));
+                    process.exit(0);
+                }
+            }
+        }
+        catch { /* flag check is best-effort — never block on error */ }
+    }
     process.stdout.write(ctx.length > 0
         ? JSON.stringify({ hookSpecificOutput: { additionalContext: ctx.join('\n\n') } })
         : '{}');

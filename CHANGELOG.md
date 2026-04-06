@@ -1,5 +1,33 @@
 # Changelog
 
+## [2.9.16] - 2026-04-06 — 하네스 엔지니어링 6대 개선 + Reality Check System
+
+### Added
+
+- **Reality Check System** (`scripts/hooks/reality-check.ts`): 에이전트 작업 결과가 사용자를 화나게 할지 사전/사후 점검하는 judgment layer
+  - 4가지 시나리오 감지: feedbackViolation, autonomyRisk, scopeOverreach, qualityExpectation
+  - feedback-memory JSONL 기반 과거 피드백 반복 위반 감지 (keyword overlap ≥ 0.7)
+  - 간접 차단 패턴: post-tool-use에서 판정 → flag → pre-tool-use에서 차단 (hot path I/O 회피)
+  - isDryRunActive 억제, denial-tracker 통합, MAX_FEEDBACK_ENTRIES=200 cap
+- **패시브 학습** (`scripts/memory/learning-capture.ts`): PDCA 비활성 시에도 가드레일 denial/에러 복구에서 자동 패턴 캡처
+  - `capturePassive()` 함수, `source:'passive'` 타입, pitfalls MAX 100 캡
+- **CLAUDE.md 정적 폴백**: 훅 실패 시 안전망 + stop.ts 세션 종료 시 자동 갱신
+- **라우팅 피드백 루프** (`scripts/routing/routing-history.ts`): atomic `recordRouting()` + `adjustConfidence()` — 히스토리 성공률 기반 confidence 동적 조정
+- **2단계 리랭킹** (`scripts/routing/reranker.ts`): `routeIntentRanked()` + alpha 퓨전 (기존 `routeIntent()` API 유지)
+- **특화 점수 적응형 가중치** (`scripts/agent-intelligence/specialization-scorer.ts`): `normalizeWeights()`, 도메인별 영속화, 동점 결정론적 정렬
+
+### Changed
+
+- **가드레일 파일 규칙 block 전환**: `.env`/lockfile/CI 규칙만 `action:'block'` (bash 규칙은 warn 유지 — Claude Code AST 이중 차단 방지)
+- **가드레일 출처 태그**: 차단 메시지에 `[aing guardrail]` 접두사 추가
+- **guardrail severityOverrides**: config에서 severity별 action 오버라이드 지원
+- **state.ts**: `cacheInvalidate` export 추가
+
+### Tests
+
+- 1433 tests (696 → 1433, +737 tests)
+- 신규 테스트 파일 6개: reality-check, passive-learning, routing-feedback, specialization-weights, reranker, guardrail-engine 확장
+
 ## [2.9.15] - 2026-04-03 — Subtask auto-check 수정 + Spring Boot DDD + Clean Code 스킬
 
 ### Fixed
@@ -10,14 +38,14 @@
 
 ### Added
 
-- **`/aing:spring-boot` 스킬** (신규): Spring Boot + DDD 아키텍처 가이드. `pom.xml`/`build.gradle` 감지 시 자동 적용. DDD 패키지 구조(application/domain/infrastructure/interfaces/support) + Code Generation Template + Best Practices 체크리스트
-- **`/aing:clean-code` 스킬** (신규): Robert C. Martin Clean Code 원칙 기반 코드 품질 감사 + 자동 수정. `/aing:refactor` 실행 시 자동 연동 (Step 5: Clean Code Pass)
-- **auto Step 0.5 Tech Stack Detection**: 프로젝트 루트 파일 기반 기술 스택 자동 감지 → 에이전트 프롬프트에 해당 스킬 주입
+- **`/aing:spring-boot` 스킬** (신규): Spring Boot + DDD 아키텍처 가이드
+- **`/aing:clean-code` 스킬** (신규): Robert C. Martin Clean Code 원칙 기반 코드 품질 감사 + 자동 수정
+- **auto Step 0.5 Tech Stack Detection**: 프로젝트 루트 파일 기반 기술 스택 자동 감지
 
 ### Changed
 
-- **refactor 스킬**: Step 5에 Clean Code Pass 삽입 — 리팩토링 실행 후 Klay가 clean code 감사, score 80 미만 시 자동 수정
-- **Jay 에이전트**: Spring Boot Auto-Detection 섹션 추가 — `pom.xml` 감지 시 DDD 규칙 자동 적용
+- **refactor 스킬**: Step 5에 Clean Code Pass 삽입
+- **Jay 에이전트**: Spring Boot Auto-Detection 섹션 추가
 
 ## [2.9.14] - 2026-04-03 — Agent Trace 정확도 + 자동 체크리스트 + 워커 병렬 하네스
 

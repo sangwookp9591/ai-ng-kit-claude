@@ -16,6 +16,7 @@ import { getPRDStatus } from '../scripts/pipeline/story-tracker.js';
 import { getVerifyState, generateArchitectPrompt } from '../scripts/hooks/architect-verify.js';
 import { getDenialSummary } from '../scripts/guardrail/denial-tracker.js';
 import { capturePassive } from '../scripts/memory/learning-capture.js';
+import { clearRealityCheckFlag } from '../scripts/hooks/reality-check.js';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
@@ -139,6 +140,11 @@ try {
             }
         }
     }
+    // Reality check flag cleanup: remove stale flag to prevent blocking next session
+    try {
+        clearRealityCheckFlag(projectDir);
+    }
+    catch { /* flag cleanup is best-effort */ }
     // Passive learning: session-end capture (only when PDCA is inactive)
     try {
         const isPdcaActive = stateResult.ok && !!stateResult.data.activeFeature;

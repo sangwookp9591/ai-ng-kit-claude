@@ -11,6 +11,8 @@ import { detectLearnablePattern, recordPatternUse } from '../scripts/hooks/learn
 import { autoAdvancePhase } from '../scripts/hooks/plan-state.js';
 import { recordAgentCompletion } from '../scripts/guardrail/agent-budget.js';
 import { capturePassive } from '../scripts/memory/learning-capture.js';
+import { runRealityCheck } from '../scripts/hooks/reality-check.js';
+import { isDryRunActive } from '../scripts/guardrail/dry-run.js';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -131,6 +133,26 @@ try {
           }
         }
       } catch { /* token tracking is best-effort */ }
+
+      // Reality check: feedback violation + autonomy risk (Agent/Task 완료 시에만 실행)
+      try {
+        if (!isDryRunActive(projectDir)) {
+          const sessionId = process.env.SESSION_ID || 'unknown';
+          const rcResults = runRealityCheck({
+            toolInput,
+            agentResponse: toolResponse,
+            sessionId,
+            projectDir,
+          });
+          for (const rc of rcResults) {
+            if (rc.verdict === 'block') {
+              process.stderr.write(`[aing:reality-check] BLOCK — ${rc.scenario}: ${rc.evidence}\n`);
+            } else if (rc.verdict === 'warn') {
+              process.stderr.write(`[aing:reality-check] WARN — ${rc.scenario}: ${rc.evidence}\n`);
+            }
+          }
+        }
+      } catch { /* reality check is best-effort */ }
     } else if (toolName === 'SendMessage' && toolInput.to) {
       const agentKey: string = (toolInput.to as string).replace('aing:', '');
       recordToolUse(toolName, { ...toolInput, _agentName: agentKey }, toolResponse, projectDir);
