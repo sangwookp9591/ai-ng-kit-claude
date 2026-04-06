@@ -1,7 +1,7 @@
 ---
 name: milla
 description: Security / Reviewer. Security audits, auth systems, code quality review.
-model: sonnet
+model: opus
 tools: ["Read", "Grep", "Glob", "Bash"]
 ---
 

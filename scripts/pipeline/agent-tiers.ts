@@ -29,25 +29,25 @@ export const AGENT_TIERS: Record<string, AgentTierEntry> = {
   task: { agent: 'able', tier: 1, model: 'haiku', description: 'Task management' },
 
   // T2 — Standard (implementation, single-domain)
-  'backend-impl': { agent: 'jay', tier: 2, model: 'sonnet', description: 'API implementation' },
-  'frontend-impl': { agent: 'iron', tier: 2, model: 'sonnet', description: 'UI implementation' },
-  'mobile-impl': { agent: 'derek', tier: 2, model: 'sonnet', description: 'Mobile implementation' },
-  'db-impl': { agent: 'jerry', tier: 2, model: 'sonnet', description: 'DB schema/migration' },
-  'motion-impl': { agent: 'rowan', tier: 2, model: 'sonnet', description: 'Animation/interaction' },
-  'design-impl': { agent: 'willji', tier: 2, model: 'sonnet', description: 'UI/UX design' },
+  'backend-impl': { agent: 'jay', tier: 2, model: 'opus', description: 'API implementation' },
+  'frontend-impl': { agent: 'iron', tier: 2, model: 'opus', description: 'UI implementation' },
+  'mobile-impl': { agent: 'rowan', tier: 2, model: 'opus', description: 'Mobile implementation' },
+  'db-impl': { agent: 'jerry', tier: 2, model: 'opus', description: 'DB schema/migration' },
+  'motion-impl': { agent: 'derek', tier: 2, model: 'opus', description: 'Animation/interaction' },
+  'design-impl': { agent: 'willji', tier: 2, model: 'opus', description: 'UI/UX design' },
 
   // T2.5 — AI Pipeline (model research + implementation)
-  'ai-research': { agent: 'hugg', tier: 2, model: 'sonnet', description: 'AI model discovery & comparison' },
-  'ai-impl': { agent: 'jo', tier: 2, model: 'sonnet', description: 'AI model integration & API scaffolding' },
+  'ai-research': { agent: 'hugg', tier: 2, model: 'opus', description: 'AI model discovery & comparison' },
+  'ai-impl': { agent: 'jo', tier: 2, model: 'opus', description: 'AI model integration & API scaffolding' },
 
   // T3 — Planning (multi-domain coordination)
-  plan: { agent: 'able', tier: 3, model: 'sonnet', description: 'Full planning with Search Before Building' },
+  plan: { agent: 'able', tier: 3, model: 'opus', description: 'Full planning with Search Before Building' },
   architect: { agent: 'klay', tier: 3, model: 'opus', description: 'Architecture design' },
-  'perf-audit': { agent: 'jun', tier: 3, model: 'sonnet', description: 'Performance analysis' },
-  'dead-code': { agent: 'simon', tier: 3, model: 'sonnet', description: 'Dead code detection' },
+  'perf-audit': { agent: 'jun', tier: 3, model: 'opus', description: 'Performance analysis' },
+  'dead-code': { agent: 'simon', tier: 3, model: 'opus', description: 'Dead code detection' },
 
   // T4 — Full context (review, verification, orchestration)
-  'security-review': { agent: 'milla', tier: 4, model: 'sonnet', description: 'Security audit' },
+  'security-review': { agent: 'milla', tier: 4, model: 'opus', description: 'Security audit' },
   'final-verify': { agent: 'sam', tier: 4, model: 'opus', description: 'Evidence chain + goal verification' },
   'auto-pipeline': { agent: 'sam', tier: 4, model: 'opus', description: 'Full pipeline orchestration' },
 };

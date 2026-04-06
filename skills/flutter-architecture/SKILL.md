@@ -8,12 +8,12 @@ triggers: ["flutter architecture", "flutter 아키텍처", "flutter 설계", "fl
 
 ## Agent Deployment
 
-Derek(Mobile/sonnet) 에이전트가 Flutter 아키텍처를 설계합니다.
+Rowan(Mobile/sonnet) 에이전트가 Flutter 아키텍처를 설계합니다.
 
 ```
 Agent({
-  subagent_type: "aing:derek",
-  description: "Derek: Flutter 아키텍처 설계 — {task}",
+  subagent_type: "aing:rowan",
+  description: "Rowan: Flutter 아키텍처 설계 — {task}",
   model: "sonnet"
 })
 ```

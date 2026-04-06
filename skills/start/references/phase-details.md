@@ -35,7 +35,7 @@
 aing이 활성화되어 있습니다. 세션 시작 시 자동으로 harness rules가 주입됩니다.
 
 ## Agent Team
-Sam(CTO/opus) Able(PM/sonnet) Klay(Architect/opus) Jay(Backend/sonnet) Jerry(DB/sonnet) Milla(Security/sonnet) Willji(Design/sonnet) Derek(Frontend/sonnet) Rowan(Motion/sonnet) Iron(Wizard/sonnet)
+Sam(CTO/opus) Able(PM/sonnet) Klay(Architect/opus) Jay(Backend/sonnet) Jerry(DB/sonnet) Milla(Security/sonnet) Willji(Design/sonnet) Derek(Motion/sonnet) Rowan(Mobile/sonnet) Iron(Web Frontend/sonnet)
 
 ## Quick Start
 - `/aing auto <feature> <task>` — 전체 파이프라인 자동 실행

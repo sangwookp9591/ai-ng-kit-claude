@@ -125,9 +125,9 @@ const AGENTS: Record<string, AgentInfo> = {
   jerry:   { icon: icon.db,     color: C.yellow, name: 'Jerry', role: 'Backend / DB', desc: 'Database and infrastructure', model: 'sonnet' },
   milla:   { icon: icon.lock,   color: C.green, name: 'Milla', role: 'Security / Review', desc: 'Security audit and code review', model: 'sonnet' },
   willji:  { icon: icon.pen,    color: C.pink, name: 'Willji', role: 'Designer / UI-UX', desc: 'Component design, layout, design tokens', model: 'sonnet' },
-  derek:   { icon: icon.screen, color: C.cyan, name: 'Derek', role: 'Mobile / Flutter', desc: 'Flutter, iOS, AOS senior engineer', model: 'sonnet' },
-  rowan:   { icon: icon.spark,  color: C.lime, name: 'Rowan', role: 'Frontend / Motion', desc: 'Animations, micro-interactions, UX polish', model: 'sonnet' },
-  iron:    { icon: icon.wand,   color: C.magenta, name: 'Iron', role: 'Frontend / Build', desc: 'Screen implementation, state management', model: 'sonnet' },
+  derek:   { icon: icon.spark,  color: C.cyan, name: 'Derek', role: 'UI Motion / Animation', desc: 'Animations, micro-interactions, UX polish', model: 'sonnet' },
+  rowan:   { icon: icon.screen, color: C.lime, name: 'Rowan', role: 'Mobile / Flutter', desc: 'Flutter, iOS, AOS senior engineer', model: 'sonnet' },
+  iron:    { icon: icon.wand,   color: C.magenta, name: 'Iron', role: 'Web Frontend', desc: 'React/Next.js screen implementation, state management', model: 'sonnet' },
 };
 
 const INNOVATIONS: InnovationInfo[] = [

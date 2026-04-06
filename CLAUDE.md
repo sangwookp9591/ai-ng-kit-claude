@@ -5,7 +5,7 @@
 
 ## Agent Team Roster
 
-Sam(CTO/opus) Able(PM/sonnet) Klay(Architect/opus) Jay(Backend/sonnet) Jerry(DB/sonnet) Milla(Security/sonnet) Willji(Design/sonnet) Derek(Frontend/sonnet) Rowan(Motion/sonnet) Iron(Wizard/sonnet)
+Sam(CTO/opus) Able(PM/sonnet) Klay(Architect/opus) Jay(Backend/sonnet) Jerry(DB/sonnet) Milla(Security/sonnet) Willji(Design/sonnet) Derek(Motion/sonnet) Rowan(Mobile/sonnet) Iron(Web Frontend/sonnet)
 
 ## Hard Limits (5)
 

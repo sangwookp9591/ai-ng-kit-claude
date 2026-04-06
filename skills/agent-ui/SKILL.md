@@ -43,7 +43,7 @@ const projectDir = process.env.PROJECT_DIR || process.cwd();
 console.log('━━━ aing Agent Monitor ━━━');
 console.log('');
 console.log('Available Agents:');
-console.log('  Sam(CTO) Able(PM) Klay(Architect) Jay(Backend) Jerry(DB) Milla(Security) Willji(Design) Derek(Frontend) Rowan(Motion) Iron(Wizard)');
+console.log('  Sam(CTO) Able(PM) Klay(Architect) Jay(Backend) Jerry(DB) Milla(Security) Willji(Design) Derek(Motion) Rowan(Mobile) Iron(Web Frontend)');
 console.log('');
 const trace = formatTraceSummary(projectDir);
 console.log(trace);

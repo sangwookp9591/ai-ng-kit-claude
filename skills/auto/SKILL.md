@@ -110,7 +110,7 @@ TaskUpdate({ taskId: "1", owner: "jay" })
   Agent        Role              Model    Task
   ─────        ────              ─────    ────
   Jay          Backend / API     sonnet   엔드포인트 구현 (TDD)
-  Derek        Frontend / Build  sonnet   UI 컴포넌트 구현
+  Iron         Web Frontend      sonnet   UI 컴포넌트 구현
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

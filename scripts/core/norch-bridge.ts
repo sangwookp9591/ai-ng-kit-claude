@@ -50,8 +50,8 @@ const AGENT_MAP: Record<string, NorchAgent> = {
   jun: { name: 'Jun', role: '성능', model: 'sonnet' },
   willji: { name: 'Willji', role: '디자인', model: 'sonnet' },
   iron: { name: 'Iron', role: '화면', model: 'sonnet' },
-  rowan: { name: 'Rowan', role: '모션', model: 'sonnet' },
-  derek: { name: 'Derek', role: '모바일', model: 'sonnet' },
+  rowan: { name: 'Rowan', role: '모바일', model: 'sonnet' },
+  derek: { name: 'Derek', role: '모션', model: 'sonnet' },
   simon: { name: 'Simon', role: '코드분석', model: 'sonnet' },
 };
 

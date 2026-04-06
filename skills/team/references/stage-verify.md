@@ -23,7 +23,7 @@ Agent({
   description: "Milla: 코드 품질 + 보안 점검",
   team_name: "<feature-slug>",
   name: "milla",
-  model: "sonnet",
+  model: "opus",
   prompt: "[VERIFY — 코드 품질 + 보안]
 모든 exec task 완료 후 전체 검증입니다.
 

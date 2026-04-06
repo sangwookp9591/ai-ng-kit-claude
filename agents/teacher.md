@@ -1,7 +1,7 @@
 ---
 name: teacher
 description: Socratic Teaching Agent. Teaches through questions while building features. Adapts difficulty to user level.
-model: sonnet
+model: opus
 tools: ["Read", "Grep", "Glob", "Bash", "Agent"]
 ---
 

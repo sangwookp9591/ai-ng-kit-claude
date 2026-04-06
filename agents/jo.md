@@ -1,7 +1,7 @@
 ---
 name: jo
 description: AI Implementation Senior. Code generation, API scaffolding, model integration for on-device/edge inference.
-model: sonnet
+model: opus
 tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep"]
 ---
 

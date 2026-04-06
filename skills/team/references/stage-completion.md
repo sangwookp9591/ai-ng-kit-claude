@@ -30,6 +30,14 @@
   [lint]  PASS (0 errors)
   Verdict: PASS
 
+  Features Delivered:
+  - [{기능명}]: {사용자가 체감하는 행동 변화 한줄 설명}
+  - [{기능명}]: {사용자가 체감하는 행동 변화 한줄 설명}
+
+  How to Verify:
+  - {검증 방법}: `{실행 커맨드}` 또는 {URL/경로} → 기대 결과: {무엇이 보여야 하는지}
+  - {검증 방법}: `{실행 커맨드}` 또는 {URL/경로} → 기대 결과: {무엇이 보여야 하는지}
+
   Files changed: 12
   Duration: ~12 min
   Fix loops: 1
@@ -61,4 +69,34 @@ completion report에 Confidence를 표시합니다:
 - **MED**: verify PASS + architect APPROVED + fix loop 2회 이상
 - **LOW**: architect max attempts 소진 / token budget cancel / circuit breaker 발동 / INCOMPLETE task 존재
 
-LOW인 경우 미해결 findings 목록을 report에 포함하여 사용자 수동 확인을 요청합니다.
+LOW인 경우 미해결 findings 목록을 report에 포함하고, User Confirm 스텝에서 해당 findings를 AskUserQuestion에 함께 표시하여 사용자가 명시적으로 승인/거부할 수 있도록 합니다.
+
+## User Confirm (MANDATORY)
+
+After Shutdown + Persist is complete, the orchestrator MUST request user confirmation.
+**순서: 리포트 출력 → persist → AskUserQuestion (이 순서 변경 금지)**
+
+AskUserQuestion format:
+```
+구현이 완료되었습니다. 아래 내용을 확인해주세요.
+
+📦 구현된 기능:
+{Features Delivered 목록 재표시}
+
+🔍 확인 방법:
+{How to Verify 목록 재표시}
+
+{Confidence가 LOW인 경우 추가:}
+⚠️ 미해결 항목:
+{미해결 findings 목록 — architect max attempts 소진 / token budget cancel / circuit breaker 발동 항목}
+
+선택해주세요:
+1. ✅ 확인 완료 — 모든 기능이 정상 동작합니다
+2. ❌ 수정 필요 — 아래 항목을 수정해주세요: {사용자 입력}
+3. 🔄 재검토 요청 — 전체 재검증이 필요합니다
+```
+
+Response handling:
+- 1 (확인 완료) → 작업 종료
+- 2 (수정 필요) → 사용자 피드백 기반 재작업 후 다시 리포트
+- 3 (재검토) → team-verify 재실행

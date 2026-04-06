@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "aing-marketplace",
-  "version": "2.9.16",
+  "version": "2.9.17",
   "description": "aing Harness Engineering Agent marketplace",
   "owner": {
     "name": "SW",
@@ -12,7 +12,7 @@
     {
       "name": "aing",
       "description": "Harness Engineering Agent — 21 named agents, 44 skills, AING-DR Consensus Planning, AI Pipeline, 1433 tests, 33 Innovations.",
-      "version": "2.9.16",
+      "version": "2.9.17",
       "author": {
         "name": "SW",
         "email": "sangwookp9591@github.com"

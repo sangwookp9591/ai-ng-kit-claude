@@ -20,7 +20,7 @@ TeamCreate({
   Agent        Role              Model    Task
   ─────        ────              ─────    ────
   Jay          Backend / API     sonnet   API 엔드포인트 구현
-  Derek        Frontend / Build  sonnet   UI 컴포넌트 구현
+  Iron         Web Frontend      sonnet   UI 컴포넌트 구현
   (verify 대기: Milla + Sam)
 
   Parallel Groups:
@@ -35,7 +35,7 @@ TeamCreate({
 | Stage | Default Agents | Specialist Routing |
 |-------|---------------|-------------------|
 | team-plan | Able (plan), Klay (review) | + Milla for high-complexity gap analysis |
-| team-exec | Jay (backend), Derek (frontend) | + Jerry (DB), Willji (design) based on task keywords |
+| team-exec | Jay (backend), Iron (web frontend) | + Jerry (DB), Willji (design), Rowan (mobile) based on task keywords |
 | team-verify | Milla (security), Sam (CTO) | + Klay (quality) for mid+, + Jun (performance) for high |
 | team-fix | Jay (primary fixer) | + debugger routing if same error 3x |
 

@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.9.17] - 2026-04-06 — User Acceptance Guide + 에이전트 역할/모델 전면 개편
+
+### Added
+- **User Acceptance Guide**: 기능 완료 리포트에 Features Delivered + How to Verify + User Confirm 3단 구조 추가
+  - 리포트 코드블록 안: 사용자 관점 기능 목록 + 검증 커맨드/경로 가이드
+  - 리포트 코드블록 밖: AskUserQuestion 기반 최종 컨펌 (persist 후 실행)
+  - auto(`worker-and-report.md`), team(`stage-completion.md`) 양쪽 적용
+  - LOW Confidence 시 미해결 findings 목록을 User Confirm에 함께 표시
+
+### Changed
+- **에이전트 역할 교체**: Derek ↔ Rowan 역할 스왑
+  - Derek: Mobile Frontend → **UI Motion / Animation** (Web & Mobile 인터랙션)
+  - Rowan: Motion → **Mobile Frontend** (Flutter/iOS/AOS 구현)
+  - Iron: Frontend / Build → **Web Frontend** (React/Next.js)
+  - 전체 참조 동기화: CLAUDE.md, ARCHITECTURE.md, ETHOS.md, session-start, statusline, display, norch-bridge, preamble-tiers, agent-tiers, presets, stage-exec, flutter-animation/architecture 스킬 등 30+ 파일
+- **모델 라우팅 전면 opus 전환**: 구현/검증 에이전트 기본 모델을 sonnet → opus로 변경
+  - opus (19개): Sam, Able, Klay, Critic, Simon, Jay, Jerry, Milla, Willji, Derek, Rowan, Iron, Jun, Kain, Noa, Ryan, Hugg, Jo, Teacher
+  - sonnet (2개): Figma-reader, Progress-checker (lightweight 작업 전용)
+  - 4개 라우팅 포인트 전부 반영: agents/*.md, presets.md, agent-tiers.ts, stage-verify.md
+  - haiku 다운그레이드 유지: Gate review(Milla), Sam(team-verify), explore/task
+
 ## [2.9.16] - 2026-04-06 — 하네스 엔지니어링 6대 개선 + Reality Check System
 
 ### Added

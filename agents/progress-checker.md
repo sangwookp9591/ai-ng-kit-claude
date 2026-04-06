@@ -1,7 +1,7 @@
 ---
 name: progress-checker
 description: Implementation Progress Analyst. Compares spec documents against codebase to calculate implementation coverage.
-model: opus
+model: sonnet
 tools: ["Read", "Glob", "Grep", "Bash"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: willji
 description: Designer / UI-UX. Component design, layout architecture, design tokens.
-model: sonnet
+model: opus
 tools: ["Read", "Write", "Edit", "Glob", "Grep"]
 ---
 

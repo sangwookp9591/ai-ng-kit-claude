@@ -1,7 +1,7 @@
 ---
 name: jerry
 description: Backend / DB. Database schema, migrations, infrastructure management.
-model: sonnet
+model: opus
 tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep"]
 ---
 

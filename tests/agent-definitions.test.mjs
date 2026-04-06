@@ -64,12 +64,12 @@ describe('Agent Definitions', () => {
     }
   });
 
-  it('should have implementation agents with sonnet model', () => {
+  it('should have implementation agents with opus model', () => {
     const implAgents = ['iron.md', 'jay.md', 'derek.md', 'jerry.md'];
     for (const file of implAgents) {
       if (existsSync(join(AGENTS_DIR, file))) {
         const content = readFileSync(join(AGENTS_DIR, file), 'utf-8');
-        assert.ok(content.includes('model: sonnet'), `${file} should use sonnet model`);
+        assert.ok(content.includes('model: opus'), `${file} should use opus model`);
       }
     }
   });

@@ -171,7 +171,7 @@ try {
     catch (_e) { /* notepad is best-effort */ }
     // === Agent Team ===
     ctx.push(`## aing Agent Team`);
-    ctx.push(`Sam(CTO/opus) Able(PM/sonnet) Klay(Architect/opus) Jay(Backend/sonnet) Jerry(DB/sonnet) Milla(Security/sonnet) Willji(Design/sonnet) Derek(Frontend/sonnet) Rowan(Motion/sonnet) Iron(Wizard/sonnet)`);
+    ctx.push(`Sam(CTO/opus) Able(PM/sonnet) Klay(Architect/opus) Jay(Backend/sonnet) Jerry(DB/sonnet) Milla(Security/sonnet) Willji(Design/sonnet) Derek(Motion/sonnet) Rowan(Mobile/sonnet) Iron(Web Frontend/sonnet)`);
     ctx.push('');
     // === MANDATORY RULES — Tiered Injection ===
     const injectionMode = process.env.AING_FULL_INJECT === '1' ? 'full' : (config.context?.injectionMode || 'compact');

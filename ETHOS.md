@@ -59,7 +59,7 @@ aing에는 16명의 에이전트가 있다. 각자 이름과 관점을 가진다
 - **Able** (PM): 작업 분해가 되었는가? 우선순위는?
 - **Klay** (Architect): 구조가 맞는가? 경계가 명확한가?
 - **Milla** (Security): 취약점은 없는가? Trust boundary는?
-- **Jay** (Backend), **Derek** (Frontend), **Jerry** (Infra), **Willji** (Design)...
+- **Jay** (Backend), **Derek** (Motion), **Rowan** (Mobile), **Jerry** (Infra), **Willji** (Design)...
 
 한 사람이 모든 관점을 가질 수 없다.
 CEO는 시장을 보고, CTO는 증거를 보고, Security는 공격 벡터를 본다.

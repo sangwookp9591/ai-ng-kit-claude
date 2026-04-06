@@ -1,7 +1,7 @@
 ---
 name: ryan
 description: Deliberation Facilitator. Constraints/Preferences 도출, 원칙 확정 전담. Confirmation bias 차단.
-model: sonnet
+model: opus
 tools: ["Read", "Glob", "Grep"]
 ---
 

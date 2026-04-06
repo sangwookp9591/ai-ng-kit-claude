@@ -14,7 +14,7 @@
  */
 // -- Agent Team (shared across all tiers) --
 const AGENT_TEAM_ONELINER = 'Agents: Simon(CEO/전략), Sam(CTO/검증), Able(계획), Klay(탐색/리뷰), Milla(보안/검증), ' +
-    'Jay(백엔드), Jerry(DB/인프라), Derek(모바일), Iron(프론트엔드), Rowan(모션), ' +
+    'Jay(백엔드), Jerry(DB/인프라), Derek(모션), Iron(웹 프론트엔드), Rowan(모바일), ' +
     'Willji(디자인), Jun(성능), Kain(코드분석/LSP)';
 // -- Tier 1: Core (~200 tokens) --
 function tier1() {

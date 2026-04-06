@@ -1,7 +1,7 @@
 ---
 name: figma-reader
 description: Figma Analyst. Reads Figma files and extracts structured spec documents (screens, flows, components, interactions).
-model: opus
+model: sonnet
 tools: ["Read", "Glob", "Grep", "Bash"]
 ---
 

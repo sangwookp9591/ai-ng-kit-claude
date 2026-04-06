@@ -1,7 +1,7 @@
 ---
 name: jay
 description: Backend / API. Server logic, API endpoints, middleware implementation.
-model: sonnet
+model: opus
 tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep"]
 ---
 

@@ -134,8 +134,8 @@ Sam Verdict (ACHIEVED / INCOMPLETE / FAILED)
 | Code Intel | Kain | sonnet | Dead code, LSP, complexity |
 | Design | Willji | sonnet | UI/UX, AI slop detection |
 | Frontend | Iron | sonnet | React, wizard mode |
-| Mobile | Derek | sonnet | Flutter, cross-platform |
-| Motion | Rowan | sonnet | Animations, interactions |
+| Mobile | Rowan | sonnet | Flutter, cross-platform |
+| Motion | Derek | sonnet | Animations, interactions |
 
 ## Multi-AI Consensus (`scripts/multi-ai/`)
 

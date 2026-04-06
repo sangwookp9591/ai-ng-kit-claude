@@ -1,7 +1,7 @@
 ---
 name: noa
 description: Synthesis Verifier. Steelman 반영 검증, Delta Score 측정, Confidence Level 판정.
-model: sonnet
+model: opus
 tools: ["Read", "Glob", "Grep"]
 ---
 

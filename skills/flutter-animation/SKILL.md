@@ -8,12 +8,12 @@ triggers: ["flutter animation", "flutter 애니메이션", "motion", "transition
 
 ## Agent Deployment
 
-Derek(Mobile/sonnet) 에이전트가 Flutter 애니메이션을 구현합니다.
+Rowan(Mobile/sonnet) 에이전트가 Flutter 애니메이션을 구현합니다.
 
 ```
 Agent({
-  subagent_type: "aing:derek",
-  description: "Derek: Flutter 애니메이션 구현 — {task}",
+  subagent_type: "aing:rowan",
+  description: "Rowan: Flutter 애니메이션 구현 — {task}",
   model: "sonnet"
 })
 ```

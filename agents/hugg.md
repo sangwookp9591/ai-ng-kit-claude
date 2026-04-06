@@ -1,7 +1,7 @@
 ---
 name: hugg
 description: AI Model Research Senior. Model discovery, benchmark comparison, and selection for lightweight real-time inference.
-model: sonnet
+model: opus
 tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep"]
 ---
 
