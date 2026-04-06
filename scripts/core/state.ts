@@ -183,13 +183,14 @@ export function writeState(filePath: string, data: unknown): WriteStateResult {
   const tmpSuffix = randomBytes(6).toString('hex');
   const tmpPath = `${filePath}.${tmpSuffix}.tmp`;
 
+  mkdirSync(dirname(filePath), { recursive: true });
+
   const locked = acquireLock(filePath);
   if (!locked) {
     return { ok: false, error: `Failed to acquire lock for ${filePath} within ${LOCK_TIMEOUT_MS}ms` };
   }
 
   try {
-    mkdirSync(dirname(filePath), { recursive: true });
     const json = JSON.stringify(data, null, 2);
     writeFileSync(tmpPath, json, 'utf-8');
     renameSync(tmpPath, filePath);

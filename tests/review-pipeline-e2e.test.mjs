@@ -161,14 +161,21 @@ describe('CSO Audit Integration', () => {
 describe('Evidence Chain Integration', () => {
   it('should add and evaluate evidence', async () => {
     const { addEvidence, evaluateChain } = await import('../dist/scripts/evidence/evidence-chain.js');
+    const { mkdtempSync, rmSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const { tmpdir } = await import('node:os');
 
-    // Add evidence to temp location
-    addEvidence('e2e-test', { type: 'test', result: 'pass', source: 'jest' }, '/tmp');
-    addEvidence('e2e-test', { type: 'build', result: 'pass', source: 'tsc' }, '/tmp');
+    const tmpDir = mkdtempSync(join(tmpdir(), 'evidence-test-'));
+    try {
+      addEvidence('e2e-test', { type: 'test', result: 'pass', source: 'jest' }, tmpDir);
+      addEvidence('e2e-test', { type: 'build', result: 'pass', source: 'tsc' }, tmpDir);
 
-    const chain = evaluateChain('e2e-test', '/tmp');
-    assert.strictEqual(chain.verdict, 'PASS');
-    assert.ok(chain.entries.length >= 2);
+      const chain = evaluateChain('e2e-test', tmpDir);
+      assert.strictEqual(chain.verdict, 'PASS');
+      assert.ok(chain.entries.length >= 2);
+    } finally {
+      rmSync(tmpDir, { recursive: true, force: true });
+    }
   });
 });
 

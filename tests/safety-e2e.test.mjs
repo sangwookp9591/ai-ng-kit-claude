@@ -41,17 +41,25 @@ describe('Careful Checklist', () => {
 describe('Mutation Guard', () => {
   it('should record and retrieve mutations', async () => {
     const { recordMutation, getRecentMutations, formatMutationAudit } = await import('../dist/scripts/guardrail/mutation-guard.js');
+    const { mkdtempSync, rmSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const { tmpdir } = await import('node:os');
 
-    recordMutation('src/auth.ts', 'edit', 'jay', '/tmp');
-    recordMutation('src/api.ts', 'create', 'jay', '/tmp');
+    const tmpDir = mkdtempSync(join(tmpdir(), 'mutation-test-'));
+    try {
+      recordMutation('src/auth.ts', 'edit', 'jay', tmpDir);
+      recordMutation('src/api.ts', 'create', 'jay', tmpDir);
 
-    const recent = getRecentMutations(10, '/tmp');
-    assert.ok(recent.length >= 2);
-    assert.strictEqual(recent[recent.length - 1].file, 'src/api.ts');
+      const recent = getRecentMutations(10, tmpDir);
+      assert.ok(recent.length >= 2);
+      assert.strictEqual(recent[recent.length - 1].file, 'src/api.ts');
 
-    const formatted = formatMutationAudit(recent);
-    assert.ok(formatted.includes('Mutation Audit'));
-    assert.ok(formatted.includes('src/auth.ts'));
+      const formatted = formatMutationAudit(recent);
+      assert.ok(formatted.includes('Mutation Audit'));
+      assert.ok(formatted.includes('src/auth.ts'));
+    } finally {
+      rmSync(tmpDir, { recursive: true, force: true });
+    }
   });
 });
 

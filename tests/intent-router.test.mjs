@@ -24,9 +24,9 @@ describe('앵커 탐지', () => {
     assert.equal(result.route, 'auto');
   });
 
-  it('.js 확장자 포함 → auto 라우팅', () => {
+  it('.js 확장자 + 오류 키워드 → debug 라우팅', () => {
     const result = routeIntent('index.js 오류 고쳐줘');
-    assert.equal(result.route, 'auto');
+    assert.equal(result.route, 'debug');
   });
 
   it('.py 확장자 포함 → auto 라우팅', () => {
@@ -39,19 +39,19 @@ describe('앵커 탐지', () => {
     assert.equal(result.route, 'auto');
   });
 
-  it('TypeError 에러 참조 포함 → auto 라우팅', () => {
+  it('TypeError 에러 참조 → debug 라우팅', () => {
     const result = routeIntent('TypeError: Cannot read property 에러 고쳐줘');
-    assert.equal(result.route, 'auto');
+    assert.equal(result.route, 'debug');
   });
 
-  it('코드 블록(```) 포함 → auto 라우팅', () => {
+  it('코드 블록 + 최적화 키워드 → perf 라우팅', () => {
     const result = routeIntent('```js\nconsole.log("hi")\n``` 이 코드 최적화해줘');
-    assert.equal(result.route, 'auto');
+    assert.equal(result.route, 'perf');
   });
 
-  it('camelCase 심볼 포함 → auto 라우팅', () => {
+  it('camelCase 심볼 + 리팩토링 키워드 → refactor 라우팅', () => {
     const result = routeIntent('getUserById 함수 리팩토링해줘');
-    assert.equal(result.route, 'auto');
+    assert.equal(result.route, 'refactor');
   });
 
   it('PascalCase 심볼 포함 → auto 라우팅', () => {
@@ -82,19 +82,19 @@ describe('키워드 라우팅', () => {
     assert.equal(result.preset, 'design');
   });
 
-  it('"계획" 키워드 → plan 라우팅', () => {
+  it('"계획" 키워드 + low complexity → plan-only 라우팅', () => {
     const result = routeIntent('인증 시스템 계획 세워줘');
-    assert.equal(result.route, 'plan');
+    assert.equal(result.route, 'plan-only');
   });
 
-  it('"분석" 키워드 → plan 라우팅', () => {
+  it('"분석" 키워드 → explore 라우팅', () => {
     const result = routeIntent('현재 아키텍처 분석해줘');
-    assert.equal(result.route, 'plan');
+    assert.equal(result.route, 'explore');
   });
 
-  it('"설계" 키워드 → plan 라우팅', () => {
+  it('"설계" 키워드 + low complexity → plan-only 라우팅', () => {
     const result = routeIntent('DB 스키마 설계해줘');
-    assert.equal(result.route, 'plan');
+    assert.equal(result.route, 'plan-only');
   });
 
   it('"팀" 키워드 → team 라우팅', () => {
@@ -102,9 +102,9 @@ describe('키워드 라우팅', () => {
     assert.equal(result.route, 'team');
   });
 
-  it('"대규모" 키워드 → team 라우팅', () => {
+  it('"대규모 리팩토링" → refactor 라우팅 (리팩토링 키워드 우선)', () => {
     const result = routeIntent('대규모 리팩토링 진행해줘');
-    assert.equal(result.route, 'team');
+    assert.equal(result.route, 'refactor');
   });
 
   it('"전체" 키워드 → team 라우팅', () => {
@@ -117,9 +117,9 @@ describe('키워드 라우팅', () => {
 // complexity 기반 라우팅
 // ─────────────────────────────────────────────
 describe('complexity 기반 라우팅', () => {
-  it('짧고 단순한 입력(≤15단어, 앵커 없음) → plan 라우팅', () => {
+  it('짧고 단순한 입력(≤15단어, 앵커 없음) → plan-only 라우팅', () => {
     const result = routeIntent('인증 기능 추가해줘');
-    assert.equal(result.route, 'plan');
+    assert.equal(result.route, 'plan-only');
   });
 
   it('낮은 complexity(≤2) → auto(solo preset)', () => {
@@ -136,9 +136,9 @@ describe('complexity 기반 라우팅', () => {
     assert.equal(result.preset, 'duo');
   });
 
-  it('높은 complexity(≥5) → team 라우팅', () => {
+  it('높은 complexity + 보안 키워드 → review-cso 라우팅', () => {
     const result = routeIntent('사용자 인증 시스템 전체 구현: JWT, OAuth, 소셜 로그인, 세션 관리, 보안 미들웨어, DB 스키마 변경, 프론트엔드 연동');
-    assert.equal(result.route, 'team');
+    assert.equal(result.route, 'review-cso');
   });
 });
 
@@ -166,8 +166,8 @@ describe('출력 형식', () => {
     assert.ok(result.confidence >= 0 && result.confidence <= 1);
   });
 
-  it('route는 auto|plan|team|wizard 중 하나', () => {
-    const validRoutes = ['auto', 'plan', 'team', 'wizard'];
+  it('route는 유효한 라우트 중 하나', () => {
+    const validRoutes = ['auto', 'plan', 'plan-only', 'team', 'wizard', 'debug', 'refactor', 'tdd', 'explore', 'perf', 'review-pipeline', 'review-cso', 'clean-code'];
     const result = routeIntent('테스트');
     assert.ok(validRoutes.includes(result.route), `Invalid route: ${result.route}`);
   });

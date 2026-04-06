@@ -79,16 +79,16 @@ describe('initPlanState: gate phase 초기화', () => {
     try {
       const state = initPlanState(dir, 'complex-feature', { complexity: 'high' });
       assert.equal(state.complexity, 'high');
-      assert.equal(state.maxIterations, 5);
+      assert.equal(state.maxIterations, 3);
     } finally { cleanup(dir); }
   });
 
-  it('should set maxIterations=3 for low complexity', () => {
+  it('should set maxIterations=2 for low complexity', () => {
     const dir = makeDir('init-low');
     try {
       const state = initPlanState(dir, 'low-feature', { complexity: 'low' });
       assert.equal(state.complexity, 'low');
-      assert.equal(state.maxIterations, 3);
+      assert.equal(state.maxIterations, 2);
     } finally { cleanup(dir); }
   });
 

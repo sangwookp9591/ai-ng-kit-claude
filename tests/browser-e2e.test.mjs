@@ -223,18 +223,18 @@ describe('Intent Router E2E', () => {
     const { routeIntent } = await import('../dist/scripts/routing/intent-router.js');
 
     const cases = [
-      { input: '로그인하면 500 에러 나', expected: 'plan' },
-      { input: '내가 짠 코드 봐줘', expected: 'plan' },
-      { input: '이 프로젝트 구조 설명해줘', expected: 'plan' },
-      { input: '왜 이렇게 느리지', expected: 'plan' },
-      { input: '이 코드 리팩토링해줘', expected: 'plan' },
-      { input: '이 기능 테스트 짜줘', expected: 'plan' },
-      { input: '보안 문제 없는지 확인해줘', expected: 'plan' },
-      { input: '로그인 기능 추가해줘', expected: 'plan' },
-      { input: 'JWT 인증 만들어줘', expected: 'plan' },
-      { input: '버튼 클릭하면 아무 반응 없어', expected: 'plan' },
-      { input: '성능 최적화 해줘', expected: 'plan' },
-      { input: 'auth', expected: 'plan' },
+      { input: '로그인하면 500 에러 나', expected: 'debug' },
+      { input: '내가 짠 코드 봐줘', expected: 'review-pipeline' },
+      { input: '이 프로젝트 구조 설명해줘', expected: 'explore' },
+      { input: '왜 이렇게 느리지', expected: 'perf' },
+      { input: '이 코드 리팩토링해줘', expected: 'refactor' },
+      { input: '이 기능 테스트 짜줘', expected: 'tdd' },
+      { input: '보안 문제 없는지 확인해줘', expected: 'review-cso' },
+      { input: '로그인 기능 추가해줘', expected: 'plan-only' },
+      { input: 'JWT 인증 만들어줘', expected: 'plan-only' },
+      { input: '버튼 클릭하면 아무 반응 없어', expected: 'debug' },
+      { input: '성능 최적화 해줘', expected: 'perf' },
+      { input: 'auth', expected: 'plan-only' },
     ];
 
     let passed = 0;

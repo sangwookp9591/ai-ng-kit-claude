@@ -176,24 +176,23 @@ describe('incrementIteration: 반복 횟수 증가 및 max 도달', () => {
   it('should increment correctly multiple times within limit', () => {
     const dir = makeDir('iter-multi');
     try {
-      initPlanState(dir, 'iter-multi-feature', { complexity: 'high' }); // maxIterations = 5
+      initPlanState(dir, 'iter-multi-feature', { complexity: 'high' }); // maxIterations = 3
       incrementIteration(dir); // 1
-      incrementIteration(dir); // 2
-      const result = incrementIteration(dir); // 3
+      const result = incrementIteration(dir); // 2
       assert.equal(result, true);
-      assert.equal(readPlanState(dir).iteration, 3);
+      assert.equal(readPlanState(dir).iteration, 2);
     } finally { cleanup(dir); }
   });
 
   it('should track iteration count correctly up to max-1', () => {
     const dir = makeDir('iter-track');
     try {
-      initPlanState(dir, 'iter-track-feature', { complexity: 'mid' }); // maxIterations = 5
-      for (let i = 0; i < 4; i++) {
+      initPlanState(dir, 'iter-track-feature', { complexity: 'mid' }); // maxIterations = 3
+      for (let i = 0; i < 2; i++) {
         const result = incrementIteration(dir);
         assert.equal(result, true, `Iteration ${i + 1} should return true`);
       }
-      assert.equal(readPlanState(dir).iteration, 4);
+      assert.equal(readPlanState(dir).iteration, 2);
     } finally { cleanup(dir); }
   });
 });

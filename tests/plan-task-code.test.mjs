@@ -101,7 +101,7 @@ describe('Plan-Task Code Enforcement', () => {
       assert.equal(state.phase, 'gate');
       assert.equal(state.feature, 'auth-api');
       assert.equal(state.iteration, 0);
-      assert.equal(state.maxIterations, 5);
+      assert.equal(state.maxIterations, 3);
       assert.deepEqual(state.phaseHistory, ['gate']);
     });
 

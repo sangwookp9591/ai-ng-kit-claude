@@ -71,17 +71,29 @@ describe('Ship Engine Integration', () => {
 
   it('should advance steps', async () => {
     const { initShip, advanceStep, getShipState } = await import('../dist/scripts/ship/ship-engine.js');
-    initShip('adv-test', 'feat/adv', 'main', '/tmp');
-    const after = advanceStep({ step: 'preflight', status: 'pass' }, '/tmp');
-    assert.strictEqual(after.currentStep, 1);
-    assert.strictEqual(after.status, 'in_progress');
+    const { mkdtempSync, rmSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const { tmpdir } = await import('node:os');
+    const tmpDir = mkdtempSync(join(tmpdir(), 'ship-adv-'));
+    try {
+      initShip('adv-test', 'feat/adv', 'main', tmpDir);
+      const after = advanceStep({ step: 'preflight', status: 'pass' }, tmpDir);
+      assert.strictEqual(after.currentStep, 1);
+      assert.strictEqual(after.status, 'in_progress');
+    } finally { rmSync(tmpDir, { recursive: true, force: true }); }
   });
 
   it('should fail on step failure', async () => {
     const { initShip, advanceStep } = await import('../dist/scripts/ship/ship-engine.js');
-    initShip('fail-test', 'feat/fail', 'main', '/tmp');
-    const after = advanceStep({ step: 'preflight', status: 'fail' }, '/tmp');
-    assert.strictEqual(after.status, 'failed');
+    const { mkdtempSync, rmSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const { tmpdir } = await import('node:os');
+    const tmpDir = mkdtempSync(join(tmpdir(), 'ship-fail-'));
+    try {
+      initShip('fail-test', 'feat/fail', 'main', tmpDir);
+      const after = advanceStep({ step: 'preflight', status: 'fail' }, tmpDir);
+      assert.strictEqual(after.status, 'failed');
+    } finally { rmSync(tmpDir, { recursive: true, force: true }); }
   });
 });
 
