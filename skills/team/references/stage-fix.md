@@ -2,7 +2,7 @@
 
 **Token budget으로 제어** — budget 초과 시 사용자 확인 요청.
 stop hook(`persistent-mode.ts`)이 세션 종료를 차단.
-circuit breaker(동일 에러 signature 20회)가 fail-safe.
+circuit breaker(동일 에러 signature 10회)가 fail-safe.
 
 ## Token Budget 확인
 
@@ -29,9 +29,9 @@ signature = hash(error_type + error_message + file_path)
 ```
 
 ### Recovery 단계
-- **4회 반복**: 대안 접근 제안 (advisory)
-- **6회 반복**: 대안 접근 **강제** (같은 도구/명령 사용 금지)
-- **10회 반복**: `/aing debug` 자동 전환 제안
+- **3회 반복**: 대안 접근 제안 (advisory)
+- **5회 반복**: 대안 접근 **강제** (같은 도구/명령 사용 금지)
+- **7회 반복**: `/aing debug` 자동 전환 제안
 - 성공 시 해당 signature 카운터 자동 리셋
 
 ## Regression 추적
@@ -100,6 +100,13 @@ PREVIOUS FIX ATTEMPTS:
 #1: {what was tried} → {result}
 #2: {what was tried} → {result}
 
+VERIFICATION COMMANDS:
+검증 명령 실행 시 반드시 exit code를 캡처하세요:
+  Bash: npx tsc --noEmit 2>&1; echo "EXIT=$?"
+  Bash: npm test 2>&1; echo "EXIT=$?"
+EXIT=0 + 빈 출력 = PASS (에러 없음). 빈 출력을 보고 재시도하지 마세요.
+같은 명령을 2회 이상 연속 실행하고 있다면 루프에 빠진 것 — 즉시 중단하세요.
+
 YOUR MISSION:
 위 검증 실패를 수정하세요. 수정 후 테스트를 실행하여 통과를 확인하세요.
 
@@ -119,4 +126,4 @@ PROTOCOL:
 - Fix 실패 → team-fix (재시도, token budget 내)
 - Token budget 초과 + 사용자 cancel → completion
 - 명시적 cancel → completion
-- Circuit breaker (동일 에러 signature 20회) → completion (fail-safe)
+- Circuit breaker (동일 에러 signature 10회) → completion (fail-safe)

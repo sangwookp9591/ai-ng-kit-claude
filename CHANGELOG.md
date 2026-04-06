@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.9.18] - 2026-04-06 — 에이전트 루프 방지 + 검증 명령 exit code 표준화
+
+### Fixed
+- **빈 출력 루프 방지**: tsc/eslint 등 성공 시 빈 출력을 반환하는 도구에서 에이전트가 무한 재시도하는 문제 수정
+  - 모든 워커 프롬프트에 `VERIFICATION COMMANDS` 섹션 추가 — `{cmd} 2>&1; echo "EXIT=$?"` 패턴 강제
+  - "EXIT=0 + 빈 출력 = PASS" 규칙 명시, 동일 명령 2회 이상 연속 재실행 시 루프 감지 경고
+  - `worker-and-report.md`, `stage-exec.md`, `stage-verify.md`, `stage-fix.md` 4개 프롬프트 동시 적용
+- **Gate timeout 안전 기본값**: 30초 timeout 시 GATE_PASS → **GATE_FAIL**로 변경 (깨진 코드 통과 방지)
+- **evidence-collector-lite.ts**: `EXIT=N` 패턴 파싱 추가 — 빈 출력 + exit 0을 명시적 pass로 기록
+- **circuit breaker 조기 개입**: 동일 에러 signature 임계값 20회 → **10회**, recovery 단계 4/6/10 → **3/5/7**회로 하향
+
 ## [2.9.17] - 2026-04-06 — User Acceptance Guide + 에이전트 역할/모델 전면 개편
 
 ### Added

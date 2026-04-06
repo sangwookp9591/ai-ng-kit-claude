@@ -79,8 +79,16 @@ Agent({
 - [tdd]   PASS/FAIL/NOT_AVAILABLE
 - Verdict: PASS / FAIL
 
+VERIFICATION COMMANDS:
+증거 수집 시 반드시 exit code를 캡처하세요:
+  Bash: npx tsc --noEmit 2>&1; echo "EXIT=$?"
+  → EXIT=0 + 빈 출력 = [build] PASS (에러 없음)
+  → EXIT≠0 = [build] FAIL
+tsc, eslint 등은 성공 시 출력이 비어있습니다. 빈 출력을 NOT_AVAILABLE로 처리하지 마세요.
+
 Rules:
 - NOT_AVAILABLE ≠ FAIL — 증거 수집 불가 시 WARNING으로 표시
+- 빈 출력 + EXIT=0 → PASS (NOT_AVAILABLE이 아님)
 - 테스트가 없는 프로젝트: [test] NOT_AVAILABLE + WARNING
 - FAIL 조건: 명시적 FAIL 결과가 있는 경우만"
 })

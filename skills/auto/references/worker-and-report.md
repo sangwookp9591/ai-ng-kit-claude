@@ -63,6 +63,24 @@ PARALLEL SUB-AGENT (대량 작업 시):
   Agent({ subagent_type: "aing:{name}", name: "{name}-worker-2", model: "haiku",
     prompt: "파일 D, E, F에 대해 {작업} 수행" })
 
+VERIFICATION COMMANDS (MANDATORY):
+검증 명령(tsc, eslint, build 등) 실행 시 반드시 exit code를 캡처하세요.
+많은 도구가 성공 시 출력이 비어있습니다. 빈 출력 ≠ 실패입니다.
+
+패턴: `{command} 2>&1; echo "EXIT=$?"`
+예시:
+  Bash: npx tsc --noEmit 2>&1; echo "EXIT=$?"
+  Bash: npm test 2>&1; echo "EXIT=$?"
+  Bash: npx eslint src/ 2>&1; echo "EXIT=$?"
+
+판정:
+  - EXIT=0 + 빈 출력 → PASS (에러 없음)
+  - EXIT=0 + 출력 있음 → PASS (결과 확인)
+  - EXIT≠0 → FAIL (에러 내용 확인)
+
+**절대 빈 출력을 보고 재시도하지 마세요.** EXIT=0이면 성공입니다.
+같은 명령을 2회 이상 연속 실행하고 있다면 루프에 빠진 것 — 즉시 중단하세요.
+
 RULES:
 - Do NOT run team commands (TeamCreate/TeamDelete는 오케스트레이터 전용)
 - CAN spawn sub-agents for parallel work (위 PARALLEL SUB-AGENT 참조)

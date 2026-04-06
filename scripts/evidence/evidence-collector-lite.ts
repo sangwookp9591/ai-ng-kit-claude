@@ -15,9 +15,37 @@ export interface BasicEvidence {
 
 /**
  * Collect basic evidence from a tool execution.
+ * Note: tsc, eslint, etc. produce EMPTY output on success (exit 0).
+ * Use collectEvidenceWithExitCode() when exit code is available.
  */
 export function collectBasicEvidence(toolName: string, output: string): BasicEvidence | null {
   if (!output) return null;
+
+  // Exit code pattern: "EXIT=0" or "EXIT=1" appended by `; echo "EXIT=$?"`
+  const exitMatch = output.match(/EXIT=(\d+)/);
+  if (exitMatch) {
+    const exitCode = parseInt(exitMatch[1]);
+    const cleanOutput = output.replace(/EXIT=\d+\s*$/, '').trim();
+    // Empty output + exit 0 = success (common for tsc --noEmit, eslint with no errors)
+    if (!cleanOutput && exitCode === 0) {
+      return {
+        type: 'build',
+        timestamp: new Date().toISOString(),
+        result: 'pass',
+        source: toolName,
+        details: { note: 'empty output with exit code 0 — no errors' }
+      };
+    }
+    if (!cleanOutput && exitCode !== 0) {
+      return {
+        type: 'build',
+        timestamp: new Date().toISOString(),
+        result: 'fail',
+        source: toolName,
+        details: { note: `exit code ${exitCode} with no output` }
+      };
+    }
+  }
 
   const lower = output.toLowerCase();
 

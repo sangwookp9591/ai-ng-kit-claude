@@ -155,10 +155,17 @@ Task #{N} '{task_title}' 완료 후 gate review입니다.
 - Test Files Exist: YES/NO
 - Verdict: GATE_PASS / GATE_FAIL — {사유}
 
+VERIFICATION COMMANDS (MANDATORY):
+tsc, eslint 등은 성공 시 출력이 비어있습니다. 반드시 exit code로 판정하세요:
+  Bash: npx tsc --noEmit 2>&1; echo "EXIT=$?"
+  → EXIT=0 + 빈 출력 = PASS (에러 없음)
+  → EXIT≠0 = FAIL
+같은 명령을 2회 이상 재실행하지 마세요. EXIT=0이면 즉시 PASS 처리.
+
 Rules:
 - build + test 통과가 유일한 GATE_PASS 조건
 - test 파일이 없으면 GATE_FAIL (TDD 미준수)
-- 30초 timeout — 초과 시 결과 없이 GATE_PASS (verify에서 재확인)"
+- 30초 timeout — 초과 시 GATE_FAIL (안전 기본값, verify에서 재확인)"
 })
 ```
 

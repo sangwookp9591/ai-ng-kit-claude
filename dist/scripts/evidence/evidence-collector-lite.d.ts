@@ -13,6 +13,8 @@ export interface BasicEvidence {
 }
 /**
  * Collect basic evidence from a tool execution.
+ * Note: tsc, eslint, etc. produce EMPTY output on success (exit 0).
+ * Use collectEvidenceWithExitCode() when exit code is available.
  */
 export declare function collectBasicEvidence(toolName: string, output: string): BasicEvidence | null;
 //# sourceMappingURL=evidence-collector-lite.d.ts.map
