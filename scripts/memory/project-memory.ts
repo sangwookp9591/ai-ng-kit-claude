@@ -11,7 +11,7 @@ interface MemoryEntry {
   content: string | Record<string, unknown>;
   addedAt: string;
   confidence: number;
-  source: 'user' | 'observed' | 'inferred';
+  source: 'user' | 'observed' | 'inferred' | 'passive';
   lastDecayed?: string;
 }
 
@@ -25,7 +25,7 @@ interface ProjectMemory {
 
 interface AddMemoryOptions {
   confidence?: number;
-  source?: 'user' | 'observed' | 'inferred';
+  source?: 'user' | 'observed' | 'inferred' | 'passive';
 }
 
 interface DecayResult {

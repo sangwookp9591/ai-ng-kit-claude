@@ -331,6 +331,26 @@ try {
 }
 catch (err) {
     log.error('Session start failed', { error: err.message });
-    process.stdout.write(JSON.stringify({}));
+    // Fallback: inject static CLAUDE.md rules when dynamic injection fails
+    let wroteOutput = false;
+    try {
+        const { dirname: dn, join: jn } = await import('node:path');
+        const { fileURLToPath: ftu } = await import('node:url');
+        const { existsSync: ex, readFileSync: rf } = await import('node:fs');
+        const root = dn(ftu(import.meta.url)).replace(/[\\/]hooks-handlers$/, '');
+        const claudeMdPath = jn(root, 'CLAUDE.md');
+        if (ex(claudeMdPath)) {
+            const staticRules = rf(claudeMdPath, 'utf-8');
+            process.stdout.write(JSON.stringify({
+                hookSpecificOutput: {
+                    additionalContext: `[aing fallback] 동적 세션 주입에 실패했습니다. 정적 CLAUDE.md 규칙을 따르세요.\n\n${staticRules}`
+                }
+            }));
+            wroteOutput = true;
+        }
+    }
+    catch { /* static fallback is also best-effort */ }
+    if (!wroteOutput)
+        process.stdout.write(JSON.stringify({}));
 }
 //# sourceMappingURL=session-start.js.map

@@ -31,7 +31,7 @@ function cacheSet(filePath, data) {
     }
     _cache.set(filePath, { data, ts: Date.now() });
 }
-function cacheInvalidate(filePath) {
+export function cacheInvalidate(filePath) {
     _cache.delete(filePath);
 }
 // ---------------------------------------------------------------------------

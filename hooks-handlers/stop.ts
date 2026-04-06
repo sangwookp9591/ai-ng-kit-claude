@@ -16,7 +16,13 @@ import { readPlanState } from '../scripts/hooks/plan-state.js';
 import { getPRDStatus } from '../scripts/pipeline/story-tracker.js';
 import { getVerifyState, generateArchitectPrompt } from '../scripts/hooks/architect-verify.js';
 import { getDenialSummary } from '../scripts/guardrail/denial-tracker.js';
-import { join } from 'node:path';
+import { capturePassive } from '../scripts/memory/learning-capture.js';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+
+const _stopDir = dirname(fileURLToPath(import.meta.url));
+const _pluginRoot = _stopDir.replace(/[\\/]hooks-handlers$/, '');
 
 const log = createLogger('stop');
 
@@ -169,6 +175,50 @@ try {
       }
     }
   }
+
+  // Passive learning: session-end capture (only when PDCA is inactive)
+  try {
+    const isPdcaActive = stateResult.ok && !!(stateResult.data as PdcaState).activeFeature;
+    if (!isPdcaActive) {
+      const denials = getDenialSummary(projectDir);
+      if (denials) {
+        capturePassive(
+          { trigger: 'session-end', content: `세션 종료 시 가드레일 기록: ${denials.slice(0, 120)}`, context: 'session' },
+          projectDir
+        );
+      }
+      capturePassive(
+        { trigger: 'session-end', content: `비 PDCA 세션 종료 (${new Date().toISOString().slice(0, 10)})`, context: 'session' },
+        projectDir
+      );
+    }
+  } catch { /* passive learning is best-effort */ }
+
+  // CLAUDE.md auto-update on session end (best-effort)
+  try {
+    const claudeMdPath = join(_pluginRoot, 'CLAUDE.md');
+    if (existsSync(claudeMdPath)) {
+      const content = readFileSync(claudeMdPath, 'utf-8');
+      const updatedAt = new Date().toISOString().slice(0, 10);
+      const marker = '> 이 파일은 동적 세션 주입 실패 시 폴백으로 사용됩니다.';
+      if (content.includes(marker)) {
+        const newContent = content.replace(
+          /> 마지막 갱신: .+/,
+          `> 마지막 갱신: ${updatedAt}`
+        );
+        // Only add update line if not already present
+        if (newContent === content && !content.includes('> 마지막 갱신:')) {
+          const withUpdate = content.replace(
+            marker,
+            `${marker}\n> 마지막 갱신: ${updatedAt}`
+          );
+          writeFileSync(claudeMdPath, withUpdate, 'utf-8');
+        } else if (newContent !== content) {
+          writeFileSync(claudeMdPath, newContent, 'utf-8');
+        }
+      }
+    }
+  } catch { /* CLAUDE.md update is best-effort */ }
 
   // Append denial audit summary
   const denialLine: string | null = getDenialSummary(projectDir);

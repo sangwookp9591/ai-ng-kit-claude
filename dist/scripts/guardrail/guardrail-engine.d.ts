@@ -22,6 +22,8 @@ interface CheckResult {
 }
 /**
  * Load guardrail rules from config + defaults.
+ * Supports severity-level action overrides via `guardrail.severityOverrides`.
+ * Example config: { "guardrail": { "severityOverrides": { "medium": "warn" } } }
  */
 export declare function loadRules(_projectDir?: string): GuardrailRule[];
 /**

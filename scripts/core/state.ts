@@ -71,7 +71,7 @@ function cacheSet(filePath: string, data: unknown): void {
   _cache.set(filePath, { data, ts: Date.now() });
 }
 
-function cacheInvalidate(filePath: string): void {
+export function cacheInvalidate(filePath: string): void {
   _cache.delete(filePath);
 }
 

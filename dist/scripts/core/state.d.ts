@@ -25,6 +25,7 @@ interface UpdateStateSuccess {
     data: unknown;
 }
 type UpdateStateResult = UpdateStateSuccess | WriteStateFailure;
+export declare function cacheInvalidate(filePath: string): void;
 /**
  * Read JSON state file safely. Results are cached with a 5s TTL.
  * @param filePath - Absolute path to JSON file

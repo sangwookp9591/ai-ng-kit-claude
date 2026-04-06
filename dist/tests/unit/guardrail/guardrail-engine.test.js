@@ -104,33 +104,44 @@ describe('checkBashCommand — safe commands', () => {
     });
 });
 // ---------------------------------------------------------------------------
-// checkFilePath — protected files
+// checkFilePath — protected files (action:'block' since v0.3.0)
 // ---------------------------------------------------------------------------
 describe('checkFilePath', () => {
-    it('warns on .env file', () => {
+    it('blocks .env file (action changed from warn to block)', () => {
         const result = checkFilePath('.env');
-        expect(result.allowed).toBe(true); // warn, not block
+        expect(result.allowed).toBe(false); // block, not warn
         expect(result.violations.some(v => v.rule.id === 'protect-env')).toBe(true);
+        expect(result.violations.find(v => v.rule.id === 'protect-env')?.rule.action).toBe('block');
     });
-    it('warns on .env.local', () => {
+    it('blocks .env.local', () => {
         const result = checkFilePath('.env.local');
+        expect(result.allowed).toBe(false);
         expect(result.violations.some(v => v.rule.id === 'protect-env')).toBe(true);
     });
-    it('warns on .env.production', () => {
+    it('blocks .env.production', () => {
         const result = checkFilePath('.env.production');
+        expect(result.allowed).toBe(false);
         expect(result.violations.some(v => v.rule.id === 'protect-env')).toBe(true);
     });
-    it('warns on package-lock.json', () => {
+    it('blocks package-lock.json', () => {
         const result = checkFilePath('package-lock.json');
+        expect(result.allowed).toBe(false);
         expect(result.violations.some(v => v.rule.id === 'protect-lockfile')).toBe(true);
     });
-    it('warns on yarn.lock', () => {
+    it('blocks yarn.lock', () => {
         const result = checkFilePath('yarn.lock');
+        expect(result.allowed).toBe(false);
         expect(result.violations.some(v => v.rule.id === 'protect-lockfile')).toBe(true);
     });
-    it('warns on .github directory files', () => {
+    it('blocks .github directory files', () => {
         const result = checkFilePath('.github/workflows/ci.yml');
+        expect(result.allowed).toBe(false);
         expect(result.violations.some(v => v.rule.id === 'protect-ci')).toBe(true);
+    });
+    it('violation messages include [aing guardrail] tag', () => {
+        const result = checkFilePath('.env');
+        const envViolation = result.violations.find(v => v.rule.id === 'protect-env');
+        expect(envViolation?.rule.message).toContain('[aing guardrail]');
     });
     it('allows normal source files', () => {
         const result = checkFilePath('src/index.ts');
@@ -149,7 +160,35 @@ describe('checkFilePath', () => {
 describe('loadRules', () => {
     it('returns default rules when no config', () => {
         const rules = loadRules();
-        expect(rules.length).toBeGreaterThanOrEqual(7); // 7 default rules
+        expect(rules.length).toBeGreaterThanOrEqual(7); // 7 default rules (4 bash-warn + 3 file-block)
+    });
+    it('file rules have action block by default', () => {
+        const rules = loadRules();
+        const fileRules = rules.filter(r => r.type === 'file');
+        for (const r of fileRules) {
+            expect(r.action).toBe('block');
+        }
+    });
+    it('bash rules retain warn action', () => {
+        const rules = loadRules();
+        const bashRules = rules.filter(r => r.type === 'bash');
+        for (const r of bashRules) {
+            expect(r.action).toBe('warn');
+        }
+    });
+    it('applies severityOverrides from config', () => {
+        mockGetConfig.mockImplementation((path, fallback) => {
+            if (path === 'guardrail.severityOverrides')
+                return { medium: 'warn' };
+            return fallback;
+        });
+        const rules = loadRules();
+        // protect-lockfile has severity:'medium', should be overridden to 'warn'
+        const lockfileRule = rules.find(r => r.id === 'protect-lockfile');
+        expect(lockfileRule?.action).toBe('warn');
+        // protect-env has severity:'high', should remain 'block'
+        const envRule = rules.find(r => r.id === 'protect-env');
+        expect(envRule?.action).toBe('block');
     });
     it('filters out disabled rules', () => {
         mockGetConfig.mockImplementation((path, fallback) => {

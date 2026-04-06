@@ -69,35 +69,38 @@ const DEFAULT_RULES: GuardrailRule[] = [
     severity: 'critical',
     message: 'DROP TABLE/DATABASE 명령이 감지되었습니다. 정말 실행하시겠습니까?'
   },
-  // Protected file patterns
+  // Protected file patterns — action:'block' to prevent accidental writes
+  // Note: bash-type rules remain 'warn' to avoid double-blocking with Claude's built-in AST checks.
   {
     id: 'protect-env',
     type: 'file',
     pattern: /\.env($|\.local$|\.production$|\.staging$)/,
-    action: 'warn',
+    action: 'block',
     severity: 'high',
-    message: '.env 파일 수정이 감지되었습니다. 민감 정보가 포함될 수 있습니다.'
+    message: '[aing guardrail] .env 파일 수정이 차단되었습니다. 민감 정보가 포함될 수 있습니다.'
   },
   {
     id: 'protect-lockfile',
     type: 'file',
     pattern: /(package-lock\.json|yarn\.lock|pnpm-lock\.yaml)$/,
-    action: 'warn',
+    action: 'block',
     severity: 'medium',
-    message: '잠금 파일 직접 수정이 감지되었습니다. 패키지 매니저를 통해 수정하세요.'
+    message: '[aing guardrail] 잠금 파일 직접 수정이 차단되었습니다. 패키지 매니저를 통해 수정하세요.'
   },
   {
     id: 'protect-ci',
     type: 'file',
     pattern: /\.(github|gitlab-ci|circleci)/,
-    action: 'warn',
+    action: 'block',
     severity: 'high',
-    message: 'CI/CD 설정 수정이 감지되었습니다. 변경사항을 신중히 검토하세요.'
+    message: '[aing guardrail] CI/CD 설정 수정이 차단되었습니다. 변경사항을 신중히 검토하세요.'
   }
 ];
 
 /**
  * Load guardrail rules from config + defaults.
+ * Supports severity-level action overrides via `guardrail.severityOverrides`.
+ * Example config: { "guardrail": { "severityOverrides": { "medium": "warn" } } }
  */
 export function loadRules(_projectDir?: string): GuardrailRule[] {
   const configRules = getConfig('guardrail.rules', []) as Array<{
@@ -118,7 +121,17 @@ export function loadRules(_projectDir?: string): GuardrailRule[] {
   // Disabled rules from config
   const disabledIds = new Set<string>(getConfig('guardrail.disabled', []) as string[]);
 
-  return [...DEFAULT_RULES, ...userRules].filter(r => !disabledIds.has(r.id));
+  // Severity-level action overrides: { "high": "warn", "medium": "block" }
+  const severityOverrides = getConfig('guardrail.severityOverrides', {}) as Record<string, 'block' | 'warn'>;
+
+  const allRules = [...DEFAULT_RULES, ...userRules].filter(r => !disabledIds.has(r.id));
+
+  if (Object.keys(severityOverrides).length === 0) return allRules;
+
+  return allRules.map(r => {
+    const override = severityOverrides[r.severity];
+    return override ? { ...r, action: override } : r;
+  });
 }
 
 /**

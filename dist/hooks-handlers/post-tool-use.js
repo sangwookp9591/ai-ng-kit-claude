@@ -10,8 +10,21 @@ import { norchToolUse, norchAgentDone } from '../scripts/core/norch-bridge.js';
 import { detectLearnablePattern, recordPatternUse } from '../scripts/hooks/learnable-pattern.js';
 import { autoAdvancePhase } from '../scripts/hooks/plan-state.js';
 import { recordAgentCompletion } from '../scripts/guardrail/agent-budget.js';
+import { capturePassive } from '../scripts/memory/learning-capture.js';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+function isPdcaActive(dir) {
+    try {
+        const stateFile = join(dir, '.aing', 'state', 'pdca-status.json');
+        if (!existsSync(stateFile))
+            return false;
+        const state = JSON.parse(readFileSync(stateFile, 'utf-8'));
+        return !!(state.activeFeature);
+    }
+    catch {
+        return false;
+    }
+}
 function detectStage(dir) {
     try {
         const sessionPath = join(dir, '.aing', 'state', 'team-session.json');
@@ -121,6 +134,27 @@ try {
         }
         resetErrorCount(projectDir);
     }
+    // Passive learning: guardrail denial capture (PDCA 비활성 시)
+    try {
+        if (!isPdcaActive(projectDir)) {
+            const toolInput = parsed.tool_input || {};
+            if (toolName === 'Bash' && toolInput.command) {
+                const { checkBashCommand } = await import('../scripts/guardrail/guardrail-engine.js');
+                const gr = checkBashCommand(toolInput.command, projectDir);
+                if (!gr.allowed || gr.violations.some(v => v.rule.action === 'block')) {
+                    capturePassive({ trigger: 'guardrail-denial', content: `가드레일 차단: ${toolInput.command.slice(0, 80)}`, context: 'bash' }, projectDir);
+                }
+            }
+            else if ((toolName === 'Write' || toolName === 'Edit') && toolInput.file_path) {
+                const { checkFilePath } = await import('../scripts/guardrail/guardrail-engine.js');
+                const gr = checkFilePath(toolInput.file_path, projectDir);
+                if (!gr.allowed || gr.violations.some(v => v.rule.action === 'block')) {
+                    capturePassive({ trigger: 'guardrail-denial', content: `가드레일 차단: ${toolInput.file_path}`, context: 'file' }, projectDir);
+                }
+            }
+        }
+    }
+    catch { /* passive learning is best-effort */ }
     if (toolName === 'Bash' && toolResponse) {
         const ev = collectBasicEvidence(toolName, toolResponse);
         if (ev)
@@ -134,6 +168,21 @@ try {
             }
         }
         else {
+            // Passive learning: error→success recovery (only when PDCA is inactive)
+            try {
+                if (!isPdcaActive(projectDir)) {
+                    const toolInput = parsed.tool_input || {};
+                    const cmd = toolInput.command || '';
+                    const { readState } = await import('../scripts/core/state.js');
+                    const errState = readState(join(projectDir, '.aing', 'state', 'error-recovery.json'));
+                    const hadError = errState.ok && Array.isArray(errState.data?.errors) &&
+                        errState.data.errors.some((e) => e.toolName === toolName);
+                    if (cmd && hadError) {
+                        capturePassive({ trigger: 'error-recovery', content: `에러 복구 성공: ${cmd.slice(0, 80)}`, context: 'bash' }, projectDir);
+                    }
+                }
+            }
+            catch { /* passive learning is best-effort */ }
             clearToolErrors(projectDir, toolName);
         }
     }

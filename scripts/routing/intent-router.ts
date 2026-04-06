@@ -5,6 +5,8 @@
  */
 
 import { scoreComplexity } from './complexity-scorer.js';
+import { adjustConfidence } from './routing-history.js';
+import { rerank, type RankedCandidate, type RerankerOptions } from './reranker.js';
 import { createLogger } from '../core/logger.js';
 
 const log = createLogger('intent-router');
@@ -213,7 +215,7 @@ function estimateComplexity(input: string, _anchorInfo: AnchorResult): number {
 type Route = 'auto' | 'plan' | 'plan-only' | 'team' | 'wizard' | 'debug' | 'review-pipeline' | 'review-cso' | 'explore' | 'perf' | 'refactor' | 'tdd';
 type Preset = 'solo' | 'duo' | 'squad' | 'full' | 'design';
 
-interface IntentResult {
+export interface IntentResult {
   route: Route;
   preset: Preset;
   confidence: number;
@@ -267,13 +269,18 @@ export function routeIntent(input: string | null): IntentResult {
   for (const dr of DIRECT_ROUTES) {
     if (dr.keywords.some(kw => inputLower.includes(kw.toLowerCase()))) {
       const complexityScore = estimateComplexity(safeInput, anchorInfo);
+      const adjustedConfidence = adjustConfidence(dr.confidence, dr.route);
       const preset = resolvePreset('auto', complexityScore, false);
-      log.info(`직접 라우팅: "${safeInput.slice(0, 40)}..." → ${dr.route}, confidence=${dr.confidence}`);
+      // confidence < 0.5이면 fallback 안내
+      const reason = adjustedConfidence < 0.5
+        ? `${dr.reason} (낮은 성공률로 인해 라우팅 재검토 권장)`
+        : dr.reason;
+      log.info(`직접 라우팅: "${safeInput.slice(0, 40)}..." → ${dr.route}, confidence=${adjustedConfidence}`);
       return {
         route: dr.route,
         preset,
-        confidence: dr.confidence,
-        reason: dr.reason,
+        confidence: adjustedConfidence,
+        reason,
         originalInput,
       };
     }
@@ -356,15 +363,119 @@ export function routeIntent(input: string | null): IntentResult {
 
   const preset = resolvePreset(route, complexityScore, isDesign);
 
-  log.info(`라우팅 결정: "${safeInput.slice(0, 40)}..." → ${route}(${preset}), confidence=${confidence}`);
+  // 히스토리 피드백 기반 confidence 동적 조정
+  const adjustedConfidence = adjustConfidence(confidence, route);
+  const finalReason = adjustedConfidence < 0.5
+    ? `${reason} (낮은 성공률로 인해 라우팅 재검토 권장)`
+    : reason;
+
+  log.info(`라우팅 결정: "${safeInput.slice(0, 40)}..." → ${route}(${preset}), confidence=${adjustedConfidence}`);
 
   return {
     route,
     preset,
-    confidence,
-    reason,
+    confidence: adjustedConfidence,
+    reason: finalReason,
     originalInput,
   };
+}
+
+// ─────────────────────────────────────────────
+// 2단계: 후보 리스트 + 리랭킹
+// ─────────────────────────────────────────────
+
+export interface RankedIntentResult extends IntentResult {
+  finalScore: number;
+  sparseScore: number;
+  denseScore: number;
+}
+
+/**
+ * 2단계 라우팅: 1단계 routeIntent() 결과 + 대안 후보들을 리랭킹하여 정렬된 리스트를 반환합니다.
+ * 기존 routeIntent() API는 변경 없이 유지됩니다.
+ */
+export function routeIntentRanked(input: string | null, options?: RerankerOptions): RankedIntentResult[] {
+  const primary = routeIntent(input);
+  const safeInput = (input == null ? '' : String(input)).trim();
+
+  if (!safeInput) {
+    return [{
+      ...primary,
+      finalScore: primary.confidence,
+      sparseScore: primary.confidence,
+      denseScore: 0.5,
+    }];
+  }
+
+  // Generate alternative candidates from direct routes and heuristic routes
+  const candidateRoutes = new Set<Route>([primary.route]);
+  const candidates: Array<{ route: Route; confidence: number; preset: Preset; reason: string }> = [
+    { route: primary.route, confidence: primary.confidence, preset: primary.preset, reason: primary.reason },
+  ];
+
+  const anchorInfo = detectAnchors(safeInput);
+  const complexityScore = estimateComplexity(safeInput, anchorInfo);
+  const isDesign = detectDesign(safeInput);
+  const inputLower = safeInput.toLowerCase();
+
+  // Collect alternative direct route matches (excluding primary)
+  for (const dr of DIRECT_ROUTES) {
+    if (candidateRoutes.has(dr.route)) continue;
+    if (dr.keywords.some(kw => inputLower.includes(kw.toLowerCase()))) {
+      const adjustedConfidence = adjustConfidence(dr.confidence, dr.route);
+      const preset = resolvePreset('auto', complexityScore, false);
+      candidateRoutes.add(dr.route);
+      candidates.push({
+        route: dr.route,
+        confidence: adjustedConfidence,
+        preset,
+        reason: dr.reason,
+      });
+    }
+  }
+
+  // Add heuristic fallback candidates if not already present
+  const fallbackCandidates: Array<{ route: Route; confidence: number; condition: boolean }> = [
+    { route: 'auto', confidence: 0.60, condition: !candidateRoutes.has('auto') },
+    { route: 'plan-only', confidence: 0.55, condition: !candidateRoutes.has('plan-only') && complexityScore <= 4 },
+    { route: 'team', confidence: 0.50, condition: !candidateRoutes.has('team') && complexityScore >= 5 },
+  ];
+
+  for (const fb of fallbackCandidates) {
+    if (fb.condition) {
+      const preset = resolvePreset(fb.route, complexityScore, isDesign);
+      candidateRoutes.add(fb.route);
+      candidates.push({
+        route: fb.route,
+        confidence: fb.confidence,
+        preset,
+        reason: '대안 후보',
+      });
+    }
+  }
+
+  // Rerank all candidates
+  const ranked = rerank(
+    candidates.map(c => ({ route: c.route, confidence: c.confidence })),
+    options,
+  );
+
+  // Build lookup for candidate metadata
+  const candidateMap = new Map(candidates.map(c => [c.route, c]));
+
+  return ranked.map((r: RankedCandidate) => {
+    const meta = candidateMap.get(r.route as Route)!;
+    return {
+      route: meta.route,
+      preset: meta.preset,
+      confidence: r.sparseScore,
+      reason: meta.reason,
+      originalInput: safeInput,
+      finalScore: r.finalScore,
+      sparseScore: r.sparseScore,
+      denseScore: r.denseScore,
+    };
+  });
 }
 
 // ─────────────────────────────────────────────
