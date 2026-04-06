@@ -80,38 +80,46 @@ Gate BLOCK 시 AskUserQuestion:
 ## Pipeline Overview
 
 ```
-Phase 1: Ryan — Foundation (Constraints + Preferences)
-  ↓
-Phase 2: Able — Option Design (AING-DR Draft)
-  ↓ Complexity Score (0-15)
-  ↓
-  ↓ [--interactive: User Review Point 1 — 초안 확인]
-  ↓
-Phase 3: Klay — Steelman Deliberation
-  ↓
-Phase 4: Able — Synthesis (반론 통합)
-  ↓
-Phase 5: Noa — Synthesis Verification + Delta Score
-  ↓ PASS → Phase 6  |  REVISE → Phase 4 재작성
-  ↓
-Phase 6: Critic — 5-Phase Deliberation Critique
-  ↓ APPROVE → Phase 7  |  ITERATE → Targeted Patch  |  REJECT → 중단
-  ↓
-  ↓ [--interactive: User Review Point 2 — 최종 승인]
-  ↓
-Phase 7: Able — Living ADR Generation + Persist
+LOW (≤3) — Fast Lane (3 에이전트, ~5분):
+  Phase 1: Ryan — Foundation
+    ↓
+  Phase 2: Able — DR Lite
+    ↓
+  Phase 3: Klay — Steelman
+    ↓
+  Phase 4: 오케스트레이터 직접 Synthesis (Able 재호출 없음)
+    ↓
+  Phase 7: Persist (Noa/Critic 스킵)
+
+MID/HIGH — Full Deliberation (5-7 에이전트):
+  Phase 1: Ryan — Foundation
+    ↓
+  Phase 2: Able — Option Design
+    ↓
+  Phase 3: Klay — Steelman
+    ↓
+  Phase 4: 오케스트레이터 직접 Synthesis (Able 재호출 없음)
+    ↓
+  Phase 5: Noa — Synthesis Verification
+    ↓ PASS → Phase 6  |  REVISE → 오케스트레이터 직접 패치
+    ↓
+  Phase 6: Critic — Deliberation Critique
+    ↓ APPROVE → Phase 7  |  ITERATE → Targeted Patch  |  REJECT → 중단
+    ↓
+  Phase 7: Able — Living ADR + Persist
 ```
 
-## 복잡도별 실행 경로 (품질 우선)
+## 복잡도별 실행 경로
 
-| Level | Score | Ryan | Able | Klay | Noa | Critic | Pre-mortem | Rollback | 합의 루프 |
-|-------|-------|------|------|------|-------|--------|------------|----------|----------|
-| **low** | ≤ 3 | ✓ | DR Lite | ✓ steelman | ✓ synthesis | ✓ THOROUGH | — | — | 최대 2회 |
-| **mid** | 4-7 | ✓ | DR Standard | ✓ steelman | ✓ synthesis + delta | ✓ THOROUGH | — | — | 최대 3회 |
-| **high** | > 7 | ✓ | DR Deep | ✓ steelman | ✓ synthesis + delta | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 3회 |
-| **`--deliberate`** | any | ✓ | DR Deep | ✓ steelman | ✓ synthesis + delta | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 3회 |
+| Level | Score | Ryan | Able | Klay | Synthesis | Noa | Critic | Pre-mortem | Rollback | 합의 루프 | 에이전트 수 |
+|-------|-------|------|------|------|-----------|-------|--------|------------|----------|----------|-----------|
+| **low** | ≤ 3 | ✓ | DR Lite | ✓ steelman | 직접 | **스킵** | **스킵** | — | — | 0회 | **3** |
+| **mid** | 4-7 | ✓ | DR Standard | ✓ steelman | 직접 | ✓ | ✓ THOROUGH | — | — | 최대 2회 | 5-7 |
+| **high** | > 7 | ✓ | DR Deep | ✓ steelman | 직접 | ✓ | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 2회 | 5-7 |
+| **`--deliberate`** | any | ✓ | DR Deep | ✓ steelman | 직접 | ✓ | ✓ → ADVERSARIAL | ✓ 필수 | ✓ 필수 | 최대 2회 | 5-7 |
 
-**품질 우선 정책**: 모든 레벨에서 Ryan → Klay → Noa → Critic 전원 참여.
+**Fast Lane**: LOW(≤3)는 Noa/Critic 스킵. 3 에이전트 호출만으로 완료.
+**Synthesis 직접 수행**: 모든 레벨에서 Phase 4는 오케스트레이터가 Edit으로 직접 반영. Able opus 재호출 금지.
 **자동 `--deliberate` 트리거**: hasSecurity=true 또는 hasArchChange=true이고 score > 5
 
 ---
@@ -403,46 +411,48 @@ Rules:
 
 → State: `phase: "steelman"`
 
-## Phase 4: Able — Synthesis (ALL levels)
+## Phase 4: Orchestrator Direct Synthesis (ALL levels)
 
-Able(opus)이 Klay의 STEELMAN_REVIEW를 받아 플랜을 수정:
+**Able 재호출 금지.** 오케스트레이터(당신)가 Klay의 STEELMAN_REVIEW를 직접 플랜에 반영한다.
+
+**왜 에이전트를 호출하지 않는가:**
+- Able(opus) 재호출 = 전체 시간의 32-40% (303줄 프롬프트 + 코드베이스 탐색)
+- Klay의 반론은 구체적(file:line 증거 포함)이므로 Edit으로 직접 반영 가능
+
+**수행 방법:**
+1. Klay의 STEELMAN_REVIEW에서 각 반론을 추출
+2. Able의 Phase 2 플랜 파일(`.aing/plans/`의 최신)을 Read
+3. 각 반론에 대해 Edit으로 직접 반영:
+   - Feasibility CONCERN → Steps에 대응책 추가
+   - Steelman Antithesis → Risks에 추가 또는 Option 수정
+   - Tradeoff Tension → Decision Drivers에 반영
+   - New Driver Proposal → Drivers 목록에 추가
+   - Architecture Risks → Steps 또는 Acceptance Criteria에 반영
+4. 변경 부분에 `[CHANGED]` 태그 표시
+5. 반론 대응 요약 테이블 작성:
 
 ```
-Agent({
-  subagent_type: "aing:able",
-  description: "Able: 반론 통합 — {feature}",
-  model: "opus",
-  prompt: "Klay의 steelman 반론을 통합하여 플랜을 수정하세요.
+| # | Klay Point | Response | Status |
+|---|-----------|----------|--------|
+| 1 | {point} | {변경 내용} | ABSORBED/REBUTTED |
+```
 
-=== RYAN FOUNDATION ===
-{Ryan's output}
-
-=== ORIGINAL PLAN_DRAFT ===
-{Able's Phase 2 output}
-
-=== KLAY STEELMAN_REVIEW ===
-{Klay's output}
-
-각 반론에 대해 명시적으로 대응하세요:
-1. 수용 (ABSORBED): 플랜에 반영하고 변경 내용 기술
-2. 반박 (REBUTTED): 구체적 증거로 반박 근거 제시
-3. Klay가 제안한 새 Driver를 Drivers 목록에 반영 (또는 거부 근거)
-
-수정된 전체 PLAN_DRAFT를 다시 출력하세요.
-변경된 부분은 [CHANGED] 태그로 표시.
-
-Rules:
+**Rules:**
 - 모든 Klay 반론에 명시적 대응 필수 (무시 금지)
-- ABSORBED면 플랜이 실제로 변경되어야 함 (형식적 언급 금지)
-- REBUTTED면 file:line 증거 필수"
-})
-```
+- ABSORBED면 플랜이 실제로 Edit으로 변경되어야 함
+- REBUTTED면 구체적 근거 기술
 
 → State: `phase: "synthesis"`
 
-## Phase 5: Noa — Synthesis Verification (ALL levels)
+## Phase 5: Noa — Synthesis Verification (MID/HIGH only)
 
-Noa(sonnet)가 Able의 synthesis 품질을 검증:
+**LOW(≤3)**: 이 Phase를 스킵하고 Phase 7(Persist)로 직행한다.
+
+**MID/HIGH**: Noa(sonnet)가 오케스트레이터의 synthesis 품질을 검증.
+
+**중요**: Noa는 **플랜 텍스트**를 검증한다. 실제 코드 파일 변경을 확인하는 것이 아니다. 플랜 단계에서 코드가 아직 변경되지 않은 것은 정상이다. "파일이 변경되지 않았다"는 이유로 REVISE를 내리면 오판이다.
+
+Noa(sonnet)가 synthesis 품질을 검증:
 
 ```
 Agent({
@@ -496,7 +506,9 @@ Rules:
 
 → State: `phase: "synthesis-check"`
 
-## Phase 6: Critic — 5-Phase Deliberation Critique (ALL levels)
+## Phase 6: Critic — 5-Phase Deliberation Critique (MID/HIGH only)
+
+**LOW(≤3)**: 이 Phase를 스킵하고 Phase 7(Persist)로 직행한다.
 
 **Noa PASS 후에만 실행** (sequential).
 
@@ -574,15 +586,15 @@ Rules:
 **Critic ITERATE 또는 Noa REVISE 시:**
 
 ```
-Noa REVISE → Phase 4 (Able 재synthesis) → Phase 5 (Noa 재검증)
+Noa REVISE → 오케스트레이터 직접 패치 (Able 재호출 금지) → Phase 5 (Noa 재검증)
 Critic ITERATE → Targeted Patch (아래 참조)
 ```
 
 | Level | 최대 반복 |
 |-------|----------|
-| low | 2회 |
-| mid | 3회 |
-| high / deliberate | 3회 |
+| low | 0회 (Noa/Critic 스킵) |
+| mid | 2회 |
+| high / deliberate | 2회 |
 
 ### Targeted Patch Mode (Critic ITERATE 시)
 
@@ -637,7 +649,7 @@ Agent({
 - 최대 반복 초과
 - Noa Delta Score 2연속 ≤ 0
 - **iteration 1에서 MAJOR 건수가 줄지 않음** → 수렴 불가로 판단, 최선 버전 + Confidence: LOW
-- **총 에이전트 호출 수가 10회 초과** → 비용 보호 차단
+- **총 에이전트 호출 수가 7회 초과** → 비용 보호 차단
 
 **최대 반복 초과 시**: 최선 버전을 사용자에게 제시 + "전문가 합의 미도달" 표시 + Confidence: LOW
 
