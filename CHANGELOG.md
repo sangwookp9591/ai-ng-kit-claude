@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.9.20] - 2026-04-08 — 세션 정리 엔진 + Cancel 스킬 + 상태 관리 도구
+
+### Added
+- **session-cleanup.ts**: 중앙화된 세션 정리 엔진 — stale lock(>30s), .tmp, handoff(>7d 아카이빙), stale mode state 자동 정리
+- **state-introspection.ts**: 상태 조회/정리 도구 — `listActiveStates`, `clearState`, `getStateStatus`
+- **protected-files.ts**: 보호 파일 상수 공유 모듈 (13개 파일 보호, 중복 제거)
+- **/aing cancel 스킬**: 활성 모드 graceful 종료 + transient 상태 정리, --force 지원
+- **테스트 21개**: session-cleanup(9), state-introspection(7), cancel-skill(5)
+
+### Changed
+- **stop.ts**: handoff 작성 후 `runSessionCleanup()` 호출 추가 (plan check 전)
+- **session-start.ts**: 인라인 GC(lines 150-188) → `runSessionCleanup()` 단일 호출로 교체
+- **GC 소유권 경계 명확화**: session-cleanup은 non-PDCA transient, state-gc는 PDCA zombie 전용
+
+### Technical
+- Lock cleanup threshold 30s (state.ts LOCK_STALE_MS 10s 대비 20s 안전 마진)
+- PROTECTED_FILES: pdca-status, cost-tracker, tech-stack 등 13개 파일 자동 삭제 방지
+- Architect + Critic 컨센서스 리뷰 통과
+
 ## [2.9.19] - 2026-04-07 — 하네스 엔지니어링 전면 점검 + Hard Limits 훅 강제 전환
 
 ### Added

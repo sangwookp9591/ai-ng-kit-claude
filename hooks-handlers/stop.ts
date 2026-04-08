@@ -19,6 +19,7 @@ import { getDenialSummary } from '../scripts/guardrail/denial-tracker.js';
 import { checkCompletionReport } from '../scripts/guardrail/report-gate.js';
 import { capturePassive } from '../scripts/memory/learning-capture.js';
 import { clearRealityCheckFlag } from '../scripts/hooks/reality-check.js';
+import { runSessionCleanup } from '../scripts/core/session-cleanup.js';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
@@ -102,6 +103,14 @@ try {
       log.error('Failed to write session handoff', { feature: session.feature });
     }
   }
+
+  // === Session Cleanup: transient files, stale locks, old handoffs ===
+  try {
+    const cleanupResult = runSessionCleanup(projectDir);
+    if (cleanupResult.cleaned.length > 0) {
+      log.info('Session cleanup on stop', { cleaned: cleanupResult.cleaned, errors: cleanupResult.errors });
+    }
+  } catch { /* cleanup is best-effort */ }
 
   // Check for active AING-DR planning session (blocks stop during consensus)
   const planState = readPlanState(projectDir);
